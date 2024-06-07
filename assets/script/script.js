@@ -11,3 +11,9 @@ async function includeHTML() {
       }
    }
 }
+
+function showHeaderNav() {
+   let hiddenElement = document.getElementById('headerNav');
+   hiddenElement.style.display = 'flex';
+}
+
