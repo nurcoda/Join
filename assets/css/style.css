@@ -1,26 +1,50 @@
-body{
-    margin: 0;
-    background-color: #f6f7f9;
+@font-face {
+   font-display: swap;
+   font-family: "Inter";
+   font-style: normal;
+   font-weight: 400;
+   src: url("../fonts/inter-v13-latin-regular.woff2") format("woff2");
 }
 
-header{
-    width: 96%;
-    height: 70px;
-    background-color: rgb(185, 185, 185);
-    /* box-shadow: 0 3px 3px rgb(184, 184, 184); */
-    display: flex;
-    justify-content: space-between;
+@font-face {
+   font-display: swap;
+   font-family: "Inter";
+   font-style: normal;
+   font-weight: 700;
+   src: url("../fonts/inter-v13-latin-700.woff2") format("woff2");
+}
+@font-face {
+   font-display: swap;
+   font-family: "Inter";
+   font-style: normal;
+   font-weight: 900;
+   src: url("../fonts/inter-v13-latin-900.woff2") format("woff2");
+}
+
+body {
+   margin: 0;
+   background-color: #f6f7f9;
+   font-family: "Inter";
+}
+
+header {
+   width: 96%;
+   height: 70px;
+   background-color: rgb(185, 185, 185);
+   /* box-shadow: 0 3px 3px rgb(184, 184, 184); */
+   display: flex;
+   justify-content: space-between;
 }
 
 header span {
-    padding-left: 220px;
-    display: flex;
-    align-items: center;
+   padding-left: 220px;
+   display: flex;
+   align-items: center;
 }
 
 .headerImgDiv {
-    display: flex;
-    align-items: center;
-    padding-right: 40px;
-    gap: 12px;
+   display: flex;
+   align-items: center;
+   padding-right: 40px;
+   gap: 12px;
 }
