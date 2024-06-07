@@ -2,3 +2,25 @@ body{
     margin: 0;
     background-color: #f6f7f9;
 }
+
+header{
+    width: 96%;
+    height: 70px;
+    background-color: rgb(185, 185, 185);
+    /* box-shadow: 0 3px 3px rgb(184, 184, 184); */
+    display: flex;
+    justify-content: space-between;
+}
+
+header span {
+    padding-left: 220px;
+    display: flex;
+    align-items: center;
+}
+
+.headerImgDiv {
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+    gap: 12px;
+}
