@@ -14,38 +14,47 @@
 .all-links-wrapper {
    display: flex;
    flex-direction: column;
-   padding-left: 30%;
    height: 60vh;
    justify-content: space-between;
+}
+
+.nav-wrapper {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
 }
 
 .nav-links {
    color: #ffffff;
    text-decoration: none;
    display: flex;
+   gap: 8px;
+   padding: 8px;
    align-items: center;
+   padding-left: 25%;
+   transition: all 100ms ease-in;
 }
 
-.nav-links:hover{
+.nav-links:hover {
    background-color: #1a293f;
-}
-
-.nav-wrapper {
-   display: flex;
-   flex-direction: column;
+   transform: scale(99%);
 }
 
 .legally-links-wrapper {
    display: flex;
    flex-direction: column;
+   padding-left: 25%;
 }
 
-.legal-Links{
-   color: lightgray;
+.legal-Links {
+   color: white;
+   opacity: 0.5;
    text-decoration: none;
+   transition: all 100ms ease-in;
 }
 
-.legal-Links:hover{
-   color: aqua;
-   transform: scale(1.1);
+.legal-Links:hover {
+   color: #29abe2;
+   font-size: 17px;
+   opacity: 1;
 }
