@@ -1,0 +1,40 @@
+h1 {
+    font-size: 48px;
+    color: black;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 348px;
+    padding-top: 70px;
+}
+
+h2 {
+    font-size: 32px;
+    color: black;
+    padding-left: 348px;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+}
+
+h3 {
+    font-size: 26px;
+    color: black;
+    padding-left: 348px;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    padding-bottom: 8px;
+    padding-top: 6px;
+}
+
+.dev-text-names {
+    display: flex;
+    padding-left: 330px
+}
+
+.text-box {
+    padding-left: 349px;
+    padding-right: 150px;
+    display: flex;
+    justify-content: flex-start;
+}
