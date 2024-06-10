@@ -1,0 +1,50 @@
+.content-Legal {
+    padding-left: 328px;
+    padding-right: 150px;
+}
+
+.h1-back-arrow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-arrow-img {
+    height: 37px;
+    width: 37px;
+    display: flex;
+    padding-top: 82px;
+}
+
+.back-arrow-img:hover {}
+
+h1 {
+    font-size: 48px;
+    color: black;
+    padding-top: 70px;
+    padding-bottom: 50px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 32px;
+    color: black;
+    margin: 0;
+}
+
+h3 {
+    font-size: 26px;
+    color: black;
+    display: flex;
+    margin: 0;
+    padding-bottom: 8px;
+    padding-top: 6px;
+}
+
+.dev-text-names {
+    display: flex;
+}
+
+.text-box {
+    display: flex;
+    justify-content: flex-start;
+}
