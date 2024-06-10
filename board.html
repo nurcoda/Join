@@ -13,11 +13,36 @@
       <div w3-include-html="./assets/templates/sitebar.html"></div>
 
       <div class="board-container">
-         <div class="board-search-add-wrapper">
+         <!-- Header -->
+         <div class="board-search-add-wrapper distances">
             <h1 class="board-headline">Board</h1>
             <div class="search-add-wrapper">
                <input type="search" name="search-task" class="search-task" id="searchTask" placeholder="find Task" />
                <div class="add-task-btn">Add task <img src="./assets/img/add_icon.png" alt="" /></div>
+            </div>
+         </div>
+         <!--  -->
+
+         <!-- board -->
+         <div class="board-wrapper distances">
+            <div class="board-column">
+               <div class="board-column-headline">To do <img src="./assets/img/add_btn_board.png" alt="" /></div>
+               <div class="task-card-container" id="taskCardContainer">
+                  <div class="task-card"></div>
+                  <div class="task-card"></div>
+                  <div class="task-card"></div>
+               </div>
+            </div>
+            <div class="board-column">
+               <div class="board-column-headline">In progress<img src="./assets/img/add_btn_board.png" alt="" /></div>
+            </div>
+            <div class="board-column">
+               <div class="board-column-headline">
+                  Await feedback<img src="./assets/img/add_btn_board.png" alt="" />
+               </div>
+            </div>
+            <div class="board-column">
+               <div class="board-column-headline">Done</div>
             </div>
          </div>
       </div>
