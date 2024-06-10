@@ -45,6 +45,7 @@ header span {
    padding-left: 320px;
    display: flex;
    align-items: center;
+   font-size: 20px;
 }
 
 .header-img-div {
