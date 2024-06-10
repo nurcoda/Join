@@ -39,6 +39,16 @@
    font-size: 20px;
    cursor: pointer;
    opacity: 1;
+   transition: background-image 100ms ease-in-out;
+   &:hover {
+      color: #29abe2;
+      border: 1px solid #29abe2;
+      background-image: url(../img/search_icon_blue.png);
+      background-color: white;
+      background-repeat: no-repeat;
+      background-position-x: right;
+      background-position-y: center;
+   }
 }
 
 .search-task::placeholder {
@@ -91,6 +101,16 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
+}
+
+.add-a-card-btn {
+   background-image: url(../img/add_btn_board.png);
+   width: 24px;
+   height: 24px;
+   &:hover {
+      background-image: url(../img/add_btn_board_blue.png);
+      cursor: pointer;
+   }
 }
 
 .task-card-container {
