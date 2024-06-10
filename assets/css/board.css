@@ -107,6 +107,7 @@
    background-image: url(../img/add_btn_board.png);
    width: 24px;
    height: 24px;
+   transition: all 100ms ease-in-out;
    &:hover {
       background-image: url(../img/add_btn_board_blue.png);
       cursor: pointer;
@@ -238,4 +239,38 @@
 
 .member-icon-3 {
    background-color: blue;
+}
+
+.task-card-nothing-to-do {
+   text-align: center;
+   background-color: rgba(231, 231, 231, 1);
+   border: 1px dashed rgba(168, 168, 168, 1);
+   color: rgba(168, 168, 168, 1);
+   transition: all 100ms ease-in-out;
+   padding: 12px 24px;
+   &:hover {
+      background-color: rgba(231, 231, 231, 0.747);
+      transform: unset;
+   }
+}
+
+.add-task-popup-board-container {
+   position: fixed;
+   top: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+   width: 100%;
+   background-color: rgba(0, 0, 0, 0.404);
+}
+
+.add-task-popup-board {
+   height: 80%;
+   width: 60%;
+   background-color: white;
+   border-radius: 20px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }

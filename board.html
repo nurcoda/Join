@@ -9,10 +9,43 @@
       <script src="./assets/script/script.js" defer></script>
    </head>
    <body onload="includeHTML()">
-      <div w3-include-html="./assets/templates/header.html"></div>
-      <div w3-include-html="./assets/templates/sitebar.html"></div>
+      <!-- <div w3-include-html="./assets/templates/header.html"></div>
+      <div w3-include-html="./assets/templates/sitebar.html"></div> -->
+      <header>
+         <span> Kanban Project Management Tool </span>
+         <div class="header-img-div">
+            <a href="/help.html"><img class="header-info-img" src="./assets/img/questionmark.png" alt="" /></a>
+            <div class="header-user-icon" onclick="showHeaderNav()">G</div>
+         </div>
+         <nav id="headerNav" class="d-none">
+            <a href="/legalNotice.html" class="header-links">Legal Notice</a>
+            <a href="/privatePolicy.html" class="header-links">Privacy Policy</a>
+            <a href="/index.html" class="header-links">Log out</a>
+         </nav>
+      </header>
 
+      <div class="sitebar-container">
+         <img src="./assets/img/join_logo.png" alt="Join logo" class="join-logo-sitebar" />
+         <div class="all-links-wrapper">
+            <div class="nav-wrapper">
+               <a href="/summary.html" class="nav-links"><img src="./assets/img/summary_icon.png" alt="" />Summary</a>
+               <a href="/addTask.html" class="nav-links"><img src="./assets/img/add_task_icon.png" alt="" />Add task</a>
+               <a href="/board.html" class="nav-links"><img src="./assets/img/board-icon.png" alt="" />Board</a>
+               <a href="/contacts.html" class="nav-links"><img src="./assets/img/contact_icon.png" alt="" />Contacts</a>
+            </div>
+            <div class="legally-links-wrapper">
+               <a class="legal-Links" href="/privatePolicy.html">Privacy Policy</a>
+               <a class="legal-Links" href="/legalNotice.html">Legal notice</a>
+            </div>
+         </div>
+      </div>
       <div class="board-container">
+         <!--  -->
+         <!-- ############# -->
+         <!-- BOARD CONTENT -->
+         <!-- ############# -->
+         <!--  -->
+
          <!-- Header -->
          <div class="board-search-add-wrapper distances">
             <h1 class="board-headline">Board</h1>
@@ -22,6 +55,12 @@
             </div>
          </div>
          <!--  -->
+         <!-- ADD TASK POP UP -->
+         <div class="add-task-popup-board-container d-none">
+            <div class="add-task-popup-board">
+               <h1>Add Task (in Board)</h1>
+            </div>
+         </div>
 
          <!-- board -->
          <div class="board-wrapper distances">
@@ -68,13 +107,7 @@
                   <div src="./assets/img/add_btn_board.png" alt="" class="add-a-card-btn"></div>
                </div>
                <div class="task-card-container" id="taskCardContainer">
-                  <div class="task-card">
-                     <div class="category-user-story task-category">User Story</div>
-                  </div>
-                  <div class="task-card">
-                     <div class="category-technical-task task-category">Technical Task</div>
-                  </div>
-                  <div class="task-card"></div>
+                  <div class="task-card-nothing-to-do task-card">No tasks to do</div>
                </div>
             </div>
             <!--  -->
