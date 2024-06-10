@@ -1,6 +1,7 @@
 const toSignUpContainer = document.getElementById("toSignUpContainer");
 const loginContainer = document.getElementById("loginContainer");
 const signUpContainer = document.getElementById("signUpContainer");
+const signUpSuccesContainer = document.getElementById("signUpSuccesContainer");
 openLogin();
 
 function openLogin() {
@@ -17,6 +18,14 @@ function openSignUp() {
    openSignUpHTML();
 }
 
+function signUpSucces() {
+   signUpSuccesContainer.classList.remove("d-none");
+}
+
+function closeSignUpSucces() {
+   signUpSuccesContainer.classList.add("d-none");
+}
+
 function openSignUpHTML() {
    signUpContainer.innerHTML = `
      <div class="headline-login-wrapper">
@@ -27,7 +36,7 @@ function openSignUpHTML() {
             <form class="input-login">
                <div class="input-login-field">
                   <input type="text" placeholder="Name" />
-                  <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
+                  <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
                </div>
                <div class="input-login-field">
                   <input type="email" placeholder="Email" />
@@ -50,7 +59,7 @@ function openSignUpHTML() {
                </div>
 
                <div class="login-guestlogin-btn-wrapper">
-                  <div class="signup-btn-in-form btns-login">Sign up</div>
+                  <div class="signup-btn-in-form btns-login" onclick="signUpSucces()">Sign up</div>
                </div>
             </form>
     `;
