@@ -19,6 +19,7 @@
     cursor: pointer;
     background-color: #eeeeee;
     border-radius: 50%;
+    transform: scale(105%);
 }
 
 h1 {
