@@ -1,26 +1,32 @@
+.contentPolicy {
+    padding-left: 328px;
+    padding-right: 150px;
+}
+
+.h1-back-arrow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-arrow-img {
+    height: 37px;
+    width: 37px;
+    display: flex;
+    padding-top: 45px;
+}
+
+.back-arrow-img:hover {}
+
 h1 {
     font-size: 48px;
     color: black;
-    display: flex;
-    justify-content: flex-start;
-    padding-left: 348px;
     padding-top: 70px;
-    width: 100%;
+    padding-bottom: 50px;
+    margin: 0;
 }
 
 h2 {
     font-size: 32px;
     color: black;
-    padding-left: 348px;
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-}
-
-.text-box {
-    padding-left: 348px;
-    padding-right: 150px;
-    display: flex;
-    justify-content: flex-start;
-
+    margin: 0;
 }
