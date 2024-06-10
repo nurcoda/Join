@@ -46,14 +46,7 @@ h3 {
     padding-top: 6px;
 }
 
-.dev-text-names {
-    display: flex;
-}
-
-.text-box {
-    display: flex;
-    justify-content: flex-start;
-}
+.dev-text-names {}
 
 .target-link {
     text-decoration: none;
