@@ -1,0 +1,25 @@
+.content{
+    margin-left: 232px;
+}
+
+.headline{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.interactionContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seperationLine{
+    height: 5px;
+    width: 1px;
+    border: 1px solid blue;
+}
+
+.container{
+    
+}
