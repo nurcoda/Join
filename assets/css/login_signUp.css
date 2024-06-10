@@ -156,7 +156,7 @@
 
 .btns-login {
    font-size: 21px;
-   padding: 10px 20px;
+   padding: 15px 24px;
    width: fit-content;
    border-radius: 8px;
    font-weight: bold;
@@ -185,6 +185,12 @@
    }
 }
 
+.signup-btn {
+   background-color: #2a3647;
+   color: white;
+   padding: 15px 24px;
+}
+
 .privacy-legal-container {
    width: 100%;
    display: flex;
@@ -200,6 +206,62 @@
          color: #29abe2;
          font-weight: bold;
       }
+   }
+}
+
+.signin-content-wrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   position: relative;
+   /* position: absolute;
+   top: 265.5px; */
+   width: 652px;
+   height: 630px;
+   color: black;
+   border-radius: 30px;
+   gap: 30px;
+   background-color: rgba(255, 255, 255, 1);
+   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+   h1 {
+      margin: 0;
+   }
+}
+
+.goback-arrow {
+   position: absolute;
+   top: 50px;
+   left: 50px;
+   &:hover {
+      transform: scale(105%);
+      cursor: pointer;
+      background-color: #eeeeee;
+      border-radius: 50%;
+   }
+}
+
+.accept-privacy-policy-form {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 8px;
+   color: #a8a8a8;
+   a {
+      text-decoration: none;
+      color: #29abe2;
+   }
+}
+
+.signup-btn-in-form {
+   background-color: #2a3647;
+   color: white;
+   cursor: pointer;
+   transition: all 100ms ease-in-out;
+   &:hover {
+      background-color: #29abe2;
+      color: white;
    }
 }
 
