@@ -11,26 +11,43 @@
    <body onload="includeHTML()">
       <div w3-include-html="./assets/templates/header.html"></div>
       <div w3-include-html="./assets/templates/sitebar.html"></div>
-
+      <div class="headline"><h1>Join 360</h1><p class="seperationLine"></p><p>Key Matrics in a glance</p></div>
       <div class="content">
-         <div class="headline"><h1>Join 360</h1><p class="seperationLine"></p><p>Key Matrics in a glance</p></div>
          <div class="interactionContainer">
             <div class="tasks">
                <div class="row1">
-                  <div></div>
-                  <div></div>
+                  <div class="container">
+                     <div><img src="" alt=""></div>
+                     <div><p class="taskNumber">1</p><p>To-Dos</p></div>
+                  </div>
+                  <div class="container">
+                     <div></div>
+                     <div><p class="taskNumber">1</p><p>Done</p></div>
+                  </div>
                </div>
-               <div class="row2"></div>
-               <div class="row3">
-                  <div class="container">5<p>Tasks in Board</p></div>
-                  <div class="container">2 <p>Tasks in Progress</p></div>
-                  <div class="container">2 <p>Awaiting Feedback</p></div>
+               <div class="row2">
+                  <div class="containerLong">
+                     <div class="Task">
+                        <div class="taskNumber">1</div>
+                        <div><p>Urgent</p></div>
+                     </div>
+                     <div class="seperationLine"></div>
+                     <div class="date">
+                        <p>June 27th 2024</p><br>
+                        <p>upcomming Deadline</p>
+                     </div>
+                  </div>
                </div>
             </div>
-            <div class="greeting">
-               <h2>good morning,</h2><br>
-               <h2>guest</h2>
-            </div>
+            <div class="row3">
+                  <div class="container"><p class="taskNumber">5</p><p>Tasks in Board</p></div>
+                  <div class="container"><p class="taskNumber">2</p><p>Tasks in Progress</p></div>
+                  <div class="container"><p class="taskNumber">2</p><p>Awaiting Feedback</p></div>
+               </div>
+         </div>
+         <div class="greeting">
+            <h2 class="greetingH2">good morning,</h2><br>
+            <h2 class="greetingH2 user">guest</h2>
          </div>
       </div>
             
