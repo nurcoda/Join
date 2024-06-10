@@ -1,13 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <script src="assets/script/script.js" defer></script>
-</head>
-<body>
-    
-</body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Join</title>
+      <link rel="stylesheet" href="./assets/css/style.css" />
+      <link rel="stylesheet" href="./assets/css/login_signUp.css" />
+      <script src="./assets/script/script.js" defer></script>
+      <script src="./assets/script/loginSignin.js" defer></script>
+   </head>
+   <body>
+      <div class="login-container">
+         <img src="./assets/img/join_logo_dark.png" alt="Join logo" class="login-join-logo" />
+         <div class="to-sign-up-container fade-in-animation d-none" id="toSignUpContainer">
+            <div class="not-a-join-user">Not a Join user?</div>
+            <div class="sign-up-btn" onclick="openSignUp()">Sign up</div>
+         </div>
+
+         <!-- LOGIN WRAPPER -->
+         <div class="login-content-wrapper fade-in-animation d-none" id="loginContainer">
+            <div class="headline-login-wrapper">
+               <h1>Log in</h1>
+               <div class="underline-headline"></div>
+            </div>
+            <form class="input-login">
+               <div class="input-login-field">
+                  <input type="email" placeholder="Email" />
+                  <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
+               </div>
+               <div class="input-login-field">
+                  <input type="password" placeholder="Password" />
+                  <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
+               </div>
+
+               <div class="remember-me-form">
+                  <input class="accept-icon" type="checkbox" name="remember-me" id="" />
+                  <label for="remember-me">Remember me</label>
+               </div>
+
+               <div class="login-guestlogin-btn-wrapper">
+                  <div class="login-btn btns-login">Log in</div>
+                  <div class="guest-login-btn btns-login">Guest Log in</div>
+               </div>
+            </form>
+         </div>
+
+         <!-- SIGN UP WRAPPER -->
+
+         <div class="signin-content-wrapper fade-in-animation" id="signUpContainer">
+            <div class="headline-login-wrapper">
+               <img src="./assets/img/goback_arrow_icon.png" alt="" class="goback-arrow" onclick="openLogin()" />
+               <h1>Sign-up</h1>
+               <div class="underline-headline"></div>
+            </div>
+            <form class="input-login">
+               <div class="input-login-field">
+                  <input type="text" placeholder="Name" />
+                  <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
+               </div>
+               <div class="input-login-field">
+                  <input type="email" placeholder="Email" />
+                  <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
+               </div>
+               <div class="input-login-field">
+                  <input type="password" placeholder="Password" />
+                  <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
+               </div>
+               <div class="input-login-field">
+                  <input type="password" placeholder="Confirm Password" />
+                  <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
+               </div>
+
+               <div class="accept-privacy-policy-form">
+                  <input class="accept-icon" type="checkbox" name="accept-privacy-policy" id="" />
+                  <label for="accept-privacy-policy"
+                     >I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label
+                  >
+               </div>
+
+               <div class="login-guestlogin-btn-wrapper">
+                  <div class="signup-btn-in-form btns-login">Sign up</div>
+               </div>
+            </form>
+         </div>
+
+         <div class="privacy-legal-container fade-in-animation">
+            <a href="" class="privay-policy">Privacy Policy</a>
+            <a href="" class="legal-notice">Legal notice</a>
+         </div>
+      </div>
+   </body>
 </html>
