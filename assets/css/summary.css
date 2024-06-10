@@ -10,7 +10,8 @@ p{
 .headline{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    margin-left: 300px;
 }
 
 .interactionContainer{
@@ -18,6 +19,9 @@ p{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 560px;
+    width: 562px;
+    margin-left: 58px;
 }
 
 .seperationLine{
@@ -29,15 +33,40 @@ p{
     margin: 10px;
 }
 
+.seperationLineLong{
+    height: 100px;
+    width: 1px;
+    border: 1px solid #bdbdbd;
+    background-color: #bdbdbd;
+    border-radius: 25px;
+    margin: 50px;
+}
+
 .container{
     background-color: white;
     border: 1px solid gray;
     border-radius: 25px;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
     margin: 10px;
     text-wrap: wrap;
+    width: 264px;
+    height: 168px;
+}
+
+.Task{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.taskStatus{
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 25px;
 }
 
 .containerLong{
@@ -46,8 +75,24 @@ p{
     border-radius: 25px;
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 10px;
     text-wrap: wrap;
+    width: 560px;
+    height: 168px;
+}
+
+.containerSmall{
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    text-wrap: wrap;
+    width: 168px;
+    height: 168px;
 }
 
 .greeting{
@@ -55,14 +100,17 @@ p{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-left: 50px;
 }
 
 .greetingH2{
     margin:0;
+    font-size: 45px;
 }
 
 .user{
-    color: #28ABE2;;
+    color: #28ABE2;
+    font-size: 50px;
 }
 
 .row1{
@@ -89,4 +137,10 @@ p{
     justify-content: center;
 }
 
+.date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
