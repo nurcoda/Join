@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/addTask.css" />
     <script src="./assets/script/script.js" defer></script>
+    <script src="./assets/script/addTask.js"></script>
   </head>
   <body onload="includeHTML()">
     <div w3-include-html="./assets/templates/header.html"></div>
@@ -25,7 +26,9 @@
           <textarea class="description-text" placeholder="Enter a Description"></textarea>
 
           <label class="margin-top-16px">Assigned to</label>
-          <div class="assigned-to-div">Select contacts to asign <img src="./assets/img/arrow_drop_down.png" alt="" /></div>
+          <div class="assigned-to-div">
+            <input type="text" class="asign-input" placeholder="Select conntacts to asign" /> <img src="./assets/img/arrow_drop_down.png" alt="" />
+          </div>
         </div>
         <div class="seperator"></div>
         <div class="add-task-right">
@@ -34,9 +37,15 @@
 
           <label class="margin-top-16px">Prio</label>
           <div class="prio-buttons">
-            <button type="button">Urgent <img src="./assets/img/prio_urgent.png" alt="" /></button>
-            <button type="button">Medium <img src="./assets/img/prio_medium.png" alt="" /></button>
-            <button type="button">Low <img src="./assets/img/prio_low.png" alt="" /></button>
+            <button type="button" id="urgentButton" onclick="setPrioButton('urgent')">
+              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent.png" alt="" />
+            </button>
+            <button type="button" id="mediumButton" onclick="setPrioButton('medium')">
+              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium.png" alt="" />
+            </button>
+            <button type="button" id="lowButton" onclick="setPrioButton('low')">
+              Low <img id="lowButtonImg" src="./assets/img/prio_low.png" alt="" />
+            </button>
           </div>
 
           <label class="margin-top-16px">Category</label>
@@ -49,7 +58,7 @@
           </div>
 
           <div class="clear-and-task-button">
-            <button class="clear-button">Clear <img src="./assets/img/close.png" alt="" /></button>
+            <button class="clear-button" onclick="reset()">Clear <img src="./assets/img/close.png" alt="" /></button>
             <button class="create-task-button">Create Task <img src="./assets/img/checkmark_white.png" alt="" /></button>
           </div>
         </div>
