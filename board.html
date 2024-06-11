@@ -7,6 +7,7 @@
       <link rel="stylesheet" href="./assets/css/style.css" />
       <link rel="stylesheet" href="./assets/css/board.css" />
       <script src="./assets/script/script.js" defer></script>
+      <script src="./assets/script/board.js" defer></script>
    </head>
    <body onload="includeHTML()">
       <!-- <div w3-include-html="./assets/templates/header.html"></div>
@@ -51,14 +52,75 @@
             <h1 class="board-headline">Board</h1>
             <div class="search-add-wrapper">
                <input type="search" name="search-task" class="search-task" id="searchTask" placeholder="find Task" />
-               <div class="add-task-btn">Add task <img src="./assets/img/add_icon.png" alt="" /></div>
+               <div class="add-task-btn" onclick="openAddTaskPopUp()">
+                  Add task <img src="./assets/img/add_icon.png" alt="" />
+               </div>
             </div>
          </div>
          <!--  -->
+
          <!-- ADD TASK POP UP -->
-         <div class="add-task-popup-board-container d-none">
-            <div class="add-task-popup-board">
+         <div class="add-task-popup-board-container d-none" id="addTaskPopUpBackground" onclick="closeAddTaskPopUp()">
+            <div class="add-task-popup-board" id="addTaskPopUp">
+               <img
+                  src="./assets/img/close_big_icon.png"
+                  alt=""
+                  class="close-popup-btn"
+                  id="closePopUpBtn"
+                  onclick="closeAddTaskPopUp()"
+               />
                <h1>Add Task (in Board)</h1>
+            </div>
+         </div>
+
+         <!-- EXISTING TASK POP UP -->
+
+         <div class="existing-task-popup-board-container" id="existingTaskPopUpBackground">
+            <div class="existing-task-popup-board" id="existingTaskPopUp">
+               <img
+                  src="./assets/img/close_big_icon.png"
+                  alt=""
+                  class="close-popup-btn"
+                  id="closePopUpBtn"
+                  onclick="closeAddTaskPopUp()"
+               />
+               <!-- pop up content -->
+               <div class="category-user-story task-category">User Story</div>
+               <div class="existing-task-popup-headline">Kochwelt Page & Recipe Recommender</div>
+               <div class="existing-task-popup-description">Build start page with recipe recommendation</div>
+               <div class="existing-task-popup-date">Due date: <span id="popUpDate">10/05/2024</span></div>
+               <div class="existing-task-popup-priority">
+                  Priority: <span id="popUpDate">Medium <img src="./assets/img/prio_medium.png" alt="" /></span>
+               </div>
+               <div class="existing-task-popup-user-wrapper">
+                  <div class="popup-user-headline">Assigned to:</div>
+                  <div class="popup-user">
+                     <div class="task-member-icon member-icon-1">JM</div>
+                     Jonas Mahlburg
+                  </div>
+                  <div class="popup-user">
+                     <div class="task-member-icon member-icon-2">JS</div>
+                     Joel S.
+                  </div>
+                  <div class="popup-user">
+                     <div class="task-member-icon member-icon-3">MM</div>
+                     Jonas Mahlburg
+                  </div>
+               </div>
+               <div class="existing-task-popup-subtasks">
+                  <div class="popup-subtask-headline">Subtasks</div>
+                  <div class="popup-subtask-task">
+                     <span class="task-done-state task-done-state-checked"></span
+                     ><span class="popup-subtask-name">Implement Recipe Recommendation</span>
+                  </div>
+                  <div class="popup-subtask-task">
+                     <span class="task-done-state"></span><span class="popup-subtask-name">Start Page layout</span>
+                  </div>
+               </div>
+               <div class="popup-delete-edit-btn-wrapper">
+                  <div class="popup-delete-btn">Delete</div>
+                  <div class="popup-edit-btn">Edit</div>
+               </div>
             </div>
          </div>
 
@@ -68,7 +130,12 @@
             <div class="board-column">
                <div class="board-column-headline">
                   To do
-                  <div src="./assets/img/add_btn_board.png" alt="" class="add-a-card-btn"></div>
+                  <div
+                     src="./assets/img/add_btn_board.png"
+                     alt=""
+                     class="add-a-card-btn"
+                     onclick="openAddTaskPopUp()"
+                  ></div>
                </div>
                <div class="task-card-container" id="taskCardContainer">
                   <div class="task-card">
@@ -104,7 +171,12 @@
             <div class="board-column">
                <div class="board-column-headline">
                   In progress
-                  <div src="./assets/img/add_btn_board.png" alt="" class="add-a-card-btn"></div>
+                  <div
+                     src="./assets/img/add_btn_board.png"
+                     alt=""
+                     class="add-a-card-btn"
+                     onclick="openAddTaskPopUp()"
+                  ></div>
                </div>
                <div class="task-card-container" id="taskCardContainer">
                   <div class="task-card-nothing-to-do task-card">No tasks to do</div>
@@ -114,7 +186,12 @@
             <div class="board-column">
                <div class="board-column-headline">
                   Await feedback
-                  <div src="./assets/img/add_btn_board.png" alt="" class="add-a-card-btn"></div>
+                  <div
+                     src="./assets/img/add_btn_board.png"
+                     alt=""
+                     class="add-a-card-btn"
+                     onclick="openAddTaskPopUp()"
+                  ></div>
                </div>
                <div class="task-card-container" id="taskCardContainer">
                   <div class="task-card">

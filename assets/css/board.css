@@ -86,12 +86,13 @@
 
 .board-wrapper {
    display: flex;
+   flex-wrap: wrap;
    justify-content: space-between;
    gap: 32px;
 }
 
 .board-column {
-   width: 15vw;
+   width: 250px;
 }
 
 .board-column-headline {
@@ -254,6 +255,8 @@
    }
 }
 
+/* Add task POPUP */
+
 .add-task-popup-board-container {
    position: fixed;
    top: 0;
@@ -263,6 +266,7 @@
    height: 100vh;
    width: 100%;
    background-color: rgba(0, 0, 0, 0.404);
+   z-index: 1;
 }
 
 .add-task-popup-board {
@@ -273,4 +277,141 @@
    display: flex;
    flex-direction: column;
    align-items: center;
+   position: relative;
+   z-index: 2;
+}
+
+.close-popup-btn {
+   position: absolute;
+   top: 3%;
+   right: 3%;
+   width: 48px;
+   height: 48px;
+   cursor: pointer;
+   transition: all 100ms ease-in-out;
+   &:hover {
+      transform: rotate(10deg);
+   }
+}
+
+/* Existing Task Pop Up */
+
+.existing-task-popup-board-container {
+   position: fixed;
+   top: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+   width: 100%;
+   background-color: rgba(0, 0, 0, 0.404);
+   z-index: 1;
+}
+
+.existing-task-popup-board {
+   height: 85vh;
+   width: 35%;
+   background-color: white;
+   border-radius: 20px;
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+   position: relative;
+   z-index: 2;
+   padding: 24px 30px;
+   font-size: 20px;
+   gap: 12px;
+   word-wrap: break-word;
+   .close-popup-btn {
+      top: 1.5%;
+   }
+}
+
+.existing-task-popup-headline {
+   font-weight: bold;
+   font-size: 40px;
+   word-wrap: break-word; /* Zeilenumbruch bei langen Wörtern */
+   word-break: break-word; /* Zeilenumbruch bei langen Wörtern */
+}
+
+.existing-task-popup-description {
+}
+
+.existing-task-popup-date {
+   display: flex;
+   width: 65%;
+   justify-content: space-between;
+}
+
+.existing-task-popup-priority {
+   margin-bottom: 8px;
+   display: flex;
+   width: 65%;
+   justify-content: space-between;
+   margin-bottom: 8px;
+}
+
+.existing-task-popup-user-wrapper {
+   margin-bottom: 8px;
+}
+
+.popup-user {
+   padding-top: 8px;
+   padding-left: 16px;
+   display: flex;
+   align-items: center;
+   gap: 16px;
+}
+
+.existing-task-popup-subtasks {
+   margin-top: 8px;
+}
+
+.popup-subtask-headline {
+   margin-bottom: 8px;
+}
+
+.popup-subtask-task {
+   font-size: 16px;
+   display: flex;
+   align-items: center;
+   padding-left: 8px;
+   gap: 8px;
+}
+
+.task-done-state {
+   display: block;
+   width: 24px;
+   height: 24px;
+   background-image: url(../img/check_btn.png);
+}
+
+.task-done-state-checked {
+   background-image: url(../img/checked_btn.png);
+}
+
+.popup-subtask-task:hover {
+   border-radius: 20px;
+   cursor: pointer;
+   background-color: rgba(211, 211, 211, 0.459);
+   .task-done-state {
+      background-image: url(../img/checked_btn.png);
+   }
+   .task-done-state-checked {
+      background-image: url(../img/check_btn.png);
+   }
+}
+
+.popup-delete-edit-btn-wrapper {
+   font-size: 16px;
+   position: absolute;
+   bottom: 1%;
+   right: 3%;
+   display: flex;
+   gap: 8px;
+}
+
+.popup-delete-btn {
+   border-right: 2px solid rgba(209, 209, 209, 1);
+   padding-right: 8px;
 }
