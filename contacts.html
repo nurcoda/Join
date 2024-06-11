@@ -7,12 +7,15 @@
       <link rel="stylesheet" href="./assets/css/style.css" />
       <link rel="stylesheet" href="./assets/css/contacts.css" />
       <script src="assets/script/script.js" defer></script>
+      <script src="assets/script/contacts.js"></script>
    </head>
-   <body onload="includeHTML()">
+   <body onload="includeHTML(); renderContact()">
       <div w3-include-html="./assets/templates/header.html"></div>
       <div w3-include-html="./assets/templates/sitebar.html"></div>
 <div class="content">
-    <div class="contactList"></div>
+    <div id="contactList" class="contactList">
+      
+    </div>
       <div>
          <div class="headline">
             <h1>Contacts</h1>
@@ -22,6 +25,8 @@
          <div class="contactDetails"></div>
       </div>
 </div>
+
+
      
    </body>
 </html>
