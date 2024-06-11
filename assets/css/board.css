@@ -134,8 +134,9 @@
    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.08);
    cursor: pointer;
    transition: all 200ms ease-in-out;
+
    &:hover {
-      transform: rotate(2deg);
+      background-color: rgb(247, 247, 247);
    }
 }
 
