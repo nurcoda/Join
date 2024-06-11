@@ -1,6 +1,6 @@
 .main-container {
   margin-left: 328px;
-  margin-top: 148px;
+  margin-top: 180px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -13,7 +13,7 @@ h2 {
 
 .add-task-form {
   width: 976px;
-  height: 524px;
+  height: 504px;
   margin-top: 52px;
   display: flex;
   justify-content: space-between;
@@ -43,6 +43,11 @@ select {
   height: 48px;
   border-radius: 10px;
   border: 1px solid #d1d1d1;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
 }
 
 :focus {
@@ -67,6 +72,11 @@ select {
   justify-content: space-between;
 }
 
+.asign-input {
+  border: 0;
+  height: 80%;
+}
+
 .subtasks-div {
   background-color: white;
   width: 440px;
@@ -79,7 +89,7 @@ select {
 
 .subtasks-div input {
   width: 408px;
-  height: 32px;
+  height: 80%;
   border: 0;
 }
 
@@ -96,12 +106,17 @@ select {
   width: 136px;
   height: 56px;
   border-radius: 10px;
-  border: 1px solid #d1d1d1;
+  border: 0;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.prio-buttons button:hover {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .clear-and-task-button {
@@ -116,11 +131,12 @@ select {
   height: 56px;
   border-radius: 10px;
   background-color: transparent;
-  border: 1px solid #1c232c;
+  border: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
+  border: 1px solid #2a3647;
 }
 
 .create-task-button {
