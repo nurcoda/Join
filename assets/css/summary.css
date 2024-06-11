@@ -2,13 +2,18 @@ p{
     margin: 0;
 }
 
+h1{
+    font-size: 50px;
+}
+
 .content{
     margin-left: 232px;
-    margin-top: 96px;
     display: flex;
 }
 
 .headline{
+    margin-left: 232px;
+    margin-top: 96px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -26,7 +31,7 @@ p{
 }
 
 .seperationLine{
-    height: 20px;
+    height: 50px;
     width: 1px;
     border: 1px solid #28ABE2;
     background-color: #28ABE2;
@@ -61,11 +66,14 @@ p{
     background-color: #2A3647;
     color: white;
     transform: scale(1.1);
-    .procressImg{
-        filter: invert(100%);
-    }
     .taskNumber{
         color:white;
+    }
+    .procressImgDone{
+        background-image: url(../img/Frame\ 59-2.png);
+    }
+    .procressImgToDo{
+        background-image: url(../img/Frame\ 59\ Kopie.png);
     }
 }
 
@@ -117,6 +125,7 @@ p{
     text-wrap: wrap;
     width: 168px;
     height: 168px;
+    transition: all 100ms ease-in-out;
 }
 
 .containerSmall:hover{
@@ -131,7 +140,7 @@ p{
 .greeting{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     flex-direction: column;
     margin-left: 50px;
 }
@@ -177,7 +186,20 @@ p{
     flex-direction: column;
 }
 
-.procressImg{
-    border: 2px solid white;
-    border-radius: 50px;
+.procressImgDone{
+    background-image: url(../img/Group\ 7.png);
+    background-repeat: no-repeat;
+    background-position: center; 
+    height: 89px;
+    width: 89px;
+    object-fit: contain;
+}
+
+.procressImgToDo{
+    background-image: url(../img/Frame\ 59.png);
+    background-repeat: no-repeat;
+    background-position: center; 
+    height: 89px;
+    width: 89px;
+    object-fit: contain;
 }

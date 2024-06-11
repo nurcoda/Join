@@ -1,3 +1,15 @@
+.content{
+    margin-left: 232px;
+    margin-top: 96px;
+    display: flex;
+}
+
+.headline{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .seperationLine{
     height: 20px;
     width: 1px;
@@ -5,4 +17,10 @@
     background-color: #28ABE2;
     border-radius: 25px;
     margin: 10px;
+}
+
+.contactList{
+    width: 465px;
+    height: 100vh;
+    background-color: white;
 }
