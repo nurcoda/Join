@@ -12,7 +12,7 @@ async function includeHTML() {
    }
 }
 
-document.body.addEventListener("click", (event) => {
+document.addEventListener("click", (event) => {
    let headerNav = document.getElementById("headerNav");
    let headerUserIcon = document.getElementById("headerUserIcon");
    if (event.target == headerUserIcon) {
