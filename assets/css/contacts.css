@@ -1,16 +1,16 @@
-.content{
+.content {
     margin-left: 232px;
     margin-top: 96px;
     display: flex;
 }
 
-.headline{
+.headline {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.seperationLine{
+.seperationLine {
     height: 20px;
     width: 1px;
     border: 1px solid #28ABE2;
@@ -19,12 +19,36 @@
     margin: 10px;
 }
 
-.contactList{
+.contactList {
     width: 465px;
     height: 100vh;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.contact{
+.contact {
     color: black;
+}
+
+.contactDetails {
+    display: flex;
+    border-radius: 8px;
+    width: 350px;
+    padding: 12px;
+}
+
+.contactDetails:hover {
+    background-color: #eeeeee;
+}
+
+.img-contacts {
+    display: flex;
+    padding-right: 32px;
+}
+
+.contacts-content-list {
+    display: flex;
+    flex-direction: column;
 }
