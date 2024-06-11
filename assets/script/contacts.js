@@ -63,7 +63,7 @@ let contacts = [
 ];
 
 function renderContact() {
-    for (let i = 0; i < Contacts.length; i++) {
+    for (let i = 0; i < contacts.length; i++) {
         document.getElementById("contactList").innerHTML += `<div class="contact">
            <div class="contactDetails">
            <div class="img-contacts">
