@@ -14,10 +14,12 @@ let Contacts= [
 
 function renderContact(){
     for(let i=0; i<Contacts.length; i++){
-           document.getElementById("contactList").innerHTML= `<div class="contact">
+           document.getElementById("contactList").innerHTML += `<div class="contact">
    <div>
-      name${Email[i]}
-      email${i}
+    Name: ${Contacts[i]["Name"]} <br>
+                    Email: ${Contacts[i]["Email"]}
+
+                  
    </div>
 </div>
     `
