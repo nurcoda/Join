@@ -33,11 +33,11 @@
     border-radius: 15px;
 }
 
-#avatar{
+.avatar{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: gray;
+    background-color: rgb(228, 152, 9);
     color: #fff;
     display: flex;
     justify-content: center;

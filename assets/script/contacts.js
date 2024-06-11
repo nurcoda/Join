@@ -17,7 +17,7 @@ function renderContact() {
         document.getElementById("contactList").innerHTML += `<div class="contact">
            <div class="contactDetails">
            <div class="img-contacts">
-              <img src="./assets/img/Anton.png" alt="">
+              <div id="avatar${i}" class="avatar"></div>
            </div>
            <div class="contacts-content-list">
               <span>${Contacts[i]["Name"]}</span>
@@ -30,7 +30,7 @@ function renderContact() {
 }
 
 function renderAvatar(i){
-    const avatar = document.getElementById('avatar')
+    const avatar = document.getElementById(`avatar${i}`)
     const username = Contacts[i]["Name"] // will be fetching the username, just used my to illustrate
     const firstNameInitial = username[0]
     const secondNameInitial = username.split(' ')[1].split('')[0]
