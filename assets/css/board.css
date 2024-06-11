@@ -320,7 +320,7 @@
    z-index: 2;
    padding: 24px 30px;
    font-size: 20px;
-   gap: 12px;
+   gap: 16px;
    word-wrap: break-word;
    .close-popup-btn {
       top: 1.5%;
@@ -418,6 +418,7 @@
 
 .popup-btn {
    display: flex;
+   gap: 4px;
    align-items: center;
 }
 
@@ -425,10 +426,10 @@
    cursor: pointer;
    color: #29abe2;
    .popup-delete-icon {
-      background-image: url(../img/delete_trashcan_icon.png);
+      background-image: url(../img/delete_trashcan_blue_icon.png);
    }
    .popup-edit-icon {
-      background-image: url(../img/edit_pen_icon.png);
+      background-image: url(../img/edit_pen_blue_icon.png);
    }
 }
 
