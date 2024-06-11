@@ -26,6 +26,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 90vh;
+    overflow: scroll;
 }
 
 .contact {
@@ -68,4 +70,31 @@
 .contacts-content-list {
     display: flex;
     flex-direction: column;
+}
+
+.buttonWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:sticky;
+    top: 0;
+    background-color: white;
+}
+
+.addContactBtn{
+    height:50px;
+    width: 352px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    gap: 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 21px;
+    margin: 20px 0;
 }

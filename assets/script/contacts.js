@@ -9,6 +9,56 @@ let Contacts = [
         "Email": "bunny@lola.de",
         "Name": "Lola Bunny",
     },
+    {
+        "phonenumber": 876543221,
+        "Email": "ander@anders.de",
+        "Name": "Anders Anderson",
+    },
+    {
+        "phonenumber": 555696969,
+        "Email": "bunny@lola.de",
+        "Name": "Lola Bunny",
+    },
+    {
+        "phonenumber": 876543221,
+        "Email": "ander@anders.de",
+        "Name": "Anders Anderson",
+    },
+    {
+        "phonenumber": 555696969,
+        "Email": "bunny@lola.de",
+        "Name": "Lola Bunny",
+    },
+    {
+        "phonenumber": 876543221,
+        "Email": "ander@anders.de",
+        "Name": "Anders Anderson",
+    },
+    {
+        "phonenumber": 555696969,
+        "Email": "bunny@lola.de",
+        "Name": "Lola Bunny",
+    },
+    {
+        "phonenumber": 876543221,
+        "Email": "ander@anders.de",
+        "Name": "Anders Anderson",
+    },
+    {
+        "phonenumber": 555696969,
+        "Email": "bunny@lola.de",
+        "Name": "Lola Bunny",
+    },
+    {
+        "phonenumber": 876543221,
+        "Email": "ander@anders.de",
+        "Name": "Anders Anderson",
+    },
+    {
+        "phonenumber": 555696969,
+        "Email": "bunny@lola.de",
+        "Name": "Lola Bunny",
+    },
 
 ];
 
