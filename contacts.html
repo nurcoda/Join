@@ -15,18 +15,43 @@
    <div w3-include-html="./assets/templates/header.html"></div>
    <div w3-include-html="./assets/templates/sitebar.html"></div>
    <div class="content">
-      
+
       <div id="contactList" class="contactList">
          <div class="buttonWrapper">
             <button class="addContactBtn"> Add new Conatct <img src="./assets/img/person_add_icon.png" alt=""> </button>
          </div>
-         
+
       </div>
       <div>
          <div class="headline">
             <h1>Contacts</h1>
             <div class="seperationLine"></div>
             <p>Better with a Team</p>
+         </div>
+
+         <div class="contact-card-name-container">
+            <div class="avatar avatar-big">AA</div>
+            <div>
+               <div>${contacts[i]["name"]}</div>
+               <div class="edit-delete-container">
+                  <span class="edit-icon-wrapper">
+                     <div class="edit-icon"></div>Edit
+                  </span>
+                  <span class="edit-icon-wrapper">
+                     <div class="trash-icon"></div>Delete
+                  </span>
+               </div>
+            </div>
+         </div>
+
+         <div class="contact-card-info-container">
+            <div class="headline-contact-information">Contact Information</div>
+            <div class="">
+               <div class="">Email</div>
+               <div class="">${contacts[i]["email"]}</div>
+               <div class="">Phone</div>
+               <div class="">${Contacts[i]["phonenumber"]}</div>
+            </div>
          </div>
 
       </div>

@@ -8,10 +8,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 35px;
 }
 
 .seperationLine {
-    height: 20px;
+    height: 64px;
     width: 1px;
     border: 1px solid #28ABE2;
     background-color: #28ABE2;
@@ -35,7 +36,7 @@
     border-radius: 15px;
 }
 
-.avatar{
+.avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -46,10 +47,15 @@
     align-items: center;
 }
 
-.contactCard{
-    display: flex;
+.avatar-big {
+    width: 120px;
+    height: 120px;
+    border: 3px solid white;
 }
 
+.contactCard {
+    display: flex;
+}
 
 .contactDetails {
     display: flex;
@@ -72,18 +78,18 @@
     flex-direction: column;
 }
 
-.buttonWrapper{
+.buttonWrapper {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    position:sticky;
+    position: sticky;
     top: 0;
     background-color: white;
 }
 
-.addContactBtn{
-    height:50px;
+.addContactBtn {
+    height: 50px;
     width: 352px;
     border: none;
     cursor: pointer;
@@ -98,3 +104,36 @@
     font-size: 21px;
     margin: 20px 0;
 }
+
+.edit-icon {
+    background-image: url(../img/edit_pen_icon.png);
+    width: 24px;
+    height: 24px;
+}
+
+.trash-icon {
+    background-image: url(../img/delete_trashcan_icon.png);
+    width: 24px;
+    height: 24px;
+}
+
+.edit-icon-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-delete-container {
+    display: flex;
+    gap: 8px;
+}
+
+.contact-card-name-container {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.contact-card-info-container {}
+
+.headline-contact-information {}
