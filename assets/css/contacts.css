@@ -1,0 +1,8 @@
+.seperationLine{
+    height: 20px;
+    width: 1px;
+    border: 1px solid #28ABE2;
+    background-color: #28ABE2;
+    border-radius: 25px;
+    margin: 10px;
+}
