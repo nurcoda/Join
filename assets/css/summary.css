@@ -4,6 +4,7 @@ p{
 
 .content{
     margin-left: 232px;
+    margin-top: 96px;
     display: flex;
 }
 
@@ -53,12 +54,16 @@ p{
     text-wrap: wrap;
     width: 264px;
     height: 168px;
+    transition: all 100ms ease-in-out;
 }
 
 .container:hover{
     background-color: #2A3647;
     color: white;
     transform: scale(1.1);
+    .procressImg{
+        filter: invert(100%);
+    }
     .taskNumber{
         color:white;
     }
@@ -89,12 +94,13 @@ p{
     text-wrap: wrap;
     width: 560px;
     height: 168px;
+    transition: transform 0.3s ease-in-out;
 }
 
 .containerLong:hover{
     background-color: #2A3647;
     color: white;
-    transform: scale(1.1);
+    transform: translateY(5%);
     .taskNumber{
         color:white;
     }
