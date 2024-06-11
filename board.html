@@ -75,14 +75,14 @@
 
          <!-- EXISTING TASK POP UP -->
 
-         <div class="existing-task-popup-board-container" id="existingTaskPopUpBackground">
+         <div class="existing-task-popup-board-container d-none" id="existingTaskPopUpBackground">
             <div class="existing-task-popup-board" id="existingTaskPopUp">
                <img
                   src="./assets/img/close_big_icon.png"
                   alt=""
                   class="close-popup-btn"
-                  id="closePopUpBtn"
-                  onclick="closeAddTaskPopUp()"
+                  id="closePopUpBtn_editTask"
+                  onclick="closeEditTaskPopUp()"
                />
                <!-- pop up content -->
                <div class="category-user-story task-category">User Story</div>
@@ -145,7 +145,7 @@
                   ></div>
                </div>
                <div class="task-card-container" id="taskCardContainer">
-                  <div class="task-card">
+                  <div class="task-card" onclick="openEditTaskPopUp()">
                      <div class="category-user-story task-category">User Story</div>
                      <div class="task-headline">Kochwelt Page & Recipe Recommender</div>
                      <div class="task-comment">Build start page with recipe recommendation...</div>
