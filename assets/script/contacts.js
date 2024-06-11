@@ -14,15 +14,25 @@ let Contacts= [
 
 function renderContact(){
     for(let i=0; i<Contacts.length; i++){
-           document.getElementById("contactList").innerHTML += `<div class="contact">
+       
+           document.getElementById("contactList").innerHTML += 
+`<div class="contactCard">
    <div>
+   <div id="avatar${i}"></div>
     Name: ${Contacts[i]["Name"]} <br>
-                    Email: ${Contacts[i]["Email"]}
-
-                  
-   </div>
+    Email: ${Contacts[i]["Email"]}
+  </div>
 </div>
-    `
+    `;
+    renderAvatar(i);
     }
- 
 }
+
+function renderAvatar(i){
+    const avatar = document.getElementById('avatar')
+    const username = Contacts[i]["Name"] // will be fetching the username, just used my to illustrate
+    const firstNameInitial = username[0]
+    const secondNameInitial = username.split(' ')[1].split('')[0]
+    avatar.innerHTML += firstNameInitial + secondNameInitial
+}
+
