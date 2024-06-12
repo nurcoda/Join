@@ -58,9 +58,17 @@
           </div>
 
           <label class="margin-top-16px">Subtasks</label>
-          <div class="subtasks-div">
-            <input type="text" placeholder="Add new subtask" />
-            <img src="./assets/img/add_icon_black.png" alt="" />
+          <div class="subtasks-div" onclick="showSubtasksIcons()">
+            <input id="subtasksInput" type="text" placeholder="Add new subtask" />
+            <img id="subtasksPlusIcon" src="./assets/img/add_icon_black.png" alt="" />
+            <div id="subtasksInputIcons" class="d-none">
+              <img src="./assets/img/addtask_close.svg" onclick="clearSubtasksInput()" alt="" />
+              <div class="subtasks-seperator"></div>
+              <img src="./assets/img/addtask_check.svg" onclick="addNewSubtask()" alt="" />
+            </div>
+          </div>
+          <div>
+            <ul id="subtasksList"></ul>
           </div>
 
           <div class="clear-and-task-button">
