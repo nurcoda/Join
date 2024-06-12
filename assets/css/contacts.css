@@ -216,14 +216,112 @@
    border-radius: 20px;
    border-top-left-radius: 50px;
    border-bottom-left-radius: 50px;
+   display: flex;
 }
 
 .popup-logo-headline-wrapper {
    height: 100%;
-   width: 25%;
+   width: 394px;
    border-top-left-radius: 20px;
    border-bottom-left-radius: 20px;
    background-color: rgba(42, 54, 71, 1);
    display: flex;
    flex-direction: column;
+   justify-content: center;
+   align-items: start;
+}
+
+.popup-headline{
+color: white;
+font-size: 51px;
+font-weight: 700;
+}
+
+.popup-subline{
+color: white;
+font-size: 22px;
+font-weight: 400;
+}
+
+.contact-formular{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.add-new-contact-form{
+   display: flex;
+   flex-direction: column;
+}
+
+.profile-img-add-contact{
+background-image: url(../img/person.png);
+background-repeat: no-repeat;
+background-position: center; 
+border: 3px solid white;
+border-radius:70px;
+background-color: gray;
+width: 120px;
+height: 120px;
+}
+
+.input-fields-add-contact{
+
+}
+
+.operation-buttons-add-contact{
+
+}
+
+.cancel-btn{
+   border: 1px solid black;
+   border-radius: 15px;
+   background-color: white;
+   width: 126px;
+   height:57px;
+   background-image: url(../img/iconoir_cancel.png);
+   background-repeat: no-repeat;
+   background-position: 100px 15px;
+   font-size: 21px;
+   font-weight: 400;
+}
+
+.create-contact-btn{
+   border-radius: 15px;
+   background-color: rgba(42, 54, 71, 1);
+   color: white;
+   width: 214px;
+   height: 57px;
+   padding: 16px;
+   background-image: url(../img/check.png);
+   background-repeat: no-repeat;
+   background-position: 185px 21px;
+   font-size: 21px;
+   font-weight: 700;
+
+}
+
+.input-field-name{
+   background-image: url(../img/person-gray.png);
+  background-position: 380px 15px;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 422px;
+  gap: 8px;
+}
+.input-field-mail{
+   background-image: url(../img/mail.png);
+  background-position: 380px 15px; 
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 422px;
+  gap: 8px;
+}
+.input-field-phone{
+   background-image: url(../img/call.png);
+  background-position: 380px 15px;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 422px;
+  gap: 8px;
 }
