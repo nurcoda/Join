@@ -37,28 +37,34 @@ h2 {
   gap: 6px;
 }
 
-input,
-select {
-  width: 440px;
-  height: 48px;
+input {
+  width: 424px;
+  height: 32px;
+  padding: 8px;
   border-radius: 10px;
   border: 1px solid #d1d1d1;
   cursor: pointer;
+}
+
+input:focus {
+  outline: 1px solid #29abe2;
 }
 
 button {
   cursor: pointer;
 }
 
-:focus {
-  outline: none;
-}
-
 .description-text {
-  width: 440px;
-  height: 120px;
+  width: 424px;
+  height: 104px;
   border-radius: 10px;
   border: 1px solid #d1d1d1;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.description-text:focus {
+  outline: 1px solid #29abe2;
 }
 
 .assigned-to-div {
@@ -70,11 +76,13 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .asign-input {
+  width: 400px;
+  height: 20px;
   border: 0;
-  height: 80%;
 }
 
 .subtasks-div {
@@ -88,8 +96,8 @@ button {
 }
 
 .subtasks-div input {
-  width: 408px;
-  height: 80%;
+  width: 400px;
+  height: 20px;
   border: 0;
 }
 
@@ -117,6 +125,20 @@ button {
 
 .prio-buttons button:hover {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.category-div select {
+  width: 440px;
+  height: 48px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.category-div select:focus {
+  outline: 1px solid #29abe2;
 }
 
 .clear-and-task-button {
@@ -150,4 +172,15 @@ button {
   justify-content: center;
   align-items: center;
   gap: 8px;
+}
+
+.clear-button:hover {
+  border: 1px solid #29abe2;
+  color: #29abe2;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.create-task-button:hover {
+  background-color: #29abe2;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
