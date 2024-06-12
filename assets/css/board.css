@@ -445,3 +445,39 @@
    height: 24px;
    background-image: url(../img/edit_pen_icon.png);
 }
+
+@media (max-width: 1520px) {
+   .board-column {
+      width: 200px;
+   }
+}
+
+@media (max-width: 1300px) {
+   .board-column {
+      width: 150px;
+   }
+   .board-column-headline {
+      font-size: 16px;
+   }
+}
+
+@media (max-width: 1130px) {
+   .board-column {
+      width: 250px;
+   }
+   .board-column-headline {
+      font-size: 16px;
+   }
+}
+
+@media (max-width: 990px) {
+   .board-column {
+      width: 200px;
+   }
+}
+
+@media (max-width: 880px) {
+   .board-column {
+      width: 100%;
+   }
+}
