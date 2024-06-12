@@ -36,7 +36,20 @@ h2 {
   gap: 6px;
 }
 
-input {
+button {
+  cursor: pointer;
+}
+
+/* input {
+  width: 424px;
+  height: 32px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  cursor: pointer;
+} */
+
+.title-input, .date-input {
   width: 424px;
   height: 32px;
   padding: 8px;
@@ -45,12 +58,9 @@ input {
   cursor: pointer;
 }
 
-input:focus {
-  outline: 1px solid #29abe2;
-}
-
-button {
-  cursor: pointer;
+.title-input:focus, .date-input:focus{
+  border: 1px solid #29abe2;
+  outline: 0;
 }
 
 .description-text {
@@ -63,7 +73,8 @@ button {
 }
 
 .description-text:focus {
-  outline: 1px solid #29abe2;
+  border: 1px solid #29abe2;
+  outline: 0;
 }
 
 .assigned-to-div {
@@ -95,23 +106,50 @@ button {
   align-items: center;
   justify-content: space-between;
   padding-right: 12px;
+  cursor: pointer;
 }
 
-.subtasks-div input {
-  width: 360px;
-  height: 20px;
+.subtasks-div:focus-within {
+ border: 1px solid #29abe2;
+ outline: 0;
+}
+
+
+#subtasksInput {
+  height: 32px;
   border: 0;
+  width: 100%;
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+#subtasksInput:focus {
+  outline: 0;
 }
 
 #subtasksInputIcons {
   display: flex;
-  gap: 6px;
+  gap: 2px;
+}
+
+.subtasks-icon {
+  border-radius: 100%;
+  padding: 4px;
+}
+
+.subtasks-icon:hover {
+ background-color: #ebebeb;
 }
 
 .subtasks-seperator {
   height: 24px;
   width: 0.5px;
   background-color: #d1d1d1;
+}
+
+#subtasksList {
+  height: 56px;
 }
 
 #subtasksList li {
@@ -198,7 +236,21 @@ button {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.clear-button svg {
+  fill: #2A3647;
+}
+
+.clear-button:hover svg {
+  fill: #29abe2;
+}
+
 .create-task-button:hover {
   background-color: #29abe2;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
+
+.change-color:hover {
+  stroke: #29abe2; /* Changes the fill color to blue on hover */
+}
+

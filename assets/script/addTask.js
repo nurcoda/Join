@@ -1,6 +1,3 @@
-// let subtasks = [];
-let subtasksIconsShowing = false;
-
 function setPrioButton(prio) {
   changeButtonColorAndImg(prio);
 }
@@ -31,7 +28,8 @@ function showSubtasksIcons() {
   document.getElementById("subtasksInputIcons").classList.remove("d-none");
 }
 
-function hideSubtasksIcons() {
+function hideSubtasksIcons(event) {
+  event.stopPropagation(); // Verhindert, dass das Klick-Event weitergeleitet wird
   document.getElementById("subtasksInputIcons").classList.add("d-none");
   document.getElementById("subtasksPlusIcon").classList.remove("d-none");
 }
@@ -39,7 +37,7 @@ function hideSubtasksIcons() {
 function clearSubtasksInput() {
   let input = document.getElementById("subtasksInput");
   input.value = "";
-  hideSubtasksIcons();
+  hideSubtasksIcons(event);
 }
 
 function addNewSubtask() {
@@ -49,3 +47,7 @@ function addNewSubtask() {
   subtasksList.innerHTML += `<li>${input}</li>`;
   clearSubtasksInput();
 }
+
+document.getElementById("subtasksDiv").addEventListener("click", function () {
+  document.getElementById("subtasksInput").focus(); // Setzt den Fokus auf das Input-Feld
+});
