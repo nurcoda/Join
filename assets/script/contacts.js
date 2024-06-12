@@ -81,7 +81,7 @@ function renderContact() {
 
 function renderAvatar(i) {
     const avatar = document.getElementById(`avatar${i}`)
-    const username = contacts[i]["name"] // will be fetching the username, just used my to illustrate
+    const username = contacts[i]["name"]
     const firstNameInitial = username[0]
     const secondNameInitial = username.split(' ')[1].split('')[0]
     avatar.innerHTML += firstNameInitial + secondNameInitial
