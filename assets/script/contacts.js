@@ -118,3 +118,20 @@ function renderContactCardInfo(i) {
             </div>
          </div>`;
 }
+
+//** Helper Functions */
+
+let popUpBackground = document.getElementById("popUpBackground");
+let contentPopUp = document.getElementById("contentPopUp");
+let closePopUpBtn = document.getElementById("closePopUpBtn");
+popUpBackground.addEventListener("click", closePopUp);
+
+function openPopUp() {
+   popUpBackground.classList.remove("d-none");
+}
+
+function closePopUp() {
+   if (event.target === popUpBackground || closePopUpBtn) {
+      popUpBackground.classList.add("d-none");
+   }
+}
