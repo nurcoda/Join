@@ -1,6 +1,6 @@
 .main-container {
   margin-left: 328px;
-  margin-top: 180px;
+  margin-top: 160px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -13,7 +13,6 @@ h2 {
 
 .add-task-form {
   width: 976px;
-  height: 504px;
   margin-top: 52px;
   display: flex;
   justify-content: space-between;
@@ -68,7 +67,7 @@ button {
 }
 
 .assigned-to-div {
-  width: 440px;
+  width: 428px;
   height: 48px;
   background-color: white;
   border-radius: 10px;
@@ -77,28 +76,46 @@ button {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  padding-right: 12px;
 }
 
 .asign-input {
-  width: 400px;
+  width: 380px;
   height: 20px;
   border: 0;
 }
 
 .subtasks-div {
   background-color: white;
-  width: 440px;
+  width: 428px;
   height: 48px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding-right: 12px;
 }
 
 .subtasks-div input {
-  width: 400px;
+  width: 360px;
   height: 20px;
   border: 0;
+}
+
+#subtasksInputIcons {
+  display: flex;
+  gap: 6px;
+}
+
+.subtasks-seperator {
+  height: 24px;
+  width: 0.5px;
+  background-color: #d1d1d1;
+}
+
+#subtasksList li {
+  margin-bottom: 8px;
 }
 
 .margin-top-16px {
@@ -145,7 +162,8 @@ button {
   display: flex;
   gap: 16px;
   justify-content: end;
-  margin-top: 24px;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .clear-button {

@@ -27,7 +27,7 @@
 
           <label class="margin-top-16px">Assigned to</label>
           <div class="assigned-to-div">
-            <input type="text" class="asign-input" placeholder="Select conntacts to asign" /> <img src="./assets/img/arrow_drop_down.png" alt="" />
+            <input type="text" class="asign-input" placeholder="Select conntacts to asign" /> <img src="./assets/img/arrow_drop_down_svg.svg" alt="" />
           </div>
         </div>
         <div class="seperator"></div>
@@ -38,13 +38,13 @@
           <label class="margin-top-16px">Prio</label>
           <div class="prio-buttons">
             <button type="button" id="urgentButton" onclick="setPrioButton('urgent')">
-              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent.png" alt="" />
+              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent_svg.svg" alt="" />
             </button>
             <button type="button" id="mediumButton" onclick="setPrioButton('medium')">
-              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium.png" alt="" />
+              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_svg.svg" alt="" />
             </button>
             <button type="button" id="lowButton" onclick="setPrioButton('low')">
-              Low <img id="lowButtonImg" src="./assets/img/prio_low.png" alt="" />
+              Low <img id="lowButtonImg" src="./assets/img/prio_low_svg.svg" alt="" />
             </button>
           </div>
 
@@ -58,14 +58,22 @@
           </div>
 
           <label class="margin-top-16px">Subtasks</label>
-          <div class="subtasks-div">
-            <input type="text" placeholder="Add new subtask" />
-            <img src="./assets/img/add_icon_black.png" alt="" />
+          <div class="subtasks-div" onclick="showSubtasksIcons()">
+            <input id="subtasksInput" type="text" placeholder="Add new subtask" />
+            <img id="subtasksPlusIcon" src="./assets/img/add_icon_black.png" alt="" />
+            <div id="subtasksInputIcons" class="d-none">
+              <img src="./assets/img/addtask_close.svg" onclick="clearSubtasksInput()" alt="" />
+              <div class="subtasks-seperator"></div>
+              <img src="./assets/img/addtask_check.svg" onclick="addNewSubtask()" alt="" />
+            </div>
+          </div>
+          <div>
+            <ul id="subtasksList"></ul>
           </div>
 
           <div class="clear-and-task-button">
-            <button class="clear-button" onclick="reset()">Clear <img src="./assets/img/close.png" alt="" /></button>
-            <button class="create-task-button">Create Task <img src="./assets/img/checkmark_white.png" alt="" /></button>
+            <button class="clear-button" onclick="reset()">Clear <img src="./assets/img/addtask_close.svg" alt="" /></button>
+            <button class="create-task-button">Create Task <img src="./assets/img/check_white_svg.svg" alt="" /></button>
           </div>
         </div>
       </form>
