@@ -61,36 +61,40 @@ let contacts = [
    },
 ];
 
+let contactCardBigContainer = document.getElementById("contactCardBigContainer");
+
 function renderContact() {
    for (let i = 0; i < contacts.length; i++) {
+      let avatar;
+      avatar = renderAvatar(i, avatar);
       document.getElementById("contactList").innerHTML += `<div class="contact" onclick="renderContactCardInfo(${i})">
            <div class="contactDetails">
            <div class="img-contacts">
-              <div id="avatar${i}" class="avatar"></div>
+              <div id="avatar${i}" class="avatar">${avatar}</div>
            </div>
            <div class="contacts-content-list">
               <span>${contacts[i]["name"]}</span>
               <a href="">Email: ${contacts[i]["email"]}</a>
            </div>
-</div></div>
+            </div>
+        </div>
     `;
-      renderAvatar(i);
    }
 }
 
-function renderAvatar(i) {
-   const avatar = document.getElementById(`avatar${i}`);
+function renderAvatar(i, avatar) {
    const username = contacts[i]["name"];
    const firstNameInitial = username[0];
    const secondNameInitial = username.split(" ")[1].split("")[0];
-   avatar.innerHTML += firstNameInitial + secondNameInitial;
+   avatar = firstNameInitial + secondNameInitial;
+   return avatar;
 }
 
-let contactCardBigContainer = document.getElementById("contactCardBigContainer");
-
 function renderContactCardInfo(i) {
+   let avatar;
+   avatar = renderAvatar(i, avatar);
    contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
-            <div class="avatar avatar-big">AA</div>
+            <div class="avatar avatar-big">${avatar}</div>
             <div>
                <div class="contact-card-name">${contacts[i].name}</div>
                <div class="edit-delete-container">

@@ -1,67 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Join</title>
+      <link rel="stylesheet" href="./assets/css/style.css" />
+      <link rel="stylesheet" href="./assets/css/contacts.css" />
+      <script src="assets/script/script.js" defer></script>
+      <script src="assets/script/contacts.js" defer></script>
+   </head>
 
-<head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Join</title>
-   <link rel="stylesheet" href="./assets/css/style.css" />
-   <link rel="stylesheet" href="./assets/css/contacts.css" />
-   <script src="assets/script/script.js" defer></script>
-   <script src="assets/script/contacts.js" defer></script>
-</head>
+   <body onload="includeHTML(); renderContact()">
+      <div w3-include-html="./assets/templates/header.html"></div>
+      <div w3-include-html="./assets/templates/sitebar.html"></div>
 
-<body onload="includeHTML(); renderContact()">
-   <div w3-include-html="./assets/templates/header.html"></div>
-   <div w3-include-html="./assets/templates/sitebar.html"></div>
-   <div class="content">
-
-      <div id="contactList" class="contactList">
-         <div class="buttonWrapper">
-            <button class="addContactBtn"> Add new Conatct <img src="./assets/img/person_add_icon.png" alt=""> </button>
-         </div>
-
-      </div>
-      <div>
-         <div class="headline">
-            <h1>Contacts</h1>
-            <!-- <div class="seperationLine"></div> -->
-            <span class="subline">Better with a Team</span>
-         </div>
-
-         <div id="contactCardBigContainer" class="contact-card-big-container">
-         <!-- <div class="contact-card-name-container">
-            <div class="avatar avatar-big">AA</div>
-            <div>
-               <div>${contacts[i]["name"]}</div>
-               <div class="edit-delete-container">
-                  <span class="edit-icon-wrapper">
-                     <div class="edit-icon"></div>Edit
-                  </span>
-                  <span class="edit-icon-wrapper">
-                     <div class="trash-icon"></div>Delete
-                  </span>
-               </div>
+      <!-- Add contact Popup -->
+      <div class="add-contact-pop-up-container">
+         <div class="add-contact-pop-up">
+            <div class="popup-logo-headline-wrapper">
+               <div><img src="./assets/img/join_logo_small_popup.png" alt="" /></div>
+               <div class="popup-headline">Add contact</div>
+               <div class="popup-subline">Tasks are better with a team</div>
+               <div class="underline-from-subline"></div>
             </div>
          </div>
+      </div>
 
-         <div id="contact-card-info-container" class="contact-card-info-container">
-            <div class="headline-contact-information">Contact Information</div>
-            <div class="">
-               <div class="">Email</div>
-               <div class="">${contacts[i]["email"]}</div>
-               <div class="">Phone</div>
-               <div class="">${Contacts[i]["phonenumber"]}</div>
+      <!-- Main Content -->
+      <div class="content">
+         <div id="contactList" class="contactList">
+            <div class="buttonWrapper">
+               <button class="addContactBtn">
+                  Add new Conatct <img src="./assets/img/person_add_icon.png" alt="" />
+               </button>
             </div>
-         </div> -->
+         </div>
+         <div>
+            <div class="headline">
+               <h1>Contacts</h1>
+               <!-- <div class="seperationLine"></div> -->
+               <span class="subline">Better with a Team</span>
+            </div>
+            <div id="contactCardBigContainer" class="contact-card-big-container"></div>
+         </div>
       </div>
-
-      </div>
-   </div>
-   </div>
-
-
-
-</body>
-
+   </body>
 </html>
