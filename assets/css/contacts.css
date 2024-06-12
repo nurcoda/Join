@@ -127,6 +127,7 @@
    cursor: pointer;
    padding-left: 24px;
    transition: all 100ms ease-in-out;
+
    &:hover {
       transform: scale(101%);
       color: #28abe2;
@@ -143,6 +144,7 @@
    cursor: pointer;
    padding-left: 24px;
    transition: all 100ms ease-in-out;
+
    &:hover {
       transform: scale(101%);
       color: #28abe2;
@@ -194,8 +196,7 @@
    font-weight: bold;
 }
 
-.contact-info-phone {
-}
+.contact-info-phone {}
 
 .add-contact-pop-up-container {
    width: 100%;
@@ -231,54 +232,50 @@
    align-items: start;
 }
 
-.popup-headline{
-color: white;
-font-size: 51px;
-font-weight: 700;
+.popup-headline {
+   color: white;
+   font-size: 51px;
+   font-weight: 700;
 }
 
-.popup-subline{
-color: white;
-font-size: 22px;
-font-weight: 400;
+.popup-subline {
+   color: white;
+   font-size: 22px;
+   font-weight: 400;
 }
 
-.contact-formular{
+.contact-formular {
    display: flex;
    justify-content: center;
    align-items: center;
 }
 
-.add-new-contact-form{
+.add-new-contact-form {
    display: flex;
    flex-direction: column;
 }
 
-.profile-img-add-contact{
-background-image: url(../img/person.png);
-background-repeat: no-repeat;
-background-position: center; 
-border: 3px solid white;
-border-radius:70px;
-background-color: gray;
-width: 120px;
-height: 120px;
+.profile-img-add-contact {
+   background-image: url(../img/person.png);
+   background-repeat: no-repeat;
+   background-position: center;
+   border: 3px solid white;
+   border-radius: 70px;
+   background-color: gray;
+   width: 120px;
+   height: 120px;
 }
 
-.input-fields-add-contact{
+.input-fields-add-contact {}
 
-}
+.operation-buttons-add-contact {}
 
-.operation-buttons-add-contact{
-
-}
-
-.cancel-btn{
+.cancel-btn {
    border: 1px solid black;
    border-radius: 15px;
    background-color: white;
    width: 126px;
-   height:57px;
+   height: 57px;
    background-image: url(../img/iconoir_cancel.png);
    background-repeat: no-repeat;
    background-position: 100px 15px;
@@ -286,7 +283,7 @@ height: 120px;
    font-weight: 400;
 }
 
-.create-contact-btn{
+.create-contact-btn {
    border-radius: 15px;
    background-color: rgba(42, 54, 71, 1);
    color: white;
@@ -301,27 +298,65 @@ height: 120px;
 
 }
 
-.input-field-name{
+.input-field-name {
    background-image: url(../img/person-gray.png);
-  background-position: 380px 15px;
-  background-repeat: no-repeat;
-  height: 50px;
-  width: 422px;
-  gap: 8px;
+   background-position: 380px 15px;
+   background-repeat: no-repeat;
+   height: 50px;
+   width: 422px;
+   gap: 8px;
+   border-radius: 10px;
+   border: 3px solid #eeeeee;
+   cursor: pointer;
+   padding-left: 12px;
 }
-.input-field-mail{
+
+.input-field-name:hover {
+   border-color: #eeeeeeca;
+}
+
+.input-field-name:focus {
+   border-color: #28abe2;
+}
+
+.input-field-mail {
    background-image: url(../img/mail.png);
-  background-position: 380px 15px; 
-  background-repeat: no-repeat;
-  height: 50px;
-  width: 422px;
-  gap: 8px;
+   background-position: 380px 15px;
+   background-repeat: no-repeat;
+   height: 50px;
+   width: 422px;
+   gap: 8px;
+   border-radius: 10px;
+   border: 3px solid #eeeeee;
+   cursor: pointer;
+   padding-left: 12px;
 }
-.input-field-phone{
+
+.input-field-mail:hover {
+   border-color: #eeeeeeca;
+}
+
+.input-field-mail:focus {
+   border-color: #28abe2;
+}
+
+.input-field-phone {
    background-image: url(../img/call.png);
-  background-position: 380px 15px;
-  background-repeat: no-repeat;
-  height: 50px;
-  width: 422px;
-  gap: 8px;
+   background-position: 380px 15px;
+   background-repeat: no-repeat;
+   height: 50px;
+   width: 422px;
+   gap: 8px;
+   border-radius: 10px;
+   border: 3px solid #eeeeee;
+   cursor: pointer;
+   padding-left: 12px;
+}
+
+.input-field-phone:hover {
+   border-color: #eeeeeeca;
+}
+
+.input-field-phone:focus {
+   border-color: #28abe2;
 }
