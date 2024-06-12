@@ -1,6 +1,6 @@
 .main-container {
   margin-left: 328px;
-  margin-top: 180px;
+  margin-top: 160px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -13,7 +13,6 @@ h2 {
 
 .add-task-form {
   width: 976px;
-  height: 504px;
   margin-top: 52px;
   display: flex;
   justify-content: space-between;
@@ -163,7 +162,8 @@ button {
   display: flex;
   gap: 16px;
   justify-content: end;
-  margin-top: 24px;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .clear-button {

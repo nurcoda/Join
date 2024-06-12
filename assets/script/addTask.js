@@ -17,10 +17,10 @@ function changeButtonColorAndImg(prio) {
     let button = document.getElementById(priority + "Button");
     let img = document.getElementById(priority + "ButtonImg");
     if (priority === prio) {
-      img.src = `./assets/img/prio_${priority}_white.png`;
+      img.src = `./assets/img/prio_${priority}_white_svg.svg`;
       button.style.backgroundColor = colors[priority];
     } else {
-      img.src = `./assets/img/prio_${priority}.png`;
+      img.src = `./assets/img/prio_${priority}_svg.svg`;
       button.style.backgroundColor = "white";
     }
   });
