@@ -196,9 +196,14 @@
    font-weight: bold;
 }
 
-.contact-info-phone {}
+.contact-info-phone {
+}
 
-.add-contact-pop-up-container {
+/**************************/
+/*   ADD CONTACT POP UP   */
+/**************************/
+
+.pop-up-container-background {
    width: 100%;
    height: 100vh;
    display: flex;
@@ -211,152 +216,165 @@
 }
 
 .add-contact-pop-up {
-   height: 50vh;
-   width: 60%;
+   height: 60vh;
+   width: 75%;
    background-color: white;
    border-radius: 20px;
    border-top-left-radius: 50px;
    border-bottom-left-radius: 50px;
    display: flex;
+   position: relative;
+}
+
+.close-pop-up-btn {
+   width: 24px;
+   height: 24px;
+   position: absolute;
+   top: 5%;
+   right: 2.5%;
+   border-radius: 50%;
+   padding: 2px;
+   cursor: pointer;
+   transition: all 100ms ease-in;
+}
+
+.close-pop-up-btn:hover {
+   background-color: rgb(245, 245, 245);
 }
 
 .popup-logo-headline-wrapper {
    height: 100%;
-   width: 394px;
+   width: 30%;
    border-top-left-radius: 20px;
    border-bottom-left-radius: 20px;
    background-color: rgba(42, 54, 71, 1);
    display: flex;
    flex-direction: column;
    justify-content: center;
-   align-items: start;
+   padding: 0 3%;
+   box-sizing: border-box;
 }
 
 .popup-headline {
+   margin-top: 16px;
    color: white;
-   font-size: 51px;
+   font-size: 40px;
    font-weight: 700;
+   line-height: 1;
 }
 
 .popup-subline {
+   margin-top: 16px;
    color: white;
-   font-size: 22px;
+   font-size: 18px;
    font-weight: 400;
 }
 
-.contact-formular {
-   display: flex;
-   justify-content: center;
-   align-items: center;
+.underline-from-subline {
+   margin-top: 16px;
+   width: 90px;
+   height: 3px;
+   background-color: #28abe2;
 }
 
-.add-new-contact-form {
+/**************************/
+/*   ADD CONTACT FORMULAR   */
+/**************************/
+
+.contact-formular {
+   width: 50vw;
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+}
+
+.input-fields-add-contact {
    display: flex;
    flex-direction: column;
 }
 
-.profile-img-add-contact {
-   background-image: url(../img/person.png);
+.add-contact-form-input {
+   border: 1px solid rgba(209, 209, 209, 1);
+   border-radius: 5px;
+   padding: 5%;
+   cursor: pointer;
+   background-position: 95% 50%;
    background-repeat: no-repeat;
-   background-position: center;
-   border: 3px solid white;
-   border-radius: 70px;
-   background-color: gray;
-   width: 120px;
-   height: 120px;
+   width: 100%;
+   transition: all 100ms ease-in;
+   outline: none;
+   font-size: 20px;
 }
 
-.input-fields-add-contact {}
-
-.operation-buttons-add-contact {}
-
-.cancel-btn {
-   border: 1px solid black;
-   border-radius: 15px;
-   background-color: white;
-   width: 126px;
-   height: 57px;
-   background-image: url(../img/iconoir_cancel.png);
-   background-repeat: no-repeat;
-   background-position: 100px 15px;
-   font-size: 21px;
-   font-weight: 400;
+.add-contact-form-input::placeholder {
+   font-size: 20px;
+   color: rgba(209, 209, 209, 1);
 }
 
-.create-contact-btn {
-   border-radius: 15px;
-   background-color: rgba(42, 54, 71, 1);
-   color: white;
-   width: 214px;
-   height: 57px;
-   padding: 16px;
-   background-image: url(../img/check.png);
-   background-repeat: no-repeat;
-   background-position: 185px 21px;
-   font-size: 21px;
-   font-weight: 700;
+.add-contact-form-input:hover {
+   border: 1px solid rgb(165, 165, 165);
+}
 
+.add-contact-form-input:focus {
+   border-color: #28abe2;
 }
 
 .input-field-name {
    background-image: url(../img/person-gray.png);
-   background-position: 380px 15px;
-   background-repeat: no-repeat;
-   height: 50px;
-   width: 422px;
-   gap: 8px;
-   border-radius: 10px;
-   border: 3px solid #eeeeee;
-   cursor: pointer;
-   padding-left: 12px;
-}
-
-.input-field-name:hover {
-   border-color: #eeeeeeca;
-}
-
-.input-field-name:focus {
-   border-color: #28abe2;
 }
 
 .input-field-mail {
    background-image: url(../img/mail.png);
-   background-position: 380px 15px;
-   background-repeat: no-repeat;
-   height: 50px;
-   width: 422px;
-   gap: 8px;
-   border-radius: 10px;
-   border: 3px solid #eeeeee;
-   cursor: pointer;
-   padding-left: 12px;
-}
-
-.input-field-mail:hover {
-   border-color: #eeeeeeca;
-}
-
-.input-field-mail:focus {
-   border-color: #28abe2;
 }
 
 .input-field-phone {
    background-image: url(../img/call.png);
-   background-position: 380px 15px;
+   margin-bottom: 32px;
+}
+
+/**************************/
+/* ADD CONTACT BTNS       */
+/**************************/
+
+.add-contact-buttons-wrapper {
+   display: flex;
+   gap: 24px;
+}
+
+.add-contact-form-btn {
+   border-radius: 12px;
    background-repeat: no-repeat;
-   height: 50px;
-   width: 422px;
-   gap: 8px;
-   border-radius: 10px;
-   border: 3px solid #eeeeee;
+   background-position: 90% 50%;
+   padding: 16px;
+   padding-right: 40px;
+   font-size: 20px;
+   transition: all 100ms ease-in;
    cursor: pointer;
-   padding-left: 12px;
 }
 
-.input-field-phone:hover {
-   border-color: #eeeeeeca;
+.cancel-btn {
+   border: 1px solid black;
+   background-color: white;
+   background-image: url(../img/cancel_btn_x_icon.png);
+   font-weight: 400;
 }
 
-.input-field-phone:focus {
+.cancel-btn:hover {
+   color: #28abe2;
+   background-image: url(../img/cancel_btn_x_blue_icon.svg);
    border-color: #28abe2;
+}
+
+.create-contact-btn {
+   background-color: rgba(42, 54, 71, 1);
+   color: white;
+   background-image: url(../img/checkmark_white.png);
+   font-weight: 700;
+   border: none;
+}
+
+.create-contact-btn:hover {
+   color: white;
+   background-color: #28abe2;
+   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.336);
 }

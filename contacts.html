@@ -15,29 +15,34 @@
       <div w3-include-html="./assets/templates/sitebar.html"></div>
 
       <!-- Add contact Popup -->
-      <div class="add-contact-pop-up-container">
-         <div class="add-contact-pop-up">
+      <div class="pop-up-container-background" id="popUpBackground">
+         <div class="add-contact-pop-up" id="contentPopUp">
+            <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
             <div class="popup-logo-headline-wrapper">
-               <div><img src="./assets/img/join_logo_small_popup.png" alt="" /></div>
+               <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
                <div class="popup-headline">Add contact</div>
-               <div class="popup-subline">Tasks are better with a team</div>
+               <div class="popup-subline">Tasks are better with a team!</div>
                <div class="underline-from-subline"></div>
             </div>
+
             <div class="contact-formular">
-                  <div class="profile-img-add-contact"></div>
-                  <div class="add-new-contact-form">
-                      <div class="input-fields-add-contact">
-                           <input class="input-field-name" placeholder="Name" type="text"> <br>
-                           <input class="input-field-mail" placeholder="Email" type="text"><br>
-                           <input class="input-field-phone" placeholder="Phone" type="text">
-                      </div>
-            <div class="operation-buttons-add-contact">
-               <button class="cancel-btn">Cancel</button><button class="create-contact-btn">Create Contact</button>
-            </div>
+               <img src="./assets/img/profile_img.svg" class="profile-img-add-contact" />
+               <!--  -->
+               <!-- Formular muss hier sein -->
+               <!-- das return false verhindern neuladen der seite, beim abschicken der Form -->
+               <form
+                  onsubmit="alert('Die Funktion gibts noch nicht :P'); return false"
+                  class="input-fields-add-contact"
+               >
+                  <input class="input-field-name add-contact-form-input" placeholder="Name" type="text" /> <br />
+                  <input class="input-field-mail add-contact-form-input" placeholder="Email" type="text" /><br />
+                  <input class="input-field-phone add-contact-form-input" placeholder="Phone" type="text" />
+                  <div class="add-contact-buttons-wrapper">
+                     <button class="cancel-btn add-contact-form-btn">Cancel</button
+                     ><button class="create-contact-btn add-contact-form-btn">Create Contact</button>
                   </div>
-           
+               </form>
             </div>
-         
          </div>
       </div>
 
@@ -45,7 +50,7 @@
       <div class="content">
          <div id="contactList" class="contactList">
             <div class="buttonWrapper">
-               <button class="addContactBtn">
+               <button class="addContactBtn" onclick="openPopUp()">
                   Add new Conatct <img src="./assets/img/person_add_icon.png" alt="" />
                </button>
             </div>
