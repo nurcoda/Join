@@ -25,7 +25,7 @@
 body {
    margin: 0;
    background-color: #f6f7f9;
-   font-family: "Inter";
+   font-family: "Inter", sans-serif;
 }
 
 /* HEADER-Template */
@@ -93,7 +93,7 @@ header span {
    flex-direction: column;
    justify-content: space-between;
    position: absolute;
-   top: 70px;
+   top: 96px;
    right: 16px;
    background-color: #2a3647;
    border-top-left-radius: 20px;

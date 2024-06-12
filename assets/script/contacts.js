@@ -64,7 +64,7 @@ let contacts = [
 
 function renderContact() {
     for (let i = 0; i < contacts.length; i++) {
-        document.getElementById("contactList").innerHTML += `<div class="contact">
+        document.getElementById("contactList").innerHTML += `<div class="contact" onclick="renderContactCardInfo(${i})">
            <div class="contactDetails">
            <div class="img-contacts">
               <div id="avatar${i}" class="avatar"></div>
@@ -87,3 +87,12 @@ function renderAvatar(i) {
     avatar.innerHTML += firstNameInitial + secondNameInitial
 }
 
+function renderContactCardInfo(i){
+    document.getElementById(`contact-card-info-container`).innerHTML= 
+    ` <div class="headline-contact-information">Contact Information</div>
+            <div class="">
+               <div class="">Email</div>
+               <div class="">${contacts[i]["email"]}</div>
+               <div class="">Phone</div>
+               <div class="">${contacts[i]["phonenumber"]}</div>`
+}

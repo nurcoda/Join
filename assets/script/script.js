@@ -1,18 +1,23 @@
 async function includeHTML() {
-  let includeElements = document.querySelectorAll("[w3-include-html]");
-  for (let i = 0; i < includeElements.length; i++) {
-    const element = includeElements[i];
-    file = element.getAttribute("w3-include-html"); // "includes/header.html"
-    let resp = await fetch(file);
-    if (resp.ok) {
-      element.innerHTML = await resp.text();
-    } else {
-      element.innerHTML = "Page not found";
-    }
-  }
+   let includeElements = document.querySelectorAll("[w3-include-html]");
+   for (let i = 0; i < includeElements.length; i++) {
+      const element = includeElements[i];
+      file = element.getAttribute("w3-include-html"); // "includes/header.html"
+      let resp = await fetch(file);
+      if (resp.ok) {
+         element.innerHTML = await resp.text();
+      } else {
+         element.innerHTML = "Page not found";
+      }
+   }
 }
 
-function showHeaderNav() {
-  let hiddenElement = document.getElementById("headerNav");
-  hiddenElement.classList.toggle("d-none");
-}
+document.addEventListener("click", (event) => {
+   let headerNav = document.getElementById("headerNav");
+   let headerUserIcon = document.getElementById("headerUserIcon");
+   if (event.target == headerUserIcon) {
+      headerNav.classList.toggle("d-none");
+   } else if (event.target != headerNav) {
+      headerNav.classList.add("d-none");
+   }
+});
