@@ -51,3 +51,31 @@ function addNewSubtask() {
 document.getElementById("subtasksDiv").addEventListener("click", function () {
   document.getElementById("subtasksInput").focus(); // Setzt den Fokus auf das Input-Feld
 });
+
+function showAssignedDropdown() {
+  document.getElementById("assignedDropdown").classList.remove("d-none");
+
+  showOpenedDropdownIcon();
+}
+
+function hideAssignedDropdown() {
+  event.stopPropagation();
+
+  document.getElementById("assignedDropdown").classList.add("d-none");
+
+  hideOpenedDropdownIcon();
+}
+
+function showOpenedDropdownIcon() {
+  document.getElementById("dropdown1").classList.add("d-none");
+  document.getElementById("dropdown2").classList.remove("d-none");
+}
+
+function hideOpenedDropdownIcon() {
+  document.getElementById("dropdown2").classList.add("d-none");
+  document.getElementById("dropdown1").classList.remove("d-none");
+}
+
+document.getElementById("assignedDiv").addEventListener("click", function () {
+  document.getElementById("assignedInput").focus(); // Setzt den Fokus auf das Input-Feld
+});

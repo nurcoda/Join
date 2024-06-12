@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/addTask.css" />
     <script src="./assets/script/script.js" defer></script>
-    <script src="./assets/script/addTask.js"></script>
   </head>
   <body onload="includeHTML()">
     <div w3-include-html="./assets/templates/header.html"></div>
@@ -26,9 +25,28 @@
           <textarea class="description-text" placeholder="Enter a Description"></textarea>
 
           <label class="margin-top-16px">Assigned to</label>
-          <div class="assigned-to-div">
-            <input type="text" class="asign-input" placeholder="Select conntacts to asign" />
-            <img src="./assets/img/arrow_drop_down_svg.svg" alt="" />
+          <div id="assignedDiv" class="assigned-to-div" onclick="showAssignedDropdown()">
+            <input id="assignedInput" type="text" class="assigned-input" placeholder="Select conntacts to asign" />
+            <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" alt="">
+            <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none" onclick="hideAssignedDropdown()" alt="" />
+          </div>
+          <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none">
+            <div>
+              <div>Rainer Zufall</div>
+              <div>Clara Fall</div>
+              <div>Rosa Munde</div>
+              <div>Klara Himmel</div>
+              <div>Hans Dampf</div>
+              <div>Susi Sorglos</div>
+              <div>Lasse Reinström</div>
+              <div>Anna Bolika</div>
+              <div>Frank Reich</div>
+              <div>Martha Pfahl</div>
+              <div>Heidi Heida</div>
+              <div>Paul Lahner</div>
+              <div>Wanda Fuhl</div>
+              <div>Bill Dung</div>
+            </div>
           </div>
         </div>
         <div class="seperator"></div>
@@ -87,5 +105,6 @@
         </div>
       </form>
     </div>
+    <script src="./assets/script/addTask.js"></script>
   </body>
 </html>
