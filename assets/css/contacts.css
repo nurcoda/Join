@@ -1,139 +1,198 @@
 .content {
-    margin-left: 232px;
-    margin-top: 96px;
-    display: flex;
+   margin-left: 232px;
+   margin-top: 96px;
+   display: flex;
 }
 
 .headline {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
+   display: flex;
+   align-items: center;
+   padding-left: 48px;
+}
+
+.headline h1 {
+   font-size: 61px;
+   border-right: 1px solid #28abe2;
+   padding-right: 20px;
+}
+
+.subline {
+   padding-top: 12px;
+   padding-left: 20px;
+   font-size: 27px;
+   font-weight: 400;
 }
 
 .seperationLine {
-    height: 64px;
-    width: 1px;
-    border: 1px solid #28ABE2;
-    background-color: #28ABE2;
-    border-radius: 25px;
-    margin: 10px;
+   height: 64px;
+   width: 1px;
+   border: 1px solid #28abe2;
+   background-color: #28abe2;
+   border-radius: 25px;
+   margin: 10px;
 }
 
 .contactList {
-    width: 465px;
-    height: 100vh;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-height: 90vh;
-    overflow: scroll;
+   width: 465px;
+   height: 100vh;
+   background-color: white;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   max-height: 90vh;
+   overflow: scroll;
 }
 
 .contact {
-    color: black;
-    border-radius: 15px;
+   color: black;
+   border-radius: 15px;
 }
 
 .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgb(228, 152, 9);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   background-color: rgb(228, 152, 9);
+   color: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .avatar-big {
-    width: 120px;
-    height: 120px;
-    border: 3px solid white;
+   width: 120px;
+   height: 120px;
+   border: 3px solid white;
+   font-size: 47px;
 }
 
 .contactCard {
-    display: flex;
+   display: flex;
 }
 
 .contactDetails {
-    display: flex;
-    border-radius: 8px;
-    width: 350px;
-    padding: 12px;
+   display: flex;
+   border-radius: 8px;
+   width: 350px;
+   padding: 12px;
 }
 
 .contactDetails:hover {
-    background-color: #eeeeee;
+   background-color: #eeeeee;
 }
 
 .img-contacts {
-    display: flex;
-    padding-right: 32px;
+   display: flex;
+   padding-right: 32px;
 }
 
 .contacts-content-list {
-    display: flex;
-    flex-direction: column;
+   display: flex;
+   flex-direction: column;
 }
 
 .buttonWrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background-color: white;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: sticky;
+   top: 0;
+   background-color: white;
 }
 
 .addContactBtn {
-    height: 50px;
-    width: 352px;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(42, 54, 71, 1);
-    color: white;
-    gap: 15px;
-    border-radius: 15px;
-    font-weight: bold;
-    font-size: 21px;
-    margin: 20px 0;
-}
-
-.edit-icon {
-    background-image: url(../img/edit_pen_icon.png);
-    width: 24px;
-    height: 24px;
-}
-
-.trash-icon {
-    background-image: url(../img/delete_trashcan_icon.png);
-    width: 24px;
-    height: 24px;
+   height: 50px;
+   width: 352px;
+   border: none;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: rgba(42, 54, 71, 1);
+   color: white;
+   gap: 15px;
+   border-radius: 15px;
+   font-weight: bold;
+   font-size: 21px;
+   margin: 20px 0;
 }
 
 .edit-icon-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+   background-image: url(../img/edit_pen_icon.png);
+   background-repeat: no-repeat;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   cursor: pointer;
+   padding-left: 24px;
+   transition: all 100ms ease-in-out;
+   &:hover {
+      transform: scale(101%);
+      color: #28abe2;
+      background-image: url(../img/edit_pen_blue_icon.png);
+   }
+}
+
+.delete-icon-wrapper {
+   background-image: url(../img/delete_trashcan_icon.png);
+   background-repeat: no-repeat;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   cursor: pointer;
+   padding-left: 24px;
+   transition: all 100ms ease-in-out;
+   &:hover {
+      transform: scale(101%);
+      color: #28abe2;
+      background-image: url(../img/delete_trashcan_blue_icon.png);
+   }
 }
 
 .edit-delete-container {
-    display: flex;
-    gap: 8px;
+   display: flex;
+   gap: 13px;
 }
 
 .contact-card-name-container {
-    display: flex;
-    align-items: center;
-    gap: 54px;
+   display: flex;
+   align-items: center;
+   gap: 54px;
+   margin-bottom: 59px;
 }
 
-.contact-card-info-container {}
+.contact-card-name {
+   font-size: 47px;
+   font-weight: 500;
+}
 
-.headline-contact-information {}
+.contact-card-big-container {
+   padding-left: 48px;
+}
+
+.contact-card-info-wrapper {
+   display: flex;
+   flex-direction: column;
+   gap: 22px;
+}
+
+.headline-contact-information {
+   margin-bottom: 59px;
+   font-size: 20px;
+}
+
+.contact-info-email-headline {
+   font-weight: bold;
+}
+
+.contact-info-email {
+   color: rgba(0, 124, 238, 1);
+}
+
+.contact-info-phone-headline {
+   font-weight: bold;
+}
+
+.contact-info-phone {
+}

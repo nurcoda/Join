@@ -8,7 +8,7 @@
    <link rel="stylesheet" href="./assets/css/style.css" />
    <link rel="stylesheet" href="./assets/css/contacts.css" />
    <script src="assets/script/script.js" defer></script>
-   <script src="assets/script/contacts.js"></script>
+   <script src="assets/script/contacts.js" defer></script>
 </head>
 
 <body onload="includeHTML(); renderContact()">
@@ -25,11 +25,12 @@
       <div>
          <div class="headline">
             <h1>Contacts</h1>
-            <div class="seperationLine"></div>
-            <p>Better with a Team</p>
+            <!-- <div class="seperationLine"></div> -->
+            <span class="subline">Better with a Team</span>
          </div>
 
-         <div class="contact-card-name-container">
+         <div id="contactCardBigContainer" class="contact-card-big-container">
+         <!-- <div class="contact-card-name-container">
             <div class="avatar avatar-big">AA</div>
             <div>
                <div>${contacts[i]["name"]}</div>
@@ -52,7 +53,8 @@
                <div class="">Phone</div>
                <div class="">${Contacts[i]["phonenumber"]}</div>
             </div>
-         </div>
+         </div> -->
+      </div>
 
       </div>
    </div>
