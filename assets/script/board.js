@@ -12,13 +12,36 @@ let todoCounter = 0;
 let inProgressCounter = 0;
 let awaitFeedbackCounter = 0;
 let doneCounter = 0;
+let preparedPriority;
 
-renderTasksIntoColumns();
+prepareData();
 console.log(tasks);
 console.log(tasks.state);
 
 /**
- * checks, which state the task has
+ * prepare some incoming data for renderfunctions
+ */
+
+function prepareData() {
+   for (let i = 0; i < tasks.length; i++) {
+      switch (tasks[i].priority) {
+         case "high":
+            preparedPriority = "urgent";
+            break;
+         default:
+            preparedPriority = tasks[i].priority;
+      }
+      // if (tasks[i].priority === "high") {
+      //    preparedPriority = "urgent";
+      // } else preparedPriority = tasks[i].priority;
+      // console.log("PRIORITY" + [i] + ":" + preparedPriority);
+   }
+
+   renderTasksIntoColumns();
+}
+
+/**
+ * checks the state of task
  * render tasks in the specific columns.
  * calls a function, to check if there is no task in a specific column
  */
@@ -64,12 +87,20 @@ function renderTasksIntoColumnsHTML(i) {
                      </div>
                      <div class="member-priority-wrapper">
                         <div class="task-member">
-                           <div class="task-member-icon member-icon-1">AH</div>
-                           <div class="task-member-icon member-icon-2">MM</div>
-                           <div class="task-member-icon member-icon-3">JM</div>
+                           <div class="task-member-icon member-icon-1">${
+                              tasks[i].assigned_user[0].first_two_letters
+                           }</div>
+                           <div class="task-member-icon member-icon-2">${
+                              tasks[i].assigned_user[1] ? tasks[i].assigned_user[1].first_two_letters : ""
+                           }</div>
+                           <div class="task-member-icon member-icon-3">${
+                              tasks[i].assigned_user[2] ? tasks[i].assigned_user[2].first_two_letters : ""
+                           }</div>
                         </div>
                         <div class="priority-icon">
-                           <img src="./assets/img/prio_medium.png" alt="" />
+                           <img src="./assets/img/prio_${
+                              tasks[i].priority === "high" ? "urgent" : tasks[i].priority
+                           }.png" alt="" />
                         </div>
                      </div>
                   </div>`;
@@ -112,9 +143,6 @@ function renderEditTaskPopUp(id) {
 }
 
 function renderEditTaskPopUpHTML(i) {
-   if (tasks[i].priority) {
-      priority = "urgent";
-   }
    return `  <img
                   src="./assets/img/close_big_icon.png"
                   alt=""
@@ -128,7 +156,9 @@ function renderEditTaskPopUpHTML(i) {
                <div class="existing-task-popup-description">${tasks[i].description}</div>
                <div class="existing-task-popup-date">Due date: <span id="popUpDate">${tasks[i].due_date}</span></div>
                <div class="existing-task-popup-priority">
-                  Priority: <span id="popUpDate">${tasks[i].priority} <img src="./assets/img/prio_${priority}.png" alt="" /></span>
+                  Priority: <span id="popUpDate">${tasks[i].priority} <img src="./assets/img/prio_${
+      tasks[i].priority === "high" ? "urgent" : tasks[i].priority
+   }.png" alt="" /></span>
                </div>
                <div class="existing-task-popup-user-wrapper">
                   <div class="popup-user-headline">Assigned to:</div>
