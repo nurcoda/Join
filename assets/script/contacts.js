@@ -98,7 +98,7 @@ function closePopUp() {
 function deleteContact(i) {
    contacts.splice(i, 1);
    renderContact();
-   document.getElementById("contact-card-info-container").innerHTML = ""; // Kontaktkarte leeren
+   document.getElementById("contact-card-big-container").innerHTML = ""; // Kontaktkarte leeren
 }
 //**Add to Contacts */
 
