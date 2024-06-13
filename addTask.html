@@ -1,129 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Join</title>
-      <link rel="stylesheet" href="./assets/css/style.css" />
-      <link rel="stylesheet" href="./assets/css/addTask.css" />
-      <script src="./assets/script/script.js" defer></script>
-      <script src="assets/script/testData.js" defer></script>
-   </head>
-   <body onload="includeHTML()">
-      <div w3-include-html="./assets/templates/header.html"></div>
-      <div w3-include-html="./assets/templates/sitebar.html"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/addTask.css" />
+    <script src="assets/script/testData.js" defer></script>
+    <script src="./assets/script/script.js" defer></script>
+    <script defer src="./assets/script/addTask.js"></script>
+  </head>
+  <body onload="includeHTML()">
+    <div w3-include-html="./assets/templates/header.html"></div>
+    <div w3-include-html="./assets/templates/sitebar.html"></div>
 
-      <div class="main-container">
-         <h2>Add Task</h2>
-         <form action="" class="add-task-form">
-            <div class="add-task-left">
-               <label>Title</label>
+    <div class="main-container">
+      <h2>Add Task</h2>
+      <form action="" class="add-task-form">
+        <div class="add-task-left">
+          <label>Title</label>
 
-               <input class="title-input" type="text" placeholder="Enter a title" required />
+          <input class="title-input" type="text" placeholder="Enter a title" required />
 
-               <label class="margin-top-16px">Description</label>
+          <label class="margin-top-16px">Description</label>
 
-               <textarea class="description-text" placeholder="Enter a Description"></textarea>
+          <textarea class="description-text" placeholder="Enter a Description"></textarea>
 
-               <label class="margin-top-16px">Assigned to</label>
-               <div id="assignedDiv" class="assigned-to-div" onclick="showAssignedDropdown()">
-                  <input
-                     id="assignedInput"
-                     type="text"
-                     class="assigned-input"
-                     placeholder="Select conntacts to asign"
-                  />
-                  <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
-                  <img
-                     id="dropdown2"
-                     src="./assets/img/arrow_dropdown2_svg.svg"
-                     class="d-none"
-                     onclick="hideAssignedDropdown()"
-                     alt=""
-                  />
-               </div>
-               <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none">
-                  <div>
-                     <div>Rainer Zufall</div>
-                     <div>Clara Fall</div>
-                     <div>Rosa Munde</div>
-                     <div>Klara Himmel</div>
-                     <div>Hans Dampf</div>
-                     <div>Susi Sorglos</div>
-                     <div>Lasse Reinström</div>
-                     <div>Anna Bolika</div>
-                     <div>Frank Reich</div>
-                     <div>Martha Pfahl</div>
-                     <div>Heidi Heida</div>
-                     <div>Paul Lahner</div>
-                     <div>Wanda Fuhl</div>
-                     <div>Bill Dung</div>
-                  </div>
-               </div>
+          <label class="margin-top-16px">Assigned to</label>
+          <div id="assignedDiv" class="assigned-to-div" onclick="showAssignedDropdown(), renderContacts()">
+            <input id="assignedInput" type="text" class="assigned-input" placeholder="Select conntacts to asign" />
+            <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
+            <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none" onclick="hideAssignedDropdown()" alt="" />
+          </div>
+          <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none"></div>
+        </div>
+        <div class="seperator"></div>
+        <div class="add-task-right">
+          <label for="dueDate">Due date</label>
+          <input class="date-input" type="date" required />
+
+          <label class="margin-top-16px">Prio</label>
+          <div class="prio-buttons">
+            <button type="button" id="urgentButton" onclick="setPrioButton('urgent')">
+              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent_svg.svg" alt="" />
+            </button>
+            <button type="button" id="mediumButton" onclick="setPrioButton('medium')">
+              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_svg.svg" alt="" />
+            </button>
+            <button type="button" id="lowButton" onclick="setPrioButton('low')">
+              Low <img id="lowButtonImg" src="./assets/img/prio_low_svg.svg" alt="" />
+            </button>
+          </div>
+
+          <label class="margin-top-16px">Category</label>
+          <div class="category-div">
+            <select>
+              <option value="" disabled selected>Select task category</option>
+              <option value="category1">Technical Task</option>
+              <option value="category2">User Story</option>
+            </select>
+          </div>
+
+          <label class="margin-top-16px">Subtasks</label>
+          <div id="subtasksDiv" class="subtasks-div" onclick="showSubtasksIcons()">
+            <input id="subtasksInput" min="1" type="text" placeholder="Add new subtask" />
+            <img id="subtasksPlusIcon" class="subtasks-icon" src="./assets/img/add_svg.svg" alt="" />
+            <div id="subtasksInputIcons" class="d-none">
+              <img src="./assets/img/addtask_close.svg" class="subtasks-icon" onclick="clearSubtasksInput()" alt="" />
+              <div class="subtasks-seperator"></div>
+              <img src="./assets/img/addtask_check.svg" class="subtasks-icon" onclick="addNewSubtask()" alt="" />
             </div>
-            <div class="seperator"></div>
-            <div class="add-task-right">
-               <label for="dueDate">Due date</label>
-               <input class="date-input" type="date" required />
+          </div>
 
-               <label class="margin-top-16px">Prio</label>
-               <div class="prio-buttons">
-                  <button type="button" id="urgentButton" onclick="setPrioButton('urgent')">
-                     Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent_svg.svg" alt="" />
-                  </button>
-                  <button type="button" id="mediumButton" onclick="setPrioButton('medium')">
-                     Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_svg.svg" alt="" />
-                  </button>
-                  <button type="button" id="lowButton" onclick="setPrioButton('low')">
-                     Low <img id="lowButtonImg" src="./assets/img/prio_low_svg.svg" alt="" />
-                  </button>
-               </div>
+          <div>
+            <ul id="subtasksList"></ul>
+          </div>
 
-               <label class="margin-top-16px">Category</label>
-               <div class="category-div">
-                  <select>
-                     <option value="" disabled selected>Select task category</option>
-                     <option value="category1">Technical Task</option>
-                     <option value="category2">User Story</option>
-                  </select>
-               </div>
-
-               <label class="margin-top-16px">Subtasks</label>
-               <div id="subtasksDiv" class="subtasks-div" onclick="showSubtasksIcons()">
-                  <input id="subtasksInput" min="1" type="text" placeholder="Add new subtask" />
-                  <img id="subtasksPlusIcon" class="subtasks-icon" src="./assets/img/add_svg.svg" alt="" />
-                  <div id="subtasksInputIcons" class="d-none">
-                     <img
-                        src="./assets/img/addtask_close.svg"
-                        class="subtasks-icon"
-                        onclick="clearSubtasksInput()"
-                        alt=""
-                     />
-                     <div class="subtasks-seperator"></div>
-                     <img src="./assets/img/addtask_check.svg" class="subtasks-icon" onclick="addNewSubtask()" alt="" />
-                  </div>
-               </div>
-
-               <div>
-                  <ul id="subtasksList"></ul>
-               </div>
-
-               <div class="clear-and-task-button">
-                  <button class="clear-button" onclick="reset()">
-                     Clear
-                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                           d="M7.14434 8.40005L2.24434 13.3C2.061 13.4834 1.82767 13.575 1.54434 13.575C1.261 13.575 1.02767 13.4834 0.844336 13.3C0.661003 13.1167 0.569336 12.8834 0.569336 12.6C0.569336 12.3167 0.661003 12.0834 0.844336 11.9L5.74434 7.00005L0.844336 2.10005C0.661003 1.91672 0.569336 1.68338 0.569336 1.40005C0.569336 1.11672 0.661003 0.883382 0.844336 0.700049C1.02767 0.516715 1.261 0.425049 1.54434 0.425049C1.82767 0.425049 2.061 0.516715 2.24434 0.700049L7.14434 5.60005L12.0443 0.700049C12.2277 0.516715 12.461 0.425049 12.7443 0.425049C13.0277 0.425049 13.261 0.516715 13.4443 0.700049C13.6277 0.883382 13.7193 1.11672 13.7193 1.40005C13.7193 1.68338 13.6277 1.91672 13.4443 2.10005L8.54434 7.00005L13.4443 11.9C13.6277 12.0834 13.7193 12.3167 13.7193 12.6C13.7193 12.8834 13.6277 13.1167 13.4443 13.3C13.261 13.4834 13.0277 13.575 12.7443 13.575C12.461 13.575 12.2277 13.4834 12.0443 13.3L7.14434 8.40005Z"
-                        />
-                     </svg>
-                  </button>
-                  <button class="create-task-button">
-                     Create Task <img src="./assets/img/check_white_svg.svg" alt="" />
-                  </button>
-               </div>
-            </div>
-         </form>
-      </div>
-      <script src="./assets/script/addTask.js"></script>
-   </body>
+          <div class="clear-and-task-button">
+            <button class="clear-button" onclick="reset()">
+              Clear
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7.14434 8.40005L2.24434 13.3C2.061 13.4834 1.82767 13.575 1.54434 13.575C1.261 13.575 1.02767 13.4834 0.844336 13.3C0.661003 13.1167 0.569336 12.8834 0.569336 12.6C0.569336 12.3167 0.661003 12.0834 0.844336 11.9L5.74434 7.00005L0.844336 2.10005C0.661003 1.91672 0.569336 1.68338 0.569336 1.40005C0.569336 1.11672 0.661003 0.883382 0.844336 0.700049C1.02767 0.516715 1.261 0.425049 1.54434 0.425049C1.82767 0.425049 2.061 0.516715 2.24434 0.700049L7.14434 5.60005L12.0443 0.700049C12.2277 0.516715 12.461 0.425049 12.7443 0.425049C13.0277 0.425049 13.261 0.516715 13.4443 0.700049C13.6277 0.883382 13.7193 1.11672 13.7193 1.40005C13.7193 1.68338 13.6277 1.91672 13.4443 2.10005L8.54434 7.00005L13.4443 11.9C13.6277 12.0834 13.7193 12.3167 13.7193 12.6C13.7193 12.8834 13.6277 13.1167 13.4443 13.3C13.261 13.4834 13.0277 13.575 12.7443 13.575C12.461 13.575 12.2277 13.4834 12.0443 13.3L7.14434 8.40005Z"
+                />
+              </svg>
+            </button>
+            <button class="create-task-button">Create Task <img src="./assets/img/check_white_svg.svg" alt="" /></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>

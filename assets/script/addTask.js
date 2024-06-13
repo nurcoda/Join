@@ -54,15 +54,12 @@ document.getElementById("subtasksDiv").addEventListener("click", function () {
 
 function showAssignedDropdown() {
   document.getElementById("assignedDropdown").classList.remove("d-none");
-
   showOpenedDropdownIcon();
 }
 
 function hideAssignedDropdown() {
   event.stopPropagation();
-
   document.getElementById("assignedDropdown").classList.add("d-none");
-
   hideOpenedDropdownIcon();
 }
 
@@ -79,3 +76,24 @@ function hideOpenedDropdownIcon() {
 document.getElementById("assignedDiv").addEventListener("click", function () {
   document.getElementById("assignedInput").focus(); // Setzt den Fokus auf das Input-Feld
 });
+
+function renderContacts() {
+  let dropdown = document.getElementById("assignedDropdown");
+  dropdown.innerHTML = "";
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i];
+    dropdown.innerHTML += `
+      <div id="contact${contact.id}" class="assigned-to-contact" onclick="markContact(${contact.id})">
+        <div class="contact-img-name">
+          <img src="./assets/img/Anton.png" alt="" />
+          <span>${contact.name}</span>
+        </div>
+        <img class="check-btn-img" src="./assets/img/check_btn.png" alt="" />
+      </div>`;
+  }
+}
+
+function markContact(contactId) {
+  let contact = document.getElementById(`contact${contactId}`);
+  contact.style.backgroundColor = "#2A3647";
+}

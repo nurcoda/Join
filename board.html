@@ -7,9 +7,9 @@
       <link rel="stylesheet" href="./assets/css/style.css" />
       <link rel="stylesheet" href="./assets/css/board.css" />
       <link rel="shortcut icon" href="./assets/img/join_logo_dark.png" type="image/x-icon" />
+      <script src="./assets/script/testData.js" defer></script>
       <script src="./assets/script/script.js" defer></script>
       <script src="./assets/script/board.js" defer></script>
-      <script src="./assets/script/testData.js" defer></script>
    </head>
    <body onload="includeHTML()">
       <div w3-include-html="./assets/templates/header.html"></div>
@@ -151,14 +151,13 @@
                      onclick="openAddTaskPopUp()"
                   ></div>
                </div>
-               <div class="task-card-container" id="taskCardContainer">
-                  <div class="task-card" onclick="openEditTaskPopUp()">
+               <div class="task-card-container" id="todoColumnContainer">
+                  <!-- <div class="task-card" onclick="openEditTaskPopUp()">
                      <div class="category-user-story task-category">User Story</div>
                      <div class="task-headline">Kochwelt Page & Recipe Recommender</div>
                      <div class="task-comment">Build start page with recipe recommendation...</div>
                      <div class="subtask-counter-wrapper">
                         <div class="subtask-progressbar">
-                           <!-- needs to switch with subtasks -->
                            <span class="subtask-bar-half"></span>
                            <span class="subtask-bar-full d-none"></span>
                         </div>
@@ -178,7 +177,7 @@
                   <div class="task-card">
                      <div class="category-technical-task task-category">Technical Task</div>
                   </div>
-                  <div class="task-card"></div>
+                  <div class="task-card"></div> -->
                </div>
             </div>
             <!--  -->
@@ -192,8 +191,8 @@
                      onclick="openAddTaskPopUp()"
                   ></div>
                </div>
-               <div class="task-card-container" id="taskCardContainer">
-                  <div class="task-card-nothing-to-do task-card">No tasks to do</div>
+               <div class="task-card-container" id="inProgressColumnContainer">
+                  <!-- <div class="task-card-nothing-to-do task-card">No tasks to do</div> -->
                </div>
             </div>
             <!--  -->
@@ -207,27 +206,27 @@
                      onclick="openAddTaskPopUp()"
                   ></div>
                </div>
-               <div class="task-card-container" id="taskCardContainer">
-                  <div class="task-card">
+               <div class="task-card-container" id="awaitFeedbackColumnContainer">
+                  <!-- <div class="task-card">
                      <div class="category-user-story task-category">User Story</div>
                   </div>
                   <div class="task-card">
                      <div class="category-technical-task task-category">Technical Task</div>
                   </div>
-                  <div class="task-card"></div>
+                  <div class="task-card"></div> -->
                </div>
             </div>
             <!--  -->
             <div class="board-column">
                <div class="board-column-headline">Done</div>
-               <div class="task-card-container" id="taskCardContainer">
-                  <div class="task-card">
+               <div class="task-card-container" id="doneColumnContainer">
+                  <!-- <div class="task-card">
                      <div class="category-user-story task-category">User Story</div>
                   </div>
                   <div class="task-card">
                      <div class="category-technical-task task-category">Technical Task</div>
                   </div>
-                  <div class="task-card"></div>
+                  <div class="task-card"></div> -->
                </div>
             </div>
          </div>
