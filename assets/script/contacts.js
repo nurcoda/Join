@@ -73,9 +73,10 @@ function openPopUp() {
 
 function closePopUp() {
    if (event.target === closePopUpBtn) {
-      popUpBackground.classList.add("d-none");
+      popUpBackground.classList.add("d-none"); 
+      }
    }
-}
+
 
 //**Add to Contacts */
 
@@ -87,5 +88,10 @@ function addPersonToContact() {
    let contact = { "name": name, "email": mail, "phone": phone};  //**Inhalt in Objekt zusammenfügen */
 
    contacts.push(contact);
-   renderContact()   //*Kontaktliste neu laden
+   renderContact();   //*Kontaktliste neu laden
+   closePopUpByBtn();
+}
+
+function closePopUpByBtn(){
+   document.getElementById("popUpBackground").classList.add("d-none");
 }
