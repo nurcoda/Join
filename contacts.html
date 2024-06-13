@@ -34,12 +34,12 @@
                   onsubmit="alert('Die Funktion gibts noch nicht :P'); return false"
                   class="input-fields-add-contact"
                >
-                  <input class="input-field-name add-contact-form-input" placeholder="Name" type="text" /> <br />
-                  <input class="input-field-mail add-contact-form-input" placeholder="Email" type="text" /><br />
-                  <input class="input-field-phone add-contact-form-input" placeholder="Phone" type="text" />
+                  <input id="input-field-name" class="input-field-name add-contact-form-input" placeholder="Name" type="text" /> <br />
+                  <input id="input-field-mail" class="input-field-mail add-contact-form-input" placeholder="Email" type="text" /><br />
+                  <input id="input-field-phone" class="input-field-phone add-contact-form-input" placeholder="Phone" type="text" />
                   <div class="add-contact-buttons-wrapper">
                      <button class="cancel-btn add-contact-form-btn">Cancel</button
-                     ><button class="create-contact-btn add-contact-form-btn">Create Contact</button>
+                     ><button class="create-contact-btn add-contact-form-btn" onclick="addPersonToContact()">Create Contact</button>
                   </div>
                </form>
             </div>

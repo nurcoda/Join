@@ -135,3 +135,17 @@ function closePopUp() {
       popUpBackground.classList.add("d-none");
    }
 }
+
+
+//**Add to Contacts */
+
+function addPersonToContact(){
+   let name = document.getElementById('input-field-name').value;
+   let mail = document.getElementById('input-field-mail').value;
+   let phone = document.getElementById('input-field-phone').value;
+
+   contacts[contacts.length]["phonenumber"].push(phone);
+   contacts["email"].push(mail);
+   contacts["name"].push(name);
+
+}
