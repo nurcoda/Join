@@ -61,7 +61,7 @@ function renderContactCardInfo(i) {
    document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp); //* öffnet die Edit Funktion
    document.querySelector('.delete-icon-wrapper').addEventListener('click', function () {
       deleteContact(i);
-   });
+   }); //löscht die Contact seite 
 }
 
 //** Helper Functions */
@@ -77,9 +77,9 @@ function openPopUp() {
 
 function closePopUp() {
    if (event.target === closePopUpBtn) {
-      popUpBackground.classList.add("d-none"); 
-      }
+      popUpBackground.classList.add("d-none");
    }
+}
 
 
 function deleteContact(i) {
@@ -101,6 +101,6 @@ function addPersonToContact() {
    closePopUpByBtn();
 }
 
-function closePopUpByBtn(){
+function closePopUpByBtn() {
    document.getElementById("popUpBackground").classList.add("d-none");
 }
