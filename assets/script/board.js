@@ -12,7 +12,6 @@ let todoCounter = 0;
 let inProgressCounter = 0;
 let awaitFeedbackCounter = 0;
 let doneCounter = 0;
-let preparedPriority;
 
 prepareData();
 console.log(tasks);
@@ -23,20 +22,6 @@ console.log(tasks.state);
  */
 
 function prepareData() {
-   for (let i = 0; i < tasks.length; i++) {
-      switch (tasks[i].priority) {
-         case "high":
-            preparedPriority = "urgent";
-            break;
-         default:
-            preparedPriority = tasks[i].priority;
-      }
-      // if (tasks[i].priority === "high") {
-      //    preparedPriority = "urgent";
-      // } else preparedPriority = tasks[i].priority;
-      // console.log("PRIORITY" + [i] + ":" + preparedPriority);
-   }
-
    renderTasksIntoColumns();
 }
 
@@ -87,15 +72,7 @@ function renderTasksIntoColumnsHTML(i) {
                      </div>
                      <div class="member-priority-wrapper">
                         <div class="task-member">
-                           <div class="task-member-icon member-icon-1">${
-                              tasks[i].assigned_user[0].first_two_letters
-                           }</div>
-                           <div class="task-member-icon member-icon-2">${
-                              tasks[i].assigned_user[1] ? tasks[i].assigned_user[1].first_two_letters : ""
-                           }</div>
-                           <div class="task-member-icon member-icon-3">${
-                              tasks[i].assigned_user[2] ? tasks[i].assigned_user[2].first_two_letters : ""
-                           }</div>
+                           ${renderAssignedUserToHTML(i)}
                         </div>
                         <div class="priority-icon">
                            <img src="./assets/img/prio_${
@@ -104,6 +81,14 @@ function renderTasksIntoColumnsHTML(i) {
                         </div>
                      </div>
                   </div>`;
+}
+
+function renderAssignedUserToHTML(i) {
+   let assignedUserTemplate = "";
+   for (let j = 0; j < tasks[i].assigned_user.length; j++) {
+      assignedUserTemplate += `<div class="task-member-icon member-icon-1">${tasks[i].assigned_user[j].first_two_letters}</div>`;
+   }
+   return assignedUserTemplate;
 }
 
 /**
@@ -137,17 +122,19 @@ function checkIfColumnIsEmptyHTML() {
 function renderEditTaskPopUp(id) {
    for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].id == id) {
-         existingTaskPopUp.innerHTML = renderEditTaskPopUpHTML(i);
+         existingTaskPopUpBackground.innerHTML = renderEditTaskPopUpHTML(i);
       }
    }
 }
 
 function renderEditTaskPopUpHTML(i) {
-   return `  <img
+   return `  
+   <div class="existing-task-popup-board" id="existingTaskPopUp">
+               <img
                   src="./assets/img/close_big_icon.png"
                   alt=""
                   class="close-popup-btn"
-                  id="closePopUpBtn_editTask"
+                  id="closePopUpBtn"
                   onclick="closeEditTaskPopUp()"
                />
                <!-- pop up content -->
@@ -162,29 +149,11 @@ function renderEditTaskPopUpHTML(i) {
                </div>
                <div class="existing-task-popup-user-wrapper">
                   <div class="popup-user-headline">Assigned to:</div>
-                  <div class="popup-user">
-                     <div class="task-member-icon member-icon-1">JM</div>
-                     Jonas Mahlburg
-                  </div>
-                  <div class="popup-user">
-                     <div class="task-member-icon member-icon-2">JS</div>
-                     Joel S.
-                  </div>
-                  <div class="popup-user">
-                     <div class="task-member-icon member-icon-3">MM</div>
-                     Mailo Mittelstädt
-                  </div>
+                 ${popUpRenderAssignedUser(i)}
                </div>
                <div class="existing-task-popup-subtasks">
                   <div class="popup-subtask-headline">Subtasks</div>
-                  <div class="popup-subtask-task">
-                     <div class="task-done-state task-done-state-checked"></div>
-                     <div class="popup-subtask-name">Implement Recipe Recommendation</div>
-                  </div>
-                  <div class="popup-subtask-task">
-                     <div class="task-done-state"></div>
-                     <div class="popup-subtask-name">Start Page layout</div>
-                  </div>
+                ${popUpRenderSubTasks(i)}
                </div>
                <div class="popup-delete-edit-btn-wrapper">
                   <div class="popup-delete-btn popup-btn">
@@ -195,7 +164,35 @@ function renderEditTaskPopUpHTML(i) {
                      <div class="popup-edit-icon"></div>
                      Edit
                   </div>
-               </div>`;
+               </div>
+               </div>
+              `;
+}
+
+function popUpRenderAssignedUser(i) {
+   let assignedUserTemplate = "";
+   for (let j = 0; j < tasks[i].assigned_user.length; j++) {
+      assignedUserTemplate += `  
+      <div class="popup-user">
+                     <div class="task-member-icon member-icon-1">${tasks[i].assigned_user[j].first_two_letters}</div>
+                     ${tasks[i].assigned_user[j].name}
+                  </div>
+                  `;
+   }
+   return assignedUserTemplate;
+}
+
+function popUpRenderSubTasks(i) {
+   let subTasksTemplate = "";
+   for (let j = 0; j < tasks[i].subtasks.length; j++) {
+      subTasksTemplate += `   
+       <div class="popup-subtask-task">
+                     <div class="task-done-state task-done-state-checked"></div>
+                     <div class="popup-subtask-name">${tasks[i].subtasks[j].subtask_name}</div>
+                  </div>    
+                  `;
+   }
+   return subTasksTemplate;
 }
 
 /**
@@ -218,10 +215,11 @@ function openEditTaskPopUp(id) {
 }
 
 function closeEditTaskPopUp() {
-   if (event.target === existingTaskPopUpBackground || event.target === closePopUpBtn_2) {
+   if (event.target === existingTaskPopUpBackground || event.target === closePopUpBtn) {
       existingTaskPopUpBackground.classList.add("d-none");
    }
 }
 
 addTaskPopUpBackground.addEventListener("click", closeAddTaskPopUp);
 existingTaskPopUpBackground.addEventListener("click", closeEditTaskPopUp);
+closePopUpBtn_2.addEventListener("click", closeAddTaskPopUp);
