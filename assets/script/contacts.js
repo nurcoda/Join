@@ -4,31 +4,29 @@ let contactCardBigContainer = document.getElementById("contactCardBigContainer")
 
 function renderContact() {
    document.getElementById("contactList").innerHTML = "";
-   for (let i = 0; i < contacts.length; i++) {
-      let avatar;
-      avatar = renderAvatar(i, avatar);
-      document.getElementById("contactList").innerHTML += `
+   document.getElementById("contactList").innerHTML += `
           <div class="buttonWrapper">
                <button class="addContactBtn" onclick="openPopUp()">
                   Add new Conatct <img src="./assets/img/person_add_icon.png" alt="" />
                </button>
             </div>
-         ${renderEveryContact(i, avatar)}
+         ${renderEveryContact()}
     `;
-   }
 }
 
-function renderEveryContact(i, avatar) {
+function renderEveryContact() {
    let everyContactTemplate = "";
-   for (let j = 0; j < contacts.length; j++) {
+   for (let i = 0; i < contacts.length; i++) {
+      let avatar;
+      avatar = renderAvatar(i, avatar);
       everyContactTemplate += `
-          <div class="contact" onclick="renderContactCardInfo(${j})">
+          <div class="contact" onclick="renderContactCardInfo(${i})">
            <div class="contactDetails">
            <div class="img-contacts">
-              <div id="avatar${j}" class="avatar">${avatar}</div>
+              <div id="avatar${i}" class="avatar">${avatar}</div>
            </div>
            <div class="contacts-content-list">
-              <span>${contacts[j]["name"]}</span>
+              <span>${contacts[i]["name"]}</span>
               <a href="">Email: ${contacts[i]["email"]}</a>
            </div>
             </div>
