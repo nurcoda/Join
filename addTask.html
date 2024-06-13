@@ -53,12 +53,13 @@
           </div>
 
           <label class="margin-top-16px">Category</label>
-          <div class="category-div">
-            <select>
-              <option value="" disabled selected>Select task category</option>
-              <option value="category1">Technical Task</option>
-              <option value="category2">User Story</option>
-            </select>
+          <div id="categoryDiv" class="category-div">
+            <span id="categorySelection">Select task category</span>
+            <img id="categoryDropdownImg" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
+          </div>
+          <div id="categoryDropdown" class="d-none">
+            <span class="category-option" onclick="selectOption(1)">Technical task</span>
+            <span class="category-option" onclick="selectOption(2)">User story</span>
           </div>
 
           <label class="margin-top-16px">Subtasks</label>
