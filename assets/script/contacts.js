@@ -1,65 +1,66 @@
-let contacts = [
-   {
-      "phonenumber": 876543221,
-      "email": "ander@anders.de",
-      "name": "Anders Anderson",
-   },
-   {
-      "phonenumber": 555696969,
-      "email": "bunny@lola.de",
-      "name": "Lola Bunny",
-   },
-   {
-      "phonenumber": 876543221,
-      "email": "ander@anders.de",
-      "name": "Anders Anderson",
-   },
-   {
-      "phonenumber": 555696969,
-      "email": "bunny@lola.de",
-      "name": "Lola Bunny",
-   },
-   {
-      "phonenumber": 876543221,
-      "email": "ander@anders.de",
-      "name": "Anders Anderson",
-   },
-   {
-      "phonenumber": 555696969,
-      "email": "bunny@lola.de",
-      "name": "Lola Bunny",
-   },
-   {
-      "phonenumber": 876543221,
-      "email": "ander@anders.de",
-      "name": "Anders Anderson",
-   },
-   {
-      "phonenumber": 555696969,
-      "email": "bunny@lola.de",
-      "name": "Lola Bunny",
-   },
-   {
-      "phonenumber": 876543221,
-      "email": "ander@anders.de",
-      "name": "Anders Anderson",
-   },
-   {
-      "phonenumber": 555696969,
-      "email": "bunny@lola.de",
-      "name": "Lola Bunny",
-   },
-   {
-      "phonenumber": 876543221,
-      "email": "ander@anders.de",
-      "name": "Anders Anderson",
-   },
-   {
-      "phonenumber": 555696969,
-      "email": "bunny@lola.de",
-      "name": "Lola Bunny",
-   },
-];
+let Test = "./assets/script/testData.js";
+// [ 
+   // {
+   //    "phonenumber": 876543221,
+   //    "email": "ander@anders.de",
+   //    "name": "Anders Anderson",
+   // },
+   // {
+   //    "phonenumber": 555696969,
+   //    "email": "bunny@lola.de",
+   //    "name": "Lola Bunny",
+   // },
+   // {
+   //    "phonenumber": 876543221,
+   //    "email": "ander@anders.de",
+   //    "name": "Anders Anderson",
+   // },
+   // {
+   //    "phonenumber": 555696969,
+   //    "email": "bunny@lola.de",
+   //    "name": "Lola Bunny",
+   // },
+   // {
+   //    "phonenumber": 876543221,
+   //    "email": "ander@anders.de",
+   //    "name": "Anders Anderson",
+   // },
+   // {
+   //    "phonenumber": 555696969,
+   //    "email": "bunny@lola.de",
+   //    "name": "Lola Bunny",
+   // },
+   // {
+   //    "phonenumber": 876543221,
+   //    "email": "ander@anders.de",
+   //    "name": "Anders Anderson",
+   // },
+   // {
+   //    "phonenumber": 555696969,
+   //    "email": "bunny@lola.de",
+   //    "name": "Lola Bunny",
+   // },
+   // {
+   //    "phonenumber": 876543221,
+   //    "email": "ander@anders.de",
+   //    "name": "Anders Anderson",
+   // },
+   // {
+   //    "phonenumber": 555696969,
+   //    "email": "bunny@lola.de",
+   //    "name": "Lola Bunny",
+   // },
+   // {
+   //    "phonenumber": 876543221,
+   //    "email": "ander@anders.de",
+   //    "name": "Anders Anderson",
+   // },
+   // {
+   //    "phonenumber": 555696969,
+   //    "email": "bunny@lola.de",
+   //    "name": "Lola Bunny",
+   // },
+// ];
 
 let contactCardBigContainer = document.getElementById("contactCardBigContainer");
 
@@ -85,8 +86,9 @@ function renderContact() {
 function renderAvatar(i, avatar) {
    const username = contacts[i]["name"];
    const firstNameInitial = username[0];
-   const secondNameInitial = username.split(" ")[1].split("")[0];
-   avatar = firstNameInitial + secondNameInitial;
+   // const secondNameInitial = username.split(" ")[1].split("")[0];
+   avatar = firstNameInitial 
+   // + secondNameInitial;  //*das kommt wieder eins nach oben ^^
    return avatar;
 }
 
@@ -114,7 +116,7 @@ function renderContactCardInfo(i) {
                <div class="contact-info-email-headline">Email</div>
                <div class="contact-info-email">${contacts[i].email}</div>
                <div class="contact-info-phone-headline">Phone</div>
-               <div class="contact-info-phone">+${contacts[i].phonenumber}</div>
+               <div class="contact-info-phone">+${contacts[i].phone}</div>
             </div>
          </div>`;
 }
@@ -138,12 +140,12 @@ function closePopUp() {
 
 //**Add to Contacts */
 
-function addPersonToContact() {
-   let name = document.getElementById("input-field-name").value;
-   let mail = document.getElementById("input-field-mail").value;
-   let phone = document.getElementById("input-field-phone").value;
+// function addPersonToContact() {
+//    let name = document.getElementById("input-field-name").value;
+//    let mail = document.getElementById("input-field-mail").value;
+//    let phone = document.getElementById("input-field-phone").value;
 
-   contacts[contacts.length]["phonenumber"].push(phone);
-   contacts["email"].push(mail);
-   contacts["name"].push(name);
-}
+//    contacts[contacts.length]["phonenumber"].push(phone);
+//    contacts["email"].push(mail);
+//    contacts["name"].push(name);
+// }
