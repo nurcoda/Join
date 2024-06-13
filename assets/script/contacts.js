@@ -1,70 +1,9 @@
 let Test = "./assets/script/testData.js";
-// [ 
-// {
-//    "phonenumber": 876543221,
-//    "email": "ander@anders.de",
-//    "name": "Anders Anderson",
-// },
-// {
-//    "phonenumber": 555696969,
-//    "email": "bunny@lola.de",
-//    "name": "Lola Bunny",
-// },
-// {
-//    "phonenumber": 876543221,
-//    "email": "ander@anders.de",
-//    "name": "Anders Anderson",
-// },
-// {
-//    "phonenumber": 555696969,
-//    "email": "bunny@lola.de",
-//    "name": "Lola Bunny",
-// },
-// {
-//    "phonenumber": 876543221,
-//    "email": "ander@anders.de",
-//    "name": "Anders Anderson",
-// },
-// {
-//    "phonenumber": 555696969,
-//    "email": "bunny@lola.de",
-//    "name": "Lola Bunny",
-// },
-// {
-//    "phonenumber": 876543221,
-//    "email": "ander@anders.de",
-//    "name": "Anders Anderson",
-// },
-// {
-//    "phonenumber": 555696969,
-//    "email": "bunny@lola.de",
-//    "name": "Lola Bunny",
-// },
-// {
-//    "phonenumber": 876543221,
-//    "email": "ander@anders.de",
-//    "name": "Anders Anderson",
-// },
-// {
-//    "phonenumber": 555696969,
-//    "email": "bunny@lola.de",
-//    "name": "Lola Bunny",
-// },
-// {
-//    "phonenumber": 876543221,
-//    "email": "ander@anders.de",
-//    "name": "Anders Anderson",
-// },
-// {
-//    "phonenumber": 555696969,
-//    "email": "bunny@lola.de",
-//    "name": "Lola Bunny",
-// },
-// ];
 
 let contactCardBigContainer = document.getElementById("contactCardBigContainer");
 
 function renderContact() {
+   document.getElementById("contactList").innerHTML = "";
    for (let i = 0; i < contacts.length; i++) {
       let avatar;
       avatar = renderAvatar(i, avatar);
@@ -86,7 +25,7 @@ function renderContact() {
 function renderAvatar(i, avatar) {
    const username = contacts[i]["name"];
    const firstNameInitial = username[0];
-   // const secondNameInitial = username.split(" ")[1].split("")[0];
+   // const secondNameInitial = username.split(" ")[1].split("")[0];  //* Auskommentiert weil die bei Herr der Ringe keine Nachnamen zeigen im Array
    avatar = firstNameInitial
    // + secondNameInitial;  //*das kommt wieder eins nach oben ^^
    return avatar;
@@ -144,13 +83,13 @@ function deleteContact() {
 }
 //**Add to Contacts */
 
-// function addPersonToContact() {
-//    let name = document.getElementById("input-field-name").value;
-//    let mail = document.getElementById("input-field-mail").value;
-//    let phone = document.getElementById("input-field-phone").value;
+function addPersonToContact() {
+   let name = document.getElementById("input-field-name").value;
+   let mail = document.getElementById("input-field-mail").value;
+   let phone = document.getElementById("input-field-phone").value;  //** Inhalt der Inputfelder */
 
-//    contacts[contacts.length]["phonenumber"].push(phone);
-//    contacts["email"].push(mail);
-//    contacts["name"].push(name);
-// }
+   let contact = { "name": name, "email": mail, "phone": phone };  //**Inhalt in Objekt zusammenfügen */
 
+   contacts.push(contact);
+   renderContact()   //*Kontaktliste neu laden
+}
