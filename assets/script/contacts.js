@@ -3,7 +3,7 @@ let Test = "./assets/script/testData.js";
 let contactCardBigContainer = document.getElementById("contactCardBigContainer");
 
 function renderContact() {
-   document.getElementById("contactList").innerHTML="";
+   document.getElementById("contactList").innerHTML = "";
    for (let i = 0; i < contacts.length; i++) {
       let avatar;
       avatar = renderAvatar(i, avatar);
@@ -26,7 +26,7 @@ function renderAvatar(i, avatar) {
    const username = contacts[i]["name"];
    const firstNameInitial = username[0];
    // const secondNameInitial = username.split(" ")[1].split("")[0];  //* Auskommentiert weil die bei Herr der Ringe keine Nachnamen zeigen im Array
-   avatar = firstNameInitial 
+   avatar = firstNameInitial
    // + secondNameInitial;  //*das kommt wieder eins nach oben ^^
    return avatar;
 }
@@ -39,7 +39,7 @@ function renderContactCardInfo(i) {
             <div>
                <div class="contact-card-name">${contacts[i].name}</div>
                <div class="edit-delete-container">
-                  <span class="edit-icon-wrapper">
+                  <span class="edit-icon-wrapper" openPopUp()>
                      <div class="edit-icon"></div><span class="edit-name">Edit</span>
                   </span>
                   <span class="delete-icon-wrapper">
@@ -58,6 +58,7 @@ function renderContactCardInfo(i) {
                <div class="contact-info-phone">+${contacts[i].phone}</div>
             </div>
          </div>`;
+   document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp); //* öffnet die Edit Funktion
 }
 
 //** Helper Functions */
@@ -78,14 +79,19 @@ function closePopUp() {
    }
 
 
+function deleteContact(i) {
+   contacts.splice(i, 1);
+   renderContact();
+   document.getElementById("contact-card-info-container").innerHTML = ""; // Kontaktkarte leeren
+}
 //**Add to Contacts */
 
 function addPersonToContact() {
    let name = document.getElementById("input-field-name").value;
    let mail = document.getElementById("input-field-mail").value;
    let phone = document.getElementById("input-field-phone").value;  //** Inhalt der Inputfelder */
- 
-   let contact = { "name": name, "email": mail, "phone": phone};  //**Inhalt in Objekt zusammenfügen */
+
+   let contact = { "name": name, "email": mail, "phone": phone };  //**Inhalt in Objekt zusammenfügen */
 
    contacts.push(contact);
    renderContact();   //*Kontaktliste neu laden
