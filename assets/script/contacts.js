@@ -58,7 +58,7 @@ function renderContactCardInfo(i) {
                <div class="contact-info-phone">+${contacts[i].phone}</div>
             </div>
          </div>`;
-   document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp); //* öffnet die Edit funktion
+   document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp); //* öffnet die Edit Funktion
 }
 
 //** Helper Functions */
