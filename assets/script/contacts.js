@@ -59,6 +59,9 @@ function renderContactCardInfo(i) {
             </div>
          </div>`;
    document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp); //* öffnet die Edit Funktion
+   document.querySelector('.delete-icon-wrapper').addEventListener('click', function () {
+      deleteContact(i);
+   });
 }
 
 //** Helper Functions */
