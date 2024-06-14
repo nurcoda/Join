@@ -14,46 +14,8 @@
    <body onload="includeHTML()">
       <div w3-include-html="./assets/templates/header.html"></div>
       <div w3-include-html="./assets/templates/sitebar.html"></div>
-      <!-- <header>
-         <span> Kanban Project Management Tool </span>
-         <div class="header-img-div">
-            <a href="/help.html"><img class="header-info-img" src="./assets/img/questionmark.png" alt="" /></a>
-            <div class="header-user-icon" id="headerUserIcon">G</div>
-         </div>
-         <nav id="headerNav" class="d-none">
-            <a href="/legalNotice.html" class="header-links">Legal Notice</a>
-            <a href="/privatePolicy.html" class="header-links">Privacy Policy</a>
-            <a href="/index.html" class="header-links">Log out</a>
-         </nav>
-      </header>
-
-      <div class="sitebar-container">
-         <img src="./assets/img/join_logo.png" alt="Join logo" class="join-logo-sitebar" />
-         <div class="all-links-wrapper">
-            <div class="nav-wrapper">
-               <a href="./summary.html" class="nav-links"><img src="./assets/img/summary_icon.png" alt="" />Summary</a>
-               <a href="./addTask.html" class="nav-links"
-                  ><img src="./assets/img/add_task_icon.png" alt="" />Add task</a
-               >
-               <a href="./board.html" class="nav-links"><img src="./assets/img/board-icon.png" alt="" />Board</a>
-               <a href="./contacts.html" class="nav-links"
-                  ><img src="./assets/img/contact_icon.png" alt="" />Contacts</a
-               >
-            </div>
-            <div class="legally-links-wrapper">
-               <a class="legal-Links" href="./privatePolicy.html">Privacy Policy</a>
-               <a class="legal-Links" href="./legalNotice.html">Legal notice</a>
-            </div>
-         </div>
-      </div> -->
 
       <div class="board-container">
-         <!--  -->
-         <!-- ############# -->
-         <!-- BOARD CONTENT -->
-         <!-- ############# -->
-         <!--  -->
-
          <!-- Header -->
          <div class="board-search-add-wrapper distances">
             <h1 class="board-headline">Board</h1>
@@ -151,34 +113,7 @@
                      onclick="openAddTaskPopUp()"
                   ></div>
                </div>
-               <div class="task-card-container" id="todoColumnContainer">
-                  <!-- <div class="task-card" onclick="openEditTaskPopUp()">
-                     <div class="category-user-story task-category">User Story</div>
-                     <div class="task-headline">Kochwelt Page & Recipe Recommender</div>
-                     <div class="task-comment">Build start page with recipe recommendation...</div>
-                     <div class="subtask-counter-wrapper">
-                        <div class="subtask-progressbar">
-                           <span class="subtask-bar-half"></span>
-                           <span class="subtask-bar-full d-none"></span>
-                        </div>
-                        <div class="subtask-counter">1/2 Subtasks</div>
-                     </div>
-                     <div class="member-priority-wrapper">
-                        <div class="task-member">
-                           <div class="task-member-icon member-icon-1">AH</div>
-                           <div class="task-member-icon member-icon-2">MM</div>
-                           <div class="task-member-icon member-icon-3">JM</div>
-                        </div>
-                        <div class="priority-icon">
-                           <img src="./assets/img/prio_medium.png" alt="" />
-                        </div>
-                     </div>
-                  </div>
-                  <div class="task-card">
-                     <div class="category-technical-task task-category">Technical Task</div>
-                  </div>
-                  <div class="task-card"></div> -->
-               </div>
+               <div class="task-card-container" id="todoColumnContainer"></div>
             </div>
             <!--  -->
             <div class="board-column">
@@ -191,9 +126,7 @@
                      onclick="openAddTaskPopUp()"
                   ></div>
                </div>
-               <div class="task-card-container" id="inProgressColumnContainer">
-                  <!-- <div class="task-card-nothing-to-do task-card">No tasks to do</div> -->
-               </div>
+               <div class="task-card-container" id="inProgressColumnContainer"></div>
             </div>
             <!--  -->
             <div class="board-column">
@@ -206,28 +139,12 @@
                      onclick="openAddTaskPopUp()"
                   ></div>
                </div>
-               <div class="task-card-container" id="awaitFeedbackColumnContainer">
-                  <!-- <div class="task-card">
-                     <div class="category-user-story task-category">User Story</div>
-                  </div>
-                  <div class="task-card">
-                     <div class="category-technical-task task-category">Technical Task</div>
-                  </div>
-                  <div class="task-card"></div> -->
-               </div>
+               <div class="task-card-container" id="awaitFeedbackColumnContainer"></div>
             </div>
             <!--  -->
             <div class="board-column">
                <div class="board-column-headline">Done</div>
-               <div class="task-card-container" id="doneColumnContainer">
-                  <!-- <div class="task-card">
-                     <div class="category-user-story task-category">User Story</div>
-                  </div>
-                  <div class="task-card">
-                     <div class="category-technical-task task-category">Technical Task</div>
-                  </div>
-                  <div class="task-card"></div> -->
-               </div>
+               <div class="task-card-container" id="doneColumnContainer"></div>
             </div>
          </div>
          <!--  -->

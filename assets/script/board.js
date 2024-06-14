@@ -26,15 +26,7 @@ function addUsersToContacts(users, contacts) {
 }
 // _________________________________________________
 
-prepareData();
-
-/**
- * prepare some incoming data for renderfunctions
- */
-
-function prepareData() {
-   renderTasksIntoColumns();
-}
+renderTasksIntoColumns();
 
 function clearAllColums() {
    todoColumn.innerHTML = "";
@@ -76,27 +68,19 @@ function renderTasksIntoColumns() {
    checkIfColumnIsEmpty();
 }
 
-function renderTasksIntoColumnsHTML(i) {
-   return `  <div class="task-card" onclick="openEditTaskPopUp(${tasks[i].id})">
-                     <div class="category-user-story task-category">${tasks[i].category}</div>
-                     <div class="task-headline">${tasks[i].name}</div>
-                     <div class="task-comment">${tasks[i].description}</div>
-                     <div class="subtask-counter-wrapper">
-                        <div class="subtask-progressbar">
-                           <!-- needs to switch with subtasks -->
-                          ${renderSubTasksToHTML(i)}
+// render subtasks bar
+
+function renderSubTasksToHTML(i) {
+   let subTasksTemplate = "";
+   let calculatedWidth = calcWidthOfProgressBar(i);
+   let subTasksDone = countSubTask(i);
+   subTasksTemplate += `   
+                  <span class="subtask-bar-half" style="width: ${calculatedWidth}%"></span>
                      </div>
-                     <div class="member-priority-wrapper">
-                        <div class="task-member">
-                           ${renderAssignedUserToHTML(i)}
-                        </div>
-                        <div class="priority-icon">
-                           <img src="./assets/img/prio_${
-                              tasks[i].priority === "high" ? "urgent" : tasks[i].priority
-                           }.png" alt="" />
-                        </div>
-                     </div>
-                  </div>`;
+                  <div class="subtask-counter">${subTasksDone}/${tasks[i].subtasks.length} Subtasks</div>    
+                  `;
+
+   return subTasksTemplate;
 }
 
 // render assigned user
@@ -110,38 +94,13 @@ function renderAssignedUserToHTML(i) {
    return assignedUserTemplate;
 }
 
-// function getColorAssignedUser(i, j) {
-//    let actualAsignedUser = tasks[i].assigned_user[j].name;
-//    console.log(actualAsignedUser);
-// }
-
 function getColorAssignedUser(name) {
    let assignedUser = contacts.find((contact) => contact.name.toLowerCase().includes(name.toLowerCase()));
-   if (assignedUser) {
-      return assignedUser.color;
-   } else {
-      return null; // oder eine andere geeignete Rückgabe für den Fall, dass kein Benutzer gefunden wird
-   }
+   return assignedUser.color;
 }
 
-// render subtasks bar
-
-function renderSubTasksToHTML(i) {
-   let subTasksTemplate = "";
-   let calculatedWidth = calcWidthOfProgressBar(i);
-   let subTasksDone = countSubTask(i);
-   subTasksTemplate += `   
-                  <span class="subtask-bar-half" style="width: ${calculatedWidth}%"></span>
-                        </div>
-                        <div class="subtask-counter">${subTasksDone}/${tasks[i].subtasks.length} Subtasks</div>    
-                  `;
-
-   return subTasksTemplate;
-}
-
-let subTaskDone = 0;
-
-function countSubTask(i, subTasksDone) {
+function countSubTask(i) {
+   let subTaskDone = 0;
    subTasksDone = 0;
    for (let j = 0; j < tasks[i].subtasks.length; j++) {
       if (tasks[i].subtasks[j].subtask_isdone == true) {
@@ -193,48 +152,6 @@ function renderEditTaskPopUp(id) {
    }
 }
 
-function renderEditTaskPopUpHTML(i) {
-   return `  
-   <div class="existing-task-popup-board" id="editTaskPopUp">
-               <img
-                  src="./assets/img/close_big_icon.png"
-                  alt=""
-                  class="close-popup-btn"
-                  id="closePopUpBtn"
-                  onclick="closeEditTaskPopUp()"
-               />
-               <!-- pop up content -->
-               <div class="category-user-story task-category">${tasks[i].category}</div>
-               <div class="existing-task-popup-headline">${tasks[i].name}</div>
-               <div class="existing-task-popup-description">${tasks[i].description}</div>
-               <div class="existing-task-popup-date">Due date: <span id="popUpDate">${tasks[i].due_date}</span></div>
-               <div class="existing-task-popup-priority">
-                  Priority: <span id="popUpDate">${tasks[i].priority} <img src="./assets/img/prio_${
-      tasks[i].priority === "high" ? "urgent" : tasks[i].priority
-   }.png" alt="" /></span>
-               </div>
-               <div class="existing-task-popup-user-wrapper">
-                  <div class="popup-user-headline">Assigned to:</div>
-                 ${popUpRenderAssignedUser(i)}
-               </div>
-               <div class="existing-task-popup-subtasks">
-                  <div class="popup-subtask-headline">Subtasks</div>
-                ${popUpRenderSubTasks(i)}
-               </div>
-               <div class="popup-delete-edit-btn-wrapper">
-                  <div class="popup-delete-btn popup-btn" onclick="deleteTask(${tasks[i].id})">
-                     <div class="popup-delete-icon"></div>
-                     Delete
-                  </div>
-                  <div class="popup-edit-btn popup-btn">
-                     <div class="popup-edit-icon"></div>
-                     Edit
-                  </div>
-               </div>
-               </div>
-              `;
-}
-
 function deleteTask(id) {
    let taskToDeleteIndex = tasks.findIndex((task) => task.id === id);
    tasks.splice(taskToDeleteIndex, 1);
@@ -276,7 +193,7 @@ function popUpRenderSubTasks(i) {
       tasks[i].subtasks[j].subtask_isdone ? (subTaskDone = "task-done-state-checked") : (subTaskDone = "");
 
       subTasksTemplate += `   
-       <div class="popup-subtask-task">
+                  <div class="popup-subtask-task">
                      <div class="task-done-state ${subTaskDone}"></div>
                      <div class="popup-subtask-name">${tasks[i].subtasks[j].subtask_name}</div>
                   </div>    
@@ -313,3 +230,70 @@ function closeEditTaskPopUp() {
 addTaskPopUpBackground.addEventListener("click", closeAddTaskPopUp);
 editTaskPopUpBackground.addEventListener("click", closeEditTaskPopUp);
 closePopUpBtn_2.addEventListener("click", closeAddTaskPopUp);
+
+// HTML TEMPLATES
+
+function renderTasksIntoColumnsHTML(i) {
+   return `  <div class="task-card" onclick="openEditTaskPopUp(${tasks[i].id})">
+                     <div class="category-user-story task-category">${tasks[i].category}</div>
+                     <div class="task-headline">${tasks[i].name}</div>
+                     <div class="task-comment">${tasks[i].description}</div>
+                     <div class="subtask-counter-wrapper">
+                        <div class="subtask-progressbar">
+                           <!-- needs to switch with subtasks -->
+                          ${renderSubTasksToHTML(i)}
+                     </div>
+                     <div class="member-priority-wrapper">
+                        <div class="task-member">
+                           ${renderAssignedUserToHTML(i)}
+                        </div>
+                        <div class="priority-icon">
+                           <img src="./assets/img/prio_${
+                              tasks[i].priority === "high" ? "urgent" : tasks[i].priority
+                           }.png" alt="" />
+                        </div>
+                     </div>
+                  </div>`;
+}
+
+function renderEditTaskPopUpHTML(i) {
+   return `  
+   <div class="existing-task-popup-board" id="editTaskPopUp">
+               <img
+                  src="./assets/img/close_big_icon.png"
+                  alt=""
+                  class="close-popup-btn"
+                  id="closePopUpBtn"
+                  onclick="closeEditTaskPopUp()"
+               />
+               <!-- pop up content -->
+               <div class="category-user-story task-category">${tasks[i].category}</div>
+               <div class="existing-task-popup-headline">${tasks[i].name}</div>
+               <div class="existing-task-popup-description">${tasks[i].description}</div>
+               <div class="existing-task-popup-date">Due date: <span id="popUpDate">${tasks[i].due_date}</span></div>
+               <div class="existing-task-popup-priority">
+                  Priority: <span id="popUpDate">${tasks[i].priority} <img src="./assets/img/prio_
+                  ${tasks[i].priority === "high" ? "urgent" : tasks[i].priority}.png" alt="" />
+               </span>
+               </div>
+               <div class="existing-task-popup-user-wrapper">
+                  <div class="popup-user-headline">Assigned to:</div>
+                 ${popUpRenderAssignedUser(i)}
+               </div>
+               <div class="existing-task-popup-subtasks">
+                  <div class="popup-subtask-headline">Subtasks</div>
+                ${popUpRenderSubTasks(i)}
+               </div>
+               <div class="popup-delete-edit-btn-wrapper">
+                  <div class="popup-delete-btn popup-btn" onclick="deleteTask(${tasks[i].id})">
+                     <div class="popup-delete-icon"></div>
+                     Delete
+                  </div>
+                  <div class="popup-edit-btn popup-btn">
+                     <div class="popup-edit-icon"></div>
+                     Edit
+                  </div>
+               </div>
+               </div>
+              `;
+}
