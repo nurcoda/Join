@@ -1,6 +1,9 @@
 let Test = "./assets/script/testData.js";
 
 let contactCardBigContainer = document.getElementById("contactCardBigContainer");
+let popUpBackground = document.getElementById("popUpBackground");
+let contentPopUp = document.getElementById("contentPopUp");
+let closePopUpBtn = document.getElementById("closePopUpBtn");
 
 function renderContact() {
    document.getElementById("contactList").innerHTML = "";
@@ -53,7 +56,7 @@ function renderContactCardInfo(i) {
             <div>
                <div class="contact-card-name">${contacts[i].name}</div>
                <div class="edit-delete-container">
-                  <span class="edit-icon-wrapper" openPopUp()>
+                  <span class="edit-icon-wrapper" onclick="renderEditContactCardInfo(${i})" >
                      <div class="edit-icon"></div><span class="edit-name">Edit</span>
                   </span>
                   <span class="delete-icon-wrapper">
@@ -79,10 +82,6 @@ function renderContactCardInfo(i) {
 }
 
 //** Helper Functions */
-
-let popUpBackground = document.getElementById("popUpBackground");
-let contentPopUp = document.getElementById("contentPopUp");
-let closePopUpBtn = document.getElementById("closePopUpBtn");
 popUpBackground.addEventListener("click", closePopUp);
 
 function openPopUp() {
@@ -118,4 +117,38 @@ function closePopUpByBtn() {
    document.getElementById("popUpBackground").classList.add("d-none");
 }
 
+function renderEditContactCardInfo(i) {
+   let avatar;
+   avatar = renderAvatar(i, avatar);
+   popUpBackground.innerHTML = `<div class="edit-contact-pop-up" id="contentPopUp">
+         <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
+         <div class="popup-logo-headline-wrapper">
+            <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
+            <div class="edit-popup-headline">Edit contact</div>
+            <div class="edit-underline-from-subline"></div>
+         </div>
+
+         <div class="edit-contact-formular">
+            <img src="${avatar}" class="avatar big-avatar" />
+            <!--  -->
+            <!-- Formular muss hier sein -->
+            <!-- das return false verhindern neuladen der seite, beim abschicken der Form -->
+            <form onsubmit="alert('Die Funktion gibts noch nicht :P'); return false" class="input-fields-edit-contact">
+               <input id="input-field-name" class="input-field-name edit-contact-form-input" placeholder="Name"
+                  type="text" />
+               <br />
+               <input id="input-field-mail" class="input-field-mail edit-contact-form-input" placeholder="Email"
+                  type="text" /><br />
+               <input id="input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
+                  type="text" />
+               <div class="edit-contact-buttons-wrapper">
+                  <button class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn()">Delete</button>
+                  <button class="edit-create-contact-btn edit-contact-form-btn"
+                     onclick="addPersonToContact()">Save</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>`;
+}
 
