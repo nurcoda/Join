@@ -2,8 +2,8 @@ const addTaskPopUpBackground = document.getElementById("addTaskPopUpBackground")
 const addTaskPopUp = document.getElementById("addTaskPopUp");
 const closePopUpBtn = document.getElementById("closePopUpBtn");
 const closePopUpBtn_2 = document.getElementById("closePopUpBtn_editTask");
-const existingTaskPopUpBackground = document.getElementById("existingTaskPopUpBackground");
-const existingTaskPopUp = document.getElementById("existingTaskPopUp");
+const editTaskPopUpBackground = document.getElementById("editTaskPopUpBackground");
+const editTaskPopUp = document.getElementById("editTaskPopUp");
 const todoColumn = document.getElementById("todoColumnContainer");
 const inProgressColumn = document.getElementById("inProgressColumnContainer");
 const awaitFeedbackColumn = document.getElementById("awaitFeedbackColumnContainer");
@@ -36,6 +36,13 @@ function prepareData() {
    renderTasksIntoColumns();
 }
 
+function clearAllColums() {
+   todoColumn.innerHTML = "";
+   inProgressColumn.innerHTML = "";
+   awaitFeedbackColumn.innerHTML = "";
+   doneColumn.innerHTML = "";
+}
+
 /**
  * checks the state of task
  * render tasks in the specific columns.
@@ -43,6 +50,7 @@ function prepareData() {
  */
 
 function renderTasksIntoColumns() {
+   clearAllColums();
    for (let i = 0; i < tasks.length; i++) {
       switch (tasks[i].state) {
          case "todo":
@@ -180,14 +188,14 @@ function checkIfColumnIsEmptyHTML() {
 function renderEditTaskPopUp(id) {
    for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].id == id) {
-         existingTaskPopUpBackground.innerHTML = renderEditTaskPopUpHTML(i);
+         editTaskPopUpBackground.innerHTML = renderEditTaskPopUpHTML(i);
       }
    }
 }
 
 function renderEditTaskPopUpHTML(i) {
    return `  
-   <div class="existing-task-popup-board" id="existingTaskPopUp">
+   <div class="existing-task-popup-board" id="editTaskPopUp">
                <img
                   src="./assets/img/close_big_icon.png"
                   alt=""
@@ -214,7 +222,7 @@ function renderEditTaskPopUpHTML(i) {
                 ${popUpRenderSubTasks(i)}
                </div>
                <div class="popup-delete-edit-btn-wrapper">
-                  <div class="popup-delete-btn popup-btn">
+                  <div class="popup-delete-btn popup-btn" onclick="deleteTask(${tasks[i].id})">
                      <div class="popup-delete-icon"></div>
                      Delete
                   </div>
@@ -225,6 +233,13 @@ function renderEditTaskPopUpHTML(i) {
                </div>
                </div>
               `;
+}
+
+function deleteTask(id) {
+   let taskToDeleteIndex = tasks.findIndex((task) => task.id === id);
+   tasks.splice(taskToDeleteIndex, 1);
+   editTaskPopUpBackground.classList.add("d-none");
+   renderTasksIntoColumns();
 }
 
 /**
@@ -285,16 +300,16 @@ function closeAddTaskPopUp() {
 }
 
 function openEditTaskPopUp(id) {
-   existingTaskPopUpBackground.classList.remove("d-none");
+   editTaskPopUpBackground.classList.remove("d-none");
    renderEditTaskPopUp(id);
 }
 
 function closeEditTaskPopUp() {
-   if (event.target === existingTaskPopUpBackground || event.target === closePopUpBtn) {
-      existingTaskPopUpBackground.classList.add("d-none");
+   if (event.target === editTaskPopUpBackground || event.target === closePopUpBtn) {
+      editTaskPopUpBackground.classList.add("d-none");
    }
 }
 
 addTaskPopUpBackground.addEventListener("click", closeAddTaskPopUp);
-existingTaskPopUpBackground.addEventListener("click", closeEditTaskPopUp);
+editTaskPopUpBackground.addEventListener("click", closeEditTaskPopUp);
 closePopUpBtn_2.addEventListener("click", closeAddTaskPopUp);
