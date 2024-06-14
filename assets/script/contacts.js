@@ -174,13 +174,13 @@ function renderEditContactCardInfo(i) {
 }
 
 function editSave(i) {
-   let name = document.getElementById('edit-input-field-name').value;  // Lese die geänderten Werte aus den Eingabefeldern
+   let name = document.getElementById('edit-input-field-name').value;  // Liest die geänderten Werte aus den Eingabefeldern
    let email = document.getElementById('edit-input-field-mail').value;
    let phone = document.getElementById('edit-input-field-phone').value;
-   contacts[i].name = name;  // Aktualisiere die Daten im contacts Array
+   contacts[i].name = name;  // Aktualisiert die Daten im contacts Array
    contacts[i].email = email;
    contacts[i].phone = phone;
-   closePopUpByBtn();  // Optional: Schließe das Pop-Up oder aktualisiere die Anzeige
+   closePopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
 }
 
