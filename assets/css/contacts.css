@@ -541,7 +541,6 @@
 
 .edit-delete-btn:hover {
    color: #28abe2;
-   background-image: url(../img/cancel_btn_x_blue_icon.svg);
    border-color: #28abe2;
 }
 

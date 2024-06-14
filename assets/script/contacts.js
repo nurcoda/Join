@@ -1,31 +1,31 @@
 let Test = "./assets/script/testData.js";
 
 let sortedContacts = [];
-    
 
-function sortArray(){
+
+function sortArray() {
 
 }
 function sortAndDisplayContacts() {
    try {
-       // Prüfen, ob contacts definiert ist und ein Array ist
-       if (!Array.isArray(contacts)) {
-           throw new Error('Die geladene Datenstruktur ist kein Array');
-       }
+      // Prüfen, ob contacts definiert ist und ein Array ist
+      if (!Array.isArray(contacts)) {
+         throw new Error('Die geladene Datenstruktur ist kein Array');
+      }
 
-       // Contacts-Array nach dem Feld "name" alphabetisch sortieren
-       const sortedContacts = contacts.sort((a, b) => {
-           return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
-       });
+      // Contacts-Array nach dem Feld "name" alphabetisch sortieren
+      const sortedContacts = contacts.sort((a, b) => {
+         return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+      });
 
-       // Sortiertes Contacts-Array anzeigen
-       console.log(JSON.stringify(sortedContacts, null, 2));
+      // Sortiertes Contacts-Array anzeigen
+      console.log(JSON.stringify(sortedContacts, null, 2));
    } catch (error) {
-       console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
+      console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
    }
 }
 function renderContact() {
- 
+
    document.getElementById("contactList").innerHTML = "";
    document.getElementById("contactList").innerHTML += `
           <div class="buttonWrapper">
@@ -41,7 +41,7 @@ function renderEveryContact() {
    let everyContactTemplate = "";
    sortAndDisplayContacts();
    for (let i = 0; i < contacts.length; i++) {
-      
+
       let avatar;
       avatar = renderAvatar(i, avatar);
       everyContactTemplate += `
@@ -141,8 +141,8 @@ function closePopUpByBtn() {
 function renderEditContactCardInfo(i) {
    let avatar;
    avatar = renderAvatar(i, avatar);
-   popUpBackground.innerHTML = `<div class="edit-contact-pop-up" id="contentPopUp">
-         <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
+   popUpBackground.innerHTML = `<div class="edit-contact-pop-up" id="editContentPopUp">
+         <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closeEditPopUpBtn" />
          <div class="popup-logo-headline-wrapper">
             <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
             <div class="edit-popup-headline">Edit contact</div>
@@ -161,14 +161,30 @@ function renderEditContactCardInfo(i) {
                <input id="edit-input-field-mail" class="input-field-mail edit-contact-form-input" placeholder="Email"
                   type="text" value="${contacts[i].email}"  /><br />
                <input id="edit-input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
-                  type="text"value="${contacts[i].phone}/>
+                  type="text"value="+${contacts[i].phone}"/>
                <div class="edit-contact-buttons-wrapper">
                   <button class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn()">Delete</button>
                   <button class="edit-create-contact-btn edit-contact-form-btn"
-                     onclick="addPersonToContact()">Save</button>
+                     onclick="editSave(${i})">Save</button>
                </div>
             </form>
          </div>
       </div>
    </div>`;
 }
+
+function editSave(i) {
+   let name = document.getElementById('edit-input-field-name').value;  // Lese die geänderten Werte aus den Eingabefeldern
+   let email = document.getElementById('edit-input-field-mail').value;
+   let phone = document.getElementById('edit-input-field-phone').value;
+   contacts[i].name = name;  // Aktualisiere die Daten im contacts Array
+   contacts[i].email = email;
+   contacts[i].phone = phone;
+   closePopUpByBtn();  // Optional: Schließe das Pop-Up oder aktualisiere die Anzeige
+   console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
+}
+
+
+function closeEditPopUpByBtn() {
+   popUpBackground.innerHTML = '';
+}  // Dummy Funktion zum Schließen des Pop-Ups
