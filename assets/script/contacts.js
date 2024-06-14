@@ -1,11 +1,31 @@
 let Test = "./assets/script/testData.js";
 
-let contactCardBigContainer = document.getElementById("contactCardBigContainer");
-let popUpBackground = document.getElementById("popUpBackground");
-let contentPopUp = document.getElementById("contentPopUp");
-let closePopUpBtn = document.getElementById("closePopUpBtn");
+let sortedContacts = [];
+    
 
+function sortArray(){
+
+}
+function sortAndDisplayContacts() {
+   try {
+       // Prüfen, ob contacts definiert ist und ein Array ist
+       if (!Array.isArray(contacts)) {
+           throw new Error('Die geladene Datenstruktur ist kein Array');
+       }
+
+       // Contacts-Array nach dem Feld "name" alphabetisch sortieren
+       const sortedContacts = contacts.sort((a, b) => {
+           return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+       });
+
+       // Sortiertes Contacts-Array anzeigen
+       console.log(JSON.stringify(sortedContacts, null, 2));
+   } catch (error) {
+       console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
+   }
+}
 function renderContact() {
+ 
    document.getElementById("contactList").innerHTML = "";
    document.getElementById("contactList").innerHTML += `
           <div class="buttonWrapper">
@@ -19,7 +39,9 @@ function renderContact() {
 
 function renderEveryContact() {
    let everyContactTemplate = "";
+   sortAndDisplayContacts();
    for (let i = 0; i < contacts.length; i++) {
+      
       let avatar;
       avatar = renderAvatar(i, avatar);
       everyContactTemplate += `
