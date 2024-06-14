@@ -133,13 +133,13 @@ function renderEditContactCardInfo(i) {
             <!-- Formular muss hier sein -->
             <!-- das return false verhindern neuladen der seite, beim abschicken der Form -->
             <form onsubmit="alert('Die Funktion gibts noch nicht :P'); return false" class="input-fields-edit-contact">
-               <input id="input-field-name" class="input-field-name edit-contact-form-input" placeholder="Name"
-                  type="text" />
+               <input id="edit-input-field-name" class="input-field-name edit-contact-form-input" placeholder="Name"
+                  type="text" value="${contacts[i].name}"/>
                <br />
-               <input id="input-field-mail" class="input-field-mail edit-contact-form-input" placeholder="Email"
-                  type="text" /><br />
-               <input id="input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
-                  type="text" />
+               <input id="edit-input-field-mail" class="input-field-mail edit-contact-form-input" placeholder="Email"
+                  type="text" value="${contacts[i].email}"  /><br />
+               <input id="edit-input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
+                  type="text"value="${contacts[i].phone}/>
                <div class="edit-contact-buttons-wrapper">
                   <button class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn()">Delete</button>
                   <button class="edit-create-contact-btn edit-contact-form-btn"
