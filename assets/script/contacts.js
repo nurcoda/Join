@@ -104,3 +104,5 @@ function addPersonToContact() {
 function closePopUpByBtn() {
    document.getElementById("popUpBackground").classList.add("d-none");
 }
+
+
