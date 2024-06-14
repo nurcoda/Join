@@ -115,7 +115,6 @@ function addPersonToContact() {
 function closePopUpByBtn() {
    document.getElementById("popUpBackground").classList.add("d-none");
 }
-<<<<<<< HEAD
 
 function renderEditContactCardInfo(i) {
    let avatar;
@@ -151,6 +150,3 @@ function renderEditContactCardInfo(i) {
       </div>
    </div>`;
 }
-
-=======
->>>>>>> b148bc53dd68c884b963782724d23b6ebadf72e9
