@@ -29,15 +29,15 @@
           <label class="margin-top-16px">Assigned to</label>
           <div id="assignedDiv" class="assigned-to-div" onclick="showAssignedDropdown(), renderContacts()">
             <input id="assignedInput" type="text" class="assigned-input" placeholder="Select conntacts to asign" />
-            <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
-            <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none" onclick="hideAssignedDropdown()" alt="" />
+            <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" class="dropdown-icon" alt="" />
+            <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" onclick="hideAssignedDropdown()" alt="" />
           </div>
           <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none"></div>
         </div>
         <div class="seperator"></div>
         <div class="add-task-right">
           <label for="dueDate">Due date</label>
-          <input class="date-input" type="date" required />
+          <input id="dueDate" class="date-input" type="date" required />
 
           <label class="margin-top-16px">Prio</label>
           <div class="prio-buttons">
@@ -55,7 +55,7 @@
           <label class="margin-top-16px">Category</label>
           <div id="categoryDiv" class="category-div">
             <span id="categorySelection">Select task category</span>
-            <img id="categoryDropdownImg" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
+            <img id="categoryDropdownImg" class="dropdown-icon" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
           </div>
           <div id="categoryDropdown" class="d-none">
             <span class="category-option" onclick="selectOption(1)">Technical task</span>

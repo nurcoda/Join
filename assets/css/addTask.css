@@ -205,7 +205,7 @@ button {
 
 .subtasks-icon {
   border-radius: 100%;
-  padding: 4px;
+  padding: 5px;
 }
 
 .subtasks-icon:hover {
@@ -280,6 +280,14 @@ button {
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+
+.dropdown-icon {
+  border-radius: 100%;
+}
+
+.dropdown-icon:hover {
+  background-color: #ebebeb;
 }
 
 .category-option {

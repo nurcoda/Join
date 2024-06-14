@@ -120,3 +120,6 @@ function selectOption(option) {
   let dropdown = document.getElementById("categoryDropdown");
   dropdown.classList.add("d-none");
 }
+
+
+// funktion fürs dropdownicon flippen fehlt noch
