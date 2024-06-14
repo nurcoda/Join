@@ -92,14 +92,35 @@ function renderContacts() {
           <img src="./assets/img/Anton.png" alt="" />
           <span>${contact.name}</span>
         </div>
-        <img class="check-btn-img" src="./assets/img/check_btn.png" alt="" />
+        <img id="contactCheckBtn${contact.id}" class="check-btn-img" src="./assets/img/check_btn.png" alt="" />
       </div>`;
   }
 }
 
+// function markContact(contactId) {
+//   let contact = document.getElementById(`contact${contactId}`);
+//   let checkbox = document.getElementById(`contactCheckBtn${contactId}`)
+//   contact.style.backgroundColor = "#2A3647";
+//   checkbox.src ="./assets/img/checked_btn_white_svg.svg"
+// }
+
 function markContact(contactId) {
   let contact = document.getElementById(`contact${contactId}`);
-  contact.style.backgroundColor = "#2A3647";
+  let checkbox = document.getElementById(`contactCheckBtn${contactId}`);
+
+  // Umschalten der Markierungsklasse
+  contact.classList.toggle('marked');
+
+  // Prüfen, ob die Klasse vorhanden ist, und dementsprechend das Bild ändern
+  if (contact.classList.contains('marked')) {
+    contact.style.backgroundColor = "#2A3647";
+    contact.style.color = "white";
+    checkbox.src = "./assets/img/checked_btn_white_svg.svg";
+  } else {
+    contact.style.color= "black";
+    contact.style.backgroundColor = "white"; 
+    checkbox.src = "./assets/img/check_btn.png";
+  }
 }
 
 // category
