@@ -23,6 +23,8 @@ function changeButtonColorAndImg(prio) {
   });
 }
 
+// subtasks
+
 function showSubtasksIcons() {
   document.getElementById("subtasksPlusIcon").classList.add("d-none");
   document.getElementById("subtasksInputIcons").classList.remove("d-none");
@@ -51,6 +53,8 @@ function addNewSubtask() {
 document.getElementById("subtasksDiv").addEventListener("click", function () {
   document.getElementById("subtasksInput").focus(); // Setzt den Fokus auf das Input-Feld
 });
+
+// assigned to
 
 function showAssignedDropdown() {
   document.getElementById("assignedDropdown").classList.remove("d-none");
@@ -96,4 +100,23 @@ function renderContacts() {
 function markContact(contactId) {
   let contact = document.getElementById(`contact${contactId}`);
   contact.style.backgroundColor = "#2A3647";
+}
+
+// category
+
+document.getElementById("categoryDiv").addEventListener("click", function () {
+  var dropdown = document.getElementById("categoryDropdown");
+  dropdown.classList.toggle("d-none"); // Toggle 'd-none' Klasse
+});
+
+function selectOption(option) {
+  let selection = document.getElementById("categorySelection");
+  if (option == 1) {
+    selection.innerHTML = "Technical task";
+  }
+  if (option == 2) {
+    selection.innerHTML = "User story";
+  }
+  let dropdown = document.getElementById("categoryDropdown");
+  dropdown.classList.add("d-none");
 }

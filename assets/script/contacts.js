@@ -4,10 +4,23 @@ let contactCardBigContainer = document.getElementById("contactCardBigContainer")
 
 function renderContact() {
    document.getElementById("contactList").innerHTML = "";
+   document.getElementById("contactList").innerHTML += `
+          <div class="buttonWrapper">
+               <button class="addContactBtn" onclick="openPopUp()">
+                  Add new Conatct <img src="./assets/img/person_add_icon.png" alt="" />
+               </button>
+            </div>
+         ${renderEveryContact()}
+    `;
+}
+
+function renderEveryContact() {
+   let everyContactTemplate = "";
    for (let i = 0; i < contacts.length; i++) {
       let avatar;
       avatar = renderAvatar(i, avatar);
-      document.getElementById("contactList").innerHTML += `<div class="contact" onclick="renderContactCardInfo(${i})">
+      everyContactTemplate += `
+          <div class="contact" onclick="renderContactCardInfo(${i})">
            <div class="contactDetails">
            <div class="img-contacts">
               <div id="avatar${i}" class="avatar">${avatar}</div>
@@ -18,15 +31,16 @@ function renderContact() {
            </div>
             </div>
         </div>
-    `;
+      `;
    }
+   return everyContactTemplate;
 }
 
 function renderAvatar(i, avatar) {
    const username = contacts[i]["name"];
    const firstNameInitial = username[0];
    // const secondNameInitial = username.split(" ")[1].split("")[0];  //* Auskommentiert weil die bei Herr der Ringe keine Nachnamen zeigen im Array
-   avatar = firstNameInitial
+   avatar = firstNameInitial;
    // + secondNameInitial;  //*das kommt wieder eins nach oben ^^
    return avatar;
 }
@@ -58,10 +72,10 @@ function renderContactCardInfo(i) {
                <div class="contact-info-phone">+${contacts[i].phone}</div>
             </div>
          </div>`;
-   document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp); //* öffnet die Edit Funktion
-   document.querySelector('.delete-icon-wrapper').addEventListener('click', function () {
+   document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
+   document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
       deleteContact(i);
-   }); //löscht die Contact seite 
+   }); //löscht die Contact seite
 }
 
 //** Helper Functions */
@@ -81,23 +95,22 @@ function closePopUp() {
    }
 }
 
-
 function deleteContact(i) {
    contacts.splice(i, 1);
    renderContact();
-   document.getElementById("contact-card-info-container").innerHTML = ""; // Kontaktkarte leeren
+   document.getElementById("contactCardBigContainer").innerHTML = ""; // Kontaktkarte leeren
 }
 //**Add to Contacts */
 
 function addPersonToContact() {
    let name = document.getElementById("input-field-name").value;
    let mail = document.getElementById("input-field-mail").value;
-   let phone = document.getElementById("input-field-phone").value;  //** Inhalt der Inputfelder */
+   let phone = document.getElementById("input-field-phone").value; //** Inhalt der Inputfelder */
 
-   let contact = { "name": name, "email": mail, "phone": phone };  //**Inhalt in Objekt zusammenfügen */
+   let contact = { "name": name, "email": mail, "phone": phone }; //**Inhalt in Objekt zusammenfügen */
 
    contacts.push(contact);
-   renderContact();   //*Kontaktliste neu laden
+   renderContact(); //*Kontaktliste neu laden
    closePopUpByBtn();
 }
 
