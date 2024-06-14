@@ -65,10 +65,7 @@ function renderTasksIntoColumnsHTML(i) {
                      <div class="subtask-counter-wrapper">
                         <div class="subtask-progressbar">
                            <!-- needs to switch with subtasks -->
-                           <span class="subtask-bar-half"></span>
-                           <span class="subtask-bar-full d-none"></span>
-                        </div>
-                        <div class="subtask-counter">1/2 Subtasks</div>
+                          ${renderSubTasksToHTML(i)}
                      </div>
                      <div class="member-priority-wrapper">
                         <div class="task-member">
@@ -83,12 +80,47 @@ function renderTasksIntoColumnsHTML(i) {
                   </div>`;
 }
 
+// render assigned user
+
 function renderAssignedUserToHTML(i) {
    let assignedUserTemplate = "";
    for (let j = 0; j < tasks[i].assigned_user.length; j++) {
       assignedUserTemplate += `<div class="task-member-icon member-icon-1">${tasks[i].assigned_user[j].first_two_letters}</div>`;
    }
    return assignedUserTemplate;
+}
+
+// render subtasks bar
+
+function renderSubTasksToHTML(i) {
+   let subTasksTemplate = "";
+   let calculatedWidth = calcWidthOfProgressBar(i);
+   let subTasksDone = countSubTask(i);
+   subTasksTemplate += `   
+                  <span class="subtask-bar-half" style="width: ${calculatedWidth}%"></span>
+                        </div>
+                        <div class="subtask-counter">${subTasksDone}/${tasks[i].subtasks.length} Subtasks</div>    
+                  `;
+
+   return subTasksTemplate;
+}
+
+let subTaskDone = 0;
+
+function countSubTask(i, subTasksDone) {
+   subTasksDone = 0;
+   for (let j = 0; j < tasks[i].subtasks.length; j++) {
+      if (tasks[i].subtasks[j].subtask_isdone == true) {
+         subTasksDone++;
+      }
+   }
+   return subTasksDone;
+}
+
+function calcWidthOfProgressBar(i, calculatedWidth) {
+   subTasksDone = countSubTask(i);
+   calculatedWidth = (subTasksDone * 100) / tasks[i].subtasks.length;
+   return calculatedWidth;
 }
 
 /**
@@ -169,6 +201,12 @@ function renderEditTaskPopUpHTML(i) {
               `;
 }
 
+/**
+ * checks how many assigned user in this task
+ * @param {task} i
+ * @returns assigned user template
+ */
+
 function popUpRenderAssignedUser(i) {
    let assignedUserTemplate = "";
    for (let j = 0; j < tasks[i].assigned_user.length; j++) {
@@ -182,12 +220,22 @@ function popUpRenderAssignedUser(i) {
    return assignedUserTemplate;
 }
 
+/**
+ * checks if subtask is done
+ * if done, box is checked
+ * @param {task} i
+ * @returns subtasktemplate
+ */
+
 function popUpRenderSubTasks(i) {
    let subTasksTemplate = "";
+   let subTaskDone;
    for (let j = 0; j < tasks[i].subtasks.length; j++) {
+      tasks[i].subtasks[j].subtask_isdone ? (subTaskDone = "task-done-state-checked") : (subTaskDone = "");
+
       subTasksTemplate += `   
        <div class="popup-subtask-task">
-                     <div class="task-done-state task-done-state-checked"></div>
+                     <div class="task-done-state ${subTaskDone}"></div>
                      <div class="popup-subtask-name">${tasks[i].subtasks[j].subtask_name}</div>
                   </div>    
                   `;

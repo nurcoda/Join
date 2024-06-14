@@ -191,6 +191,18 @@
    border-radius: 16px;
 }
 
+.subtask-bar-level-1 {
+   width: 33%;
+}
+
+.subtask-bar-level-2 {
+   width: 50%;
+}
+
+.subtask-bar-level-3 {
+   width: 100%;
+}
+
 .subtask-bar-full {
    background-color: rgba(69, 137, 255, 1);
    width: 100%;
