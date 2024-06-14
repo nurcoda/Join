@@ -150,4 +150,7 @@ function renderEditContactCardInfo(i) {
       </div>
    </div>`;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7a3cfe3f525df10f72be8b19e2818eb11de68fc4
