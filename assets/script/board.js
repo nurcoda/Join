@@ -13,9 +13,20 @@ let inProgressCounter = 0;
 let awaitFeedbackCounter = 0;
 let doneCounter = 0;
 
+// _________________________________________________
+// THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
+// THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
+// THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
+addUsersToContacts(user, contacts);
+function addUsersToContacts(users, contacts) {
+   users.forEach((user) => {
+      let { password, ...userWithoutPassword } = user;
+      contacts.push(userWithoutPassword);
+   });
+}
+// _________________________________________________
+
 prepareData();
-console.log(tasks);
-console.log(tasks.state);
 
 /**
  * prepare some incoming data for renderfunctions
@@ -85,9 +96,24 @@ function renderTasksIntoColumnsHTML(i) {
 function renderAssignedUserToHTML(i) {
    let assignedUserTemplate = "";
    for (let j = 0; j < tasks[i].assigned_user.length; j++) {
-      assignedUserTemplate += `<div class="task-member-icon member-icon-1">${tasks[i].assigned_user[j].first_two_letters}</div>`;
+      let assignedUserBackgroundColor = getColorAssignedUser(tasks[i].assigned_user[j].name);
+      assignedUserTemplate += `<div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${tasks[i].assigned_user[j].first_two_letters}</div>`;
    }
    return assignedUserTemplate;
+}
+
+// function getColorAssignedUser(i, j) {
+//    let actualAsignedUser = tasks[i].assigned_user[j].name;
+//    console.log(actualAsignedUser);
+// }
+
+function getColorAssignedUser(name) {
+   let assignedUser = contacts.find((contact) => contact.name.toLowerCase().includes(name.toLowerCase()));
+   if (assignedUser) {
+      return assignedUser.color;
+   } else {
+      return null; // oder eine andere geeignete Rückgabe für den Fall, dass kein Benutzer gefunden wird
+   }
 }
 
 // render subtasks bar
@@ -210,9 +236,10 @@ function renderEditTaskPopUpHTML(i) {
 function popUpRenderAssignedUser(i) {
    let assignedUserTemplate = "";
    for (let j = 0; j < tasks[i].assigned_user.length; j++) {
+      let assignedUserBackgroundColor = getColorAssignedUser(tasks[i].assigned_user[j].name);
       assignedUserTemplate += `  
       <div class="popup-user">
-                     <div class="task-member-icon member-icon-1">${tasks[i].assigned_user[j].first_two_letters}</div>
+                     <div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${tasks[i].assigned_user[j].first_two_letters}</div>
                      ${tasks[i].assigned_user[j].name}
                   </div>
                   `;
