@@ -109,7 +109,7 @@ function openPopUp() {
    popUpBackground.classList.remove("d-none");
 }
 
-function closePopUp() {
+function closePopUp(event) {
    if (event.target === closePopUpBtn) {
       popUpBackground.classList.add("d-none");
    }
@@ -163,7 +163,7 @@ function renderEditContactCardInfo(i) {
                <input id="edit-input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
                   type="text"value="+${contacts[i].phone}"/>
                <div class="edit-contact-buttons-wrapper">
-                  <button class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn()">Delete</button>
+                  <button class="edit-delete-btn edit-contact-form-btn" onclick="deleteContact(${i})">Delete</button>
                   <button class="edit-create-contact-btn edit-contact-form-btn"
                      onclick="editSave(${i})">Save</button>
                </div>
@@ -184,7 +184,7 @@ function editSave(i) {
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
 }
 
-
 function closeEditPopUpByBtn() {
    popUpBackground.innerHTML = '';
 }  // Dummy Funktion zum Schließen des Pop-Ups
+
