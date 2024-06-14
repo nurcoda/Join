@@ -42,9 +42,8 @@ function renderEveryContact() {
 function renderAvatar(i, avatar) {
    const username = contacts[i]["name"];
    const firstNameInitial = username[0];
-   // const secondNameInitial = username.split(" ")[1].split("")[0];  //* Auskommentiert weil die bei Herr der Ringe keine Nachnamen zeigen im Array
-   avatar = firstNameInitial;
-   // + secondNameInitial;  //*das kommt wieder eins nach oben ^^
+   const secondNameInitial = username.split(" ")[1].split("")[0]; //* Auskommentiert weil die bei Herr der Ringe keine Nachnamen zeigen im Array
+   avatar = firstNameInitial + secondNameInitial;
    return avatar;
 }
 
@@ -116,6 +115,7 @@ function addPersonToContact() {
 function closePopUpByBtn() {
    document.getElementById("popUpBackground").classList.add("d-none");
 }
+<<<<<<< HEAD
 
 function renderEditContactCardInfo(i) {
    let avatar;
@@ -152,3 +152,5 @@ function renderEditContactCardInfo(i) {
    </div>`;
 }
 
+=======
+>>>>>>> b148bc53dd68c884b963782724d23b6ebadf72e9
