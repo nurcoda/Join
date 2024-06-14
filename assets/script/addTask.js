@@ -87,9 +87,11 @@ function renderContacts() {
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i];
     dropdown.innerHTML += `
-      <div id="contact${contact.id}" class="assigned-to-contact" onclick="markContact(${contact.id})">
+      <div id="contact${contact.id}" class="assigned-to-contact" onclick="markContact(${contact.id}, ${i})">
         <div class="contact-img-name">
-          <img src="./assets/img/Anton.png" alt="" />
+          <div class="two-letters-img" style="background-color: ${contact.color}; color: white">
+            ${contact.first_two_letters}
+          </div>
           <span>${contact.name}</span>
         </div>
         <img id="contactCheckBtn${contact.id}" class="check-btn-img" src="./assets/img/check_btn.png" alt="" />
@@ -97,28 +99,31 @@ function renderContacts() {
   }
 }
 
-// function markContact(contactId) {
-//   let contact = document.getElementById(`contact${contactId}`);
-//   let checkbox = document.getElementById(`contactCheckBtn${contactId}`)
-//   contact.style.backgroundColor = "#2A3647";
-//   checkbox.src ="./assets/img/checked_btn_white_svg.svg"
-// }
+function addContactToAssigned(i) {
+  let contact = contacts[i];
+  let content = document.getElementById("assignedContacts");
+  content.innerHTML += `
+    <div class="assigned-contacts-img" style="background-color: ${contact.color}; color: white">
+      ${contact.first_two_letters}
+    </div>`;
+}
 
-function markContact(contactId) {
+function markContact(contactId, i) {
   let contact = document.getElementById(`contact${contactId}`);
   let checkbox = document.getElementById(`contactCheckBtn${contactId}`);
 
   // Umschalten der Markierungsklasse
-  contact.classList.toggle('marked');
+  contact.classList.toggle("marked");
 
   // Prüfen, ob die Klasse vorhanden ist, und dementsprechend das Bild ändern
-  if (contact.classList.contains('marked')) {
+  if (contact.classList.contains("marked")) {
     contact.style.backgroundColor = "#2A3647";
     contact.style.color = "white";
     checkbox.src = "./assets/img/checked_btn_white_svg.svg";
+    addContactToAssigned(i);
   } else {
-    contact.style.color= "black";
-    contact.style.backgroundColor = "white"; 
+    contact.style.color = "black";
+    contact.style.backgroundColor = "white";
     checkbox.src = "./assets/img/check_btn.png";
   }
 }
@@ -141,6 +146,5 @@ function selectOption(option) {
   let dropdown = document.getElementById("categoryDropdown");
   dropdown.classList.add("d-none");
 }
-
 
 // funktion fürs dropdownicon flippen fehlt noch
