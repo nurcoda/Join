@@ -14,7 +14,7 @@ let awaitFeedbackCounter = 0;
 let doneCounter = 0;
 
 // _________________________________________________
-// THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
+// TODO: THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
 // THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
 // THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
 addUsersToContacts(user, contacts);

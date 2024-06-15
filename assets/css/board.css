@@ -92,7 +92,7 @@
 }
 
 .board-column {
-   width: 250px;
+   width: 20%;
 }
 
 .board-column-headline {
@@ -458,13 +458,11 @@
 
 @media (max-width: 1520px) {
    .board-column {
-      width: 200px;
    }
 }
 
 @media (max-width: 1300px) {
    .board-column {
-      width: 150px;
    }
    .board-column-headline {
       font-size: 16px;
@@ -474,6 +472,9 @@
 @media (max-width: 1130px) {
    .board-column {
       width: 250px;
+   }
+   .board-wrapper {
+      justify-content: space-around;
    }
    .board-column-headline {
       font-size: 16px;
