@@ -43,28 +43,28 @@ function clearAllColums() {
 
 function renderTasksIntoColumns() {
    clearAllColums();
-   for (let i = 0; i < tasks.length; i++) {
-      switch (tasks[i].state) {
+   tasks.forEach((task, index) => {
+      switch (task.state) {
          case "todo":
             todoCounter++;
-            todoColumn.innerHTML += renderTasksIntoColumnsHTML(i);
+            todoColumn.innerHTML += renderTasksIntoColumnsHTML(index);
             break;
          case "inprogress":
             inProgressCounter++;
-            inProgressColumn.innerHTML += renderTasksIntoColumnsHTML(i);
+            inProgressColumn.innerHTML += renderTasksIntoColumnsHTML(index);
             break;
          case "awaitfeedback":
             awaitFeedbackCounter++;
-            awaitFeedbackColumn.innerHTML += renderTasksIntoColumnsHTML(i);
+            awaitFeedbackColumn.innerHTML += renderTasksIntoColumnsHTML(index);
             break;
          case "done":
             doneCounter++;
-            doneColumn.innerHTML += renderTasksIntoColumnsHTML(i);
+            doneColumn.innerHTML += renderTasksIntoColumnsHTML(index);
             break;
          default:
-            console.error(`Unknown state: ${tasks[i].state}`);
+            console.error(`Unknown state: ${task.state}`);
       }
-   }
+   });
    checkIfColumnIsEmpty();
 }
 
@@ -87,26 +87,24 @@ function renderSubTasksToHTML(i) {
 
 function renderAssignedUserToHTML(i) {
    let assignedUserTemplate = "";
-   for (let j = 0; j < tasks[i].assigned_user.length; j++) {
-      let assignedUserBackgroundColor = getColorAssignedUser(tasks[i].assigned_user[j].name);
-      assignedUserTemplate += `<div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${tasks[i].assigned_user[j].first_two_letters}</div>`;
-   }
+   tasks[i].assigned_user.forEach((user) => {
+      let assignedUserBackgroundColor = getColorAssignedUser(user.name);
+      assignedUserTemplate += `<div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${user.first_two_letters}</div>`;
+   });
    return assignedUserTemplate;
 }
-
 function getColorAssignedUser(name) {
    let assignedUser = contacts.find((contact) => contact.name.toLowerCase().includes(name.toLowerCase()));
    return assignedUser.color;
 }
 
 function countSubTask(i) {
-   let subTaskDone = 0;
-   subTasksDone = 0;
-   for (let j = 0; j < tasks[i].subtasks.length; j++) {
-      if (tasks[i].subtasks[j].subtask_isdone == true) {
+   let subTasksDone = 0;
+   tasks[i].subtasks.forEach((subtask) => {
+      if (subtask.subtask_isdone) {
          subTasksDone++;
       }
-   }
+   });
    return subTasksDone;
 }
 
@@ -145,11 +143,11 @@ function checkIfColumnIsEmptyHTML() {
  */
 
 function renderEditTaskPopUp(id) {
-   for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id == id) {
-         editTaskPopUpBackground.innerHTML = renderEditTaskPopUpHTML(i);
+   tasks.forEach((task, index) => {
+      if (task.id == id) {
+         editTaskPopUpBackground.innerHTML = renderEditTaskPopUpHTML(index);
       }
-   }
+   });
 }
 
 function deleteTask(id) {
@@ -167,15 +165,15 @@ function deleteTask(id) {
 
 function popUpRenderAssignedUser(i) {
    let assignedUserTemplate = "";
-   for (let j = 0; j < tasks[i].assigned_user.length; j++) {
-      let assignedUserBackgroundColor = getColorAssignedUser(tasks[i].assigned_user[j].name);
+   tasks[i].assigned_user.forEach((user) => {
+      let assignedUserBackgroundColor = getColorAssignedUser(user.name);
       assignedUserTemplate += `  
       <div class="popup-user">
-                     <div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${tasks[i].assigned_user[j].first_two_letters}</div>
-                     ${tasks[i].assigned_user[j].name}
-                  </div>
-                  `;
-   }
+         <div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${user.first_two_letters}</div>
+         ${user.name}
+      </div>
+      `;
+   });
    return assignedUserTemplate;
 }
 
@@ -189,16 +187,15 @@ function popUpRenderAssignedUser(i) {
 function popUpRenderSubTasks(i) {
    let subTasksTemplate = "";
    let subTaskDone;
-   for (let j = 0; j < tasks[i].subtasks.length; j++) {
-      tasks[i].subtasks[j].subtask_isdone ? (subTaskDone = "task-done-state-checked") : (subTaskDone = "");
-
+   tasks[i].subtasks.forEach((subtask) => {
+      subtask.subtask_isdone ? (subTaskDone = "task-done-state-checked") : (subTaskDone = "");
       subTasksTemplate += `   
-                  <div class="popup-subtask-task">
-                     <div class="task-done-state ${subTaskDone}"></div>
-                     <div class="popup-subtask-name">${tasks[i].subtasks[j].subtask_name}</div>
-                  </div>    
-                  `;
-   }
+      <div class="popup-subtask-task">
+         <div class="task-done-state ${subTaskDone}"></div>
+         <div class="popup-subtask-name">${subtask.subtask_name}</div>
+      </div>    
+      `;
+   });
    return subTasksTemplate;
 }
 
