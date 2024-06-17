@@ -30,7 +30,7 @@ function groupAndDisplayContacts() {
 
        for (const letter in groupedContacts) {
            // Buchstaben-Überschrift hinzufügen
-           containerContent += `<div class="contact-letter"><h2>${letter}</h2></div>`;
+           containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
 
            groupedContacts[letter].forEach(contact => {
                // Kontakt-Details hinzufügen
