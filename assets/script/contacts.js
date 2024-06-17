@@ -1,4 +1,5 @@
 let Test = "./assets/script/testData.js";
+let selectedContactIndex = null;
 
 function groupAndDisplayContacts() {
 
@@ -26,8 +27,9 @@ function groupContacts(sortedContacts){
            groupedContacts[letter].forEach(contact => {
                let i = contacts.findIndex(c => c.id === contact.id);
                let avatar = renderAvatar(i, contact.color);
+                const highlightClass = (i === selectedContactIndex) ? 'highlight' : '';
                containerContent += `
-                   <div class="contact" onclick="renderContactCardInfo(${i})">
+                   <div class="contact ${highlightClass}" id="contact-${i}" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
                        <div class="contactDetails">
                            <div class="img-contacts">
                                <div id="avatar${i}" class="avatar" style="background-color: ${contact.color}">${avatar}</div>
@@ -42,6 +44,13 @@ function groupContacts(sortedContacts){
            });
        }
        document.getElementById("contactList").innerHTML = containerContent;
+}
+function highlightContact(index) {
+   if (selectedContactIndex !== null) {
+       document.getElementById(`contact-${selectedContactIndex}`).classList.remove('highlight');
+   }
+   selectedContactIndex = index;
+   document.getElementById(`contact-${selectedContactIndex}`).classList.add('highlight');
 }
 
 function renderContact() {
