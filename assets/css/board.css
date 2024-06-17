@@ -468,8 +468,18 @@
    flex-direction: column;
    overflow: scroll;
    overflow-x: hidden;
-   scrollbar-width: thin;
    padding-right: 2%;
+}
+
+.edit-task-form::-webkit-scrollbar {
+   width: 5px;
+   border-radius: 20px;
+   background-color: white;
+}
+
+.edit-task-form::-webkit-scrollbar-thumb {
+   background-color: lightgrey;
+   border-radius: 20px;
 }
 
 .edit-task-form input {
