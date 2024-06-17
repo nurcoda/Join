@@ -4,39 +4,39 @@ let sortedContacts = [];
 
 function groupAndDisplayContacts() {
    try {
-       // Prüfen, ob contacts definiert ist und ein Array ist
-       if (!Array.isArray(contacts)) {
-           throw new Error('Die geladene Datenstruktur ist kein Array');
-       }
+      // Prüfen, ob contacts definiert ist und ein Array ist
+      if (!Array.isArray(contacts)) {
+         throw new Error('Die geladene Datenstruktur ist kein Array');
+      }
 
-       // Contacts-Array nach dem Feld "name" alphabetisch sortieren
-       const sortedContacts = contacts.sort((a, b) => {
-           return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
-       });
+      // Contacts-Array nach dem Feld "name" alphabetisch sortieren
+      const sortedContacts = contacts.sort((a, b) => {
+         return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+      });
 
-       // Kontakte nach dem ersten Buchstaben gruppieren
-       const groupedContacts = sortedContacts.reduce((groups, contact) => {
-           const firstLetter = contact.name[0].toUpperCase();
-           if (!groups[firstLetter]) {
-               groups[firstLetter] = [];
-           }
-           groups[firstLetter].push(contact);
-           return groups;
-       }, {});
+      // Kontakte nach dem ersten Buchstaben gruppieren
+      const groupedContacts = sortedContacts.reduce((groups, contact) => {
+         const firstLetter = contact.name[0].toUpperCase();
+         if (!groups[firstLetter]) {
+            groups[firstLetter] = [];
+         }
+         groups[firstLetter].push(contact);
+         return groups;
+      }, {});
 
-       // Sortiertes und gruppiertes Contacts-Array anzeigen
-       let containerContent = '';
-       
+      // Sortiertes und gruppiertes Contacts-Array anzeigen
+      let containerContent = '';
 
-       for (const letter in groupedContacts) {
-           // Buchstaben-Überschrift hinzufügen
-           containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
 
-           groupedContacts[letter].forEach(contact => {
-               // Kontakt-Details hinzufügen
-               const i = contacts.findIndex(c => c.id === contact.id);
-               let avatar = renderAvatar(i, contact.color);
-               containerContent += `
+      for (const letter in groupedContacts) {
+         // Buchstaben-Überschrift hinzufügen
+         containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
+
+         groupedContacts[letter].forEach(contact => {
+            // Kontakt-Details hinzufügen
+            const i = contacts.findIndex(c => c.id === contact.id);
+            let avatar = renderAvatar(i, contact.color);
+            containerContent += `
                    <div class="contact" onclick="renderContactCardInfo(${i})">
                        <div class="contactDetails">
                            <div class="img-contacts">
@@ -49,12 +49,12 @@ function groupAndDisplayContacts() {
                        </div>
                    </div>
                `;
-           });
-       }
-      
-       document.getElementById("contactList").innerHTML += containerContent;
+         });
+      }
+
+      document.getElementById("contactList").innerHTML += containerContent;
    } catch (error) {
-       console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
+      console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
    }
 }
 
@@ -164,7 +164,7 @@ function renderEditContactCardInfo(i) {
          </div>
 
          <div class="edit-contact-formular">
-            <img src="${avatar}" class="avatar big-avatar" />
+             <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
             <form class="input-fields-edit-contact">
                <input id="edit-input-field-name" class="input-field-name edit-contact-form-input" placeholder="Name"
                   type="text" value="${contacts[i].name}"/>
@@ -191,12 +191,6 @@ function editSave(i) {
    contacts[i].name = name;  // Aktualisiert die Daten im contacts Array
    contacts[i].email = email;
    contacts[i].phone = phone;
-   closeEditPopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
+   closePopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
 }
-
-
-function closeEditPopUpByBtn() {
-   popUpBackground.innerHTML = '';
-} 
- // Dummy Funktion zum Schließen des Pop-Ups
