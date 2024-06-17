@@ -85,6 +85,7 @@ document.getElementById("assignedDiv").addEventListener("click", function () {
 
 function renderContacts() {
   let dropdown = document.getElementById("assignedDropdown");
+  let searchInput = document.getElementById("assignedInput").value.toLowerCase(); // Wert des Suchfelds
   dropdown.innerHTML = ""; // Bereinigen des Dropdown-Inhalts
 
   for (let i = 0; i < contacts.length; i++) {
@@ -93,19 +94,22 @@ function renderContacts() {
     const contactClass = isAssigned ? "assigned-to-contact marked" : "assigned-to-contact"; // Klasse basierend auf Zuweisungsstatus
     const imgSrc = isAssigned ? "./assets/img/checked_btn_white_svg.svg" : "./assets/img/check_btn.png";
 
-    // Erstellen des HTML-Strings für jeden Kontakt
-    dropdown.innerHTML += `
-      <div id="contact${contact.id}" class="${contactClass}" onclick="markContact(${contact.id}, ${i})">
-        <div class="contact-img-name">
-           <div class="two-letters-img" style="background-color: ${contact.color}; color: white;">
-            ${contact.first_two_letters}
+    // Überprüfen, ob der Kontaktname dem Suchkriterium entspricht
+    if (contact.name.toLowerCase().includes(searchInput)) {
+      // Erstellen des HTML-Strings für jeden Kontakt
+      dropdown.innerHTML += `
+        <div id="contact${contact.id}" class="${contactClass}" onclick="markContact(${contact.id}, ${i})">
+          <div class="contact-img-name">
+            <div class="two-letters-img" style="background-color: ${contact.color}; color: white;">
+              ${contact.first_two_letters}
+            </div>
+            <span>${contact.name}</span>
           </div>
-          <span>${contact.name}</span>
-        </div>
-        <img id="contactCheckBtn${contact.id}" class="check-btn-img" src="${imgSrc}" alt="" />
-      </div>`;
+          <img id="contactCheckBtn${contact.id}" class="check-btn-img" src="${imgSrc}" alt="" />
+        </div>`;
+    }
   }
-}
+}      
 
 function addContactToAssigned(i) {
   let contact = contacts[i];
