@@ -7,26 +7,26 @@ function groupAndDisplayContacts() {
       if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
       return 0;
 
-  });
+   });
    groupContacts(sortedContacts);
 }
 
-function groupContacts(sortedContacts){
-       const groupedContacts = {};
-       sortedContacts.forEach(contact => {
-           const firstLetter = contact.name[0].toUpperCase();
-           if (!groupedContacts[firstLetter]) {
-               groupedContacts[firstLetter] = [];
-           }
-           groupedContacts[firstLetter].push(contact);
-       });
-       let containerContent = '';
-       for (const letter in groupedContacts) {
-           containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
-           groupedContacts[letter].forEach(contact => {
-               let i = contacts.findIndex(c => c.id === contact.id);
-               let avatar = renderAvatar(i, contact.color);
-               containerContent += `
+function groupContacts(sortedContacts) {
+   const groupedContacts = {};
+   sortedContacts.forEach(contact => {
+      const firstLetter = contact.name[0].toUpperCase();
+      if (!groupedContacts[firstLetter]) {
+         groupedContacts[firstLetter] = [];
+      }
+      groupedContacts[firstLetter].push(contact);
+   });
+   let containerContent = '';
+   for (const letter in groupedContacts) {
+      containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
+      groupedContacts[letter].forEach(contact => {
+         let i = contacts.findIndex(c => c.id === contact.id);
+         let avatar = renderAvatar(i, contact.color);
+         containerContent += `
                    <div class="contact" onclick="renderContactCardInfo(${i})">
                        <div class="contactDetails">
                            <div class="img-contacts">
@@ -39,9 +39,9 @@ function groupContacts(sortedContacts){
                        </div>
                    </div>
                `;
-           });
-       }
-       document.getElementById("contactList").innerHTML = containerContent;
+      });
+   }
+   document.getElementById("contactList").innerHTML = containerContent;
 }
 
 function renderContact() {
@@ -179,4 +179,5 @@ function editSave(i) {
    contacts[i].phone = phone;
    closePopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
+   renderContactCardInfo(i);
 }
