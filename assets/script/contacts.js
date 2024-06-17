@@ -36,7 +36,7 @@ function groupContacts(sortedContacts){
                            </div>
                            <div class="contacts-content-list">
                                <span>${contact.name}</span>
-                               <a href="">Email: ${contact.email}</a>
+                               <div class="mailLink">${contact.email}</div>
                            </div>
                        </div>
                    </div>
