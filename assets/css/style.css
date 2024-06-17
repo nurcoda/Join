@@ -28,6 +28,10 @@ body {
    font-family: "Inter", sans-serif;
 }
 
+body::-webkit-scrollbar {
+   width: 0px;
+}
+
 /* HEADER-Template */
 
 header {
