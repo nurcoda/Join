@@ -56,10 +56,10 @@ function groupAndDisplayContacts() {
          }
 
          document.getElementById("contactList").innerHTML += containerContent;
-      } catch (error) {
-         console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
       }
-   };
+   } catch (error) {
+      console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
+   }
 }
 
 function renderContact() {
@@ -169,9 +169,6 @@ function renderEditContactCardInfo(i) {
 
          <div class="edit-contact-formular">
             <img src="${avatar}" class="avatar big-avatar" />
-            <!--  -->
-            <!-- Formular muss hier sein -->
-            <!-- das return false verhindern neuladen der seite, beim abschicken der Form -->
             <form class="input-fields-edit-contact">
                <input id="edit-input-field-name" class="input-field-name edit-contact-form-input" placeholder="Name"
                   type="text" value="${contacts[i].name}"/>
