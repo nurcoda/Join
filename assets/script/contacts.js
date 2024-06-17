@@ -1,4 +1,5 @@
 let Test = "./assets/script/testData.js";
+let selectedContactIndex = null;
 
 function groupAndDisplayContacts() {
 
@@ -34,7 +35,7 @@ function groupContacts(sortedContacts) {
                            </div>
                            <div class="contacts-content-list">
                                <span>${contact.name}</span>
-                               <a href="">Email: ${contact.email}</a>
+                               <div class="mailLink">${contact.email}</div>
                            </div>
                        </div>
                    </div>
@@ -42,6 +43,13 @@ function groupContacts(sortedContacts) {
       });
    }
    document.getElementById("contactList").innerHTML = containerContent;
+}
+function highlightContact(index) {
+   if (selectedContactIndex !== null) {
+      document.getElementById(`contact-${selectedContactIndex}`).classList.remove('highlight');
+   }
+   selectedContactIndex = index;
+   document.getElementById(`contact-${selectedContactIndex}`).classList.add('highlight');
 }
 
 function renderContact() {
