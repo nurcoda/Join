@@ -26,6 +26,7 @@ function groupAndDisplayContacts() {
 
        // Sortiertes und gruppiertes Contacts-Array anzeigen
        let containerContent = '';
+       
 
        for (const letter in groupedContacts) {
            // Buchstaben-Überschrift hinzufügen
@@ -51,7 +52,7 @@ function groupAndDisplayContacts() {
            });
        }
 
-       document.getElementById("contactList").innerHTML = containerContent;
+       document.getElementById("contactList").innerHTML += containerContent;
    } catch (error) {
        console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
    }
