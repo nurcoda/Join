@@ -4,39 +4,39 @@ let sortedContacts = [];
 
 function groupAndDisplayContacts() {
    try {
-       // Prüfen, ob contacts definiert ist und ein Array ist
-       if (!Array.isArray(contacts)) {
-           throw new Error('Die geladene Datenstruktur ist kein Array');
-       }
+      // Prüfen, ob contacts definiert ist und ein Array ist
+      if (!Array.isArray(contacts)) {
+         throw new Error('Die geladene Datenstruktur ist kein Array');
+      }
 
-       // Contacts-Array nach dem Feld "name" alphabetisch sortieren
-       const sortedContacts = contacts.sort((a, b) => {
-           return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
-       });
+      // Contacts-Array nach dem Feld "name" alphabetisch sortieren
+      const sortedContacts = contacts.sort((a, b) => {
+         return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+      });
 
-       // Kontakte nach dem ersten Buchstaben gruppieren
-       const groupedContacts = sortedContacts.reduce((groups, contact) => {
-           const firstLetter = contact.name[0].toUpperCase();
-           if (!groups[firstLetter]) {
-               groups[firstLetter] = [];
-           }
-           groups[firstLetter].push(contact);
-           return groups;
-       }, {});
+      // Kontakte nach dem ersten Buchstaben gruppieren
+      const groupedContacts = sortedContacts.reduce((groups, contact) => {
+         const firstLetter = contact.name[0].toUpperCase();
+         if (!groups[firstLetter]) {
+            groups[firstLetter] = [];
+         }
+         groups[firstLetter].push(contact);
+         return groups;
+      }, {});
 
-       // Sortiertes und gruppiertes Contacts-Array anzeigen
-       let containerContent = '';
-       
+      // Sortiertes und gruppiertes Contacts-Array anzeigen
+      let containerContent = '';
 
-       for (const letter in groupedContacts) {
-           // Buchstaben-Überschrift hinzufügen
-           containerContent += `<h2>${letter}</h2><hr>`;
 
-           groupedContacts[letter].forEach(contact => {
-               // Kontakt-Details hinzufügen
-               const i = contacts.findIndex(c => c.id === contact.id);
-               let avatar = renderAvatar(i, contact.color);
-               containerContent += `
+      for (const letter in groupedContacts) {
+         // Buchstaben-Überschrift hinzufügen
+         containerContent += `<h2>${letter}</h2><hr>`;
+
+         groupedContacts[letter].forEach(contact => {
+            // Kontakt-Details hinzufügen
+            const i = contacts.findIndex(c => c.id === contact.id);
+            let avatar = renderAvatar(i, contact.color);
+            containerContent += `
                    <div class="contact" onclick="renderContactCardInfo(${i})">
                        <div class="contactDetails">
                            <div class="img-contacts">
@@ -49,12 +49,12 @@ function groupAndDisplayContacts() {
                        </div>
                    </div>
                `;
-           });
-       }
+         });
+      }
 
-       document.getElementById("contactList").innerHTML += containerContent;
+      document.getElementById("contactList").innerHTML += containerContent;
    } catch (error) {
-       console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
+      console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
    }
 }
 
@@ -168,7 +168,7 @@ function renderEditContactCardInfo(i) {
             <!--  -->
             <!-- Formular muss hier sein -->
             <!-- das return false verhindern neuladen der seite, beim abschicken der Form -->
-            <form onsubmit="alert('Die Funktion gibts noch nicht :P'); return false" class="input-fields-edit-contact">
+            <form class="input-fields-edit-contact">
                <input id="edit-input-field-name" class="input-field-name edit-contact-form-input" placeholder="Name"
                   type="text" value="${contacts[i].name}"/>
                <br />
@@ -177,7 +177,7 @@ function renderEditContactCardInfo(i) {
                <input id="edit-input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
                   type="text"value="+${contacts[i].phone}"/>
                <div class="edit-contact-buttons-wrapper">
-                  <button class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn()">Delete</button>
+                  <button class="edit-delete-btn edit-contact-form-btn" onclick="deleteContact(${i})">Delete</button>
                   <button class="edit-create-contact-btn edit-contact-form-btn"
                      onclick="editSave(${i})">Save</button>
                </div>
@@ -201,5 +201,5 @@ function editSave(i) {
 
 function closeEditPopUpByBtn() {
    popUpBackground.innerHTML = '';
-} 
- // Dummy Funktion zum Schließen des Pop-Ups
+}
+// Dummy Funktion zum Schließen des Pop-Ups
