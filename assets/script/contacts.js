@@ -51,7 +51,7 @@ function groupAndDisplayContacts() {
                `;
            });
        }
-
+      
        document.getElementById("contactList").innerHTML += containerContent;
    } catch (error) {
        console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
