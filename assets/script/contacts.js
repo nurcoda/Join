@@ -49,14 +49,6 @@ function groupAndDisplayContacts() {
                        </div>
                    </div>
                `;
-            });
-         }
-
-         document.getElementById("contactList").innerHTML += containerContent;
-      }
-   } catch (error) {
-      console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
-   }
            });
        }
       
