@@ -27,35 +27,39 @@ function groupAndDisplayContacts() {
       // Sortiertes und gruppiertes Contacts-Array anzeigen
       let containerContent = '';
 
-
       for (const letter in groupedContacts) {
          // Buchstaben-Überschrift hinzufügen
-         containerContent += `<h2>${letter}</h2><hr>`;
+         containerContent += `<div class="contact-letter"><h2>${letter}</h2></div>`;
 
-         groupedContacts[letter].forEach(contact => {
-            // Kontakt-Details hinzufügen
-            const i = contacts.findIndex(c => c.id === contact.id);
-            let avatar = renderAvatar(i, contact.color);
-            containerContent += `
+         for (const letter in groupedContacts) {
+            // Buchstaben-Überschrift hinzufügen
+            containerContent += `<h2>${letter}</h2><hr>`;
+
+            groupedContacts[letter].forEach(contact => {
+               // Kontakt-Details hinzufügen
+               const i = contacts.findIndex(c => c.id === contact.id);
+               let avatar = renderAvatar(i, contact.color);
+               containerContent += `
                    <div class="contact" onclick="renderContactCardInfo(${i})">
                        <div class="contactDetails">
                            <div class="img-contacts">
-                               <div id="avatar${i}" class="avatar">${avatar}</div>
+                               <div id="avatar${i}" class="avatar" style="background-color: ${contact.color}">${avatar}</div>
                            </div>
                            <div class="contacts-content-list">
                                <span>${contact.name}</span>
-                               <a href="">Email: ${contact.email}</a>
+                               <a class="mailLink"href="">${contact.email}</a>
                            </div>
                        </div>
                    </div>
                `;
-         });
-      }
+            });
+         }
 
-      document.getElementById("contactList").innerHTML += containerContent;
-   } catch (error) {
-      console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
-   }
+         document.getElementById("contactList").innerHTML += containerContent;
+      } catch (error) {
+         console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
+      }
+   };
 }
 
 function renderContact() {
@@ -69,7 +73,7 @@ function renderContact() {
    groupAndDisplayContacts();
 }
 
-function renderAvatar(index, color) {
+function colorAvatar(i, color) {
    // Diese Funktion sollte das Avatar-Rendering übernehmen
    return `<div style="background-color: ${color}; width: 40px; height: 40px; border-radius: 50%;"></div>`;
 }
@@ -87,7 +91,7 @@ function renderContactCardInfo(i) {
    let avatar;
    avatar = renderAvatar(i, avatar);
    contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
-            <div class="avatar avatar-big">${avatar}</div>
+            <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
             <div>
                <div class="contact-card-name">${contacts[i].name}</div>
                <div class="edit-delete-container">
