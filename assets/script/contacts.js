@@ -175,8 +175,8 @@ function renderEditContactCardInfo(i) {
                   type="text"value="+${contacts[i].phone}"/>
                <div class="edit-contact-buttons-wrapper">
                   <div class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn() ; deleteContact(${i})">Delete</div>
-                  <button class="edit-create-contact-btn edit-contact-form-btn"
-                     onclick="editSave(${i})">Save</button>
+                  <div class="edit-create-contact-btn edit-contact-form-btn"
+                     onclick="editSave(${i})">Save</div>
                </div>
             </form>
          </div>
