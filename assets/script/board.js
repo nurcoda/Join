@@ -142,12 +142,141 @@ function checkIfColumnIsEmptyHTML() {
  * render the right task in the pop up
  */
 
-function renderEditTaskPopUp(id) {
+function renderTaskPopUp(id) {
    tasks.forEach((task, index) => {
       if (task.id == id) {
-         editTaskPopUpBackground.innerHTML = renderEditTaskPopUpHTML(index);
+         editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(index);
       }
    });
+}
+
+function formateDueDateEditPopUp(i) {
+   formattedDuDate = tasks[i].due_date;
+   formattedDuDate = formattedDuDate.split("/").reverse().join("-");
+   return formattedDuDate;
+}
+
+function renderEditTask(i) {
+   editTaskPopUpBackground.innerHTML = `
+     <div class="existing-task-popup-board" id="editTaskPopUp">
+               <img
+                  src="./assets/img/close_big_icon.png"
+                  alt=""
+                  class="close-popup-btn"
+                  id="closePopUpBtn"
+                  onclick="closePopUpOnClick()"
+               />
+               <!-- pop up content -->
+
+             <form action="" class="add-task-form edit-task-form">
+         <div class="add-task-left">
+
+          <label>Title</label>
+          <input class="title-input" type="text" value="${tasks[i].name}" required />
+
+          <label class="margin-top-16px">Description</label>
+          <textarea class="description-text" >${tasks[i].description}</textarea>
+  <label for="dueDate">Due date</label>
+          <input id="dueDate" class="date-input" type="date" value="${formateDueDateEditPopUp(i)}" required /> 
+        </div>
+   
+        <div class="add-task-right">
+
+ <label class="margin-top-16px">Assigned to</label>
+          <div id="assignedDiv" class="assigned-to-div" onclick="showAssignedDropdown(), renderContacts()">
+            <input id="assignedInput" type="text" class="assigned-input" placeholder="Select conntacts to asign" />
+            <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" class="dropdown-icon" alt="" />
+            <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" onclick="hideAssignedDropdown()" alt="" />
+          </div>
+          <div id="assignedContacts"></div>
+          <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none"></div>
+
+           <label class="margin-top-16px">Prio</label>
+          <div class="prio-buttons">
+           ${getPrioButton(i)}
+          </div>
+
+          <label class="margin-top-16px">Category</label>
+          <div id="categoryDiv" class="category-div">
+            <span id="categorySelection">Select task category</span>
+            <img id="categoryDropdownImg" class="dropdown-icon" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
+          </div>
+          <div id="categoryDropdown" class="d-none">
+            <span class="category-option" onclick="selectOption(1)">Technical task</span>
+            <span class="category-option" onclick="selectOption(2)">User story</span>
+          </div>
+
+          <label class="margin-top-16px">Subtasks</label>
+          <div id="subtasksDiv" class="subtasks-div" onclick="showSubtasksIcons()">
+            <input id="subtasksInput" min="1" type="text" placeholder="Add new subtask" />
+            <img id="subtasksPlusIcon" class="subtasks-icon" src="./assets/img/add_svg.svg" alt="" />
+            <div id="subtasksInputIcons" class="d-none">
+              <img src="./assets/img/addtask_close.svg" class="subtasks-icon" onclick="clearSubtasksInput()" alt="" />
+              <div class="subtasks-seperator"></div>
+              <img src="./assets/img/addtask_check.svg" class="subtasks-icon" onclick="addNewSubtask()" alt="" />
+            </div>
+          </div>
+          <div>
+            <ul id="subtasksList"></ul>
+          </div>
+        </div>
+      </form>
+      <div class="ok-btn-edit-task-wrapper">
+ <button class="ok-btn-edit-task">Ok<img src="./assets/img/checkmark_white.png" alt=""></button>
+ </div>
+               </div>
+               </div>
+   `;
+}
+
+// Edit-Task-Form-functions
+
+function setPrioButton(prio, i) {
+   changeButtonColorAndImg(prio, i);
+}
+
+function changeButtonColorAndImg(prio, i) {
+   tasks[i].priority = prio;
+   renderEditTask(i);
+}
+
+function getPrioButton(i) {
+   if (tasks[i].priority === "high") {
+      return `            
+      <button type="button" id="urgentButton" onclick="setPrioButton('urgent', ${i})" style="background-color: #FF3D00; color: white">
+              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent_white_svg.svg" alt="" />
+            </button>
+            <button type="button" id="mediumButton" onclick="setPrioButton('medium',${i})">
+              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_svg.svg" alt="" />
+            </button>
+            <button type="button" id="lowButton" onclick="setPrioButton('low',${i})">
+              Low <img id="lowButtonImg" src="./assets/img/prio_low_svg.svg" alt="" />
+            </button>`;
+   }
+   if (tasks[i].priority === "medium") {
+      return `            
+      <button type="button" id="urgentButton" onclick="setPrioButton('urgent',${i})" >
+              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent_svg.svg" alt="" />
+            </button>
+            <button type="button" id="mediumButton" onclick="setPrioButton('medium',${i})" style="background-color: #FFA800; color: white">
+              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_white_svg.svg" alt="" />
+            </button>
+            <button type="button" id="lowButton" onclick="setPrioButton('low',${i})">
+              Low <img id="lowButtonImg" src="./assets/img/prio_low_svg.svg" alt="" />
+            </button>`;
+   }
+   if (tasks[i].priority === "low") {
+      return `            
+      <button type="button" id="urgentButton" onclick="setPrioButton('urgent',${i})" >
+              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent.png" alt="" />
+            </button>
+            <button type="button" id="mediumButton" onclick="setPrioButton('medium',${i})">
+              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_svg.svg" alt="" />
+            </button>
+            <button type="button" id="lowButton" onclick="setPrioButton('low',${i})" style="background-color: #7AE229; color: white">
+              Low <img id="lowButtonImg" src="./assets/img/prio_low_white_svg.svg" alt="" />
+            </button>`;
+   }
 }
 
 function deleteTask(id) {
@@ -215,13 +344,17 @@ function closeAddTaskPopUp() {
 
 function openEditTaskPopUp(id) {
    editTaskPopUpBackground.classList.remove("d-none");
-   renderEditTaskPopUp(id);
+   renderTaskPopUp(id);
 }
 
 function closeEditTaskPopUp() {
    if (event.target === editTaskPopUpBackground || event.target === closePopUpBtn) {
       editTaskPopUpBackground.classList.add("d-none");
    }
+}
+
+function closePopUpOnClick() {
+   editTaskPopUpBackground.classList.add("d-none");
 }
 
 addTaskPopUpBackground.addEventListener("click", closeAddTaskPopUp);
@@ -253,7 +386,7 @@ function renderTasksIntoColumnsHTML(i) {
                   </div>`;
 }
 
-function renderEditTaskPopUpHTML(i) {
+function renderTaskPopUpHTML(i) {
    return `  
    <div class="existing-task-popup-board" id="editTaskPopUp">
                <img
@@ -261,7 +394,7 @@ function renderEditTaskPopUpHTML(i) {
                   alt=""
                   class="close-popup-btn"
                   id="closePopUpBtn"
-                  onclick="closeEditTaskPopUp()"
+                  onclick="closePopUpOnClick()"
                />
                <!-- pop up content -->
                <div class="category-user-story task-category">${tasks[i].category}</div>
@@ -269,8 +402,9 @@ function renderEditTaskPopUpHTML(i) {
                <div class="existing-task-popup-description">${tasks[i].description}</div>
                <div class="existing-task-popup-date">Due date: <span id="popUpDate">${tasks[i].due_date}</span></div>
                <div class="existing-task-popup-priority">
-                  Priority: <span id="popUpDate">${tasks[i].priority} <img src="./assets/img/prio_
-                  ${tasks[i].priority === "high" ? "urgent" : tasks[i].priority}.png" alt="" />
+                  Priority: <span id="popUpDate">${tasks[i].priority} <img src="./assets/img/prio_${
+      tasks[i].priority === "high" ? "urgent" : tasks[i].priority
+   }.png" alt="" />
                </span>
                </div>
                <div class="existing-task-popup-user-wrapper">
@@ -286,7 +420,7 @@ function renderEditTaskPopUpHTML(i) {
                      <div class="popup-delete-icon"></div>
                      Delete
                   </div>
-                  <div class="popup-edit-btn popup-btn">
+                  <div class="popup-edit-btn popup-btn" onclick="renderEditTask(${i})">
                      <div class="popup-edit-icon"></div>
                      Edit
                   </div>

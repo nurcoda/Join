@@ -104,7 +104,7 @@ button {
 
 .assigned-dropdown {
   width: 440px;
-  height: 200px;
+  height: 168px;
   background-color: white;
   position: absolute;
   top: 594px;
@@ -113,7 +113,8 @@ button {
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   overflow-x: hidden;
-  padding-top: 10px;
+  padding-top: 14px;
+  padding-bottom: 4px;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -170,6 +171,7 @@ button {
 
 #assignedContacts {
   width: 440px;
+  height: 120px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -198,6 +200,7 @@ button {
 
 .marked {
   background-color: #2a3647; /* Dunkle Hintergrundfarbe */
+  color: white;
 }
 
 .check-btn-img {
@@ -344,9 +347,9 @@ button {
 .clear-and-task-button {
   display: flex;
   gap: 16px;
-  justify-content: end;
   margin-top: 16px;
   margin-bottom: 16px;
+  justify-content: end;
 }
 
 .clear-button {
@@ -396,4 +399,12 @@ button {
 
 .change-color:hover {
   stroke: #29abe2;
+}
+
+.required-text {
+  margin-top: 54px;
+}
+
+.asterisk {
+  color: #FF8190;
 }

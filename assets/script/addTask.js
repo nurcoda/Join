@@ -1,3 +1,5 @@
+let assignedContacts = [];
+
 function setPrioButton(prio) {
   changeButtonColorAndImg(prio);
 }
@@ -83,29 +85,65 @@ document.getElementById("assignedDiv").addEventListener("click", function () {
 
 function renderContacts() {
   let dropdown = document.getElementById("assignedDropdown");
-  dropdown.innerHTML = "";
+  let searchInput = document.getElementById("assignedInput").value.toLowerCase(); // Wert des Suchfelds
+  dropdown.innerHTML = ""; // Bereinigen des Dropdown-Inhalts
+
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i];
-    dropdown.innerHTML += `
-      <div id="contact${contact.id}" class="assigned-to-contact" onclick="markContact(${contact.id}, ${i})">
-        <div class="contact-img-name">
-          <div class="two-letters-img" style="background-color: ${contact.color}; color: white">
-            ${contact.first_two_letters}
+    const isAssigned = assignedContacts.includes(contact); // Prüfen, ob der Kontakt markiert ist
+    const contactClass = isAssigned ? "assigned-to-contact marked" : "assigned-to-contact"; // Klasse basierend auf Zuweisungsstatus
+    const imgSrc = isAssigned ? "./assets/img/checked_btn_white_svg.svg" : "./assets/img/check_btn.png";
+
+    // Überprüfen, ob der Kontaktname dem Suchkriterium entspricht
+    if (contact.name.toLowerCase().includes(searchInput)) {
+      // Erstellen des HTML-Strings für jeden Kontakt
+      dropdown.innerHTML += `
+        <div id="contact${contact.id}" class="${contactClass}" onclick="markContact(${contact.id}, ${i})">
+          <div class="contact-img-name">
+            <div class="two-letters-img" style="background-color: ${contact.color}; color: white;">
+              ${contact.first_two_letters}
+            </div>
+            <span>${contact.name}</span>
           </div>
-          <span>${contact.name}</span>
-        </div>
-        <img id="contactCheckBtn${contact.id}" class="check-btn-img" src="./assets/img/check_btn.png" alt="" />
-      </div>`;
+          <img id="contactCheckBtn${contact.id}" class="check-btn-img" src="${imgSrc}" alt="" />
+        </div>`;
+    }
   }
-}
+}      
 
 function addContactToAssigned(i) {
   let contact = contacts[i];
+  assignedContacts.push(contact);
+  renderAssignedContacts();
+}
+
+function removeContactFromAssigned(i) {
+  // Kontakt aus dem ursprünglichen Array 'contacts' holen
+  let contact = contacts[i];
+
+  // Index des Kontakts im 'assignedContacts' Array finden
+  let index = assignedContacts.findIndex((c) => c.id === contact.id);
+
+  // Prüfen, ob der Kontakt gefunden wurde, und nur dann entfernen
+  if (index !== -1) {
+    assignedContacts.splice(index, 1);
+  }
+
+  // Aktualisieren der Anzeige
+  renderAssignedContacts();
+}
+
+function renderAssignedContacts() {
   let content = document.getElementById("assignedContacts");
-  content.innerHTML += `
+  content.innerHTML = "";
+  for (let i = 0; i < assignedContacts.length; i++) {
+    const contact = assignedContacts[i];
+    content.innerHTML += `
     <div class="assigned-contacts-img" style="background-color: ${contact.color}; color: white">
-      ${contact.first_two_letters}
-    </div>`;
+    ${contact.first_two_letters}
+  </div>
+    `;
+  }
 }
 
 function markContact(contactId, i) {
@@ -125,6 +163,7 @@ function markContact(contactId, i) {
     contact.style.color = "black";
     contact.style.backgroundColor = "white";
     checkbox.src = "./assets/img/check_btn.png";
+    removeContactFromAssigned(i);
   }
 }
 

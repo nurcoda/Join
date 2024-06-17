@@ -150,7 +150,7 @@ function renderEditContactCardInfo(i) {
          </div>
 
          <div class="edit-contact-formular">
-            <img src="${avatar}" class="avatar big-avatar" />
+             <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
             <form class="input-fields-edit-contact">
                <input id="edit-input-field-name" class="input-field-name edit-contact-form-input" placeholder="Name"
                   type="text" value="${contacts[i].name}"/>
@@ -160,7 +160,7 @@ function renderEditContactCardInfo(i) {
                <input id="edit-input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
                   type="text"value="+${contacts[i].phone}"/>
                <div class="edit-contact-buttons-wrapper">
-                  <button class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn()">Delete</button>
+                  <div class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn() ; deleteContact(${i})">Delete</div>
                   <button class="edit-create-contact-btn edit-contact-form-btn"
                      onclick="editSave(${i})">Save</button>
                </div>
@@ -177,12 +177,6 @@ function editSave(i) {
    contacts[i].name = name;  // Aktualisiert die Daten im contacts Array
    contacts[i].email = email;
    contacts[i].phone = phone;
-   closeEditPopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
+   closePopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
 }
-
-
-function closeEditPopUpByBtn() {
-   popUpBackground.innerHTML = '';
-} 
- // Dummy Funktion zum Schließen des Pop-Ups
