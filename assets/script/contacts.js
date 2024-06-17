@@ -80,6 +80,10 @@ function renderAvatar(i, avatar) {
 function renderContactCardInfo(i) {
    let avatar;
    avatar = renderAvatar(i, avatar);
+   let phone = contacts[i].phone;
+   if (!phone.startsWith('+')) {
+      phone = '+' + phone;
+   }
    contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
             <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
             <div>
@@ -166,7 +170,7 @@ function renderEditContactCardInfo(i) {
                <input id="edit-input-field-mail" class="input-field-mail edit-contact-form-input" placeholder="Email"
                   type="text" value="${contacts[i].email}"  /><br />
                <input id="edit-input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
-                  type="text"value="${contacts[i].phone}"/>
+                  type="text"value="+${contacts[i].phone}"/>
                <div class="edit-contact-buttons-wrapper">
                   <div class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn() ; deleteContact(${i})">Delete</div>
                   <div class="edit-create-contact-btn edit-contact-form-btn"
@@ -182,6 +186,9 @@ function editSave(i) {
    let name = document.getElementById('edit-input-field-name').value;  // Liest die geänderten Werte aus den Eingabefeldern
    let email = document.getElementById('edit-input-field-mail').value;
    let phone = document.getElementById('edit-input-field-phone').value;
+   if (phone.startsWith('+')) {
+      phone = phone.substring(1);
+   }
    contacts[i].name = name;  // Aktualisiert die Daten im contacts Array
    contacts[i].email = email;
    contacts[i].phone = phone;
