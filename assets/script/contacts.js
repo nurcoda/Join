@@ -2,64 +2,77 @@ let Test = "./assets/script/testData.js";
 
 let sortedContacts = [];
 
-
-function sortArray() {
-
-}
-function sortAndDisplayContacts() {
+function groupAndDisplayContacts() {
    try {
-      // Prüfen, ob contacts definiert ist und ein Array ist
-      if (!Array.isArray(contacts)) {
-         throw new Error('Die geladene Datenstruktur ist kein Array');
-      }
+       // Prüfen, ob contacts definiert ist und ein Array ist
+       if (!Array.isArray(contacts)) {
+           throw new Error('Die geladene Datenstruktur ist kein Array');
+       }
 
-      // Contacts-Array nach dem Feld "name" alphabetisch sortieren
-      const sortedContacts = contacts.sort((a, b) => {
-         return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
-      });
+       // Contacts-Array nach dem Feld "name" alphabetisch sortieren
+       const sortedContacts = contacts.sort((a, b) => {
+           return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
+       });
 
-      // Sortiertes Contacts-Array anzeigen
-      console.log(JSON.stringify(sortedContacts, null, 2));
+       // Kontakte nach dem ersten Buchstaben gruppieren
+       const groupedContacts = sortedContacts.reduce((groups, contact) => {
+           const firstLetter = contact.name[0].toUpperCase();
+           if (!groups[firstLetter]) {
+               groups[firstLetter] = [];
+           }
+           groups[firstLetter].push(contact);
+           return groups;
+       }, {});
+
+       // Sortiertes und gruppiertes Contacts-Array anzeigen
+       let containerContent = '';
+
+       for (const letter in groupedContacts) {
+           // Buchstaben-Überschrift hinzufügen
+           containerContent += `<h2>${letter}</h2><hr>`;
+
+           groupedContacts[letter].forEach(contact => {
+               // Kontakt-Details hinzufügen
+               const i = contacts.findIndex(c => c.id === contact.id);
+               let avatar = renderAvatar(i, contact.color);
+               containerContent += `
+                   <div class="contact" onclick="renderContactCardInfo(${i})">
+                       <div class="contactDetails">
+                           <div class="img-contacts">
+                               <div id="avatar${i}" class="avatar">${avatar}</div>
+                           </div>
+                           <div class="contacts-content-list">
+                               <span>${contact.name}</span>
+                               <a href="">Email: ${contact.email}</a>
+                           </div>
+                       </div>
+                   </div>
+               `;
+           });
+       }
+
+       document.getElementById("contactList").innerHTML = containerContent;
    } catch (error) {
-      console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
+       console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
    }
 }
+
 function renderContact() {
-
-   document.getElementById("contactList").innerHTML = "";
-   document.getElementById("contactList").innerHTML += `
-          <div class="buttonWrapper">
-               <button class="addContactBtn" onclick="openPopUp()">
-                  Add new Conatct <img src="./assets/img/person_add_icon.png" alt="" />
-               </button>
-            </div>
-         ${renderEveryContact()}
-    `;
+   document.getElementById("contactList").innerHTML = `
+       <div class="buttonWrapper">
+           <button class="addContactBtn" onclick="openPopUp()">
+               Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
+           </button>
+       </div>
+   `;
+   groupAndDisplayContacts();
 }
 
-function renderEveryContact() {
-   let everyContactTemplate = "";
-   sortAndDisplayContacts();
-   for (let i = 0; i < contacts.length; i++) {
-
-      let avatar;
-      avatar = renderAvatar(i, avatar);
-      everyContactTemplate += `
-          <div class="contact" onclick="renderContactCardInfo(${i})">
-           <div class="contactDetails">
-           <div class="img-contacts">
-              <div id="avatar${i}" class="avatar">${avatar}</div>
-           </div>
-           <div class="contacts-content-list">
-              <span>${contacts[i]["name"]}</span>
-              <a href="">Email: ${contacts[i]["email"]}</a>
-           </div>
-            </div>
-        </div>
-      `;
-   }
-   return everyContactTemplate;
+function renderAvatar(index, color) {
+   // Diese Funktion sollte das Avatar-Rendering übernehmen
+   return `<div style="background-color: ${color}; width: 40px; height: 40px; border-radius: 50%;"></div>`;
 }
+
 
 function renderAvatar(i, avatar) {
    const username = contacts[i]["name"];
@@ -109,7 +122,7 @@ function openPopUp() {
    popUpBackground.classList.remove("d-none");
 }
 
-function closePopUp(event) {
+function closePopUp() {
    if (event.target === closePopUpBtn) {
       popUpBackground.classList.add("d-none");
    }
@@ -163,7 +176,7 @@ function renderEditContactCardInfo(i) {
                <input id="edit-input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
                   type="text"value="+${contacts[i].phone}"/>
                <div class="edit-contact-buttons-wrapper">
-                  <button class="edit-delete-btn edit-contact-form-btn" onclick="deleteContact(${i})">Delete</button>
+                  <button class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn()">Delete</button>
                   <button class="edit-create-contact-btn edit-contact-form-btn"
                      onclick="editSave(${i})">Save</button>
                </div>
@@ -184,7 +197,8 @@ function editSave(i) {
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
 }
 
+
 function closeEditPopUpByBtn() {
    popUpBackground.innerHTML = '';
-}  // Dummy Funktion zum Schließen des Pop-Ups
-
+} 
+ // Dummy Funktion zum Schließen des Pop-Ups
