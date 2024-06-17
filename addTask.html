@@ -28,7 +28,7 @@
 
           <label class="margin-top-16px">Assigned to</label>
           <div id="assignedDiv" class="assigned-to-div" onclick="showAssignedDropdown(), renderContacts()">
-            <input id="assignedInput" type="text" class="assigned-input" placeholder="Select conntacts to asign" />
+            <input id="assignedInput" type="text" class="assigned-input" onkeyup="renderContacts()" placeholder="Select conntacts to asign" />
             <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" class="dropdown-icon" alt="" />
             <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" onclick="hideAssignedDropdown()" alt="" />
           </div>
@@ -40,7 +40,6 @@
         <div class="add-task-right">
           <label for="dueDate">Due date<span class="asterisk">*</span></label>
           <input id="dueDate" class="date-input" type="date" required />
-
           <label class="margin-top-16px">Prio</label>
           <div class="prio-buttons">
             <button type="button" id="urgentButton" onclick="setPrioButton('urgent')">

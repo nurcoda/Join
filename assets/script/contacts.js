@@ -1,42 +1,32 @@
 let Test = "./assets/script/testData.js";
 
-let sortedContacts = [];
-
 function groupAndDisplayContacts() {
-   try {
-      // Prüfen, ob contacts definiert ist und ein Array ist
-      if (!Array.isArray(contacts)) {
-         throw new Error('Die geladene Datenstruktur ist kein Array');
-      }
 
-      // Contacts-Array nach dem Feld "name" alphabetisch sortieren
-      const sortedContacts = contacts.sort((a, b) => {
-         return a.name.localeCompare(b.name, 'de', { sensitivity: 'base' });
-      });
+   const sortedContacts = contacts.sort((a, b) => {
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+      return 0;
 
-      // Kontakte nach dem ersten Buchstaben gruppieren
-      const groupedContacts = sortedContacts.reduce((groups, contact) => {
-         const firstLetter = contact.name[0].toUpperCase();
-         if (!groups[firstLetter]) {
-            groups[firstLetter] = [];
-         }
-         groups[firstLetter].push(contact);
-         return groups;
-      }, {});
+  });
+   groupContacts(sortedContacts);
+}
 
-      // Sortiertes und gruppiertes Contacts-Array anzeigen
-      let containerContent = '';
-
-
-      for (const letter in groupedContacts) {
-         // Buchstaben-Überschrift hinzufügen
-         containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
-
-         groupedContacts[letter].forEach(contact => {
-            // Kontakt-Details hinzufügen
-            const i = contacts.findIndex(c => c.id === contact.id);
-            let avatar = renderAvatar(i, contact.color);
-            containerContent += `
+function groupContacts(sortedContacts){
+       const groupedContacts = {};
+       sortedContacts.forEach(contact => {
+           const firstLetter = contact.name[0].toUpperCase();
+           if (!groupedContacts[firstLetter]) {
+               groupedContacts[firstLetter] = [];
+           }
+           groupedContacts[firstLetter].push(contact);
+       });
+       let containerContent = '';
+       for (const letter in groupedContacts) {
+           containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
+           groupedContacts[letter].forEach(contact => {
+               let i = contacts.findIndex(c => c.id === contact.id);
+               let avatar = renderAvatar(i, contact.color);
+               containerContent += `
                    <div class="contact" onclick="renderContactCardInfo(${i})">
                        <div class="contactDetails">
                            <div class="img-contacts">
@@ -44,18 +34,14 @@ function groupAndDisplayContacts() {
                            </div>
                            <div class="contacts-content-list">
                                <span>${contact.name}</span>
-                               <a class="mailLink"href="">${contact.email}</a>
+                               <a href="">Email: ${contact.email}</a>
                            </div>
                        </div>
                    </div>
                `;
-         });
-      }
-
-      document.getElementById("contactList").innerHTML += containerContent;
-   } catch (error) {
-      console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
-   }
+           });
+       }
+       document.getElementById("contactList").innerHTML = containerContent;
 }
 
 function renderContact() {
