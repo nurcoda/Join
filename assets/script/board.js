@@ -93,6 +93,7 @@ function renderAssignedUserToHTML(i) {
    });
    return assignedUserTemplate;
 }
+
 function getColorAssignedUser(name) {
    let assignedUser = contacts.find((contact) => contact.name.toLowerCase().includes(name.toLowerCase()));
    return assignedUser.color;
@@ -191,7 +192,9 @@ function renderEditTask(i) {
                        <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" class="dropdown-icon" alt="" />
                        <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" onclick="hideAssignedDropdown()" alt="" />
                    </div>
-                   <div id="assignedContacts"></div>
+                   <div id="assignedContacts">
+                   ${renderAssignedContactsPopUp(i)}
+                   </div>
                    <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none"></div>
                    
                    <label class="margin-top-16px">Subtasks</label>
@@ -229,6 +232,61 @@ function getEditedTask(i) {
 
    editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(i);
    renderTasksIntoColumns();
+}
+
+// Edit-Task-Form-functions ASSIGNED USER
+
+function showAssignedDropdown() {
+   document.getElementById("assignedDropdown").classList.remove("d-none");
+   showOpenedDropdownIcon();
+}
+
+function renderAssignedContactsPopUp(i) {
+   let assignedUser = "";
+   tasks[i].assigned_user.forEach((user) => {
+      let assignedUserColor = getColorAssignedUser(user.name);
+      assignedUser += `
+      <div class="assigned-contacts-img" style="background-color: ${assignedUserColor}; color:white;">${user.first_two_letters}</div>
+      `;
+   });
+   return assignedUser;
+}
+
+function hideAssignedDropdown() {
+   event.stopPropagation();
+   document.getElementById("assignedDropdown").classList.add("d-none");
+   hideOpenedDropdownIcon();
+}
+
+function showOpenedDropdownIcon() {
+   document.getElementById("dropdown1").classList.add("d-none");
+   document.getElementById("dropdown2").classList.remove("d-none");
+}
+
+function hideOpenedDropdownIcon() {
+   document.getElementById("dropdown2").classList.add("d-none");
+   document.getElementById("dropdown1").classList.remove("d-none");
+}
+
+// document.getElementById("assignedDiv").addEventListener("click", function () {
+//    document.getElementById("assignedInput").focus(); // Setzt den Fokus auf das Input-Feld
+// });
+
+function renderContacts() {
+   let dropdown = document.getElementById("assignedDropdown");
+   for (let i = 0; i < contacts.length; i++) {
+      let contact = contacts[i];
+      dropdown.innerHTML += `
+      <div id="contact${contact.id}" class="" onclick="markContact(${contact.id}, ${i})">
+        <div class="contact-img-name">
+          <div class="two-letters-img" style="background-color: ${contact.color}; color: white;">
+            ${contact.first_two_letters}
+          </div>
+          <span>${contact.name}</span>
+        </div>
+    
+      </div>`;
+   }
 }
 
 // Edit-Task-Form-functions
