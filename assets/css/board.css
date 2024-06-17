@@ -324,7 +324,7 @@
 
 .existing-task-popup-board {
    height: 80%;
-   /* width: 50%; */
+   width: 30%;
    background-color: white;
    border-radius: 20px;
    display: flex;
@@ -474,19 +474,43 @@
 
 .edit-task-form input {
    font-size: 18px;
+   width: 90%;
 }
 
 .date-input {
    font-family: "Inter", sans-serif;
 }
 
+.prio-buttons {
+   width: 95%;
+}
+
 .prio-buttons button {
    font-size: 18px;
+   width: 30%;
 }
 
 .description-text {
    font-family: "Inter", sans-serif;
    font-size: 20px;
+   width: 90%;
+}
+
+.assigned-to-div {
+   width: 93%;
+}
+
+.category-div {
+   width: 90%;
+}
+
+.subtasks-div {
+   width: 93%;
+}
+
+#assignedContacts {
+   height: auto;
+   width: 90% !important;
 }
 
 .ok-btn-edit-task-wrapper {
@@ -497,16 +521,24 @@
 
 .ok-btn-edit-task {
    background-color: #2a3647;
+   position: absolute;
+   bottom: 5%;
+   right: 5%;
    color: white;
    font-size: 20px;
    border-radius: 10px;
-   padding: 1.5% 2%;
-   width: 20%;
+   padding: 1.5% 4%;
    display: flex;
    align-items: center;
    gap: 8px;
    justify-content: center;
    border: none;
+   transition: all 150ms ease-in-out;
+}
+
+.ok-btn-edit-task:hover {
+   background-color: #29abe2;
+   cursor: pointer;
 }
 
 /* RESPONSIVE */
