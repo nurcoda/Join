@@ -1,4 +1,5 @@
 let assignedContacts = [];
+subtasks = [];
 
 function setPrioButton(prio) {
   changeButtonColorAndImg(prio);
@@ -46,9 +47,8 @@ function clearSubtasksInput() {
 
 function addNewSubtask() {
   let input = document.getElementById("subtasksInput").value;
-  let subtasksList = document.getElementById("subtasksList");
-  // subtasks.push(input);
-  subtasksList.innerHTML += `<li>${input}</li>`;
+  subtasks.push(input);
+  renderSubtasks();
   clearSubtasksInput();
 }
 
@@ -56,7 +56,61 @@ document.getElementById("subtasksDiv").addEventListener("click", function () {
   document.getElementById("subtasksInput").focus(); // Setzt den Fokus auf das Input-Feld
 });
 
-// assigned to
+function renderSubtasks() {
+  let subtasksList = document.getElementById("subtasksList");
+  subtasksList.innerHTML = "";
+  for (let i = 0; i < subtasks.length; i++) {
+    const subtask = subtasks[i];
+    subtasksList.innerHTML += `<div id="subtask${i}">
+    <div class="subtask-div" onmouseover="showEditIcons(event, ${i})" onmouseout="hideEditIcons(${i})"><p>• ${subtask}</p>
+  <div id="subtask${i}Icons" class="edit-subtask-icons d-none">
+  <img onclick="editSubtask(${i})" src="./assets/img/edit_pen_icon.png" alt="">
+  <div class="subtasks-seperator"></div>
+  <img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt="">
+  </div>
+  </div>`;
+  }
+}
+
+function showEditIcons(event, i) {
+  let DivElement = event.target;
+  let icons = document.getElementById(`subtask${i}Icons`);
+  icons.classList.remove("d-none");
+}
+
+function hideEditIcons(i) {
+  let icons = document.getElementById(`subtask${i}Icons`);
+  icons.classList.add("d-none");
+}
+
+function editSubtask(i) {
+  let subtask = document.getElementById(`subtask${i}`);
+  subtask.innerHTML = `
+  <div class="edit-subtask-div">
+    <input id="onEditSubtaskInput${i}" class="edit-subtask-input">
+  <div class="on-edit-subtask-icons">
+    <img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt="">
+    <div class="subtasks-seperator"></div>
+    <img onclick="saveEditedSubtask(${i})" src="./assets/img/checkmark.png" alt="">
+  </div>`;
+  subtask.style.padding = "2px 0px 2px 0px";
+  subtask.style.width = "440px";
+  input = document.getElementById(`onEditSubtaskInput${i}`);
+  input.value = subtasks[i];
+}
+
+function saveEditedSubtask(i) {
+  input = document.getElementById(`onEditSubtaskInput${i}`);
+  subtasks.splice(i, 1, input.value);
+  renderSubtasks();
+}
+
+function deleteSubtask(i) {
+  subtasks.splice(i, 1);
+  renderSubtasks();
+}
+
+// function renderEditSubtask() {
 
 function showAssignedDropdown() {
   document.getElementById("assignedDropdown").classList.remove("d-none");
@@ -109,7 +163,7 @@ function renderContacts() {
         </div>`;
     }
   }
-}      
+}
 
 function addContactToAssigned(i) {
   let contact = contacts[i];
