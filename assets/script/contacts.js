@@ -49,6 +49,14 @@ function groupAndDisplayContacts() {
                        </div>
                    </div>
                `;
+            });
+         }
+
+         document.getElementById("contactList").innerHTML += containerContent;
+      }
+   } catch (error) {
+      console.error('Fehler beim Verarbeiten der JSON-Daten:', error);
+   }
            });
        }
       
@@ -156,7 +164,7 @@ function renderEditContactCardInfo(i) {
    let avatar;
    avatar = renderAvatar(i, avatar);
    popUpBackground.innerHTML = `<div class="edit-contact-pop-up" id="editContentPopUp">
-         <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closeEditPopUpBtn" />
+         <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
          <div class="popup-logo-headline-wrapper">
             <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
             <div class="edit-popup-headline">Edit contact</div>
@@ -165,10 +173,7 @@ function renderEditContactCardInfo(i) {
 
          <div class="edit-contact-formular">
             <img src="${avatar}" class="avatar big-avatar" />
-            <!--  -->
-            <!-- Formular muss hier sein -->
-            <!-- das return false verhindern neuladen der seite, beim abschicken der Form -->
-            <form onsubmit="alert('Die Funktion gibts noch nicht :P'); return false" class="input-fields-edit-contact">
+            <form class="input-fields-edit-contact">
                <input id="edit-input-field-name" class="input-field-name edit-contact-form-input" placeholder="Name"
                   type="text" value="${contacts[i].name}"/>
                <br />
@@ -194,7 +199,7 @@ function editSave(i) {
    contacts[i].name = name;  // Aktualisiert die Daten im contacts Array
    contacts[i].email = email;
    contacts[i].phone = phone;
-   closePopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
+   closeEditPopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
 }
 
