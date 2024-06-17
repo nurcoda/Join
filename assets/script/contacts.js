@@ -160,7 +160,7 @@ function renderEditContactCardInfo(i) {
    let avatar;
    avatar = renderAvatar(i, avatar);
    popUpBackground.innerHTML = `<div class="edit-contact-pop-up" id="editContentPopUp">
-         <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closeEditPopUpBtn" />
+         <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
          <div class="popup-logo-headline-wrapper">
             <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
             <div class="edit-popup-headline">Edit contact</div>
@@ -195,7 +195,7 @@ function editSave(i) {
    contacts[i].name = name;  // Aktualisiert die Daten im contacts Array
    contacts[i].email = email;
    contacts[i].phone = phone;
-   closePopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
+   closeEditPopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
 }
 
