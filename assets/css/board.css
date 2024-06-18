@@ -542,6 +542,10 @@
    cursor: pointer;
 }
 
+.assigned-to-contact {
+   width: unset;
+}
+
 .ok-btn-edit-task-wrapper {
    display: flex;
    width: 100%;
