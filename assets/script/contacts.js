@@ -28,8 +28,8 @@ function groupContacts(sortedContacts){
            let avatar = renderAvatar(i, contact.color);
             const highlightClass = (i === selectedContactIndex) ? 'highlight' : '';
            containerContent += `
-               <div class="contact ${highlightClass}" id="contact-${i}" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
-                   <div class="contactDetails">
+               <div class="contact ${highlightClass}" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
+                   <div id="contact-${i}" class="contactDetails">
                        <div class="img-contacts">
                            <div id="avatar${i}" class="avatar" style="background-color: ${contact.color}">${avatar}</div>
                        </div>
