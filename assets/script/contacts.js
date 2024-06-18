@@ -169,11 +169,11 @@ function renderEditContactCardInfo(i) {
                   type="text" value="${contacts[i].name}"/>
                <br />
                <input id="edit-input-field-mail" class="input-field-mail edit-contact-form-input" placeholder="Email"
-                  type="text" value="${contacts[i].email}"  /><br />
+                  type="e-mail" value="${contacts[i].email}"  /><br />
                <input id="edit-input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
-                  type="text"value="+${contacts[i].phone}"/>
+                  type="tel" value="+${contacts[i].phone}"/>
                <div class="edit-contact-buttons-wrapper">
-                  <div class="edit-delete-btn edit-contact-form-btn" onclick="closePopUpByBtn() ; deleteContact(${i})">Delete</div>
+                  <div class="edit-delete-btn edit-contact-form-btn-delete" onclick="closePopUpByBtn() ; deleteContact(${i})">Delete</div>
                   <div class="edit-create-contact-btn edit-contact-form-btn"
                      onclick="editSave(${i})">Save</div>
                </div>
