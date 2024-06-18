@@ -11,39 +11,40 @@ function groupAndDisplayContacts() {
    });
    groupContacts(sortedContacts);
 }
-
-function groupContacts(sortedContacts) {
+function groupContacts(sortedContacts){
    const groupedContacts = {};
    sortedContacts.forEach(contact => {
-      const firstLetter = contact.name[0].toUpperCase();
-      if (!groupedContacts[firstLetter]) {
-         groupedContacts[firstLetter] = [];
-      }
-      groupedContacts[firstLetter].push(contact);
+       const firstLetter = contact.name[0].toUpperCase();
+       if (!groupedContacts[firstLetter]) {
+           groupedContacts[firstLetter] = [];
+       }
+       groupedContacts[firstLetter].push(contact);
    });
    let containerContent = '';
    for (const letter in groupedContacts) {
-      containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
-      groupedContacts[letter].forEach(contact => {
-         let i = contacts.findIndex(c => c.id === contact.id);
-         let avatar = renderAvatar(i, contact.color);
-         containerContent += `
-                   <div class="contact" onclick="renderContactCardInfo(${i})">
-                       <div class="contactDetails">
-                           <div class="img-contacts">
-                               <div id="avatar${i}" class="avatar" style="background-color: ${contact.color}">${avatar}</div>
-                           </div>
-                           <div class="contacts-content-list">
-                               <span>${contact.name}</span>
-                               <div class="mailLink">${contact.email}</div>
-                           </div>
+       containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
+       groupedContacts[letter].forEach(contact => {
+           let i = contacts.findIndex(c => c.id === contact.id);
+           let avatar = renderAvatar(i, contact.color);
+            const highlightClass = (i === selectedContactIndex) ? 'highlight' : '';
+           containerContent += `
+               <div class="contact ${highlightClass}" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
+                   <div id="contact-${i}" class="contactDetails">
+                       <div class="img-contacts">
+                           <div id="avatar${i}" class="avatar" style="background-color: ${contact.color}">${avatar}</div>
+                       </div>
+                       <div class="contacts-content-list">
+                           <span>${contact.name}</span>
+                           <div class="mailLink">${contact.email}</div>
                        </div>
                    </div>
-               `;
-      });
+               </div>
+           `;
+       });
    }
    document.getElementById("contactList").innerHTML = containerContent;
 }
+
 function highlightContact(index) {
    if (selectedContactIndex !== null) {
       document.getElementById(`contact-${selectedContactIndex}`).classList.remove('highlight');
