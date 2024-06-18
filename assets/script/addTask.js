@@ -142,6 +142,9 @@ function renderContacts() {
   let searchInput = document.getElementById("assignedInput").value.toLowerCase(); // Wert des Suchfelds
   dropdown.innerHTML = ""; // Bereinigen des Dropdown-Inhalts
 
+  // Sortieren der Kontakte alphabetisch nach Namen
+  const sortedContacts = contacts.sort((a, b) => a.name.localeCompare(b.name));
+
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i];
     const isAssigned = assignedContacts.includes(contact); // Prüfen, ob der Kontakt markiert ist

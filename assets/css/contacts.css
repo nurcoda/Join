@@ -110,12 +110,12 @@
    background-color: #eeeeee;
 }
 
-.highlight{
+.highlight {
    background-color: #293647;
    color: white;
 }
 
-.highlight:hover{
+.highlight:hover {
    background-color: #293647;
    color: white;
 }
@@ -569,6 +569,16 @@
    background-position: 90% 50%;
    padding: 16px;
    padding-right: 40px;
+   font-size: 20px;
+   transition: all 100ms ease-in;
+   cursor: pointer;
+}
+
+.edit-contact-form-btn-delete {
+   border-radius: 12px;
+   background-repeat: no-repeat;
+   background-position: 90% 50%;
+   padding: 16px;
    font-size: 20px;
    transition: all 100ms ease-in;
    cursor: pointer;
