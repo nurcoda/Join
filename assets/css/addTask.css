@@ -209,14 +209,14 @@ button {
 
 .subtasks-div {
   background-color: white;
-  width: 436px;
+  width: 430px;
   height: 48px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-right: 12px;
+  padding-right: 10px;
   cursor: pointer;
 }
 
@@ -267,7 +267,6 @@ button {
   gap: 8px;
 }
 
-
 .subtasks-scrollbar::-webkit-scrollbar {
   width: 8px;
   background-color: #f4f4f4;
@@ -295,7 +294,6 @@ button {
   margin-top: 12px;
 }
 
-
 .edit-subtask-icons {
   display: flex;
   align-items: center;
@@ -309,7 +307,7 @@ button {
 .subtask-div {
   width: 408px;
   height: 24px;
-  padding: 2px 16px 2px 24px;
+  padding: 2px 8px 2px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -321,14 +319,14 @@ button {
 }
 
 .edit-subtask-div {
-  /* width: 427px; */
-  height: 23px;
+  width: 416px;
+  height: 22px;
   border-bottom: 1px solid #29abe2;
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-right: 16px;
+  padding: 1px 16px 1px 0px;
 }
 
 .on-edit-subtask-icons {
@@ -342,7 +340,7 @@ button {
 }
 
 .edit-subtask-input {
-  width: 320px;
+  width: 354px;
   height: 16px;
   border: 0;
   outline: 0;

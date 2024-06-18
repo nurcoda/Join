@@ -94,7 +94,7 @@ function editSubtask(i) {
     <img onclick="saveEditedSubtask(${i})" src="./assets/img/addtask_check.svg" alt="">
   </div>`;
   subtask.style.padding = "2px 0px 2px 0px";
-  subtask.style.width = "440px";
+  subtask.style.width = "432px";
   input = document.getElementById(`onEditSubtaskInput${i}`);
   input.value = subtasks[i];
 }
