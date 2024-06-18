@@ -91,10 +91,10 @@ function editSubtask(i) {
   <div class="on-edit-subtask-icons">
     <img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt="">
     <div class="subtasks-seperator"></div>
-    <img onclick="saveEditedSubtask(${i})" src="./assets/img/checkmark.png" alt="">
+    <img onclick="saveEditedSubtask(${i})" src="./assets/img/addtask_check.svg" alt="">
   </div>`;
   subtask.style.padding = "2px 0px 2px 0px";
-  subtask.style.width = "440px";
+  subtask.style.width = "432px";
   input = document.getElementById(`onEditSubtaskInput${i}`);
   input.value = subtasks[i];
 }
