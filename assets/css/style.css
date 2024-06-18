@@ -187,5 +187,47 @@ header span {
 }
 
 .d-none {
-   display: none !important; /*Display none*/
+   display: none !important;
+   /*Display none*/
+}
+
+/**************************/
+/* Media Querya 
+   sitebar      */
+/**************************/
+
+@media only screen and (max-width: 840px) {
+   .sitebar-container {
+      background-color: #2a3647;
+      height: 80px;
+      max-height: 80px;
+      width: 100%;
+      bottom: 0;
+      top: unset;
+   }
+
+   .join-logo-sitebar {
+      display: none;
+   }
+
+   .all-links-wrapper {
+      height: 0;
+   }
+
+   .legal-Links {
+      display: none;
+   }
+
+   .nav-links {
+      padding-left: 10%;
+      flex-direction: column;
+      padding: 0;
+
+   }
+
+   .nav-wrapper {
+      flex-direction: row;
+      padding-top: 8px;
+      justify-content: space-evenly
+   }
 }
