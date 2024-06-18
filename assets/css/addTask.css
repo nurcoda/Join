@@ -209,7 +209,7 @@ button {
 
 .subtasks-div {
   background-color: white;
-  width: 428px;
+  width: 436px;
   height: 48px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
@@ -259,12 +259,42 @@ button {
 }
 
 #subtasksList {
-  height: 80px;
-  /* overflow: scroll; */
+  height: 102px;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
+
+.subtasks-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f4f4f4;
+  height: 100px;
+}
+
+.subtasks-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a8a8a8;
+  border-radius: 4px;
+  min-height: 10px; /* Ändere diesen Wert, um die minimale Höhe des Scroll-Thumbs anzupassen */
+}
+
+.subtasks-scrollbar::-webkit-scrollbar-track {
+  background-color: white;
+  border-bottom-right-radius: 10px;
+}
+
+.subtasks-scrollbar::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 24px;
+}
+
+.subtasks-scrollbar::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 12px;
+}
+
 
 .edit-subtask-icons {
   display: flex;
@@ -272,10 +302,14 @@ button {
   gap: 4px;
 }
 
+.edit-subtask-icons img:hover {
+  transform: scale(105%);
+}
+
 .subtask-div {
   width: 408px;
   height: 24px;
-  padding: 2px 16px 2px 16px;
+  padding: 2px 16px 2px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -283,16 +317,18 @@ button {
 
 .subtask-div:hover {
   background-color: rgba(224, 224, 224, 0.658);
+  border-radius: 10px;
 }
 
 .edit-subtask-div {
   /* width: 427px; */
-  height: 24px;
+  height: 23px;
   border-bottom: 1px solid #29abe2;
   background-color: white;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding-right: 21px;
+  padding-right: 16px;
 }
 
 .on-edit-subtask-icons {
@@ -301,9 +337,13 @@ button {
   gap: 4px;
 }
 
+.on-edit-subtask-icons img:hover {
+  transform: scale(105%);
+}
+
 .edit-subtask-input {
   width: 320px;
-  height: 20px;
+  height: 16px;
   border: 0;
   outline: 0;
 }
