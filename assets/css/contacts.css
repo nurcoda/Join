@@ -2,6 +2,7 @@
    margin-left: 232px;
    margin-top: 96px;
    display: flex;
+   overflow-x: scroll;
 }
 
 .headline {
@@ -40,16 +41,21 @@
    flex-direction: column;
    align-items: center;
    max-height: 90vh;
-   overflow: scroll;
+   overflow-y: scroll;
+   scroll-padding-top: 90px;
 }
 
 .contact {
    color: black;
-   border-radius: 15px;
+   border-radius: 10px;
+   height: 78px;
+   width: 352px;
+   gap: 35px;
+   padding: 15px 24px 15px 24px;
 }
 
 .contact-letter {
-   border-bottom: 1px solid gray;
+   border-bottom: 1px solid #D1D1D1;
    width: 352px;
    height: 58px;
    display: flex;
@@ -97,6 +103,7 @@
    border-radius: 8px;
    width: 350px;
    padding: 12px;
+   cursor: pointer;
 }
 
 .contactDetails:hover {
