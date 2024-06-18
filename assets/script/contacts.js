@@ -42,7 +42,7 @@ function groupContacts(sortedContacts){
            `;
        });
    }
-   document.getElementById("contactList").innerHTML = containerContent;
+   document.getElementById("contactList").innerHTML += containerContent;
 }
 
 function highlightContact(index) {
