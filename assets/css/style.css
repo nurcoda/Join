@@ -197,6 +197,7 @@ header span {
 /**************************/
 
 @media only screen and (max-width: 840px) {
+
    .sitebar-container {
       background-color: #2a3647;
       height: 80px;
@@ -237,5 +238,23 @@ header span {
       padding: 6px;
       border-radius: 6px;
       transition: unset;
+   }
+}
+
+/**************************/
+/* Media Querya 
+   HEADER     */
+/**************************/
+@media only screen and (max-width: 840px) {
+
+   header {}
+
+   header span {
+      padding: 0;
+      display: none;
+   }
+
+   .header-info-img {
+      display: none;
    }
 }
