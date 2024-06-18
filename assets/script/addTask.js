@@ -1,8 +1,16 @@
 let assignedContacts = [];
-subtasks = [];
+let tempSubtasks = [];
+let currentButtonPrio = "";
+
+let newTask = [];
+
+function setDefaultPriority() {
+  setPrioButton("medium");
+}
 
 function setPrioButton(prio) {
   changeButtonColorAndImg(prio);
+  currentButtonPrio = prio;
 }
 
 function changeButtonColorAndImg(prio) {
@@ -47,7 +55,7 @@ function clearSubtasksInput() {
 
 function addNewSubtask() {
   let input = document.getElementById("subtasksInput").value;
-  subtasks.push(input);
+  tempSubtasks.push(input);
   renderSubtasks();
   clearSubtasksInput();
 }
@@ -59,8 +67,8 @@ document.getElementById("subtasksDiv").addEventListener("click", function () {
 function renderSubtasks() {
   let subtasksList = document.getElementById("subtasksList");
   subtasksList.innerHTML = "";
-  for (let i = 0; i < subtasks.length; i++) {
-    const subtask = subtasks[i];
+  for (let i = 0; i < tempSubtasks.length; i++) {
+    const subtask = tempSubtasks[i];
     subtasksList.innerHTML += `<div id="subtask${i}">
     <div class="subtask-div" onmouseover="showEditIcons(event, ${i})" onmouseout="hideEditIcons(${i})"><p>• ${subtask}</p>
   <div id="subtask${i}Icons" class="edit-subtask-icons d-none">
@@ -101,12 +109,12 @@ function editSubtask(i) {
 
 function saveEditedSubtask(i) {
   input = document.getElementById(`onEditSubtaskInput${i}`);
-  subtasks.splice(i, 1, input.value);
+  tempSubtasks.splice(i, 1, input.value);
   renderSubtasks();
 }
 
 function deleteSubtask(i) {
-  subtasks.splice(i, 1);
+  tempSubtasks.splice(i, 1);
   renderSubtasks();
 }
 
@@ -244,3 +252,55 @@ function selectOption(option) {
 }
 
 // funktion fürs dropdownicon flippen fehlt noch
+
+// submit/add a task
+
+function addTask() {
+  let title = document.getElementById("titleInput").value;
+  let newId = generateId();
+  let description = document.getElementById("descriptionText").value;
+  let category = document.getElementById("categorySelection").innerHTML;
+  let dueDate = document.getElementById("dueDate").value;
+
+  // Dynamisch zugewiesene Kontakte aus assignedContacts Array
+  let assignedUsers = assignedContacts.map((contact) => ({
+    name: contact.name,
+    first_two_letters: contact.first_two_letters,
+  }));
+
+  // Dynamisch erstellte Unteraufgaben aus tempSubtasks Array
+  let subtasks = tempSubtasks.map((subtask) => ({
+    subtask_name: subtask,
+    subtask_isdone: false,
+  }));
+
+  newTask = {
+    name: title,
+    id: newId,
+    description: description,
+    category: category,
+    priority: currentButtonPrio,
+    due_date: dueDate,
+    state: "todo",
+    assigned_user: assignedUsers,
+    subtasks: subtasks,
+  };
+
+  tasks.push(newTask);
+  console.log(tasks);
+}
+
+function generateId() {
+  let generatedId;
+  let isUnique = false;
+
+  while (!isUnique) {
+    // Generiere eine zufällige 6-stellige Zahl
+    generatedId = Math.floor(100000 + Math.random() * 900000);
+
+    // Überprüfen, ob die ID bereits existiert
+    isUnique = !tasks.some((task) => task.id === generatedId);
+  }
+
+  return generatedId;
+}

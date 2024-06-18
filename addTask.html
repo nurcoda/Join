@@ -10,7 +10,7 @@
     <script src="./assets/script/script.js" defer></script>
     <script defer src="./assets/script/addTask.js"></script>
   </head>
-  <body onload="includeHTML()">
+  <body onload="includeHTML(), setDefaultPriority()">
     <div w3-include-html="./assets/templates/header.html"></div>
     <div w3-include-html="./assets/templates/sitebar.html"></div>
 
@@ -20,11 +20,11 @@
         <div class="add-task-left">
           <label>Title<span class="asterisk">*</span></label>
 
-          <input class="title-input" type="text" placeholder="Enter a title" required />
+          <input id="titleInput" class="title-input" type="text" placeholder="Enter a title" required />
 
           <label class="margin-top-16px">Description</label>
 
-          <textarea class="description-text" placeholder="Enter a Description"></textarea>
+          <textarea id="descriptionText" class="description-text" placeholder="Enter a Description"></textarea>
 
           <label class="margin-top-16px">Assigned to</label>
           <div id="assignedDiv" class="assigned-to-div" onclick="showAssignedDropdown(), renderContacts()">
@@ -84,7 +84,7 @@
                 />
               </svg>
             </button>
-            <button class="create-task-button">Create Task <img src="./assets/img/check_white_svg.svg" alt="" /></button>
+            <button type="submit" onsubmit="addTask()" class="create-task-button">Create Task <img src="./assets/img/check_white_svg.svg" alt="" /></button>
           </div>
         </div>
       </form>
