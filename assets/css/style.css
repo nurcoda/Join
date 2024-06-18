@@ -216,18 +216,26 @@ header span {
 
    .legal-Links {
       display: none;
+      transition: unset;
    }
 
    .nav-links {
       padding-left: 10%;
       flex-direction: column;
       padding: 0;
-
+      transform: unset;
    }
 
    .nav-wrapper {
       flex-direction: row;
       padding-top: 8px;
       justify-content: space-evenly
+   }
+
+   .nav-links:hover {
+      background-color: #1a293f;
+      padding: 6px;
+      border-radius: 6px;
+      transition: unset;
    }
 }
