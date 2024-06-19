@@ -204,13 +204,13 @@ function renderAssignedContacts() {
   for (let i = 0; i < assignedContacts.length; i++) {
     const contact = assignedContacts[i];
     content.innerHTML += `
-    <div class="assigned-contacts-img" style="background-color: ${contact.color}; color: white">
-    ${contact.first_two_letters}
-  </div>
-    `;
+      <div class="assigned-contacts-img" style="background-color: ${contact.color}; color: white">
+          ${contact.first_two_letters}
+          <span class="tooltip">${contact.name}</span>
+      </div>
+      `;
   }
 }
-
 function markContact(contactId, i) {
   let contact = document.getElementById(`contact${contactId}`);
   let checkbox = document.getElementById(`contactCheckBtn${contactId}`);
@@ -332,7 +332,6 @@ function addTask() {
   console.log(tasks);
 }
 
-
 function generateId() {
   let generatedId;
   let isUnique = false;
@@ -348,7 +347,6 @@ function generateId() {
   return generatedId;
 }
 
-
 // due date, generiert aktuelles Datum
 
 function setDefaultDate() {
@@ -360,5 +358,3 @@ function setDefaultDate() {
 
   document.getElementById("dueDate").value = formattedDate;
 }
-
-

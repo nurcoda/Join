@@ -118,6 +118,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  z-index: 2;
   cursor: pointer;
   /* scrollbar-width: thin;
   scrollbar-color: #d6d6d6 #f4f4f4;  */
@@ -196,10 +197,39 @@ button {
   align-items: center;
   border: 2px solid white;
   cursor: pointer;
+  position: relative;
+  transition: transform 100ms ease-in-out;
+  z-index: 1; /* Ensure this is higher than other elements */
+}
+
+.tooltip {
+  visibility: hidden;
+  width: auto;
+  background-color: #2a3647;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 100; 
+  bottom: 125%; 
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  white-space: nowrap; 
+}
+
+.assigned-contacts-img:hover {
+  transform: scale(1.05); 
+}
+
+.assigned-contacts-img:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
 .marked {
-  background-color: #2a3647; /* Dunkle Hintergrundfarbe */
+  background-color: #2a3647; 
   color: white;
 }
 
