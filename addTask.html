@@ -62,6 +62,7 @@
             <span class="category-option" onclick="selectOption(1)">Technical task</span>
             <span class="category-option" onclick="selectOption(2)">User story</span>
           </div>
+          <input type="hidden" id="selectedCategory" name="category" required />
 
           <label class="margin-top-16px">Subtasks</label>
           <div id="subtasksDiv" class="subtasks-div" onclick="showSubtasksIcons()">
@@ -84,7 +85,9 @@
                 />
               </svg>
             </button>
-            <button type="submit" onsubmit="addTask()" class="create-task-button">Create Task <img src="./assets/img/check_white_svg.svg" alt="" /></button>
+            <button type="submit" onsubmit="addTask()" class="create-task-button">
+              Create Task <img src="./assets/img/check_white_svg.svg" alt="" />
+            </button>
           </div>
         </div>
       </form>
