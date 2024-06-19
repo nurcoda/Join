@@ -50,6 +50,7 @@
    height: 78px;
    width: 352px;
    gap: 35px;
+   position: relative;
    padding: 15px 24px 15px 24px;
 }
 
@@ -736,9 +737,17 @@
    .headline{
       padding-left: 20px;
    }
+
+   .contact{
+      padding-left: 0;
+   }
 }
 
 @media only screen and (max-width: 1020px){
+   .headAndContact{
+      width: 400px;
+   }
+   
    .headline{
       flex-direction: column;
    }
@@ -747,24 +756,94 @@
       border-bottom: 1px solid #28abe2;
       border-right: 0;
       font-size: 40px;
+      margin-bottom: 0;
+   }
+
+}
+
+@media only screen and (max-width: 980px){
+   .contact-letter{
+      padding-right: 20px;
+   }
+
+   .contact-card-big-container{
+      padding-left: 24px;
+   }
+
+   .contact-card-name-container{
+      flex-direction: column;
    }
 }
 
-@media only screen and (max-width: 820px){
+@media only screen and (max-width: 930px){
    .headAndContact{
-      display: none;
+      width: 350px;
+   }
+   
+   .contact-card-name-container{
+      gap: 15px;
+
+   }
+}
+
+@media only screen and (max-width: 840px){
+   .headAndContact{
+      width: 40%;
    }
 
-   .contactList{
-      width: 100vw;
+   .headline{
+      margin-top: 96px;
+   }
+
+   .avatar-big{
+      height: 90px;
+      width: 90px;
+      font-size: 52px;
+   }
+
+   .contact-card-name-container{
+      gap: 20px;
+   }
+
+   .content{
+      margin: 0;
+   }
+
+   .addContactBtn{
+      border-radius: 46px;
+      height: 56px;
+      width: 56px;
+      position: relative;
+      top: 700px;
+      left: 200px;
+      text-indent: -9999em;
+      contain: content;
+      gap: 0;
+      justify-content: center;
+      align-items: center;
+   }
+}
+
+@media only screen and (max-width: 770px){
+   .addContactBtn{
+      top: 775px;
+      left: 180px;
+   }
+}
+
+@media only screen and (max-width: 700px){
+   .contact-card-name{
+      font-size: 30px;
+   }
+}
+
+@media only screen and (max-width: 660px){
+   .addContactBtn{
+      left: 150px;
    }
 }
 
 @media only screen and (max-width: 590px){
-   .addContactBtn{
-      width: 175px;
-   }
-
    .contact-letter{
       padding: 0;
       justify-content: flex-start;
@@ -774,20 +853,12 @@
       padding:0;
    }
 
-   .sitebar-container{
-      width: 200px;
-   }
-
-   .content{
-      margin-left: 200px;
+   .headAndContact{
+      display: none;
    }
 }
 
 @media only screen and (max-width: 550px){
-   .sitebar-container{
-      display: none;
-   }
-
    .content{
       margin-left: 0;
    }
@@ -809,4 +880,10 @@
    .contactList{
       padding-left: 15px;
    }
+}
+
+@media only screen and (max-width: 380px){
+.addContactBtn{
+   left: 120px;
+}
 }
