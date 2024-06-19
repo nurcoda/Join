@@ -12,6 +12,7 @@ let todoCounter = 0;
 let inProgressCounter = 0;
 let awaitFeedbackCounter = 0;
 let doneCounter = 0;
+let assignedContacts = [];
 
 // _________________________________________________
 // TODO: THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
@@ -193,7 +194,7 @@ function renderEditTask(i) {
                        <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" onclick="hideAssignedDropdown()" alt="" />
                    </div>
                    <div id="assignedContacts">
-                   ${renderAssignedContactsPopUp(i)}
+                   ${initRenderAssignedContacts(i)}
                    </div>
                    <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none"></div>
                    
@@ -228,86 +229,172 @@ function getEditedTask(i) {
    tasks[i].name = editedName;
    tasks[i].description = editedDescription;
    tasks[i].due_date = editedDueDate;
+   tasks[i].assigned_user = assignedContacts;
    editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(i);
    renderTasksIntoColumns();
 }
 
 // Edit-Task-Form-functions ASSIGNED USER
+// Edit-Task-Form-functions ASSIGNED USER
+// Edit-Task-Form-functions ASSIGNED USER
+// Edit-Task-Form-functions ASSIGNED USER
+// Edit-Task-Form-functions ASSIGNED USER
 
-// function renderAssignedContacts() {
-//    let content = document.getElementById("assignedContacts");
-//    content.innerHTML = "";
-//    for (let i = 0; i < assignedContacts.length; i++) {
-//       const contact = assignedContacts[i];
-//       content.innerHTML += `
-//       <div class="assigned-contacts-img" style="background-color: ${contact.color}; color: white">
-//       ${contact.first_two_letters}
-//     </div>
-//       `;
-//    }
-// }
-
-function renderAssignedContactsPopUp(i) {
-   let assignedUser = "";
+function initRenderAssignedContacts(i) {
+   let assignedUserHTML = "";
+   assignedContacts = [];
    tasks[i].assigned_user.forEach((user) => {
-      user_id = getUserIdByName(user.name);
+      let user_id = getUserIdByName(user.name);
+      let assignedUser = getUserObjectById(user_id);
+      assignedContacts.push(assignedUser);
       let assignedUserColor = getColorAssignedUser(user.name);
-      assignedUser += `
-       <div class="assigned-contacts-img" style="background-color: ${assignedUserColor}; color:white;">${user.first_two_letters}</div>
+      assignedUserHTML += `
+       <div class="assigned-contacts-img" style="background-color: ${assignedUserColor}; color:white;" data-id="${user_id}">
+          ${user.first_two_letters}
+       </div>
        `;
    });
+   return assignedUserHTML;
+}
 
+function renderAssignedContactsPopUp(i) {
+   assignedContacts = [];
+   let assignedUser = "";
+   tasks[i].assigned_user.forEach((user) => {
+      let user_id = getUserIdByName(user.name);
+      let assignedUser = getUserObjectById(user_id);
+      assignedContacts.push(assignedUser);
+      let assignedUserColor = getColorAssignedUser(user.name);
+      assignedUser += `
+       <div class="assigned-contacts-img" style="background-color: ${assignedUserColor}; color:white;" data-id="${user_id}">
+          ${user.first_two_letters}
+       </div>
+       `;
+   });
    return assignedUser;
 }
 
-//
-// HIER GEHTS WEITER
-// Noch habe ich nur einen assigned markiert - das muss richtig in die Schleife eingebaut werden
-// style="color: red;"
-//
+function getUserObjectById(user_id) {
+   return contacts.find((user) => user.id === user_id);
+}
+/**
+ * render dropdown contactlist to assign user
+ * checks, assigned user and marks them
+ * @param {*} i
+ */
 
 function renderContactsDropdownPopUpEdit(i) {
    let dropdown = document.getElementById("assignedDropdown");
    dropdown.innerHTML = "";
 
-   let imgSrc = "./assets/img/check_btn.png";
-   let imgSrcChecked = "./assets/img/checked_btn_white_svg.svg";
-   tasks[i].assigned_user.forEach((user) => {
-      assigned_user_id = getUserIdByName(user.name);
-   });
-   for (let i = 0; i < contacts.length; i++) {
-      let assigned_user_id;
-
-      if (assigned_user_id === contacts[i].id) {
-         dropdown.innerHTML += `
-         <div id="contact${contacts[i].id}" class="assigned-to-contact" onclick="markContact(${contacts[i].id}, ${i})">
-           <div class="contact-img-name" >
-             <div class="two-letters-img" style="background-color: ${contacts[i].color}; color: white;">
-               ${contacts[i].first_two_letters}
-             </div>
-             <span>${contacts[i].name}</span>
-           </div>
-           <img id="contactCheckBtn${contacts[i].id}" class="check-btn-img" src="${imgSrc}" alt="" />
-         </div>`;
-      } else {
-         dropdown.innerHTML += `
-         <div id="contact${contacts[i].id}" class="assigned-to-contact" onclick="markContact(${contacts[i].id}, ${i})">
-         <div class="contact-img-name" >
-       <div class="two-letters-img" style="background-color: ${contacts[i].color}; color: white;">
-         ${contacts[i].first_two_letters}
-       </div>
-       <span>${contacts[i].name}</span>
-     </div>
-     <img id="contactCheckBtn${contacts[i].id}" class="check-btn-img" src="${imgSrcChecked}" alt="" />
-   </div>`;
+   for (let j = 0; j < contacts.length; j++) {
+      let isAssigned = false;
+      let imgSrc = "./assets/img/check_btn.png";
+      for (let k = 0; k < tasks[i].assigned_user.length; k++) {
+         let assigned_user_id = getUserIdByName(tasks[i].assigned_user[k].name);
+         if (assigned_user_id === contacts[j].id) {
+            isAssigned = true;
+            imgSrc = "./assets/img/checked_btn_white_svg.svg";
+            break;
+         }
       }
+
+      dropdown.innerHTML += `
+         <div id="contact${contacts[j].id}" class="assigned-to-contact ${
+         isAssigned ? "marked" : ""
+      }" onclick="markContactEditPopUp(${contacts[j].id}, ${j})">
+            <div class="contact-img-name">
+               <div class="two-letters-img" style="background-color: ${contacts[j].color}; color: white;">
+                  ${contacts[j].first_two_letters}
+               </div>
+               <span>${contacts[j].name}</span>
+            </div>
+            <img id="contactCheckBtn${contacts[j].id}" class="check-btn-img" src="${imgSrc}" alt="" />
+         </div>`;
    }
 }
+
 function getUserIdByName(userName) {
    const user = contacts.find((user) => user.name.includes(userName));
-   return user.id;
+   return user ? user.id : null;
 }
 
+function markContactEditPopUp(contactId, i) {
+   let contact = document.getElementById(`contact${contactId}`);
+   let checkbox = document.getElementById(`contactCheckBtn${contactId}`);
+   contact.classList.toggle("marked");
+   renderAssignedContactsEditPopUp();
+
+   if (contact.classList.contains("marked")) {
+      contact.style.backgroundColor = "#2A3647";
+      contact.style.color = "white";
+      checkbox.src = "./assets/img/checked_btn_white_svg.svg";
+      addContactToAssignedEditPopUp(contactId);
+   } else {
+      contact.style.color = "black";
+      contact.style.backgroundColor = "white";
+      checkbox.src = "./assets/img/check_btn.png";
+      removeContactFromAssignedEditPopUp(contactId);
+   }
+}
+
+function addContactToAssignedEditPopUp(contactId) {
+   let contact = contacts.find((c) => c.id === contactId);
+   if (contact && !assignedContacts.some((c) => c.id === contactId)) {
+      assignedContacts.push(contact);
+      renderSingleAssignedContact(contact);
+   }
+}
+
+function removeContactFromAssignedEditPopUp(contactId) {
+   let index = assignedContacts.findIndex((c) => c.id === contactId);
+   if (index !== -1) {
+      assignedContacts.splice(index, 1);
+      document.querySelector(`#assignedContacts .assigned-contacts-img[data-id="${contactId}"]`).remove();
+   }
+}
+
+function renderSingleAssignedContact(contact) {
+   let content = document.getElementById("assignedContacts");
+   content.innerHTML += `
+      <div class="assigned-contacts-img" data-id="${contact.id}" style="background-color: ${contact.color}; color: white;">
+         ${contact.first_two_letters}
+      </div>`;
+}
+
+function renderAssignedContactsEditPopUp() {
+   let content = document.getElementById("assignedContacts");
+   console.log(assignedContacts);
+   content.innerHTML = "";
+   for (let i = 0; i < assignedContacts.length; i++) {
+      const contact = assignedContacts[i];
+      content.innerHTML += `
+         <div class="assigned-contacts-img" data-id="${contact.id}" style="background-color: ${contact.color}; color: white;">
+            ${contact.first_two_letters}
+         </div>`;
+   }
+}
+
+function showAssignedDropdown() {
+   document.getElementById("assignedDropdown").classList.remove("d-none");
+   showOpenedDropdownIcon();
+}
+
+function hideAssignedDropdown() {
+   event.stopPropagation();
+   document.getElementById("assignedDropdown").classList.add("d-none");
+   hideOpenedDropdownIcon();
+}
+
+function showOpenedDropdownIcon() {
+   document.getElementById("dropdown1").classList.add("d-none");
+   document.getElementById("dropdown2").classList.remove("d-none");
+}
+
+function hideOpenedDropdownIcon() {
+   document.getElementById("dropdown2").classList.add("d-none");
+   document.getElementById("dropdown1").classList.remove("d-none");
+}
 // Edit-Task-Form-functions
 
 function showSubtasksIcons() {
