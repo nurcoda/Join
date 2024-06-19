@@ -45,12 +45,26 @@ function groupContacts(sortedContacts) {
    document.getElementById("contactList").innerHTML += containerContent;
 }
 
+// function highlightContact(index) {
+//    if (selectedContactIndex !== null) {
+//       document.getElementById(`contact-${selectedContactIndex}`).classList.remove('highlight');
+//    }
+//    selectedContactIndex = index;
+//    document.getElementById(`contact-${selectedContactIndex}`).classList.add('highlight');
+// }
+
 function highlightContact(index) {
    if (selectedContactIndex !== null) {
-      document.getElementById(`contact-${selectedContactIndex}`).classList.remove('highlight');
+      const previousElement = document.getElementById(`contact-${selectedContactIndex}`);
+      if (previousElement) {
+         previousElement.classList.remove('highlight');
+      }
    }
    selectedContactIndex = index;
-   document.getElementById(`contact-${selectedContactIndex}`).classList.add('highlight');
+   const newElement = document.getElementById(`contact-${selectedContactIndex}`);
+   if (newElement) {
+      newElement.classList.add('highlight');
+   }
 }
 
 function renderContact() {
@@ -128,10 +142,17 @@ function closePopUp() {
    }
 }
 
-function deleteContact(i) {
-   contacts.splice(i, 1);
-   renderContact();
-   document.getElementById("contactCardBigContainer").innerHTML = ""; // Kontaktkarte leeren
+function deleteContact(index) {
+   const elementToDelete = document.getElementById(`contact-${index}`);
+   if (elementToDelete) {
+      if (index === selectedContactIndex) {
+         elementToDelete.classList.remove('highlight');
+         selectedContactIndex = null; // oder setze auf einen anderen gültigen Index
+      }
+      elementToDelete.remove();
+   }
+   contacts.splice(index, 1);
+      renderContact();
 }
 //**Add to Contacts */
 
