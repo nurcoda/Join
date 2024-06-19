@@ -406,12 +406,6 @@
    border-radius: 20px;
    cursor: pointer;
    background-color: rgba(211, 211, 211, 0.459);
-   .task-done-state {
-      background-image: url(../img/checked_btn.png);
-   }
-   .task-done-state-checked {
-      background-image: url(../img/check_btn.png);
-   }
 }
 
 .popup-delete-edit-btn-wrapper {
@@ -458,6 +452,34 @@
 }
 
 /* PopUp Edit task */
+
+#subtasksList {
+   height: unset;
+   overflow: scroll;
+   overflow-x: hidden;
+   padding-left: 5%;
+}
+.edit-pop-up-subtask-wrapper {
+   display: flex;
+   justify-content: space-between;
+   width: 90%;
+}
+.edit-pop-up-btn-wrapper {
+   display: flex;
+   justify-content: center;
+   flex-direction: row;
+   gap: 8px;
+}
+
+.subtask-edit-btn {
+   cursor: pointer;
+   border-right: 1px solid #d1d1d1;
+   padding-right: 8px;
+}
+
+.subtask-delete-btn {
+   cursor: pointer;
+}
 
 /* body::-webkit-scrollbar-thumb {
    border-radius: 20px !important;
