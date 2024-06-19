@@ -236,8 +236,20 @@ function markContact(contactId, i) {
 
 document.getElementById("categoryDiv").addEventListener("click", function () {
   var dropdown = document.getElementById("categoryDropdown");
-  dropdown.classList.toggle("d-none"); // Toggle 'd-none' class
-  document.getElementById("categoryDiv").style.border = ""; // Remove the red border
+  var categoryDiv = document.getElementById("categoryDiv");
+
+  if (dropdown.classList.contains("d-none")) {
+    dropdown.classList.remove("d-none"); // Show dropdown
+  } else {
+    dropdown.classList.add("d-none"); // Hide dropdown
+    hideOpenedCategoryIcon();
+  }
+
+  if (categoryDiv.style.border !== "1px solid red") {
+    categoryDiv.style.border = "1px solid #d1d1d1"; // Set default border
+  } else {
+    categoryDiv.style.border = ""; // Remove the red border
+  }
 });
 
 function selectOption(option) {
@@ -254,17 +266,34 @@ function selectOption(option) {
 
   let dropdown = document.getElementById("categoryDropdown");
   dropdown.classList.add("d-none");
+  hideOpenedCategoryIcon();
 }
 
 document.querySelector(".create-task-button").addEventListener("click", function (event) {
   let hiddenInput = document.getElementById("selectedCategory");
+  let categoryDiv = document.getElementById("categoryDiv");
   if (hiddenInput.value === "") {
-    document.getElementById("categoryDiv").style.border = "1px solid red";
+    categoryDiv.style.border = "1px solid red";
     event.preventDefault(); // Prevent form submission
   } else {
-    document.getElementById("categoryDiv").style.border = "none";
+    categoryDiv.style.border = "1px solid #d1d1d1";
   }
 });
+
+function hideOpenedCategoryIcon() {
+  // Your implementation of hideOpenedCategoryIcon
+}
+
+function showOpenedCategoryIcon() {
+  document.getElementById("categoryIcon1").classList.add("d-none");
+  document.getElementById("categoryIcon2").classList.remove("d-none");
+}
+
+function hideOpenedCategoryIcon() {
+  document.getElementById("categoryIcon2").classList.add("d-none");
+  document.getElementById("categoryIcon1").classList.remove("d-none");
+}
+
 
 // funktion fürs dropdownicon flippen fehlt noch
 

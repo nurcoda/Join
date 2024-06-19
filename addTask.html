@@ -54,9 +54,10 @@
           </div>
 
           <label class="margin-top-16px">Category<span class="asterisk">*</span></label>
-          <div id="categoryDiv" class="category-div">
+          <div id="categoryDiv" class="category-div" onclick="showOpenedCategoryIcon()">
             <span id="categorySelection">Select task category</span>
-            <img id="categoryDropdownImg" class="dropdown-icon" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
+            <img id="categoryIcon1" class="dropdown-icon" src="./assets/img/arrow_drop_down_svg.svg" alt=""/>
+            <img id="categoryIcon2"src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" alt="" />
           </div>
           <div id="categoryDropdown" class="d-none">
             <span class="category-option" onclick="selectOption(1)">Technical task</span>
