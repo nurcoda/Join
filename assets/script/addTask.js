@@ -280,10 +280,6 @@ document.querySelector(".create-task-button").addEventListener("click", function
   }
 });
 
-function hideOpenedCategoryIcon() {
-  // Your implementation of hideOpenedCategoryIcon
-}
-
 function showOpenedCategoryIcon() {
   document.getElementById("categoryIcon1").classList.add("d-none");
   document.getElementById("categoryIcon2").classList.remove("d-none");
@@ -293,9 +289,6 @@ function hideOpenedCategoryIcon() {
   document.getElementById("categoryIcon2").classList.add("d-none");
   document.getElementById("categoryIcon1").classList.remove("d-none");
 }
-
-
-// funktion fürs dropdownicon flippen fehlt noch
 
 // submit/add a task
 
