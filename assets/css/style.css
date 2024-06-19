@@ -225,6 +225,7 @@ header span {
       flex-direction: column;
       padding: 0;
       transform: unset;
+      transition: unset;
    }
 
    .nav-wrapper {
@@ -234,10 +235,11 @@ header span {
    }
 
    .nav-links:hover {
-      background-color: #1a293f;
-      padding: 6px;
-      border-radius: 6px;
+      background-color: unset;
+      padding: 0;
+      border-radius: 0;
       transition: unset;
+      transform: unset;
    }
 }
 
@@ -254,7 +256,29 @@ header span {
       display: none;
    }
 
+   .header-img-div {
+      justify-content: space-between;
+      width: 100%;
+   }
+
    .header-info-img {
+      display: none;
+   }
+
+   .logo-header-mobile {
+      height: 36px;
+      width: 36px;
+      padding-left: 20px;
+      display: flex;
+   }
+}
+
+@media only screen and (min-width: 841px) {
+
+   .logo-header-mobile {
+      height: 36px;
+      width: 36px;
+      padding-left: 20px;
       display: none;
    }
 }
