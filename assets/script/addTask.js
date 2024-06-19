@@ -341,3 +341,17 @@ function generateId() {
 
   return generatedId;
 }
+
+// due date, generiert aktuelles Datum
+
+function setDefaultDate() {
+  const today = new Date();
+  const day = ("0" + today.getDate()).slice(-2);
+  const month = ("0" + (today.getMonth() + 1)).slice(-2);
+  const year = today.getFullYear();
+  const formattedDate = `${year}-${month}-${day}`;
+
+  document.getElementById("dueDate").value = formattedDate;
+}
+
+
