@@ -225,6 +225,7 @@ header span {
       flex-direction: column;
       padding: 0;
       transform: unset;
+      transition: unset;
    }
 
    .nav-wrapper {
@@ -234,10 +235,11 @@ header span {
    }
 
    .nav-links:hover {
-      background-color: #1a293f;
-      padding: 6px;
-      border-radius: 6px;
+      background-color: unset;
+      padding: 0;
+      border-radius: 0;
       transition: unset;
+      transform: unset;
    }
 }
 
