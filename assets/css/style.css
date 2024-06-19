@@ -257,7 +257,8 @@ header span {
    }
 
    .header-img-div {
-      justify-content: space-around;
+      justify-content: space-between;
+      width: 100%;
    }
 
    .header-info-img {
