@@ -153,6 +153,7 @@ function deleteContact(index) {
    }
    contacts.splice(index, 1);
       renderContact();
+      document.getElementById('contactCardBigContainer').innerHTML="";
 }
 //**Add to Contacts */
 
