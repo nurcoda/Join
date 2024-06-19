@@ -70,7 +70,7 @@ function highlightContact(index) {
 function renderContact() {
    document.getElementById("contactList").innerHTML = `
        <div class="buttonWrapper">
-           <button class="addContactBtn" onclick="openPopUp()">
+           <button class="addContactBtn" onclick="renderAddContactCardInfo()">
                Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
            </button>
        </div>
@@ -152,8 +152,8 @@ function deleteContact(index) {
       elementToDelete.remove();
    }
    contacts.splice(index, 1);
-      renderContact();
-      document.getElementById('contactCardBigContainer').innerHTML="";
+   renderContact();
+   document.getElementById('contactCardBigContainer').innerHTML = "";
 }
 //**Add to Contacts */
 
@@ -219,4 +219,37 @@ function editSave(i) {
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
    renderContactCardInfo(i); // ruft nochmal die Funktion aus 
    groupAndDisplayContacts(); // zum speichern wir diese funktion erneut aufgerufen
+}
+
+function renderAddContactCardInfo() {
+   popUpBackground.innerHTML = `<div class="pop-up-container-background d-none" id="popUpBackground">
+      <div class="add-contact-pop-up" id="contentPopUp">
+         <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
+         <div class="popup-logo-headline-wrapper">
+            <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
+            <div class="popup-headline">Add contact</div>
+            <div class="popup-subline">Tasks are better with a team!</div>
+            <div class="underline-from-subline"></div>
+         </div>
+         <div class="contact-formular">
+            <img src="./assets/img/profile_img.svg" class="profile-img-add-contact" />
+            <form class="input-fields-add-contact">
+               <input id="input-field-name" class="input-field-name add-contact-form-input" placeholder="Name"
+                  type="text" />
+               <br />
+               <input id="input-field-mail" class="input-field-mail add-contact-form-input" placeholder="Email"
+                  type="text" /><br />
+               <input id="input-field-phone" class="input-field-phone add-contact-form-input" placeholder="Phone"
+                  type="text" />
+               <div class="add-contact-buttons-wrapper">
+                  <button class="cancel-btn add-contact-form-btn" onclick="closePopUpByBtn()">Cancel</button><button
+                     class="create-contact-btn add-contact-form-btn" onclick="addPersonToContact()">
+                     Create Contact
+                  </button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+`
 }
