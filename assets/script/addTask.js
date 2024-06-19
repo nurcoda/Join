@@ -236,20 +236,35 @@ function markContact(contactId, i) {
 
 document.getElementById("categoryDiv").addEventListener("click", function () {
   var dropdown = document.getElementById("categoryDropdown");
-  dropdown.classList.toggle("d-none"); // Toggle 'd-none' Klasse
+  dropdown.classList.toggle("d-none"); // Toggle 'd-none' class
+  document.getElementById("categoryDiv").style.border = ""; // Remove the red border
 });
 
 function selectOption(option) {
   let selection = document.getElementById("categorySelection");
+  let hiddenInput = document.getElementById("selectedCategory");
+
   if (option == 1) {
     selection.innerHTML = "Technical task";
-  }
-  if (option == 2) {
+    hiddenInput.value = "Technical task";
+  } else if (option == 2) {
     selection.innerHTML = "User story";
+    hiddenInput.value = "User story";
   }
+
   let dropdown = document.getElementById("categoryDropdown");
   dropdown.classList.add("d-none");
 }
+
+document.querySelector(".create-task-button").addEventListener("click", function (event) {
+  let hiddenInput = document.getElementById("selectedCategory");
+  if (hiddenInput.value === "") {
+    document.getElementById("categoryDiv").style.border = "1px solid red";
+    event.preventDefault(); // Prevent form submission
+  } else {
+    document.getElementById("categoryDiv").style.border = "none";
+  }
+});
 
 // funktion fürs dropdownicon flippen fehlt noch
 
