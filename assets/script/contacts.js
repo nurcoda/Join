@@ -205,6 +205,10 @@ function renderEditContactCardInfo(i) {
    </div>`;
 }
 
+function renderAddContactCardInfo(i) {
+
+}
+
 function editSave(i) {
    let name = document.getElementById('edit-input-field-name').value;  // Liest die geänderten Werte aus den Eingabefeldern
    let email = document.getElementById('edit-input-field-mail').value;
