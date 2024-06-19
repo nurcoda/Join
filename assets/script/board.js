@@ -145,6 +145,7 @@ function checkIfColumnIsEmptyHTML() {
  */
 
 function renderTaskPopUp(id) {
+   editTaskPopUpBackground.innerHTML = "";
    tasks.forEach((task, index) => {
       if (task.id == id) {
          editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(index);
@@ -252,10 +253,47 @@ function addNewSubtaskEditPopUp(i) {
 function renderSubtasksEditPopUp(i) {
    let subtaskList = "";
    for (let j = 0; j < tasks[i].subtasks.length; j++) {
-      subtaskList += `<li>${tasks[i].subtasks[j].subtask_name}</li>`;
+      subtaskList += `<li class="edit-pop-up-subtask-wrapper">&bull; ${tasks[i].subtasks[j].subtask_name} 
+      <span class="edit-pop-up-btn-wrapper">
+       <span class="edit-subtask-edit-btn">
+      <img class="subtask-edit-btn" onclick="saveEditedSubtask(${i})" src="./assets/img/edit_pen_icon.png" alt=""></span>
+      <span class="subtask-delete-btn" class="edit-subtask-delete-btn"><img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt=""></span>
+     
+      </span>
+      </li>`;
    }
    return subtaskList;
 }
+
+// SUBTASKS
+
+function editSubtask(i) {
+   let subtask = document.getElementById(`subtask${i}`);
+   subtask.innerHTML = `
+   <div class="edit-subtask-div">
+     <input id="onEditSubtaskInput${i}" class="edit-subtask-input">
+   <div class="on-edit-subtask-icons">
+     <img class=""onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt="">
+     <img onclick="saveEditedSubtask(${i})" src="./assets/img/addtask_check.svg" alt="">
+   </div>`;
+   subtask.style.padding = "2px 0px 2px 0px";
+   subtask.style.width = "432px";
+   input = document.getElementById(`onEditSubtaskInput${i}`);
+   input.value = subtasks[i];
+}
+
+function showEditIcons(event, i) {
+   // let DivElement = event.target;
+   let icons = document.getElementById(`subtask${i}Icons`);
+   icons.classList.remove("d-none");
+}
+
+function hideEditIcons(i) {
+   let icons = document.getElementById(`subtask${i}Icons`);
+   icons.classList.add("d-none");
+}
+
+// _____________________________________________________________
 
 function setPrioButton(prio, i) {
    changeButtonColorAndImg(prio, i);
@@ -340,13 +378,20 @@ function popUpRenderAssignedUser(i) {
  * @returns subtasktemplate
  */
 
+function popUpCheckmarkIsDone(taskIndex, subtaskIndex) {
+   tasks[taskIndex].subtasks[subtaskIndex].subtask_isdone
+      ? (tasks[taskIndex].subtasks[subtaskIndex].subtask_isdone = false)
+      : (tasks[taskIndex].subtasks[subtaskIndex].subtask_isdone = true);
+   renderTaskPopUp(tasks[taskIndex].id);
+}
+
 function popUpRenderSubTasks(i) {
    let subTasksTemplate = "";
    let subTaskDone;
-   tasks[i].subtasks.forEach((subtask) => {
+   tasks[i].subtasks.forEach((subtask, index) => {
       subtask.subtask_isdone ? (subTaskDone = "task-done-state-checked") : (subTaskDone = "");
       subTasksTemplate += `   
-      <div class="popup-subtask-task">
+      <div class="popup-subtask-task" onclick="popUpCheckmarkIsDone(${i}, ${index})">
          <div class="task-done-state ${subTaskDone}"></div>
          <div class="popup-subtask-name">${subtask.subtask_name}</div>
       </div>    
