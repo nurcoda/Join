@@ -220,3 +220,40 @@ function editSave(i) {
    renderContactCardInfo(i); // ruft nochmal die Funktion aus 
    groupAndDisplayContacts(); // zum speichern wir diese funktion erneut aufgerufen
 }
+
+function renderContactCardInfoMobile(){
+   let avatar;
+   avatar = renderAvatar(i, avatar); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
+   let phone = contacts[i].phone;
+   if (!phone.startsWith('+')) {
+      phone = '+' + phone;
+   }
+   contactCardBigContainerMobil.innerHTML = `<div class="contact-card-name-container">
+            <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
+            <div>
+               <div class="contact-card-name">${contacts[i].name}</div>
+               <div class="edit-delete-container">
+                  <span class="edit-icon-wrapper" onclick="renderEditContactCardInfo(${i})" >
+                     <div class="edit-icon"></div><span class="edit-name">Edit</span>
+                  </span>
+                  <span class="delete-icon-wrapper">
+                     <div class="trash-icon"></div><span class="delete-name">Delete</span>
+                  </span>
+               </div>
+            </div>
+         </div>
+
+         <div id="contact-card-info-container" class="contact-card-info-container">
+            <div class="headline-contact-information">Contact Information</div>
+            <div class="contact-card-info-wrapper">
+               <div class="contact-info-email-headline">Email</div>
+               <div class="contact-info-email">${contacts[i].email}</div>
+               <div class="contact-info-phone-headline">Phone</div>
+               <div class="contact-info-phone">${`+` + contacts[i].phone}</div>
+            </div>
+         </div>`;
+   document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
+   document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
+      deleteContact(i);
+   }); //löscht die Contact seite
+}

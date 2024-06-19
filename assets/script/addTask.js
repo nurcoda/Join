@@ -292,12 +292,17 @@ function hideOpenedCategoryIcon() {
 
 // submit/add a task
 
+function formatDueDate(dueDate) {
+  return dueDate.split("-").reverse().join("/");
+}
+
 function addTask() {
   let title = document.getElementById("titleInput").value;
   let newId = generateId();
   let description = document.getElementById("descriptionText").value;
   let category = document.getElementById("categorySelection").innerHTML;
   let dueDate = document.getElementById("dueDate").value;
+  let formattedDueDate = formatDueDate(dueDate); // Format the date here
 
   // Dynamisch zugewiesene Kontakte aus assignedContacts Array
   let assignedUsers = assignedContacts.map((contact) => ({
@@ -311,13 +316,13 @@ function addTask() {
     subtask_isdone: false,
   }));
 
-  newTask = {
+  let newTask = {
     name: title,
     id: newId,
     description: description,
     category: category,
     priority: currentButtonPrio,
-    due_date: dueDate,
+    due_date: formattedDueDate, // Use the formatted date here
     state: "todo",
     assigned_user: assignedUsers,
     subtasks: subtasks,
@@ -326,6 +331,7 @@ function addTask() {
   tasks.push(newTask);
   console.log(tasks);
 }
+
 
 function generateId() {
   let generatedId;
@@ -341,6 +347,7 @@ function generateId() {
 
   return generatedId;
 }
+
 
 // due date, generiert aktuelles Datum
 
