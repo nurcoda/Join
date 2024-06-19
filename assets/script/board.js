@@ -12,6 +12,7 @@ let todoCounter = 0;
 let inProgressCounter = 0;
 let awaitFeedbackCounter = 0;
 let doneCounter = 0;
+let assignedContacts = [];
 
 // _________________________________________________
 // TODO: THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
@@ -193,7 +194,7 @@ function renderEditTask(i) {
                        <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" onclick="hideAssignedDropdown()" alt="" />
                    </div>
                    <div id="assignedContacts">
-                   ${renderAssignedContactsPopUp(i)}
+                   ${initRenderAssignedContacts(i)}
                    </div>
                    <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none"></div>
                    
@@ -228,84 +229,9 @@ function getEditedTask(i) {
    tasks[i].name = editedName;
    tasks[i].description = editedDescription;
    tasks[i].due_date = editedDueDate;
+   tasks[i].assigned_user = assignedContacts;
    editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(i);
    renderTasksIntoColumns();
-}
-
-// Edit-Task-Form-functions ASSIGNED USER
-
-// function renderAssignedContacts() {
-//    let content = document.getElementById("assignedContacts");
-//    content.innerHTML = "";
-//    for (let i = 0; i < assignedContacts.length; i++) {
-//       const contact = assignedContacts[i];
-//       content.innerHTML += `
-//       <div class="assigned-contacts-img" style="background-color: ${contact.color}; color: white">
-//       ${contact.first_two_letters}
-//     </div>
-//       `;
-//    }
-// }
-
-function renderAssignedContactsPopUp(i) {
-   let assignedUser = "";
-   tasks[i].assigned_user.forEach((user) => {
-      user_id = getUserIdByName(user.name);
-      let assignedUserColor = getColorAssignedUser(user.name);
-      assignedUser += `
-       <div class="assigned-contacts-img" style="background-color: ${assignedUserColor}; color:white;">${user.first_two_letters}</div>
-       `;
-   });
-
-   return assignedUser;
-}
-
-//
-// HIER GEHTS WEITER
-// Noch habe ich nur einen assigned markiert - das muss richtig in die Schleife eingebaut werden
-// style="color: red;"
-//
-
-function renderContactsDropdownPopUpEdit(i) {
-   let dropdown = document.getElementById("assignedDropdown");
-   dropdown.innerHTML = "";
-
-   let imgSrc = "./assets/img/check_btn.png";
-   let imgSrcChecked = "./assets/img/checked_btn_white_svg.svg";
-   tasks[i].assigned_user.forEach((user) => {
-      assigned_user_id = getUserIdByName(user.name);
-   });
-   for (let i = 0; i < contacts.length; i++) {
-      let assigned_user_id;
-
-      if (assigned_user_id === contacts[i].id) {
-         dropdown.innerHTML += `
-         <div id="contact${contacts[i].id}" class="assigned-to-contact" onclick="markContact(${contacts[i].id}, ${i})">
-           <div class="contact-img-name" >
-             <div class="two-letters-img" style="background-color: ${contacts[i].color}; color: white;">
-               ${contacts[i].first_two_letters}
-             </div>
-             <span>${contacts[i].name}</span>
-           </div>
-           <img id="contactCheckBtn${contacts[i].id}" class="check-btn-img" src="${imgSrc}" alt="" />
-         </div>`;
-      } else {
-         dropdown.innerHTML += `
-         <div id="contact${contacts[i].id}" class="assigned-to-contact" onclick="markContact(${contacts[i].id}, ${i})">
-         <div class="contact-img-name" >
-       <div class="two-letters-img" style="background-color: ${contacts[i].color}; color: white;">
-         ${contacts[i].first_two_letters}
-       </div>
-       <span>${contacts[i].name}</span>
-     </div>
-     <img id="contactCheckBtn${contacts[i].id}" class="check-btn-img" src="${imgSrcChecked}" alt="" />
-   </div>`;
-      }
-   }
-}
-function getUserIdByName(userName) {
-   const user = contacts.find((user) => user.name.includes(userName));
-   return user.id;
 }
 
 // Edit-Task-Form-functions

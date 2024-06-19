@@ -249,8 +249,6 @@ header span {
 /**************************/
 @media only screen and (max-width: 840px) {
 
-   header {}
-
    header span {
       padding: 0;
       display: none;
@@ -277,7 +275,6 @@ header span {
 
    .logo-header-mobile {
       height: 36px;
-      width: 36px;
       padding-left: 20px;
       display: none;
    }

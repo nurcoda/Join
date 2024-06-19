@@ -223,6 +223,7 @@
 .task-member {
    display: flex;
    gap: -10px;
+   flex-wrap: wrap;
 }
 
 .task-member-icon {
