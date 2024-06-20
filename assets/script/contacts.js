@@ -1,32 +1,36 @@
 let Test = "./assets/script/data.js";
 let selectedContactIndex = null;
 
-function groupAndDisplayContacts() {
+function init() {
+   setTimeout(() => {
+      renderContact();
+   }, 1000);
+}
 
+function groupAndDisplayContacts() {
    const sortedContacts = contacts.sort((a, b) => {
       if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
       return 0;
-
    });
    groupContacts(sortedContacts);
 }
 function groupContacts(sortedContacts) {
    const groupedContacts = {};
-   sortedContacts.forEach(contact => {
+   sortedContacts.forEach((contact) => {
       const firstLetter = contact.name[0].toUpperCase();
       if (!groupedContacts[firstLetter]) {
          groupedContacts[firstLetter] = [];
       }
       groupedContacts[firstLetter].push(contact);
    });
-   let containerContent = '';
+   let containerContent = "";
    for (const letter in groupedContacts) {
       containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
-      groupedContacts[letter].forEach(contact => {
-         let i = contacts.findIndex(c => c.id === contact.id);
+      groupedContacts[letter].forEach((contact) => {
+         let i = contacts.findIndex((c) => c.id === contact.id);
          let avatar = renderAvatar(i, contact.color);
-         const highlightClass = (i === selectedContactIndex) ? 'highlight' : '';
+         const highlightClass = i === selectedContactIndex ? "highlight" : "";
          containerContent += `
                <div class="contact ${highlightClass}" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
                    <div id="contact-${i}" class="contactDetails">
@@ -57,13 +61,13 @@ function highlightContact(index) {
    if (selectedContactIndex !== null) {
       const previousElement = document.getElementById(`contact-${selectedContactIndex}`);
       if (previousElement) {
-         previousElement.classList.remove('highlight');
+         previousElement.classList.remove("highlight");
       }
    }
    selectedContactIndex = index;
    const newElement = document.getElementById(`contact-${selectedContactIndex}`);
    if (newElement) {
-      newElement.classList.add('highlight');
+      newElement.classList.add("highlight");
    }
 }
 
@@ -86,7 +90,6 @@ function colorAvatar(i, color) {
    return `<div style="background-color: ${color}; width: 40px; height: 40px; border-radius: 50%;"></div>`;
 }
 
-
 function renderAvatar(i, avatar) {
    const username = contacts[i]["name"];
    const firstNameInitial = username[0];
@@ -99,11 +102,11 @@ function renderContactCardInfo(i) {
    let avatar;
    avatar = renderAvatar(i, avatar); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
    let phone = contacts[i].phone;
-   let x = document.getElementById('headAndContact');
-   if (!phone.startsWith('+')) {
-      phone = '+' + phone;
+   let x = document.getElementById("headAndContact");
+   if (!phone.startsWith("+")) {
+      phone = "+" + phone;
    }
-      contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
+   contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
       <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
       <div>
          <div class="contact-card-name">${contacts[i].name}</div>
@@ -127,13 +130,13 @@ function renderContactCardInfo(i) {
          <div class="contact-info-phone">${`+` + contacts[i].phone}</div>
       </div>
    </div>`;
-document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
-document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
-deleteContact(i);
-});
-if (window.getComputedStyle(x).display==="none"){
-   openPopUp();
-   popUpBackground.innerHTML = `<div class="contact-card-name-container-mobile">
+   document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
+   document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
+      deleteContact(i);
+   });
+   if (window.getComputedStyle(x).display === "none") {
+      openPopUp();
+      popUpBackground.innerHTML = `<div class="contact-card-name-container-mobile">
     <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
    <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
    <div>
@@ -158,12 +161,11 @@ if (window.getComputedStyle(x).display==="none"){
 </div>
 </div>`;
 
-
-document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
-document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
-deleteContact(i);
-}); //löscht die Contact seite
-} //löscht die Contact seite
+      document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
+      document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
+         deleteContact(i);
+      }); //löscht die Contact seite
+   } //löscht die Contact seite
 }
 
 //** Helper Functions */
@@ -183,14 +185,14 @@ function deleteContact(index) {
    const elementToDelete = document.getElementById(`contact-${index}`);
    if (elementToDelete) {
       if (index === selectedContactIndex) {
-         elementToDelete.classList.remove('highlight');
+         elementToDelete.classList.remove("highlight");
          selectedContactIndex = null; // oder setze auf einen anderen gültigen Index
       }
       elementToDelete.remove();
    }
    contacts.splice(index, 1);
    renderContact();
-   document.getElementById('contactCardBigContainer').innerHTML = "";
+   document.getElementById("contactCardBigContainer").innerHTML = "";
 }
 //**Add to Contacts */
 
@@ -274,22 +276,22 @@ function renderAddContactCardInfo() {
          </div>
       </div>
    </div>
-   `
+   `;
 }
 
 function editSave(i) {
-   let name = document.getElementById('edit-input-field-name').value;  // Liest die geänderten Werte aus den Eingabefeldern
-   let email = document.getElementById('edit-input-field-mail').value;
-   let phone = document.getElementById('edit-input-field-phone').value;
-   if (phone.startsWith('+')) {
+   let name = document.getElementById("edit-input-field-name").value; // Liest die geänderten Werte aus den Eingabefeldern
+   let email = document.getElementById("edit-input-field-mail").value;
+   let phone = document.getElementById("edit-input-field-phone").value;
+   if (phone.startsWith("+")) {
       phone = phone.substring(1); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
    }
-   contacts[i].name = name;  // Aktualisiert die Daten im contacts Array
+   contacts[i].name = name; // Aktualisiert die Daten im contacts Array
    contacts[i].email = email;
    contacts[i].phone = phone;
    closePopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
-   renderContactCardInfo(i); // ruft nochmal die Funktion aus 
+   renderContactCardInfo(i); // ruft nochmal die Funktion aus
    groupAndDisplayContacts(); // zum speichern wir diese funktion erneut aufgerufen
 }
 

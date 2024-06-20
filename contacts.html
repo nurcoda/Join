@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Join</title>
+      <link rel="stylesheet" href="./assets/css/style.css" />
+      <link rel="stylesheet" href="./assets/css/contacts.css" />
+      <script src="assets/script/data.js" defer></script>
+      <script src="assets/script/script.js" defer></script>
+      <script src="assets/script/contacts.js" defer></script>
+   </head>
 
-<head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>Join</title>
-   <link rel="stylesheet" href="./assets/css/style.css" />
-   <link rel="stylesheet" href="./assets/css/contacts.css" />
-   <script src="assets/script/data.js" defer></script>
-   <script src="assets/script/script.js" defer></script>
-   <script src="assets/script/contacts.js" defer></script>
-</head>
+   <body onload="includeHTML(); init()">
+      <div w3-include-html="./assets/templates/header.html"></div>
+      <div w3-include-html="./assets/templates/sitebar.html"></div>
 
-<body onload="includeHTML(); renderContact()">
-   <div w3-include-html="./assets/templates/header.html"></div>
-   <div w3-include-html="./assets/templates/sitebar.html"></div>
+      <!-- Add contact Popup -->
+      <div class="pop-up-container-background d-none" id="popUpBackground"></div>
 
-   <!-- Add contact Popup -->
-   <div class="pop-up-container-background d-none" id="popUpBackground"></div>
-
-   <!-- Main Content -->
-   <div class="content">
-      <div id="contactList" class="contactList">
-         <div class="buttonWrapper">
-            <button class="addContactBtn" onclick="openPopUp()">
-               Add new Conatct <img src="./assets/img/person_add_icon.png" alt="" />
-            </button>
-            
+      <!-- Main Content -->
+      <div class="content">
+         <div id="contactList" class="contactList">
+            <div class="buttonWrapper">
+               <button class="addContactBtn" onclick="openPopUp()">
+                  Add new Conatct <img src="./assets/img/person_add_icon.png" alt="" />
+               </button>
+            </div>
+         </div>
+         <div id="headAndContact" class="headAndContact">
+            <div class="headline">
+               <h1>Contacts</h1>
+               <!-- <div class="seperationLine"></div> -->
+               <span class="subline">Better with a Team</span>
+            </div>
+            <div id="contactCardBigContainer" class="contact-card-big-container"></div>
          </div>
       </div>
-      <div id="headAndContact" class="headAndContact">
-         <div class="headline">
-            <h1>Contacts</h1>
-            <!-- <div class="seperationLine"></div> -->
-            <span class="subline">Better with a Team</span>
-         </div>
-         <div id="contactCardBigContainer" class="contact-card-big-container"></div>
-      </div>
-   </div>
-</body>
-
+   </body>
 </html>
