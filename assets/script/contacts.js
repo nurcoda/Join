@@ -70,10 +70,10 @@ function highlightContact(index) {
 function renderContact() {
    document.getElementById("contactList").innerHTML = `
        <div class="buttonWrapper">
-           <button class="addContactBtn" onclick="renderAddContactCardInfo(); openPopUp()">
+           <button class="addContactBtn" onclick="renderAddContactCardInfo(); openPopUP()">
                Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
            </button>
-           <button class="addContactBtnMobile" onclick="openPopUp()"
+           <button class="addContactBtnMobile" onclick="renderAddContactCardInfo()"
                  <img src="./assets/img/person_add_icon.png" alt="" />
            </button>
        </div>
@@ -211,6 +211,7 @@ function closePopUpByBtn() {
 }
 
 function renderEditContactCardInfo(i) {
+   openPopUp();
    let avatar;
    avatar = renderAvatar(i, avatar);
    popUpBackground.innerHTML = `<div class="edit-contact-pop-up" id="editContentPopUp">
@@ -243,6 +244,7 @@ function renderEditContactCardInfo(i) {
 }
 
 function renderAddContactCardInfo() {
+   openPopUp();
    popUpBackground.innerHTML = `
    <div class="add-contact-pop-up" id="contentPopUp">
          <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
