@@ -121,11 +121,15 @@ function deleteSubtask(i) {
 // function renderEditSubtask() {
 
 function showAssignedDropdown() {
+  const assignedDiv = document.querySelector(".assigned-to-div");
+  assignedDiv.style.zIndex = 8;
   document.getElementById("assignedDropdown").classList.remove("d-none");
   showOpenedDropdownIcon();
 }
 
 function hideAssignedDropdown() {
+  const assignedDiv = document.querySelector(".assigned-to-div");
+  assignedDiv.style.zIndex = 5;
   event.stopPropagation();
   document.getElementById("assignedDropdown").classList.add("d-none");
   hideOpenedDropdownIcon();
@@ -296,13 +300,15 @@ function formatDueDate(dueDate) {
   return dueDate.split("-").reverse().join("/");
 }
 
-function addTask() {
+// Funktion, um eine neue Aufgabe hinzuzufügen und sie gleichzeitig in Firebase zu speichern
+async function addTask() {
+  event.preventDefault(); // Verhindert das Standardverhalten des Formulars
   let title = document.getElementById("titleInput").value;
   let newId = generateId();
   let description = document.getElementById("descriptionText").value;
   let category = document.getElementById("categorySelection").innerHTML;
   let dueDate = document.getElementById("dueDate").value;
-  let formattedDueDate = formatDueDate(dueDate); // Format the date here
+  let formattedDueDate = formatDueDate(dueDate);
 
   // Dynamisch zugewiesene Kontakte aus assignedContacts Array
   let assignedUsers = assignedContacts.map((contact) => ({
@@ -322,15 +328,39 @@ function addTask() {
     description: description,
     category: category,
     priority: currentButtonPrio,
-    due_date: formattedDueDate, // Use the formatted date here
+    due_date: formattedDueDate,
     state: "todo",
     assigned_user: assignedUsers,
     subtasks: subtasks,
   };
 
+  // Aufgabe zum lokalen Array hinzufügen
   tasks.push(newTask);
+
+  // Aufgabe in Firebase speichern
+  await updateData(`tasks/${newId}`, newTask);
+
   console.log(tasks);
+
+  window.location.reload();
+
+  
 }
+
+// Funktion zum Aktualisieren der Daten in Firebase
+async function updateData(path, data) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  let responseAsJson = await response.json();
+  console.log(responseAsJson);
+}
+
 
 function generateId() {
   let generatedId;
@@ -358,3 +388,107 @@ function setDefaultDate() {
 
   document.getElementById("dueDate").value = formattedDate;
 }
+
+
+
+
+
+
+
+const display = document.querySelector(".calendar-display");
+const days = document.querySelector(".calendar-days");
+const previous = document.querySelector(".calendar-prev");
+const next = document.querySelector(".calendar-next");
+const selected = document.querySelector(".calendar-selected");
+
+const date = new Date();
+
+let year = date.getFullYear();
+let month = date.getMonth();
+
+function displayCalendar() {
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const firstDayIndex = firstDay.getDay();
+  const numberOfDays = lastDay.getDate();
+
+  const formattedDate = date.toLocaleString("en-US", {
+    month: "long",
+    year: "numeric"
+  });
+
+  display.innerHTML = `${formattedDate}`;
+
+  for (let x = 1; x <= firstDayIndex; x++) {
+    const div = document.createElement("div");
+    div.innerHTML = "";
+
+    days.appendChild(div);
+  }
+
+  for (let i = 1; i <= numberOfDays; i++) {
+    const div = document.createElement("div");
+    const currentDate = new Date(year, month, i);
+
+    div.dataset.date = currentDate.toDateString();
+
+    div.innerHTML = i;
+    days.appendChild(div);
+    if (
+      currentDate.getFullYear() === new Date().getFullYear() &&
+      currentDate.getMonth() === new Date().getMonth() &&
+      currentDate.getDate() === new Date().getDate()
+    ) {
+      div.classList.add("calendar-current-date");
+    }
+  }
+}
+
+// Call the function to display the calendar
+displayCalendar();
+
+previous.addEventListener("click", () => {
+  days.innerHTML = "";
+  selected.innerHTML = "";
+
+  if (month < 0) {
+    month = 11;
+    year = year - 1;
+  }
+
+  month = month - 1;
+
+  date.setMonth(month);
+
+  displayCalendar();
+  displaySelected();
+});
+
+next.addEventListener("click", () => {
+  days.innerHTML = "";
+  selected.innerHTML = "";
+
+  if (month > 11) {
+    month = 0;
+    year = year + 1;
+  }
+
+  month = month + 1;
+  date.setMonth(month);
+
+  displayCalendar();
+  displaySelected();
+});
+
+function displaySelected() {
+  const dayElements = document.querySelectorAll(".calendar-days div");
+  dayElements.forEach((day) => {
+    day.addEventListener("click", (e) => {
+      const selectedDate = e.target.dataset.date;
+      selected.innerHTML = `Selected Date : ${selectedDate}`;
+    });
+  });
+}
+displaySelected();
+
+

@@ -6,9 +6,10 @@
     <title>Join</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/addTask.css" />
-    <script src="assets/script/testData.js" defer></script>
+    <script src="assets/script/data.js" defer></script>
     <script src="./assets/script/script.js" defer></script>
     <script defer src="./assets/script/addTask.js"></script>
+    <script defer src="./assets/script/addtaskdata.js"></script>
   </head>
   <body onload="includeHTML(), setDefaultPriority(), setDefaultDate()">
     <div w3-include-html="./assets/templates/header.html"></div>
@@ -16,7 +17,7 @@
 
     <div class="main-container">
       <h2>Add Task</h2>
-      <form action="" class="add-task-form">
+      <form action="" class="add-task-form" onsubmit="addTask(event)">
         <div class="add-task-left">
           <label>Title<span class="asterisk">*</span></label>
 
@@ -38,8 +39,41 @@
         </div>
         <div class="seperator"></div>
         <div class="add-task-right">
+          
           <label for="dueDate">Due date<span class="asterisk">*</span></label>
           <input id="dueDate" class="date-input" type="date" required />
+          
+
+          <div class="unique-calendar d-none">
+            <div class="calendar-container">
+              <div class="calendar">
+                <div class="calendar-header">
+                  <pre class="calendar-prev">◀</pre>
+                  
+                  <div class="calendar-header-display">
+                    <p class="calendar-display"></p>
+                  </div>
+          
+                  <pre class="calendar-next">▶</pre>
+                </div>
+          
+                <div class="calendar-week">
+                  <div>Su</div>
+                  <div>Mo</div>
+                  <div>Tu</div>
+                  <div>We</div>
+                  <div>Th</div>
+                  <div>Fr</div>
+                  <div>Sa</div>
+                </div>
+                <div class="calendar-days"></div>
+              </div>
+              <div class="calendar-display-selected">
+                <p class="calendar-selected"></p>
+              </div>
+            </div>
+          </div>
+
           <label class="margin-top-16px">Prio</label>
           <div class="prio-buttons">
             <button type="button" id="urgentButton" onclick="setPrioButton('urgent')">
@@ -86,7 +120,7 @@
                 />
               </svg>
             </button>
-            <button type="submit" onsubmit="addTask()" class="create-task-button">
+            <button type="Submit" class="create-task-button">
               Create Task <img src="./assets/img/check_white_svg.svg" alt="" />
             </button>
           </div>
