@@ -24,7 +24,15 @@
          <div class="board-search-add-wrapper distances">
             <h1 class="board-headline">Board</h1>
             <div class="search-add-wrapper">
-               <input type="search" name="search-task" class="search-task" id="searchTask" placeholder="find Task" />
+               <input
+                  type="search"
+                  oninput="findTaskInBoard()"
+                  name="search-task"
+                  class="search-task"
+                  id="searchTask"
+                  placeholder="find Task"
+                  autocomplete="off"
+               />
                <div class="add-task-btn" onclick="openAddTaskPopUp()">
                   Add task <img src="./assets/img/add_icon.png" alt="" />
                </div>

@@ -273,3 +273,16 @@ function hideEditIcons(i) {
    let icons = document.getElementById(`subtask${i}Icons`);
    icons.classList.add("d-none");
 }
+
+// __________________________________________________________________
+//    Find Task
+
+function findTaskInBoard() {
+   let searchInput = document.getElementById("searchTask").value.trim().toLowerCase();
+
+   for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].name.toLowerCase().includes(searchInput)) {
+         console.log(tasks[i].name);
+      }
+   }
+}
