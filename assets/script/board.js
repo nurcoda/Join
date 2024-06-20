@@ -75,16 +75,37 @@ function renderTasksIntoColumns() {
 
 // render subtasks bar
 
+// function renderSubTasksToHTML(i) {
+//    let subTasksTemplate = "";
+//    let calculatedWidth = calcWidthOfProgressBar(i);
+//    let subTasksDone = countSubTask(i);
+//    subTasksTemplate += `
+//                   <span class="subtask-bar-half" style="width: ${calculatedWidth}%"></span>
+//                      </div>
+//                   <div class="subtask-counter">${subTasksDone}/${tasks[i].subtasks.length} Subtasks</div>
+//                   `;
+
+//    return subTasksTemplate;
+// }
+
 function renderSubTasksToHTML(i) {
    let subTasksTemplate = "";
    let calculatedWidth = calcWidthOfProgressBar(i);
    let subTasksDone = countSubTask(i);
-   subTasksTemplate += `   
-                  <span class="subtask-bar-half" style="width: ${calculatedWidth}%"></span>
-                     </div>
-                  <div class="subtask-counter">${subTasksDone}/${tasks[i].subtasks.length} Subtasks</div>    
-                  `;
 
+   if (tasks[i] && tasks[i].subtasks && Array.isArray(tasks[i].subtasks) && tasks[i].subtasks.length > 0) {
+      subTasksTemplate += `
+               <span class="subtask-bar-half" style="width: ${calculatedWidth}%"></span>
+               </div>
+                <div class="subtask-counter">${subTasksDone}/${tasks[i].subtasks.length} Subtasks</div>
+             `;
+   } else {
+      subTasksTemplate += `
+               <span class="subtask-bar-half" style="width: 0%"></span>
+                </div>
+                <div class="subtask-counter">0/0 Subtasks</div>
+       `;
+   }
    return subTasksTemplate;
 }
 
@@ -92,10 +113,21 @@ function renderSubTasksToHTML(i) {
 
 function renderAssignedUserToHTML(i) {
    let assignedUserTemplate = "";
-   tasks[i].assigned_user.forEach((user) => {
-      let assignedUserBackgroundColor = getColorAssignedUser(user.name);
-      assignedUserTemplate += `<div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${user.first_two_letters}</div>`;
-   });
+
+   if (
+      tasks[i] &&
+      tasks[i].assigned_user &&
+      Array.isArray(tasks[i].assigned_user) &&
+      tasks[i].assigned_user.length > 0
+   ) {
+      tasks[i].assigned_user.forEach((user) => {
+         let assignedUserBackgroundColor = getColorAssignedUser(user.name);
+         assignedUserTemplate += `<div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${user.first_two_letters}</div>`;
+      });
+   } else {
+      assignedUserTemplate = ``;
+   }
+
    return assignedUserTemplate;
 }
 
@@ -110,17 +142,25 @@ function getColorAssignedUser(name) {
 
 function countSubTask(i) {
    let subTasksDone = 0;
-   tasks[i].subtasks.forEach((subtask) => {
-      if (subtask.subtask_isdone) {
-         subTasksDone++;
-      }
-   });
+   if (tasks[i] && tasks[i].subtasks && Array.isArray(tasks[i].subtasks)) {
+      tasks[i].subtasks.forEach((subtask) => {
+         if (subtask.subtask_isdone) {
+            subTasksDone++;
+         }
+      });
+   }
    return subTasksDone;
 }
 
 function calcWidthOfProgressBar(i, calculatedWidth) {
-   subTasksDone = countSubTask(i);
-   calculatedWidth = (subTasksDone * 100) / tasks[i].subtasks.length;
+   // Überprüfen, ob die Aufgabe überhaupt Subtasks hat
+   if (tasks[i] && tasks[i].subtasks && Array.isArray(tasks[i].subtasks) && tasks[i].subtasks.length > 0) {
+      subTasksDone = countSubTask(i);
+      calculatedWidth = (subTasksDone * 100) / tasks[i].subtasks.length;
+   } else {
+      calculatedWidth = 0; // Wenn keine Subtasks vorhanden sind, Breite auf 0 setzen
+   }
+
    return calculatedWidth;
 }
 
@@ -308,15 +348,25 @@ function deleteTask(id) {
 
 function popUpRenderAssignedUser(i) {
    let assignedUserTemplate = "";
-   tasks[i].assigned_user.forEach((user) => {
-      let assignedUserBackgroundColor = getColorAssignedUser(user.name);
-      assignedUserTemplate += `  
-      <div class="popup-user">
-         <div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${user.first_two_letters}</div>
-         ${user.name}
-      </div>
-      `;
-   });
+   if (
+      tasks[i] &&
+      tasks[i].assigned_user &&
+      Array.isArray(tasks[i].assigned_user) &&
+      tasks[i].assigned_user.length > 0
+   ) {
+      tasks[i].assigned_user.forEach((user) => {
+         let assignedUserBackgroundColor = getColorAssignedUser(user.name);
+         assignedUserTemplate += `  
+               <div class="popup-user">
+                   <div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${user.first_two_letters}</div>
+                   ${user.name}
+               </div>
+           `;
+      });
+   } else {
+      assignedUserTemplate = `<div class="popup-user">No assigned users</div>`;
+   }
+
    return assignedUserTemplate;
 }
 
@@ -337,16 +387,21 @@ function popUpCheckmarkIsDone(taskIndex, subtaskIndex) {
 
 function popUpRenderSubTasks(i) {
    let subTasksTemplate = "";
-   let subTaskDone;
-   tasks[i].subtasks.forEach((subtask, index) => {
-      subtask.subtask_isdone ? (subTaskDone = "task-done-state-checked") : (subTaskDone = "");
-      subTasksTemplate += `   
-      <div class="popup-subtask-task" onclick="popUpCheckmarkIsDone(${i}, ${index})">
-         <div class="task-done-state ${subTaskDone}"></div>
-         <div class="popup-subtask-name">${subtask.subtask_name}</div>
-      </div>    
-      `;
-   });
+   if (tasks[i] && tasks[i].subtasks && Array.isArray(tasks[i].subtasks) && tasks[i].subtasks.length > 0) {
+      let subTaskDone;
+      tasks[i].subtasks.forEach((subtask, index) => {
+         subtask.subtask_isdone ? (subTaskDone = "task-done-state-checked") : (subTaskDone = "");
+         subTasksTemplate += `   
+               <div class="popup-subtask-task" onclick="popUpCheckmarkIsDone(${i}, ${index})">
+                   <div class="task-done-state ${subTaskDone}"></div>
+                   <div class="popup-subtask-name">${subtask.subtask_name}</div>
+               </div>    
+           `;
+      });
+   } else {
+      subTasksTemplate = `<div class="popup-subtask-task">No subtasks</div>`;
+   }
+
    return subTasksTemplate;
 }
 

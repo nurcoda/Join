@@ -5,17 +5,27 @@
 function initRenderAssignedContacts(i) {
    let assignedUserHTML = "";
    assignedContacts = [];
-   tasks[i].assigned_user.forEach((user) => {
-      let user_id = getUserIdByName(user.name);
-      let assignedUser = getUserObjectById(user_id);
-      assignedContacts.push(assignedUser);
-      let assignedUserColor = getColorAssignedUser(user.name);
-      assignedUserHTML += `
-       <div class="assigned-contacts-img" style="background-color: ${assignedUserColor}; color:white;" data-id="${user_id}">
-          ${user.first_two_letters}
-       </div>
-       `;
-   });
+   if (
+      tasks[i] &&
+      tasks[i].assigned_user &&
+      Array.isArray(tasks[i].assigned_user) &&
+      tasks[i].assigned_user.length > 0
+   ) {
+      tasks[i].assigned_user.forEach((user) => {
+         let user_id = getUserIdByName(user.name);
+         let assignedUser = getUserObjectById(user_id);
+         assignedContacts.push(assignedUser);
+         let assignedUserColor = getColorAssignedUser(user.name);
+         assignedUserHTML += `
+               <div class="assigned-contacts-img" style="background-color: ${assignedUserColor}; color:white;" data-id="${user_id}">
+                   ${user.first_two_letters}
+               </div>
+           `;
+      });
+   } else {
+      assignedUserHTML = ``;
+   }
+
    return assignedUserHTML;
 }
 
@@ -49,30 +59,40 @@ function renderContactsDropdownPopUpEdit(i) {
    let dropdown = document.getElementById("assignedDropdown");
    dropdown.innerHTML = "";
 
+   // Überprüfen, ob tasks[i] definiert ist und ob es assigned_user gibt
+
    for (let j = 0; j < contacts.length; j++) {
       let isAssigned = false;
       let imgSrc = "./assets/img/check_btn.png";
-      for (let k = 0; k < tasks[i].assigned_user.length; k++) {
-         let assigned_user_id = getUserIdByName(tasks[i].assigned_user[k].name);
-         if (assigned_user_id === contacts[j].id) {
-            isAssigned = true;
-            imgSrc = "./assets/img/checked_btn_white_svg.svg";
-            break;
+
+      if (
+         tasks[i] &&
+         tasks[i].assigned_user &&
+         Array.isArray(tasks[i].assigned_user) &&
+         tasks[i].assigned_user.length > 0
+      ) {
+         for (let k = 0; k < tasks[i].assigned_user.length; k++) {
+            let assigned_user_id = getUserIdByName(tasks[i].assigned_user[k].name);
+            if (assigned_user_id === contacts[j].id) {
+               isAssigned = true;
+               imgSrc = "./assets/img/checked_btn_white_svg.svg";
+               break;
+            }
          }
       }
 
       dropdown.innerHTML += `
-         <div id="contact${contacts[j].id}" class="assigned-to-contact ${
+               <div id="contact${contacts[j].id}" class="assigned-to-contact ${
          isAssigned ? "marked" : ""
       }" onclick="markContactEditPopUp(${contacts[j].id}, ${j})">
-            <div class="contact-img-name">
-               <div class="two-letters-img" style="background-color: ${contacts[j].color}; color: white;">
-                  ${contacts[j].first_two_letters}
-               </div>
-               <span>${contacts[j].name}</span>
-            </div>
-            <img id="contactCheckBtn${contacts[j].id}" class="check-btn-img" src="${imgSrc}" alt="" />
-         </div>`;
+                   <div class="contact-img-name">
+                       <div class="two-letters-img" style="background-color: ${contacts[j].color}; color: white;">
+                           ${contacts[j].first_two_letters}
+                       </div>
+                       <span>${contacts[j].name}</span>
+                   </div>
+                   <img id="contactCheckBtn${contacts[j].id}" class="check-btn-img" src="${imgSrc}" alt="" />
+               </div>`;
    }
 }
 
@@ -169,6 +189,9 @@ function showSubtasksIcons() {
 function addNewSubtaskEditPopUp(i) {
    let input = document.getElementById("subtasksInput").value;
    let newSubTask = { "subtask_name": input, "subtask_isdone": false };
+   if (!tasks[i].subtasks) {
+      tasks[i].subtasks = [];
+   }
    tasks[i].subtasks.push(newSubTask);
    let subtasksListContainer = document.getElementById("subtasksList");
    subtasksListContainer.innerHTML = `${renderSubtasksEditPopUp(i)}`;
@@ -176,16 +199,26 @@ function addNewSubtaskEditPopUp(i) {
 
 function renderSubtasksEditPopUp(i) {
    let subtaskList = "";
-   for (let j = 0; j < tasks[i].subtasks.length; j++) {
-      let subTaskTitle = tasks[i].subtasks[j].subtask_name;
-      subtaskList += `<div class="edit-pop-up-subtask-wrapper" id="subtask${j}">&bull; ${subTaskTitle} 
-      <span class="edit-pop-up-btn-wrapper">
-       <span class="edit-subtask-edit-btn">
-      <img class="subtask-edit-btn" onclick="editSubtask(${i}, ${j}, '${subTaskTitle}')" src="./assets/img/edit_pen_icon.png" alt=""></span>
-      <span class="subtask-delete-btn" class="edit-subtask-delete-btn"><img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt=""></span>
-      </span>
-      </div>`;
+   if (tasks[i] && tasks[i].subtasks && Array.isArray(tasks[i].subtasks) && tasks[i].subtasks.length > 0) {
+      for (let j = 0; j < tasks[i].subtasks.length; j++) {
+         let subTaskTitle = tasks[i].subtasks[j].subtask_name;
+         subtaskList += `
+               <div class="edit-pop-up-subtask-wrapper" id="subtask${j}">
+                   &bull; ${subTaskTitle} 
+                   <span class="edit-pop-up-btn-wrapper">
+                       <span class="edit-subtask-edit-btn">
+                           <img class="subtask-edit-btn" onclick="editSubtask(${i}, ${j}, '${subTaskTitle}')" src="./assets/img/edit_pen_icon.png" alt="">
+                       </span>
+                       <span class="subtask-delete-btn edit-subtask-delete-btn">
+                           <img onclick="deleteSubtask(${i}, ${j})" src="./assets/img/delete_trashcan_icon.png" alt="">
+                       </span>
+                   </span>
+               </div>`;
+      }
+   } else {
+      subtaskList = ``;
    }
+
    return subtaskList;
 }
 
