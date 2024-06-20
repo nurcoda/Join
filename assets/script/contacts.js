@@ -1,4 +1,4 @@
-let Test = "./assets/script/testData.js";
+let Test = "./assets/script/data.js";
 let selectedContactIndex = null;
 
 function groupAndDisplayContacts() {
