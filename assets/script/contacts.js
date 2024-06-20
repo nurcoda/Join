@@ -73,6 +73,9 @@ function renderContact() {
            <button class="addContactBtn" onclick="renderAddContactCardInfo()">
                Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
            </button>
+           <button class="addContactBtnMobile" onclick="openPopUp()"
+                 <img src="./assets/img/person_add_icon.png" alt="" />
+           </button>
        </div>
    `;
    groupAndDisplayContacts();
@@ -96,37 +99,71 @@ function renderContactCardInfo(i) {
    let avatar;
    avatar = renderAvatar(i, avatar); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
    let phone = contacts[i].phone;
+   let x = document.getElementById('headAndContact');
    if (!phone.startsWith('+')) {
       phone = '+' + phone;
    }
-   contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
-            <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
-            <div>
-               <div class="contact-card-name">${contacts[i].name}</div>
-               <div class="edit-delete-container">
-                  <span class="edit-icon-wrapper" onclick="renderEditContactCardInfo(${i})" >
-                     <div class="edit-icon"></div><span class="edit-name">Edit</span>
-                  </span>
-                  <span class="delete-icon-wrapper">
-                     <div class="trash-icon"></div><span class="delete-name">Delete</span>
-                  </span>
-               </div>
-            </div>
+      contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
+      <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
+      <div>
+         <div class="contact-card-name">${contacts[i].name}</div>
+         <div class="edit-delete-container">
+            <span class="edit-icon-wrapper" onclick="renderEditContactCardInfo(${i})" >
+               <div class="edit-icon"></div><span class="edit-name">Edit</span>
+            </span>
+            <span class="delete-icon-wrapper">
+               <div class="trash-icon"></div><span class="delete-name">Delete</span>
+            </span>
          </div>
+      </div>
+   </div>
 
-         <div id="contact-card-info-container" class="contact-card-info-container">
-            <div class="headline-contact-information">Contact Information</div>
-            <div class="contact-card-info-wrapper">
-               <div class="contact-info-email-headline">Email</div>
-               <div class="contact-info-email">${contacts[i].email}</div>
-               <div class="contact-info-phone-headline">Phone</div>
-               <div class="contact-info-phone">${`+` + contacts[i].phone}</div>
-            </div>
-         </div>`;
-   document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
-   document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
-      deleteContact(i);
-   }); //löscht die Contact seite
+   <div id="contact-card-info-container" class="contact-card-info-container">
+      <div class="headline-contact-information">Contact Information</div>
+      <div class="contact-card-info-wrapper">
+         <div class="contact-info-email-headline">Email</div>
+         <div class="contact-info-email">${contacts[i].email}</div>
+         <div class="contact-info-phone-headline">Phone</div>
+         <div class="contact-info-phone">${`+` + contacts[i].phone}</div>
+      </div>
+   </div>`;
+document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
+document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
+deleteContact(i);
+});
+if (window.getComputedStyle(x).display==="none"){
+   openPopUp();
+   popUpBackground.innerHTML = `<div class="contact-card-name-container-mobile">
+    <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
+   <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
+   <div>
+      <div class="contact-card-name">${contacts[i].name}</div>
+      <div class="edit-delete-container-mobile">
+         <span class="edit-icon-wrapper" onclick="renderEditContactCardInfo(${i})" >
+            <div class="edit-icon"></div><span class="edit-name">Edit</span>
+         </span>
+         <span class="delete-icon-wrapper">
+            <div class="trash-icon"></div><span class="delete-name">Delete</span>
+         </span>
+      </div>
+   </div>
+   <div id="contact-card-info-container" class="contact-card-info-container-mobile">
+   <div class="headline-contact-information">Contact Information</div>
+   <div class="contact-card-info-wrapper">
+      <div class="contact-info-email-headline">Email</div>
+      <div class="contact-info-email">${contacts[i].email}</div>
+      <div class="contact-info-phone-headline">Phone</div>
+      <div class="contact-info-phone">${`+` + contacts[i].phone}</div>
+   </div>
+</div>
+</div>`;
+
+
+document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
+document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
+deleteContact(i);
+}); //löscht die Contact seite
+} //löscht die Contact seite
 }
 
 //** Helper Functions */
@@ -205,8 +242,38 @@ function renderEditContactCardInfo(i) {
    </div>`;
 }
 
-function renderAddContactCardInfo(i) {
-
+function renderAddContactCardInfo() {
+   openPopUp();
+   //    popUpBackground.innerHTML = `<div class="pop-up-container-background d-none" id="popUpBackground">
+   //       <div class="add-contact-pop-up" id="contentPopUp">
+   //          <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
+   //          <div class="popup-logo-headline-wrapper">
+   //             <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
+   //             <div class="popup-headline">Add contact</div>
+   //             <div class="popup-subline">Tasks are better with a team!</div>
+   //             <div class="underline-from-subline"></div>
+   //          </div>
+   //          <div class="contact-formular">
+   //             <img src="./assets/img/profile_img.svg" class="profile-img-add-contact" />
+   //             <form class="input-fields-add-contact">
+   //                <input id="input-field-name" class="input-field-name add-contact-form-input" placeholder="Name"
+   //                   type="text" />
+   //                <br />
+   //                <input id="input-field-mail" class="input-field-mail add-contact-form-input" placeholder="Email"
+   //                   type="text" /><br />
+   //                <input id="input-field-phone" class="input-field-phone add-contact-form-input" placeholder="Phone"
+   //                   type="text" />
+   //                <div class="add-contact-buttons-wrapper">
+   //                   <button class="cancel-btn add-contact-form-btn" onclick="closePopUpByBtn()">Cancel</button><button
+   //                      class="create-contact-btn add-contact-form-btn" onclick="addPersonToContact()">
+   //                      Create Contact
+   //                   </button>
+   //                </div>
+   //             </form>
+   //          </div>
+   //       </div>
+   //    </div>
+   // `
 }
 
 function editSave(i) {
@@ -225,39 +292,39 @@ function editSave(i) {
    groupAndDisplayContacts(); // zum speichern wir diese funktion erneut aufgerufen
 }
 
-function renderContactCardInfoMobile() {
-   let avatar;
-   avatar = renderAvatar(i, avatar); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
-   let phone = contacts[i].phone;
-   if (!phone.startsWith('+')) {
-      phone = '+' + phone;
-   }
-   contactCardBigContainerMobil.innerHTML = `<div class="contact-card-name-container">
-            <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
-            <div>
-               <div class="contact-card-name">${contacts[i].name}</div>
-               <div class="edit-delete-container">
-                  <span class="edit-icon-wrapper" onclick="renderEditContactCardInfo(${i})" >
-                     <div class="edit-icon"></div><span class="edit-name">Edit</span>
-                  </span>
-                  <span class="delete-icon-wrapper">
-                     <div class="trash-icon"></div><span class="delete-name">Delete</span>
-                  </span>
-               </div>
-            </div>
-         </div>
+// function renderContactCardInfoMobile() {
+// //   let avatar;
+//    avatar = renderAvatar(i, avatar); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
+//    let phone = contacts[i].phone;
+//    if (!phone.startsWith('+')) {
+//       phone = '+' + phone;
+//    }
+//    contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
+//             <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
+//             <div>
+//                <div class="contact-card-name">${contacts[i].name}</div>
+//                <div class="edit-delete-container">
+//                   <span class="edit-icon-wrapper" onclick="renderEditContactCardInfo(${i})" >
+//                      <div class="edit-icon"></div><span class="edit-name">Edit</span>
+//                   </span>
+//                   <span class="delete-icon-wrapper">
+//                      <div class="trash-icon"></div><span class="delete-name">Delete</span>
+//                   </span>
+//                </div>
+//             </div>
+//          </div>
 
-         <div id="contact-card-info-container" class="contact-card-info-container">
-            <div class="headline-contact-information">Contact Information</div>
-            <div class="contact-card-info-wrapper">
-               <div class="contact-info-email-headline">Email</div>
-               <div class="contact-info-email">${contacts[i].email}</div>
-               <div class="contact-info-phone-headline">Phone</div>
-               <div class="contact-info-phone">${`+` + contacts[i].phone}</div>
-            </div>
-         </div>`;
-   document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
-   document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
-      deleteContact(i);
-   }); //löscht die Contact seite
-}
+//          <div id="contact-card-info-container" class="contact-card-info-container">
+//             <div class="headline-contact-information">Contact Information</div>
+//             <div class="contact-card-info-wrapper">
+//                <div class="contact-info-email-headline">Email</div>
+//                <div class="contact-info-email">${contacts[i].email}</div>
+//                <div class="contact-info-phone-headline">Phone</div>
+//                <div class="contact-info-phone">${`+` + contacts[i].phone}</div>
+//             </div>
+//          </div>`;
+//    document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
+//    document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
+//       deleteContact(i);
+// }
+// }
