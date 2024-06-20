@@ -101,7 +101,11 @@ function renderAssignedUserToHTML(i) {
 
 function getColorAssignedUser(name) {
    let assignedUser = contacts.find((contact) => contact.name.toLowerCase().includes(name.toLowerCase()));
-   return assignedUser.color;
+   if (assignedUser) {
+      return assignedUser.color;
+   } else {
+      return "User not found"; // oder ein anderer Standardwert wie z.B. "defaultColor"
+   }
 }
 
 function countSubTask(i) {
