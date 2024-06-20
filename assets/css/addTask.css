@@ -192,6 +192,11 @@ button {
   align-items: center;
 }
 
+.assigned-contacts-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .assigned-contacts-img {
   height: 42px;
   width: 42px;
@@ -201,8 +206,7 @@ button {
   align-items: center;
   border: 2px solid white;
   cursor: pointer;
-  position: relative;
-  transition: transform 100ms ease-in-out;
+  transition: transform 100ms ease-in-out, opacity 100ms ease-in-out;
   z-index: 5; /* Ensure this is higher than other elements */
 }
 
@@ -215,21 +219,39 @@ button {
   border-radius: 5px;
   padding: 5px 10px;
   position: absolute;
-  bottom: 125%; 
+  bottom: 110%; 
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
   white-space: nowrap; 
+  z-index: 10; /* Ensure the tooltip is above other elements */
 }
 
-.assigned-contacts-img:hover {
+.assigned-contacts-wrapper:hover .assigned-contacts-img {
   transform: scale(1.05);
+  opacity: 0.7;
+  animation: subtle-pulse 1s infinite; /* Add subtle pulse animation */
 }
 
-.assigned-contacts-img:hover .tooltip {
+.assigned-contacts-wrapper:hover .tooltip {
   visibility: visible;
   opacity: 1;
 }
+
+@keyframes subtle-pulse {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+
+
 
 .marked {
   background-color: #2a3647; 

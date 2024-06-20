@@ -186,12 +186,9 @@ function addContactToAssigned(i) {
   renderAssignedContacts();
 }
 
-function removeContactFromAssigned(i) {
-  // Kontakt aus dem ursprünglichen Array 'contacts' holen
-  let contact = contacts[i];
-
+function removeContactFromAssignedById(contactId) {
   // Index des Kontakts im 'assignedContacts' Array finden
-  let index = assignedContacts.findIndex((c) => c.id === contact.id);
+  let index = assignedContacts.findIndex((c) => c.id === contactId);
 
   // Prüfen, ob der Kontakt gefunden wurde, und nur dann entfernen
   if (index !== -1) {
@@ -200,6 +197,7 @@ function removeContactFromAssigned(i) {
 
   // Aktualisieren der Anzeige
   renderAssignedContacts();
+  renderContacts(); // Aktualisieren des Dropdowns, um die Änderungen widerzuspiegeln
 }
 
 function renderAssignedContacts() {
@@ -208,13 +206,16 @@ function renderAssignedContacts() {
   for (let i = 0; i < assignedContacts.length; i++) {
     const contact = assignedContacts[i];
     content.innerHTML += `
-      <div class="assigned-contacts-img" style="background-color: ${contact.color}; color: white">
+      <div class="assigned-contacts-wrapper">
+        <div class="assigned-contacts-img" onclick="removeContactFromAssignedById(${contact.id})" style="background-color: ${contact.color}; color: white">
           ${contact.first_two_letters}
-          <span class="tooltip">${contact.name}</span>
+        </div>
+        <span class="tooltip">${contact.name}</span>
       </div>
-      `;
+    `;
   }
 }
+
 function markContact(contactId, i) {
   let contact = document.getElementById(`contact${contactId}`);
   let checkbox = document.getElementById(`contactCheckBtn${contactId}`);
@@ -232,9 +233,10 @@ function markContact(contactId, i) {
     contact.style.color = "black";
     contact.style.backgroundColor = "white";
     checkbox.src = "./assets/img/check_btn.png";
-    removeContactFromAssigned(i);
+    removeContactFromAssignedById(contactId);
   }
 }
+
 
 // category
 
