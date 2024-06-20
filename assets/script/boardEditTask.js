@@ -277,12 +277,16 @@ function hideEditIcons(i) {
 // __________________________________________________________________
 //    Find Task
 
+let matchedTasks = [];
+
 function findTaskInBoard() {
    let searchInput = document.getElementById("searchTask").value.trim().toLowerCase();
-
+   matchedTasks = [];
    for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].name.toLowerCase().includes(searchInput)) {
-         console.log(tasks[i].name);
+         matchedTasks.push(tasks[i]);
       }
    }
+   tasks = matchedTasks;
+   renderTasksIntoColumns();
 }
