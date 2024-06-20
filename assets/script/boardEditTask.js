@@ -156,3 +156,87 @@ function hideOpenedDropdownIcon() {
    document.getElementById("dropdown2").classList.add("d-none");
    document.getElementById("dropdown1").classList.remove("d-none");
 }
+
+// ___________________________________________
+//             SUBTASK SECTION
+// ___________________________________________
+
+function showSubtasksIcons() {
+   document.getElementById("subtasksPlusIcon").classList.add("d-none");
+   document.getElementById("subtasksInputIcons").classList.remove("d-none");
+}
+
+function addNewSubtaskEditPopUp(i) {
+   let input = document.getElementById("subtasksInput").value;
+   let newSubTask = { "subtask_name": input, "subtask_isdone": false };
+   tasks[i].subtasks.push(newSubTask);
+   let subtasksListContainer = document.getElementById("subtasksList");
+   subtasksListContainer.innerHTML = `${renderSubtasksEditPopUp(i)}`;
+}
+
+function renderSubtasksEditPopUp(i) {
+   let subtaskList = "";
+   for (let j = 0; j < tasks[i].subtasks.length; j++) {
+      let subTaskTitle = tasks[i].subtasks[j].subtask_name;
+      subtaskList += `<div class="edit-pop-up-subtask-wrapper" id="subtask${j}">&bull; ${subTaskTitle} 
+      <span class="edit-pop-up-btn-wrapper">
+       <span class="edit-subtask-edit-btn">
+      <img class="subtask-edit-btn" onclick="editSubtask(${i}, ${j}, '${subTaskTitle}')" src="./assets/img/edit_pen_icon.png" alt=""></span>
+      <span class="subtask-delete-btn" class="edit-subtask-delete-btn"><img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt=""></span>
+      </span>
+      </div>`;
+   }
+   return subtaskList;
+}
+
+// SUBTASKS
+
+function editSubtask(i, j, subTaskTitle) {
+   let subtask = document.getElementById(`subtask${j}`);
+   subtask.innerHTML = `
+   <div class="edit-subtask-div">
+     <input id="onEditSubtaskInput${j}" class="edit-subtask-input" value="${subTaskTitle}">
+   <div class="on-edit-subtask-icons">
+     <img onclick="deleteSubtask(${i}, ${j})" src="./assets/img/delete_trashcan_icon.png" alt="">
+     <div class="subtasks-seperator"></div>
+     <img onclick="saveEditedSubtask(${i}, ${j})" src="./assets/img/addtask_check.svg" alt="">
+   </div>`;
+   subtask.style.padding = "2px 0px 2px 0px";
+}
+
+function saveEditedSubtask(i, j) {
+   input = document.getElementById(`onEditSubtaskInput${j}`);
+   tasks[i].subtasks[j].subtask_name = input.value;
+   renderSubtasksAfterEdit(i, j);
+}
+
+function deleteSubtask(i, j) {
+   tasks[i].subtasks.splice(j, 1);
+   renderSubtasksAfterEdit(i, j);
+}
+
+function renderSubtasksAfterEdit(i, j) {
+   let subtasksList = document.getElementById("subtasksList");
+   subtasksList.innerHTML = "";
+   for (let j = 0; j < tasks[i].subtasks.length; j++) {
+      let subTaskTitle = tasks[i].subtasks[j].subtask_name;
+      subtasksList.innerHTML += `<div class="edit-pop-up-subtask-wrapper" id="subtask${j}">&bull; ${subTaskTitle} 
+      <span class="edit-pop-up-btn-wrapper">
+       <span class="edit-subtask-edit-btn">
+      <img class="subtask-edit-btn" onclick="editSubtask(${i}, ${j}, '${subTaskTitle}')" src="./assets/img/edit_pen_icon.png" alt=""></span>
+      <span class="subtask-delete-btn" class="edit-subtask-delete-btn"><img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt=""></span>
+      </span>
+      </div>`;
+   }
+}
+
+function showEditIcons(event, i) {
+   // let DivElement = event.target;
+   let icons = document.getElementById(`subtask${i}Icons`);
+   icons.classList.remove("d-none");
+}
+
+function hideEditIcons(i) {
+   let icons = document.getElementById(`subtask${i}Icons`);
+   icons.classList.add("d-none");
+}

@@ -198,7 +198,6 @@ function renderEditTask(i) {
                    ${initRenderAssignedContacts(i)}
                    </div>
                    <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none"></div>
-                   
                    <label class="margin-top-16px">Subtasks</label>
                    <div id="subtasksDiv" class="subtasks-div" onclick="showSubtasksIcons()">
                        <input id="subtasksInput" min="1" type="text" placeholder="Add new subtask" />
@@ -209,11 +208,11 @@ function renderEditTask(i) {
                            <img src="./assets/img/addtask_check.svg" class="subtasks-icon" onclick="addNewSubtaskEditPopUp(${i})" alt="" />
                        </div>
                    </div>
-                   <div>
+                   
                        <ul id="subtasksList">
                            ${renderSubtasksEditPopUp(i)}
                        </ul>
-                   </div>
+                  
                </div>
                <button class="ok-btn-edit-task" type="submit">Ok<img src="./assets/img/checkmark_white.png" alt=""></button>
            </form>
@@ -233,64 +232,6 @@ function getEditedTask(i) {
    tasks[i].assigned_user = assignedContacts;
    editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(i);
    renderTasksIntoColumns();
-}
-
-// Edit-Task-Form-functions
-
-function showSubtasksIcons() {
-   document.getElementById("subtasksPlusIcon").classList.add("d-none");
-   document.getElementById("subtasksInputIcons").classList.remove("d-none");
-}
-
-function addNewSubtaskEditPopUp(i) {
-   let input = document.getElementById("subtasksInput").value;
-   let newSubTask = { "subtask_name": input, "subtask_isdone": false };
-   tasks[i].subtasks.push(newSubTask);
-   let subtasksListContainer = document.getElementById("subtasksList");
-   subtasksListContainer.innerHTML = `${renderSubtasksEditPopUp(i)}`;
-}
-
-function renderSubtasksEditPopUp(i) {
-   let subtaskList = "";
-   for (let j = 0; j < tasks[i].subtasks.length; j++) {
-      subtaskList += `<li class="edit-pop-up-subtask-wrapper">&bull; ${tasks[i].subtasks[j].subtask_name} 
-      <span class="edit-pop-up-btn-wrapper">
-       <span class="edit-subtask-edit-btn">
-      <img class="subtask-edit-btn" onclick="saveEditedSubtask(${i})" src="./assets/img/edit_pen_icon.png" alt=""></span>
-      <span class="subtask-delete-btn" class="edit-subtask-delete-btn"><img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt=""></span>
-     
-      </span>
-      </li>`;
-   }
-   return subtaskList;
-}
-
-// SUBTASKS
-
-function editSubtask(i) {
-   let subtask = document.getElementById(`subtask${i}`);
-   subtask.innerHTML = `
-   <div class="edit-subtask-div">
-     <input id="onEditSubtaskInput${i}" class="edit-subtask-input">
-   <div class="on-edit-subtask-icons">
-     <img class=""onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt="">
-     <img onclick="saveEditedSubtask(${i})" src="./assets/img/addtask_check.svg" alt="">
-   </div>`;
-   subtask.style.padding = "2px 0px 2px 0px";
-   subtask.style.width = "432px";
-   input = document.getElementById(`onEditSubtaskInput${i}`);
-   input.value = subtasks[i];
-}
-
-function showEditIcons(event, i) {
-   // let DivElement = event.target;
-   let icons = document.getElementById(`subtask${i}Icons`);
-   icons.classList.remove("d-none");
-}
-
-function hideEditIcons(i) {
-   let icons = document.getElementById(`subtask${i}Icons`);
-   icons.classList.add("d-none");
 }
 
 // _____________________________________________________________
@@ -383,6 +324,7 @@ function popUpCheckmarkIsDone(taskIndex, subtaskIndex) {
       ? (tasks[taskIndex].subtasks[subtaskIndex].subtask_isdone = false)
       : (tasks[taskIndex].subtasks[subtaskIndex].subtask_isdone = true);
    renderTaskPopUp(tasks[taskIndex].id);
+   renderTasksIntoColumns();
 }
 
 function popUpRenderSubTasks(i) {

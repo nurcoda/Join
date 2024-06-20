@@ -458,11 +458,12 @@
    overflow: scroll;
    overflow-x: hidden;
    padding-left: 5%;
+   height: 20%;
 }
 .edit-pop-up-subtask-wrapper {
    display: flex;
    justify-content: space-between;
-   width: 90%;
+   width: 95%;
 }
 .edit-pop-up-btn-wrapper {
    display: flex;
@@ -471,6 +472,11 @@
    gap: 8px;
 }
 
+.edit-subtask-div {
+   width: 98%;
+   height: auto;
+   padding-right: 0;
+}
 .subtask-edit-btn {
    cursor: pointer;
    border-right: 1px solid #d1d1d1;
@@ -479,6 +485,10 @@
 
 .subtask-delete-btn {
    cursor: pointer;
+}
+
+.on-edit-subtask-icons {
+   gap: 8px;
 }
 
 /* body::-webkit-scrollbar-thumb {
