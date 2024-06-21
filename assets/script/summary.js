@@ -12,5 +12,28 @@ async function tasksInBoardCounter() {
 
     // Anzeige der Anzahl der Aufgaben auf der Webseite
     let totalTasksElement = document.getElementById('totalTasks');
-    totalTasksElement.innerHTML = `<p class="taskNumber" id="totalTasks">${totalTasks}</p>`;
+    totalTasksElement.innerHTML = totalTasks;
+
+    // Zählen der Aufgaben und Klassifizieren nach Zustand
+    tasks.forEach(task => {
+        switch (task.state) {
+            case "todo":
+                toDoCounter++;
+                break;
+            case "inprogress":
+                inProgressCounter++;
+                break;
+            case "awaitfeedback":
+                awaitFeedbackCounter++;
+                break;
+            case "done":
+                doneCounter++;
+                break;
+            default:
+                console.error(`Unknown state: ${task.state}`);
+        }
+    });
+
+    //     let taskToDoElement = document.getElementById('taskToDo');
+    //     taskToDoElement.innerHTML = taskToDo;
 }
