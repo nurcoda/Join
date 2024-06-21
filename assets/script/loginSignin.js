@@ -35,15 +35,15 @@ function openSignUpHTML() {
             </div>
             <form class="input-login">
                <div class="input-login-field">
-                  <input type="text" placeholder="Name" />
+                  <input id="name" type="text" placeholder="Name" />
                   <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
                </div>
                <div class="input-login-field">
-                  <input type="email" placeholder="Email" />
+                  <input id="email" type="email" placeholder="Email" />
                   <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
                </div>
                <div class="input-login-field">
-                  <input type="password" placeholder="Password" />
+                  <input id="password" type="password" placeholder="Password" />
                   <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
                </div>
                <div class="input-login-field">
@@ -59,10 +59,29 @@ function openSignUpHTML() {
                </div>
 
                <div class="login-guestlogin-btn-wrapper">
-                  <div class="signup-btn-in-form btns-login" onclick="signUpSucces()">Sign up</div>
+                  <div class="signup-btn-in-form btns-login" onclick="signUpSucces() postSignUpData("users",returnPostedData(email, name, password))">Sign up</div>
                </div>
             </form>
     `;
+}
+
+function returnPostedData(email, name, password){
+   let email = document.getElementById('email').value;
+   let name = document.getElementById('name').value;
+   let password = document.getElementById('password').value;
+
+   // return {"email": email, "name": name, "password": password};
+}
+
+async function postSignUpData(path="", data={}){
+   let response = await fetch(BASE_URL + ".json",{
+     method: "POST",
+     header: {
+      "Content-Type": "application/json"
+     },
+     body: JSON.stringify(data)
+   });
+   return responseToJSON = await response.json();
 }
 
 function openLoginHTML() {

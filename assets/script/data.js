@@ -14,7 +14,7 @@ async function loadData() {
    contacts = Object.values(responseAsJson.contacts);
 }
 
-async function PostData(){
+async function postSignUpData(path="", data={}){
    let response = await fetch(BASE_URL + ".json",{
      method: "POST",
      header: {
