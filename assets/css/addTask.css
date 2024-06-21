@@ -631,3 +631,45 @@ button {
   text-align: center;
   font-size: 1.2rem;
 }  */
+
+
+
+
+/* Toast */
+
+/* Hinzufügen einer Keyframes-Animation */
+@keyframes slideUp {
+  0% {
+      transform: translateY(100vh);
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+/* Style für das Toast-Div */
+#toastDiv {
+  height: 68px;
+  width: 280px;
+  background-color: #2a3647;
+  position: absolute;
+  top: 50%;
+  left: 44%;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  gap: 16px;
+  opacity: 0; /* Standardmäßig unsichtbar */
+  transition: opacity 0.5s; /* Smooth transition for opacity */
+}
+
+/* Wenn das Div sichtbar ist, spielt die Animation */
+#toastDiv.show {
+  animation: slideUp 0.5s forwards; /* Die Animation dauert 0.5s */
+  opacity: 1; /* Sichtbar */
+}

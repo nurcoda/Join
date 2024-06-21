@@ -303,7 +303,7 @@ function formatDueDate(dueDate) {
 }
 
 // Funktion, um eine neue Aufgabe hinzuzufügen und sie gleichzeitig in Firebase zu speichern
-async function addTask() {
+async function addTask(event) {
   event.preventDefault(); // Verhindert das Standardverhalten des Formulars
   let title = document.getElementById("titleInput").value;
   let newId = generateId();
@@ -341,12 +341,25 @@ async function addTask() {
 
   // Aufgabe in Firebase speichern
   await updateData(`tasks/${newId}`, newTask);
-
-  console.log(tasks);
-
-  window.location.reload();
-
   
+  // Set a flag in sessionStorage to show the toast after reload
+
+  showToast();
+}
+
+// Function to show toast message
+// Funktion zum Anzeigen des Toast-Divs
+function showToast() {
+  var toastDiv = document.getElementById('toastDiv');
+  toastDiv.classList.remove('d-none');
+  toastDiv.classList.add('show');
+
+  // Nach 1.3 Sekunden die Animation zurücksetzen und das Div ausblenden, dann weiterleiten
+  setTimeout(function() {
+    toastDiv.classList.remove('show');
+    toastDiv.classList.add('d-none');
+    window.location.href = 'board.html'; // Weiterleitung zu board.html
+  }, 1300);
 }
 
 // Funktion zum Aktualisieren der Daten in Firebase
@@ -390,6 +403,8 @@ function setDefaultDate() {
 
   document.getElementById("dueDate").value = formattedDate;
 }
+
+
 
 
 
@@ -446,6 +461,8 @@ function displayCalendar() {
   }
 }
 
+
+
 // Call the function to display the calendar
 displayCalendar();
 
@@ -492,5 +509,4 @@ function displaySelected() {
   });
 }
 displaySelected();
-
 
