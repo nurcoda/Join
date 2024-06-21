@@ -22,7 +22,7 @@ function pushUsersToContacts(user, contacts) {
    });
 }
 
-async function PostData(path="", data={}) {
+async function PostData(path = "", data = {}) {
    let response = await fetch(BASE_URL + path + ".json", {
       method: "POST",
       header: {
@@ -33,13 +33,46 @@ async function PostData(path="", data={}) {
    return (responseToJSON = await response.json());
 }
 
-async function postSignUpData(path= "", data={}){
-   let response = await fetch(BASE_URL + path + ".json",{
-     method: "POST",
-     header: {
-      "Content-Type": "application/json"
-     },
-     body: JSON.stringify(data)
+async function postSignUpData(path = "", data = {}) {
+   let response = await fetch(BASE_URL + path + ".json", {
+      method: "POST",
+      header: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
    });
-   return responseToJSON = await response.json();
+   return (responseToJSON = await response.json());
 }
+
+// This function is to sort the data in database in right way, to work with it correctly.
+// ONLY NECESSARY WITH TESTDATA JSON, ONE TIME
+// USE ONE TIME IF DATA COMES FROM TESTDATA.JSON
+
+async function uploadDataToHaveRightPositionInDB() {
+   const dataToUpload = {
+      users: user.reduce((acc, u) => ({ ...acc, [u.id]: u }), {}),
+      tasks: tasks.reduce((acc, t) => ({ ...acc, [t.id]: t }), {}),
+      contacts: contacts.reduce((acc, c) => ({ ...acc, [c.id]: c }), {}),
+   };
+
+   try {
+      let response = await fetch(BASE_URL + ".json", {
+         method: "PUT",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(dataToUpload),
+      });
+
+      if (!response.ok) {
+         throw new Error("Fehler beim Hochladen der Daten");
+      }
+
+      let responseData = await response.json();
+      console.log("Daten erfolgreich hochgeladen", responseData);
+   } catch (error) {
+      console.error("Fehler:", error);
+   }
+}
+
+// ____________________________________________________________________________
