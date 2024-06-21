@@ -22,8 +22,8 @@ function pushUsersToContacts(user, contacts) {
    });
 }
 
-async function PostData() {
-   let response = await fetch(BASE_URL + ".json", {
+async function PostData(path="", data={}) {
+   let response = await fetch(BASE_URL + path + ".json", {
       method: "POST",
       header: {
          "Content-Type": "application/json",
@@ -31,4 +31,15 @@ async function PostData() {
       body: JSON.stringify(data),
    });
    return (responseToJSON = await response.json());
+}
+
+async function postSignUpData(path= "", data={}){
+   let response = await fetch(BASE_URL + path + ".json",{
+     method: "POST",
+     header: {
+      "Content-Type": "application/json"
+     },
+     body: JSON.stringify(data)
+   });
+   return responseToJSON = await response.json();
 }

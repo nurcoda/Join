@@ -26,51 +26,100 @@ function closeSignUpSucces() {
    signUpSuccesContainer.classList.add("d-none");
 }
 
+// function openSignUpHTML() {
+//    signUpContainer.innerHTML = `
+//      <div class="headline-login-wrapper">
+//                <img src="./assets/img/goback_arrow_icon.png" alt="" class="goback-arrow" onclick="openLogin()" />
+//                <h1>Sign-up</h1>
+//                <div class="underline-headline"></div>
+//             </div>
+//             <form id="SignUpData" class="input-login">
+//                <div class="input-login-field">
+//                   <input type="text" placeholder="Name" />
+//                   <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
+//                </div>
+//                <div class="input-login-field">
+//                   <input type="email" placeholder="Email" />
+//                   <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
+//                </div>
+//                <div class="input-login-field">
+//                   <input type="password" placeholder="Password" />
+//                   <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
+//                </div>
+//                <div class="input-login-field">
+//                   <input type="password" placeholder="Confirm Password" />
+//                   <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
+//                </div>
+
+//                <div class="accept-privacy-policy-form">
+//                   <input class="accept-icon" type="checkbox" name="accept-privacy-policy" id="" />
+//                   <label for="accept-privacy-policy"
+//                      >I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label
+//                   >
+//                </div>
+
+//                <div class="login-guestlogin-btn-wrapper">
+//                   <div class="signup-btn-in-form btns-login" onclick="signUpSucces() postSignUpData("users",returnPostedData())">Sign up</div>
+//                </div>
+//             </form>
+//     `;
+// }
+
+// function returnPostedData(email, name, password){
+//    let email = document.getElementById('SignUpData').elements[0];
+//    let name = document.getElementById('SignUpData').elements[1];
+//    let password = document.getElementById('SignUpData').elements[2];
+
+//    // return {"email": email, "name": name, "password": password};
+// }
+
 function openSignUpHTML() {
    signUpContainer.innerHTML = `
-     <div class="headline-login-wrapper">
-               <img src="./assets/img/goback_arrow_icon.png" alt="" class="goback-arrow" onclick="openLogin()" />
-               <h1>Sign-up</h1>
-               <div class="underline-headline"></div>
-            </div>
-            <form class="input-login">
-               <div class="input-login-field">
-                  <input id="name" type="text" placeholder="Name" />
-                  <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
-               </div>
-               <div class="input-login-field">
-                  <input id="email" type="email" placeholder="Email" />
-                  <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
-               </div>
-               <div class="input-login-field">
-                  <input id="password" type="password" placeholder="Password" />
-                  <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
-               </div>
-               <div class="input-login-field">
-                  <input type="password" placeholder="Confirm Password" />
-                  <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
-               </div>
-
-               <div class="accept-privacy-policy-form">
-                  <input class="accept-icon" type="checkbox" name="accept-privacy-policy" id="" />
-                  <label for="accept-privacy-policy"
-                     >I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label
-                  >
-               </div>
-
-               <div class="login-guestlogin-btn-wrapper">
-                  <div class="signup-btn-in-form btns-login" onclick="signUpSucces() postSignUpData("users",returnPostedData(email, name, password))">Sign up</div>
-               </div>
-            </form>
-    `;
+       <div class="headline-login-wrapper">
+           <img src="./assets/img/goback_arrow_icon.png" alt="" class="goback-arrow" onclick="openLogin()" />
+           <h1>Sign-up</h1>
+           <div class="underline-headline"></div>
+       </div>
+       <form id="SignUpData" class="input-login">
+           <div class="input-login-field">
+               <input type="text" name="name" placeholder="Name" />
+               <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
+           </div>
+           <div class="input-login-field">
+               <input type="email" name="email" placeholder="Email" />
+               <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
+           </div>
+           <div class="input-login-field">
+               <input type="password" name="password" placeholder="Password" />
+               <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
+           </div>
+           <div class="input-login-field">
+               <input type="password" name="confirmPassword" placeholder="Confirm Password" />
+               <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
+           </div>
+           <div class="accept-privacy-policy-form">
+               <input class="accept-icon" type="checkbox" name="acceptPrivacyPolicy" id="acceptPrivacyPolicy" />
+               <label for="acceptPrivacyPolicy">I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label>
+           </div>
+           <div class="login-guestlogin-btn-wrapper">
+               <div class="signup-btn-in-form btns-login" onclick="signUpSucces(); postSignUpData('./data.js/users', returnPostedData());">Sign up</div>
+           </div>
+       </form>
+   `;
 }
 
-function returnPostedData(email, name, password){
-   let email = document.getElementById('email').value;
-   let name = document.getElementById('name').value;
-   let password = document.getElementById('password').value;
 
-   // return {"email": email, "name": name, "password": password};
+function returnPostedData() {
+   const form = document.getElementById('SignUpData');
+   const formData = new FormData(form);
+
+   const data = {
+       name: formData.get('name'),
+       email: formData.get('email'),
+       password: formData.get('password')
+   };
+
+   return data;
 }
 
 async function postSignUpData(path="", data={}){
