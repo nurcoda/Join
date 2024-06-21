@@ -277,16 +277,43 @@ function hideEditIcons(i) {
 // __________________________________________________________________
 //    Find Task
 
-let matchedTasks = [];
+// let matchedTasks = [];
 
-function findTaskInBoard() {
-   let searchInput = document.getElementById("searchTask").value.trim().toLowerCase();
-   matchedTasks = [];
-   for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].name.toLowerCase().includes(searchInput)) {
-         matchedTasks.push(tasks[i]);
-      }
-   }
-   tasks = matchedTasks;
-   renderTasksIntoColumns();
-}
+// function findTaskInBoard() {
+//    let searchInput = document.getElementById("searchTask").value.trim().toLowerCase();
+//    matchedTasks = [];
+//    for (let i = 0; i < tasks.length; i++) {
+//       if (tasks[i].name.toLowerCase().includes(searchInput)) {
+//          matchedTasks.push(tasks[i]);
+//       }
+//    }
+//    console.table(matchedTasks);
+//    renderTasksIntoColumnsSearching(matchedTasks);
+// }
+
+// function renderTasksIntoColumnsSearching(matchedTasks) {
+//    clearAllColums();
+//    matchedTasks.forEach((task, index) => {
+//       switch (task.state) {
+//          case "todo":
+//             todoCounter++;
+//             todoColumn.innerHTML += renderTasksIntoColumnsHTML(index);
+//             break;
+//          case "inprogress":
+//             inProgressCounter++;
+//             inProgressColumn.innerHTML += renderTasksIntoColumnsHTML(index);
+//             break;
+//          case "awaitfeedback":
+//             awaitFeedbackCounter++;
+//             awaitFeedbackColumn.innerHTML += renderTasksIntoColumnsHTML(index);
+//             break;
+//          case "done":
+//             doneCounter++;
+//             doneColumn.innerHTML += renderTasksIntoColumnsHTML(index);
+//             break;
+//          default:
+//             console.error(`Unknown state: ${task.state}`);
+//       }
+//    });
+//    checkIfColumnIsEmpty();
+// }
