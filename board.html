@@ -125,7 +125,12 @@
                      onclick="openAddTaskPopUp()"
                   ></div>
                </div>
-               <div class="task-card-container" id="todoColumnContainer"></div>
+               <div
+                  class="task-card-container"
+                  id="todoColumnContainer"
+                  ondrop="moveTo('todo')"
+                  ondragover="allowDrop(event)"
+               ></div>
             </div>
             <!--  -->
             <div class="board-column">
@@ -138,7 +143,12 @@
                      onclick="openAddTaskPopUp()"
                   ></div>
                </div>
-               <div class="task-card-container" id="inProgressColumnContainer"></div>
+               <div
+                  class="task-card-container"
+                  id="inProgressColumnContainer"
+                  ondrop="moveTo('inprogress')"
+                  ondragover="allowDrop(event)"
+               ></div>
             </div>
             <!--  -->
             <div class="board-column">
@@ -151,12 +161,22 @@
                      onclick="openAddTaskPopUp()"
                   ></div>
                </div>
-               <div class="task-card-container" id="awaitFeedbackColumnContainer"></div>
+               <div
+                  class="task-card-container"
+                  id="awaitFeedbackColumnContainer"
+                  ondrop="moveTo('awaitfeedback')"
+                  ondragover="allowDrop(event)"
+               ></div>
             </div>
             <!--  -->
             <div class="board-column">
                <div class="board-column-headline">Done</div>
-               <div class="task-card-container" id="doneColumnContainer"></div>
+               <div
+                  class="task-card-container"
+                  id="doneColumnContainer"
+                  ondrop="moveTo('done')"
+                  ondragover="allowDrop(event)"
+               ></div>
             </div>
          </div>
          <!--  -->

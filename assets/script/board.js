@@ -189,7 +189,10 @@ function renderTaskPopUp(id) {
 }
 
 function formateDueDateEditPopUp(i) {
-   formattedDuDate = tasks[i].due_date;
+   if (!tasks[i].due_date) {
+      return "No due_date";
+   }
+   let formattedDuDate = tasks[i].due_date;
    formattedDuDate = formattedDuDate.split("/").reverse().join("-");
    return formattedDuDate;
 }
@@ -267,6 +270,35 @@ function getEditedTask(i) {
    tasks[i].assigned_user = assignedContacts;
    editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(i);
    renderTasksIntoColumns();
+   updateTaskData(i);
+}
+
+async function updateData(path, data) {
+   let response = await fetch(BASE_URL + path + ".json", {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+         "Content-Type": "application/json",
+      },
+   });
+
+   let responseAsJson = await response.json();
+   // console.log(responseAsJson);
+}
+
+function updateTaskData(i) {
+   let updatedTaskData = {
+      "name": tasks[i].name,
+      "id": tasks[i].id,
+      "priority": tasks[i].priority,
+      "state": tasks[i].state,
+      "category": tasks[i].category,
+      "description": tasks[i].description,
+      "due_date": tasks[i].due_date,
+   };
+   // console.log(updatedTaskData);
+
+   updateData("tasks/" + tasks[i].id, updatedTaskData);
 }
 
 // _____________________________________________________________
@@ -428,7 +460,9 @@ closePopUpBtn_2.addEventListener("click", closeAddTaskPopUp);
 // HTML TEMPLATES
 
 function renderTasksIntoColumnsHTML(i) {
-   return `  <div class="task-card" onclick="openEditTaskPopUp(${tasks[i].id})">
+   return `  <div class="task-card" draggable="true" ondragstart="startDragging(${
+      tasks[i].id
+   })" onclick="openEditTaskPopUp(${tasks[i].id})">
                      <div class="category-user-story task-category">${tasks[i].category}</div>
                      <div class="task-headline">${tasks[i].name}</div>
                      <div class="task-comment">${tasks[i].description}</div>
@@ -448,6 +482,24 @@ function renderTasksIntoColumnsHTML(i) {
                         </div>
                      </div>
                   </div>`;
+}
+
+let currentDraggedElement;
+
+function startDragging(id) {
+   currentDraggedElement = id;
+}
+
+function moveTo(state) {
+   let foundItem = tasks.find((item) => item.id === currentDraggedElement);
+   if (foundItem) {
+      foundItem.state = state;
+   }
+   renderTasksIntoColumns();
+}
+
+function allowDrop(ev) {
+   ev.preventDefault();
 }
 
 function renderTaskPopUpHTML(i) {
