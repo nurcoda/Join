@@ -48,19 +48,19 @@
    color: black;
    border-radius: 10px;
    height: 78px;
-   width: 100%;
+   width: 85%;
    gap: 35px;
    position: relative;
-   padding: 15px 0px 15px 0px;
+   padding: 15px 24px 15px 24px;
 }
 
 .contact-letter {
    border-bottom: 1px solid #D1D1D1;
-   width: 100%;
+   width: 85%;
    height: 58px;
    display: flex;
    align-items: center;
-   padding: 17px 0px 17px 0px;
+   padding: 17px 36px 17px 36px;
    gap: 8px;
    font-weight: 100;
 }
@@ -848,6 +848,10 @@
 }
 
 @media only screen and (max-width: 840px){
+   header{
+      z-index: 10;
+   }
+   
    .headAndContact{
       width: 40%;
    }
@@ -915,6 +919,10 @@
    .headAndContact{
       display: none;
       z-index: 999;
+   }
+
+   .contactList{
+      width: 100%;
    }
 }
 

@@ -1,4 +1,4 @@
-let Test = "./assets/script/data.js";
+// let Test = "./assets/script/data.js";
 let selectedContactIndex = null;
 
 function init() {
