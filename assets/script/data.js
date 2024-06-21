@@ -50,9 +50,9 @@ async function postSignUpData(path = "", data = {}) {
 
 async function uploadDataToHaveRightPositionInDB() {
    const dataToUpload = {
-      users: user.reduce((acc, u) => ({ ...acc, [u.id]: u }), {}),
-      tasks: tasks.reduce((acc, t) => ({ ...acc, [t.id]: t }), {}),
-      contacts: contacts.reduce((acc, c) => ({ ...acc, [c.id]: c }), {}),
+      users: user.reduce((acc, u) => (u ? { ...acc, [u.id]: u } : acc), {}),
+      tasks: tasks.reduce((acc, t) => (t ? { ...acc, [t.id]: t } : acc), {}),
+      contacts: contacts.reduce((acc, c) => (c ? { ...acc, [c.id]: c } : acc), {}),
    };
 
    try {
@@ -73,6 +73,11 @@ async function uploadDataToHaveRightPositionInDB() {
    } catch (error) {
       console.error("Fehler:", error);
    }
+}
+
+async function uploadTestData() {
+   await loadData();
+   await uploadDataToHaveRightPositionInDB();
 }
 
 // ____________________________________________________________________________
