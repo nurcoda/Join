@@ -15,21 +15,8 @@ let doneCounter = 0;
 let assignedContacts = [];
 
 setTimeout(() => {
-   addUsersToContacts(user, contacts);
    renderTasksIntoColumns();
 }, 1000);
-// _________________________________________________
-// TODO: THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
-// THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
-// THIS IS A FUNCTION FOR TESTING- HAS TO BE DELETED!
-//
-function addUsersToContacts(users, contacts) {
-   users.forEach((user) => {
-      let { password, ...userWithoutPassword } = user;
-      contacts.push(userWithoutPassword);
-   });
-}
-// _________________________________________________
 
 // renderTasksIntoColumns();
 

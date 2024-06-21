@@ -228,30 +228,14 @@ button {
 }
 
 .assigned-contacts-wrapper:hover .assigned-contacts-img {
-  transform: scale(1.05);
+  transform: scale(0.94);
   opacity: 0.7;
-  animation: subtle-pulse 1s infinite; /* Add subtle pulse animation */
 }
 
 .assigned-contacts-wrapper:hover .tooltip {
   visibility: visible;
   opacity: 1;
 }
-
-@keyframes subtle-pulse {
-  0% {
-    transform: scale(1.05);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1.05);
-  }
-}
-
-
-
 
 .marked {
   background-color: #2a3647; 
