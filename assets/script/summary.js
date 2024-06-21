@@ -34,6 +34,6 @@ async function tasksInBoardCounter() {
         }
     });
 
-    //     let taskToDoElement = document.getElementById('taskToDo');
-    //     taskToDoElement.innerHTML = taskToDo;
+    let taskToDoElement = document.getElementById('taskToDo');
+    taskToDoElement.innerHTML = taskToDo;
 }
