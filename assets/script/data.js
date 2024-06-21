@@ -13,3 +13,14 @@ async function loadData() {
    tasks = Object.values(responseAsJson.tasks);
    contacts = Object.values(responseAsJson.contacts);
 }
+
+async function PostData(){
+   let response = await fetch(BASE_URL + ".json",{
+     method: "POST",
+     header: {
+      "Content-Type": "application/json"
+     },
+     body: JSON.stringify(data)
+   });
+   return responseToJSON = await response.json();
+}
