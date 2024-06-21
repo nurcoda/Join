@@ -484,6 +484,9 @@ function renderTasksIntoColumnsHTML(i) {
                   </div>`;
 }
 
+// _____________________________________
+//  DRAG & DROP
+
 let currentDraggedElement;
 
 function startDragging(id) {
@@ -492,9 +495,15 @@ function startDragging(id) {
 
 function moveTo(state) {
    let foundItem = tasks.find((item) => item.id === currentDraggedElement);
-   if (foundItem) {
-      foundItem.state = state;
+   let taskPosition = 0;
+   for (let i = 0; i < tasks.length; i++) {
+      if (foundItem) {
+         foundItem.state = state;
+         taskPosition++;
+      }
    }
+
+   updateTaskData(taskPosition - 1);
    renderTasksIntoColumns();
 }
 
