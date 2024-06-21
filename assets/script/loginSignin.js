@@ -102,7 +102,7 @@ function openSignUpHTML() {
                <label for="acceptPrivacyPolicy">I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label>
            </div>
            <div class="login-guestlogin-btn-wrapper">
-               <div class="signup-btn-in-form btns-login" onclick="signUpSucces(); postSignUpData('./data.js/users', returnPostedData());">Sign up</div>
+               <div class="signup-btn-in-form btns-login" onclick="signUpSucces(); postSignUpData('/users', returnPostedData());">Sign up</div>
            </div>
        </form>
    `;
