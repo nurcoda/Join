@@ -12,15 +12,23 @@ async function loadData() {
    user = Object.values(responseAsJson.users);
    tasks = Object.values(responseAsJson.tasks);
    contacts = Object.values(responseAsJson.contacts);
+   pushUsersToContacts(user, contacts);
 }
 
-async function PostData(){
-   let response = await fetch(BASE_URL + ".json",{
-     method: "POST",
-     header: {
-      "Content-Type": "application/json"
-     },
-     body: JSON.stringify(data)
+function pushUsersToContacts(user, contacts) {
+   user.forEach((singleUser) => {
+      let { password, ...userWithoutPassword } = singleUser;
+      contacts.push(userWithoutPassword);
    });
-   return responseToJSON = await response.json();
+}
+
+async function PostData() {
+   let response = await fetch(BASE_URL + ".json", {
+      method: "POST",
+      header: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+   });
+   return (responseToJSON = await response.json());
 }
