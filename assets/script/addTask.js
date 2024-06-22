@@ -36,6 +36,14 @@ function changeButtonColorAndImg(prio) {
 
 // subtasks
 
+// Verhindert Formularübermittlung beim Drücken der Enter-Taste im Subtasks-Feld und fügt stattdessen einen Subtask hinzu
+document.getElementById("subtasksInput").addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    addNewSubtask();
+  }
+});
+
 function showSubtasksIcons() {
   document.getElementById("subtasksPlusIcon").classList.add("d-none");
   document.getElementById("subtasksInputIcons").classList.remove("d-none");
@@ -55,9 +63,12 @@ function clearSubtasksInput() {
 
 function addNewSubtask() {
   let input = document.getElementById("subtasksInput").value;
-  tempSubtasks.push(input);
-  renderSubtasks();
-  clearSubtasksInput();
+  if (input.trim() !== "") {
+    // Überprüft, ob das Eingabefeld nicht leer ist
+    tempSubtasks.push(input);
+    renderSubtasks();
+    clearSubtasksInput();
+  }
 }
 
 document.getElementById("subtasksDiv").addEventListener("click", function () {
@@ -103,14 +114,25 @@ function editSubtask(i) {
   </div>`;
   subtask.style.padding = "2px 0px 2px 0px";
   subtask.style.width = "432px";
-  input = document.getElementById(`onEditSubtaskInput${i}`);
-  input.value = subtasks[i];
+  let input = document.getElementById(`onEditSubtaskInput${i}`);
+  input.value = tempSubtasks[i];
+
+  // Füge den Event-Listener hinzu, um Enter-Taste zu behandeln
+  input.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      saveEditedSubtask(i);
+    }
+  });
 }
 
 function saveEditedSubtask(i) {
-  input = document.getElementById(`onEditSubtaskInput${i}`);
-  tempSubtasks.splice(i, 1, input.value);
-  renderSubtasks();
+  let input = document.getElementById(`onEditSubtaskInput${i}`).value;
+  if (input.trim() !== "") {
+    // Überprüft, ob das Eingabefeld nicht leer ist
+    tempSubtasks.splice(i, 1, input);
+    renderSubtasks();
+  }
 }
 
 function deleteSubtask(i) {
@@ -120,10 +142,10 @@ function deleteSubtask(i) {
 
 // Assigned to
 
-document.addEventListener('click', function(event) {
-  const assignedDiv = document.querySelector('.assigned-to-div');
-  const assignedDropdown = document.getElementById('assignedDropdown');
-  const dropdown2 = document.getElementById('dropdown2');
+document.addEventListener("click", function (event) {
+  const assignedDiv = document.querySelector(".assigned-to-div");
+  const assignedDropdown = document.getElementById("assignedDropdown");
+  const dropdown2 = document.getElementById("dropdown2");
 
   if (!assignedDiv.contains(event.target) && !assignedDropdown.contains(event.target)) {
     hideAssignedDropdown();
@@ -160,7 +182,7 @@ document.getElementById("assignedDiv").addEventListener("click", function (event
   showAssignedDropdown(); // Zeigt das Dropdown an
 });
 
-document.getElementById("dropdown2").addEventListener("click", function(event) {
+document.getElementById("dropdown2").addEventListener("click", function (event) {
   event.stopPropagation();
   hideAssignedDropdown();
 });
@@ -253,21 +275,20 @@ function markContact(contactId, i) {
   }
 }
 
-
 // category
 
 // Add global click event listener
-document.addEventListener('click', function(event) {
-  const categoryDiv = document.getElementById('categoryDiv');
-  const categoryDropdown = document.getElementById('categoryDropdown');
+document.addEventListener("click", function (event) {
+  const categoryDiv = document.getElementById("categoryDiv");
+  const categoryDropdown = document.getElementById("categoryDropdown");
 
   if (!categoryDiv.contains(event.target) && !categoryDropdown.contains(event.target)) {
-    categoryDropdown.classList.add('d-none'); // Hide dropdown
+    categoryDropdown.classList.add("d-none"); // Hide dropdown
     hideOpenedCategoryIcon();
   }
 });
 
-document.getElementById("categoryDiv").addEventListener("click", function(event) {
+document.getElementById("categoryDiv").addEventListener("click", function (event) {
   event.stopPropagation(); // Stop propagation to prevent immediate re-closing
   let dropdown = document.getElementById("categoryDropdown");
   let categoryDiv = document.getElementById("categoryDiv");
@@ -304,17 +325,6 @@ function selectOption(option) {
   hideOpenedCategoryIcon();
 }
 
-document.querySelector(".create-task-button").addEventListener("click", function(event) {
-  let hiddenInput = document.getElementById("selectedCategory");
-  let categoryDiv = document.getElementById("categoryDiv");
-  if (hiddenInput.value === "") {
-    categoryDiv.style.border = "1px solid red";
-    event.preventDefault(); // Prevent form submission
-  } else {
-    categoryDiv.style.border = "1px solid #d1d1d1";
-  }
-});
-
 function showOpenedCategoryIcon() {
   document.getElementById("categoryIcon1").classList.add("d-none");
   document.getElementById("categoryIcon2").classList.remove("d-none");
@@ -325,8 +335,40 @@ function hideOpenedCategoryIcon() {
   document.getElementById("categoryIcon1").classList.remove("d-none");
 }
 
-
 // submit/add a task
+
+// Verhindert die Standard-Formularübermittlung und ruft addTask() auf
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Funktion zur Validierung der Kategorie und gegebenenfalls Verhindern des Submit
+  function validateCategory(event) {
+    let hiddenInput = document.getElementById("selectedCategory");
+    let categoryDiv = document.getElementById("categoryDiv");
+    if (hiddenInput.value === "") {
+      categoryDiv.style.border = "1px solid red";
+      event.preventDefault(); // Verhindert das Abschicken des Formulars
+    } else {
+      categoryDiv.style.border = "1px solid #d1d1d1";
+    }
+  }
+
+  // Formular-Event-Listener zur Behandlung des Formular-Submit
+  document.getElementById("addTaskForm").addEventListener("submit", function (event) {
+    validateCategory(event);
+    if (!event.defaultPrevented) {
+      addTask(event);
+    }
+  });
+
+  // Globaler Event-Listener für Enter-Taste, um das Formular abzusenden, wenn der Fokus nicht auf einem Eingabefeld liegt
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+      event.preventDefault();
+      // Manuelles Absenden des Formulars, um die native Validierung zu nutzen
+      document.getElementById("addTaskForm").requestSubmit();
+    }
+  });
+});
 
 function formatDueDate(dueDate) {
   return dueDate.split("-").reverse().join("/");
@@ -519,53 +561,4 @@ function setDefaultDate() {
   const formattedDate = `${year}-${month}-${day}`;
 
   document.getElementById("dueDate").value = formattedDate;
-}
-
-const display = document.querySelector(".calendar-display");
-const days = document.querySelector(".calendar-days");
-const previous = document.querySelector(".calendar-prev");
-const next = document.querySelector(".calendar-next");
-const selected = document.querySelector(".calendar-selected");
-
-const date = new Date();
-
-let year = date.getFullYear();
-let month = date.getMonth();
-
-function displayCalendar() {
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const firstDayIndex = firstDay.getDay();
-  const numberOfDays = lastDay.getDate();
-
-  const formattedDate = date.toLocaleString("en-US", {
-    month: "long",
-    year: "numeric",
-  });
-
-  display.innerHTML = `${formattedDate}`;
-
-  for (let x = 1; x <= firstDayIndex; x++) {
-    const div = document.createElement("div");
-    div.innerHTML = "";
-
-    days.appendChild(div);
-  }
-
-  for (let i = 1; i <= numberOfDays; i++) {
-    const div = document.createElement("div");
-    const currentDate = new Date(year, month, i);
-
-    div.dataset.date = currentDate.toDateString();
-
-    div.innerHTML = i;
-    days.appendChild(div);
-    if (
-      currentDate.getFullYear() === new Date().getFullYear() &&
-      currentDate.getMonth() === new Date().getMonth() &&
-      currentDate.getDate() === new Date().getDate()
-    ) {
-      div.classList.add("calendar-current-date");
-    }
-  }
 }
