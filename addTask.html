@@ -28,10 +28,10 @@
           <textarea id="descriptionText" class="description-text" placeholder="Enter a Description"></textarea>
 
           <label class="margin-top-16px">Assigned to</label>
-          <div id="assignedDiv" class="assigned-to-div" onclick="showAssignedDropdown(), renderContacts()">
+          <div id="assignedDiv" class="assigned-to-div" onclick="renderContacts()">
             <input id="assignedInput" type="text" class="assigned-input" onkeyup="renderContacts()" placeholder="Select contacts to asign" />
             <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" class="dropdown-icon" alt="" />
-            <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" onclick="hideAssignedDropdown()" alt="" />
+            <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" alt="" />
           </div>
           <div id="assignedContacts"></div>
           <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none"></div>

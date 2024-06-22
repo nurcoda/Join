@@ -118,7 +118,17 @@ function deleteSubtask(i) {
   renderSubtasks();
 }
 
-// function renderEditSubtask() {
+// Assigned to
+
+document.addEventListener('click', function(event) {
+  const assignedDiv = document.querySelector('.assigned-to-div');
+  const assignedDropdown = document.getElementById('assignedDropdown');
+  const dropdown2 = document.getElementById('dropdown2');
+
+  if (!assignedDiv.contains(event.target) && !assignedDropdown.contains(event.target)) {
+    hideAssignedDropdown();
+  }
+});
 
 function showAssignedDropdown() {
   const assignedDiv = document.querySelector(".assigned-to-div");
@@ -130,7 +140,6 @@ function showAssignedDropdown() {
 function hideAssignedDropdown() {
   const assignedDiv = document.querySelector(".assigned-to-div");
   assignedDiv.style.zIndex = 5;
-  event.stopPropagation();
   document.getElementById("assignedDropdown").classList.add("d-none");
   hideOpenedDropdownIcon();
 }
@@ -145,8 +154,15 @@ function hideOpenedDropdownIcon() {
   document.getElementById("dropdown1").classList.remove("d-none");
 }
 
-document.getElementById("assignedDiv").addEventListener("click", function () {
+document.getElementById("assignedDiv").addEventListener("click", function (event) {
+  event.stopPropagation(); // Stoppt die Ausbreitung des Ereignisses
   document.getElementById("assignedInput").focus(); // Setzt den Fokus auf das Input-Feld
+  showAssignedDropdown(); // Zeigt das Dropdown an
+});
+
+document.getElementById("dropdown2").addEventListener("click", function(event) {
+  event.stopPropagation();
+  hideAssignedDropdown();
 });
 
 function renderContacts() {
@@ -167,7 +183,7 @@ function renderContacts() {
     if (contact.name.toLowerCase().includes(searchInput)) {
       // Erstellen des HTML-Strings für jeden Kontakt
       dropdown.innerHTML += `
-        <div id="contact${contact.id}" class="${contactClass}" onclick="markContact(${contact.id}, ${i})">
+        <div id="contact${contact.id}" class="${contactClass}" onclick="markContact(${contact.id}, ${i}); event.stopPropagation();">
           <div class="contact-img-name">
             <div class="two-letters-img" style="background-color: ${contact.color}; color: white;">
               ${contact.first_two_letters}
@@ -236,6 +252,7 @@ function markContact(contactId, i) {
     removeContactFromAssignedById(contactId);
   }
 }
+
 
 // category
 
