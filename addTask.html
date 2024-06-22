@@ -39,40 +39,8 @@
         </div>
         <div class="seperator"></div>
         <div class="add-task-right">
-          
           <label for="dueDate">Due date<span class="asterisk">*</span></label>
           <input id="dueDate" class="date-input" type="date" required />
-          
-
-          <div class="unique-calendar d-none">
-            <div class="calendar-container">
-              <div class="calendar">
-                <div class="calendar-header">
-                  <pre class="calendar-prev">◀</pre>
-                  
-                  <div class="calendar-header-display">
-                    <p class="calendar-display"></p>
-                  </div>
-          
-                  <pre class="calendar-next">▶</pre>
-                </div>
-          
-                <div class="calendar-week">
-                  <div>Su</div>
-                  <div>Mo</div>
-                  <div>Tu</div>
-                  <div>We</div>
-                  <div>Th</div>
-                  <div>Fr</div>
-                  <div>Sa</div>
-                </div>
-                <div class="calendar-days"></div>
-              </div>
-              <div class="calendar-display-selected">
-                <p class="calendar-selected"></p>
-              </div>
-            </div>
-          </div>
 
           <label class="margin-top-16px">Prio</label>
           <div class="prio-buttons">
@@ -120,15 +88,23 @@
                 />
               </svg>
             </button>
-            <button type="Submit" class="create-task-button">
+            <button id="createTaskButton" type="Submit" class="create-task-button">
               Create Task <img src="./assets/img/check_white_svg.svg" alt="" />
             </button>
           </div>
         </div>
 
-        <div id="toastDiv" class="d-none">Task added to board <img src="./assets/img/board-icon.png" alt=""></div>
-
+        <div id="toastDiv" class="d-none">Task added to board <img src="./assets/img/board-icon.png" alt="" /></div>
       </form>
+      <!-- Modal for confirmation -->
+      <div id="duplicateTaskModal" class="task-modal">
+        <div class="task-modal-content">
+          <span class="task-close">&times;</span>
+          <p>A task with this title already exists. Are you sure you want to create another one?</p>
+          <button id="confirmDuplicateTask">Yes, create task</button>
+          <button id="cancelDuplicateTask" onclick="closeModal()">Cancel</button>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -50,10 +50,6 @@ button {
   cursor: pointer;
 }
 
-.date-input {
-  z-index: 3;
-}
-
 .title-input:focus,
 .date-input:focus {
   border: 1px solid #29abe2;
@@ -219,11 +215,11 @@ button {
   border-radius: 5px;
   padding: 5px 10px;
   position: absolute;
-  bottom: 110%; 
+  bottom: 110%;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
-  white-space: nowrap; 
+  white-space: nowrap;
   z-index: 10; /* Ensure the tooltip is above other elements */
 }
 
@@ -238,7 +234,7 @@ button {
 }
 
 .marked {
-  background-color: #2a3647; 
+  background-color: #2a3647;
   color: white;
 }
 
@@ -533,119 +529,17 @@ button {
   color: #ff8190;
 }
 
-
-
-
-
-
-
-
-.unique-calendar {
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  z-index: 2;
-  top: 320px;
-  left: 863px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-}
-
-.unique-calendar .calendar-container {
-  display: inline-block;
-  background-color: #fff;
-  padding: 20px 10px 10px 10px;
-  font-size: 1rem; /* Make the whole calendar larger */
-  border-radius: 10px;
-}
-
-.unique-calendar .calendar-header {
-  margin: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
-}
-
-.unique-calendar .calendar-header-display {
-  display: flex;
-  align-items: center;
-}
-
-.unique-calendar .calendar-header-display p {
-  color: #0041ff;
-  margin: 5px;
-  font-size: 1.2rem; /* Adjust font size for header display */
-  word-spacing: 0.5rem;
-}
-
-.unique-calendar .calendar-prev,
-.unique-calendar .calendar-next {
-  padding: 5px;
-  margin: 0;
-  cursor: pointer;
-  font-size: 1.2rem; /* Adjust font size for prev/next buttons */
-  color: #0041ff;
-}
-
-.unique-calendar .calendar-days,
-.unique-calendar .calendar-week {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  margin: auto;
-  padding: 0 10px;
-  justify-content: space-between;
-}
-
-.unique-calendar .calendar-week div,
-.unique-calendar .calendar-days div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2.5rem; /* Adjust height for calendar days */
-  width: 2.5em; /* Adjust width for calendar days */
-  border-radius: 100%;
-}
-
-.unique-calendar .calendar-days div:hover {
-  background: #ebedf0;
-  color: rgb(25, 25, 201);
-  cursor: pointer;
-}
-
-.unique-calendar .calendar-week div {
-  opacity: 0.5;
-}
-
-.unique-calendar .calendar-current-date {
-  background-color: #0041ff;
-  color: #fff;
-}
-
-
-/* .unique-calendar .calendar-display-selected {
-  margin-bottom: 10px;
-  padding: 15px 10px;
-  text-align: center;
-  font-size: 1.2rem;
-}  */
-
-
-
-
 /* Toast */
 
 /* Hinzufügen einer Keyframes-Animation */
 @keyframes slideUp {
   0% {
-      transform: translateY(100vh);
-      opacity: 0;
+    transform: translateY(100vh);
+    opacity: 0;
   }
   100% {
-      transform: translateY(0);
-      opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -654,7 +548,7 @@ button {
   height: 68px;
   width: 280px;
   background-color: #2a3647;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 44%;
   border-radius: 10px;
@@ -672,4 +566,42 @@ button {
 #toastDiv.show {
   animation: slideUp 0.5s forwards; /* Die Animation dauert 0.5s */
   opacity: 1; /* Sichtbar */
+}
+
+/* Modal CSS */
+.task-modal {
+  display: none;
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.task-modal-content {
+  background-color: #fefefe;
+  margin: 18% auto;
+  padding: 20px;
+  border: 1px solid #d1d1d1;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.task-close {
+  color: #d1d1d1;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.task-close:hover,
+.task-close:focus {
+  color: #2a3647;
+  text-decoration: none;
+  cursor: pointer;
 }

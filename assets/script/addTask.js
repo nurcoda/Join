@@ -237,7 +237,6 @@ function markContact(contactId, i) {
   }
 }
 
-
 // category
 
 document.getElementById("categoryDiv").addEventListener("click", function () {
@@ -302,10 +301,35 @@ function formatDueDate(dueDate) {
   return dueDate.split("-").reverse().join("/");
 }
 
-// Funktion, um eine neue Aufgabe hinzuzufügen und sie gleichzeitig in Firebase zu speichern
 async function addTask(event) {
   event.preventDefault(); // Verhindert das Standardverhalten des Formulars
+
+  const createTaskButton = document.getElementById("createTaskButton");
+  createTaskButton.disabled = true; // Button deaktivieren um die Erstellung von mehreren gleichen Tasks zu vermeiden
+
   let title = document.getElementById("titleInput").value;
+
+  // Check for duplicate task titles
+  if (tasks.some((task) => task.name === title)) {
+    pendingTaskData = {
+      title: title,
+      description: document.getElementById("descriptionText").value,
+      category: document.getElementById("categorySelection").innerHTML,
+      dueDate: document.getElementById("dueDate").value,
+      assignedUsers: assignedContacts.map((contact) => ({
+        name: contact.name,
+        first_two_letters: contact.first_two_letters,
+      })),
+      subtasks: tempSubtasks.map((subtask) => ({
+        subtask_name: subtask,
+        subtask_isdone: false,
+      })),
+    };
+    showDuplicateTaskModal();
+    createTaskButton.disabled = false; // Re-enable the button if duplicate is found
+    return; // Exit the function to prevent creating a duplicate task
+  }
+
   let newId = generateId();
   let description = document.getElementById("descriptionText").value;
   let category = document.getElementById("categorySelection").innerHTML;
@@ -341,41 +365,103 @@ async function addTask(event) {
 
   // Aufgabe in Firebase speichern
   await updateData(`tasks/${newId}`, newTask);
-  
-  // Set a flag in sessionStorage to show the toast after reload
 
   showToast();
+
+  // Schließen des Popups nach dem Erstellen der Aufgabe
+  closeModal();
+}
+
+function closeModal() {
+  const modal = document.getElementById("duplicateTaskModal");
+  modal.style.display = "none";
+}
+
+function showDuplicateTaskModal() {
+  const modal = document.getElementById("duplicateTaskModal");
+  modal.style.display = "block";
+
+  const span = document.getElementsByClassName("task-close")[0];
+
+  span.onclick = function () {
+    closeModal();
+  };
+
+  document.getElementById("cancelDuplicateTask").onclick = function () {
+    closeModal();
+  };
+
+  document.getElementById("confirmDuplicateTask").onclick = async function () {
+    if (pendingTaskData) {
+      await createNewTask(pendingTaskData);
+      closeModal();
+      pendingTaskData = null;
+    }
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      closeModal();
+    }
+  };
+}
+
+async function createNewTask(taskData) {
+  const newId = generateId();
+  const formattedDueDate = formatDueDate(taskData.dueDate);
+
+  let newTask = {
+    name: taskData.title,
+    id: newId,
+    description: taskData.description,
+    category: taskData.category,
+    priority: currentButtonPrio,
+    due_date: formattedDueDate,
+    state: "todo",
+    assigned_user: taskData.assignedUsers,
+    subtasks: taskData.subtasks,
+  };
+
+  // Aufgabe zum lokalen Array hinzufügen
+  tasks.push(newTask);
+
+  // Aufgabe in Firebase speichern
+  await updateData(`tasks/${newTask.id}`, newTask).then(() => {
+    showToast("Task added to board");
+  });
+
+  // Schließen des Popups nach dem Erstellen der Aufgabe
+  closeModal();
 }
 
 // Function to show toast message
 // Funktion zum Anzeigen des Toast-Divs
 function showToast() {
-  var toastDiv = document.getElementById('toastDiv');
-  toastDiv.classList.remove('d-none');
-  toastDiv.classList.add('show');
+  let toastDiv = document.getElementById("toastDiv");
+  toastDiv.classList.remove("d-none");
+  toastDiv.classList.add("show");
 
   // Nach 1.3 Sekunden die Animation zurücksetzen und das Div ausblenden, dann weiterleiten
-  setTimeout(function() {
-    toastDiv.classList.remove('show');
-    toastDiv.classList.add('d-none');
-    window.location.href = 'board.html'; // Weiterleitung zu board.html
+  setTimeout(function () {
+    toastDiv.classList.remove("show");
+    toastDiv.classList.add("d-none");
+    window.location.href = "board.html"; // Weiterleitung zu board.html
   }, 1300);
 }
 
 // Funktion zum Aktualisieren der Daten in Firebase
 async function updateData(path, data) {
   let response = await fetch(BASE_URL + path + ".json", {
-    method: 'PUT',
+    method: "PUT",
     body: JSON.stringify(data),
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   });
 
   let responseAsJson = await response.json();
   console.log(responseAsJson);
 }
-
 
 function generateId() {
   let generatedId;
@@ -404,14 +490,6 @@ function setDefaultDate() {
   document.getElementById("dueDate").value = formattedDate;
 }
 
-
-
-
-
-
-
-
-
 const display = document.querySelector(".calendar-display");
 const days = document.querySelector(".calendar-days");
 const previous = document.querySelector(".calendar-prev");
@@ -431,7 +509,7 @@ function displayCalendar() {
 
   const formattedDate = date.toLocaleString("en-US", {
     month: "long",
-    year: "numeric"
+    year: "numeric",
   });
 
   display.innerHTML = `${formattedDate}`;
@@ -460,53 +538,3 @@ function displayCalendar() {
     }
   }
 }
-
-
-
-// Call the function to display the calendar
-displayCalendar();
-
-previous.addEventListener("click", () => {
-  days.innerHTML = "";
-  selected.innerHTML = "";
-
-  if (month < 0) {
-    month = 11;
-    year = year - 1;
-  }
-
-  month = month - 1;
-
-  date.setMonth(month);
-
-  displayCalendar();
-  displaySelected();
-});
-
-next.addEventListener("click", () => {
-  days.innerHTML = "";
-  selected.innerHTML = "";
-
-  if (month > 11) {
-    month = 0;
-    year = year + 1;
-  }
-
-  month = month + 1;
-  date.setMonth(month);
-
-  displayCalendar();
-  displaySelected();
-});
-
-function displaySelected() {
-  const dayElements = document.querySelectorAll(".calendar-days div");
-  dayElements.forEach((day) => {
-    day.addEventListener("click", (e) => {
-      const selectedDate = e.target.dataset.date;
-      selected.innerHTML = `Selected Date : ${selectedDate}`;
-    });
-  });
-}
-displaySelected();
-
