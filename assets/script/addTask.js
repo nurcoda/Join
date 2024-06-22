@@ -256,12 +256,25 @@ function markContact(contactId, i) {
 
 // category
 
-document.getElementById("categoryDiv").addEventListener("click", function () {
-  var dropdown = document.getElementById("categoryDropdown");
-  var categoryDiv = document.getElementById("categoryDiv");
+// Add global click event listener
+document.addEventListener('click', function(event) {
+  const categoryDiv = document.getElementById('categoryDiv');
+  const categoryDropdown = document.getElementById('categoryDropdown');
+
+  if (!categoryDiv.contains(event.target) && !categoryDropdown.contains(event.target)) {
+    categoryDropdown.classList.add('d-none'); // Hide dropdown
+    hideOpenedCategoryIcon();
+  }
+});
+
+document.getElementById("categoryDiv").addEventListener("click", function(event) {
+  event.stopPropagation(); // Stop propagation to prevent immediate re-closing
+  let dropdown = document.getElementById("categoryDropdown");
+  let categoryDiv = document.getElementById("categoryDiv");
 
   if (dropdown.classList.contains("d-none")) {
     dropdown.classList.remove("d-none"); // Show dropdown
+    showOpenedCategoryIcon();
   } else {
     dropdown.classList.add("d-none"); // Hide dropdown
     hideOpenedCategoryIcon();
@@ -291,7 +304,7 @@ function selectOption(option) {
   hideOpenedCategoryIcon();
 }
 
-document.querySelector(".create-task-button").addEventListener("click", function (event) {
+document.querySelector(".create-task-button").addEventListener("click", function(event) {
   let hiddenInput = document.getElementById("selectedCategory");
   let categoryDiv = document.getElementById("categoryDiv");
   if (hiddenInput.value === "") {
@@ -311,6 +324,7 @@ function hideOpenedCategoryIcon() {
   document.getElementById("categoryIcon2").classList.add("d-none");
   document.getElementById("categoryIcon1").classList.remove("d-none");
 }
+
 
 // submit/add a task
 
