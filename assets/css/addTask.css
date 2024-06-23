@@ -299,7 +299,7 @@ button {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .subtasks-scrollbar::-webkit-scrollbar {
@@ -346,6 +346,14 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.subtask-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  margin-right: 8px; /* Abstand zwischen Text und Icons */
 }
 
 .subtask-div:hover {

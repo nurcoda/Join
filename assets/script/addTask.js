@@ -82,7 +82,7 @@ function renderSubtasks() {
   for (let i = 0; i < tempSubtasks.length; i++) {
     const subtask = tempSubtasks[i];
     subtasksList.innerHTML += `<div id="subtask${i}">
-    <div class="subtask-div" onmouseover="showEditIcons(event, ${i})" onmouseout="hideEditIcons(${i})"><p>• ${subtask}</p>
+    <div class="subtask-div" onmouseover="showEditIcons(event, ${i})" onmouseout="hideEditIcons(${i})"><p class="subtask-text">• ${subtask}</p>
   <div id="subtask${i}Icons" class="edit-subtask-icons d-none">
   <img onclick="editSubtask(${i})" src="./assets/img/edit_pen_icon.png" alt="">
   <div class="subtasks-seperator"></div>
