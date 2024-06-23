@@ -68,6 +68,7 @@ function addNewSubtask() {
     tempSubtasks.push(input);
     renderSubtasks();
     clearSubtasksInput();
+    document.getElementById("subtasksInput").focus(); // Setzt den Fokus auf das Input-Feld
   }
 }
 
