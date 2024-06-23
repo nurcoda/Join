@@ -51,6 +51,51 @@ let user = [
 // Kontakte (contacts)
 let contacts = [
    {
+      "name": "Frodo Baggins",
+      "id": 1,
+      "email": "frodo@shire.com",
+      "password": "ringBearer1",
+      "phone": "1234567890",
+      "first_two_letters": "FB",
+      "color": "#1F3D7A", // Dunkelblau
+   },
+   {
+      "name": "Samwise Gamgee",
+      "id": 2,
+      "email": "sam@shire.com",
+      "password": "loyalGardener2",
+      "phone": "1234567891",
+      "first_two_letters": "SG",
+      "color": "#4B0082", // Indigo
+   },
+   {
+      "name": "Aragorn Elessar",
+      "id": 3,
+      "email": "aragorn@gondor.com",
+      "password": "kingReturn3",
+      "phone": "1234567892",
+      "first_two_letters": "AE",
+      "color": "#8B0000", // Dunkelrot
+   },
+   {
+      "name": "Legolas Thranduilion",
+      "id": 4,
+      "email": "legolas@mirkwood.com",
+      "password": "elfPrince4",
+      "phone": "1234567893",
+      "first_two_letters": "LT",
+      "color": "#006400", // Dunkelgrün
+   },
+   {
+      "name": "Gandalf Mithrandir",
+      "id": 5,
+      "email": "gandalf@middleearth.com",
+      "password": "wizardGrey5",
+      "phone": "1234567894",
+      "first_two_letters": "GM",
+      "color": "#2F4F4F", // Dunkles Schiefergrau
+   },
+   {
       "name": "Boromir Denethorion",
       "id": 6,
       "email": "boromir@gondor.com",

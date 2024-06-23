@@ -161,11 +161,13 @@
 .task-headline {
    font-weight: bold;
    margin-bottom: 8px;
+   word-wrap: break-word;
 }
 
 .task-comment {
    color: rgba(168, 168, 168, 1);
    margin-bottom: 24px;
+   word-wrap: break-word;
 }
 
 .subtask-counter-wrapper {

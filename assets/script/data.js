@@ -1,6 +1,6 @@
-let user;
-let contacts;
-let tasks;
+let user = [];
+let contacts = [];
+let tasks = [];
 
 const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
 
@@ -10,17 +10,19 @@ async function loadData() {
    let responseAsJson = await response.json();
    console.log(typeof responseAsJson.contacts);
    user = Object.values(responseAsJson.users);
-   tasks = Object.values(responseAsJson.tasks);
    contacts = Object.values(responseAsJson.contacts);
-   pushUsersToContacts(user, contacts);
+
+   tasks = Object.values(responseAsJson.tasks);
+
+   // pushUsersToContacts(user, contacts);
 }
 
-function pushUsersToContacts(user, contacts) {
-   user.forEach((singleUser) => {
-      let { password, ...userWithoutPassword } = singleUser;
-      contacts.push(userWithoutPassword);
-   });
-}
+// function pushUsersToContacts(user, contacts) {
+//    user.forEach((singleUser) => {
+//       let { password, ...userWithoutPassword } = singleUser;
+//       contacts.push(userWithoutPassword);
+//    });
+// }
 
 async function PostData(path = "", data = {}) {
    let response = await fetch(BASE_URL + path + ".json", {
@@ -47,8 +49,7 @@ async function postSignUpData(path = "", data = {}) {
 // This function is to sort the data in database in right way, to work with it correctly.
 // ONLY NECESSARY WITH TESTDATA JSON, ONE TIME
 // USE ONE TIME IF DATA COMES FROM TESTDATA.JSON
-
-async function uploadDataToHaveRightPositionInDB() {
+async function uploadDataToHaveCorrectKeyInDB() {
    const dataToUpload = {
       users: user.reduce((acc, u) => (u ? { ...acc, [u.id]: u } : acc), {}),
       tasks: tasks.reduce((acc, t) => (t ? { ...acc, [t.id]: t } : acc), {}),
@@ -77,7 +78,6 @@ async function uploadDataToHaveRightPositionInDB() {
 
 async function uploadTestData() {
    await loadData();
-   await uploadDataToHaveRightPositionInDB();
+   await uploadDataToHaveCorrectKeyInDB();
 }
-
 // ____________________________________________________________________________

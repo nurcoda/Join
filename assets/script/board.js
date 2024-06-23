@@ -25,6 +25,10 @@ function clearAllColums() {
    inProgressColumn.innerHTML = "";
    awaitFeedbackColumn.innerHTML = "";
    doneColumn.innerHTML = "";
+   todoCounter = 0;
+   inProgressCounter = 0;
+   awaitFeedbackCounter = 0;
+   doneCounter = 0;
 }
 
 /**
@@ -167,7 +171,7 @@ function checkIfColumnIsEmpty() {
       awaitFeedbackColumn.innerHTML = checkIfColumnIsEmptyHTML();
    }
    if (doneCounter === 0) {
-      done.innerHTML = checkIfColumnIsEmptyHTML();
+      doneColumn.innerHTML = checkIfColumnIsEmptyHTML();
    }
 }
 
@@ -288,6 +292,8 @@ async function updateData(path, data) {
 
 function updateTaskData(i) {
    let updatedTaskData = {
+      "assigned_user": updateTaskDataAssignedUser(i),
+      "subtasks": updateTaskDataSubtasks(i),
       "name": tasks[i].name,
       "id": tasks[i].id,
       "priority": tasks[i].priority,
@@ -296,11 +302,26 @@ function updateTaskData(i) {
       "description": tasks[i].description,
       "due_date": tasks[i].due_date,
    };
-   // console.log(updatedTaskData);
-
    updateData("tasks/" + tasks[i].id, updatedTaskData);
 }
 
+function updateTaskDataAssignedUser(i) {
+   if (!tasks[i].assigned_user) {
+      return [{}];
+   }
+   return tasks[i].assigned_user.map((user) => {
+      return { "name": user.name, "first_two_letters": user.first_two_letters };
+   });
+}
+
+function updateTaskDataSubtasks(i) {
+   if (!tasks[i].subtasks) {
+      return [{}];
+   }
+   return tasks[i].subtasks.map((subtask) => {
+      return { "subtask_name": subtask.subtask_name, "subtask_isdone": subtask.subtask_isdone };
+   });
+}
 // _____________________________________________________________
 
 function setPrioButton(prio, i) {
@@ -352,12 +373,40 @@ function getPrioButton(i) {
    }
 }
 
-function deleteTask(id) {
+async function deleteTask(id) {
    let taskToDeleteIndex = tasks.findIndex((task) => task.id === id);
    tasks.splice(taskToDeleteIndex, 1);
    editTaskPopUpBackground.classList.add("d-none");
    renderTasksIntoColumns();
+   deleteTaskData(id); // Aufruf der Funktion zur Löschung aus der Datenbank
 }
+
+async function deleteTaskData(id) {
+   await fetch(`${BASE_URL}/tasks/${id}.json`, {
+      method: "DELETE",
+      headers: {
+         "Content-Type": "application/json",
+      },
+   });
+}
+
+// function updateTaskDataAssignedUser(i) {
+//    if (!tasks[i].assigned_user) {
+//       return [{}];
+//    }
+//    return tasks[i].assigned_user.map((user) => {
+//       return { "name": user.name, "first_two_letters": user.first_two_letters };
+//    });
+// }
+
+// function updateTaskDataSubtasks(i) {
+//    if (!tasks[i].subtasks) {
+//       return [{}];
+//    }
+//    return tasks[i].subtasks.map((subtask) => {
+//       return { "subtask_name": subtask.subtask_name, "subtask_isdone": subtask.subtask_isdone };
+//    });
+// }
 
 /**
  * checks how many assigned user in this task
@@ -495,15 +544,9 @@ function startDragging(id) {
 
 function moveTo(state) {
    let foundItem = tasks.find((item) => item.id === currentDraggedElement);
-   let taskPosition = 0;
-   for (let i = 0; i < tasks.length; i++) {
-      if (foundItem) {
-         foundItem.state = state;
-         taskPosition++;
-      }
-   }
-
-   updateTaskData(taskPosition - 1);
+   let taskPosition = tasks.findIndex((item) => item.id === currentDraggedElement);
+   foundItem.state = state;
+   updateTaskData(taskPosition);
    renderTasksIntoColumns();
 }
 
