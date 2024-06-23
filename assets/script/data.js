@@ -8,14 +8,16 @@ loadData();
 async function loadData() {
    let response = await fetch(BASE_URL + ".json");
    let responseAsJson = await response.json();
-   console.log(typeof responseAsJson.contacts);
+   console.log(responseAsJson);
+   user = [];
+   contacts = [];
+   tasks = [];
    user = Object.values(responseAsJson.users);
    contacts = Object.values(responseAsJson.contacts);
-
    tasks = Object.values(responseAsJson.tasks);
-
-   // pushUsersToContacts(user, contacts);
 }
+
+// pushUsersToContacts(user, contacts);
 
 // function pushUsersToContacts(user, contacts) {
 //    user.forEach((singleUser) => {
@@ -49,6 +51,7 @@ async function postSignUpData(path = "", data = {}) {
 // This function is to sort the data in database in right way, to work with it correctly.
 // ONLY NECESSARY WITH TESTDATA JSON, ONE TIME
 // USE ONE TIME IF DATA COMES FROM TESTDATA.JSON
+
 async function uploadDataToHaveCorrectKeyInDB() {
    const dataToUpload = {
       users: user.reduce((acc, u) => (u ? { ...acc, [u.id]: u } : acc), {}),

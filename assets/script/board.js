@@ -375,7 +375,19 @@ function getPrioButton(i) {
 
 async function deleteTask(id) {
    let taskToDeleteIndex = tasks.findIndex((task) => task.id === id);
-   tasks.splice(taskToDeleteIndex, 1);
+
+   if (tasks.length === 1) {
+      // Wenn es die letzte Task ist, füge einen Placeholder ein
+      tasks[0] = {
+         name: "Placeholder",
+         id: "Placeholder",
+         description: "Placeholder",
+      };
+   } else {
+      // Sonst lösche die Task aus der Liste
+      tasks.splice(taskToDeleteIndex, 1);
+   }
+
    editTaskPopUpBackground.classList.add("d-none");
    renderTasksIntoColumns();
    deleteTaskData(id); // Aufruf der Funktion zur Löschung aus der Datenbank
