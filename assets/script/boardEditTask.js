@@ -274,46 +274,55 @@ function hideEditIcons(i) {
    icons.classList.add("d-none");
 }
 
-// __________________________________________________________________
-//    Find Task
+// __________________________________________________________________;
+// Find Task
 
-// let matchedTasks = [];
+let matchedTasks = [];
+let matchedTasksIndex = [];
 
-// function findTaskInBoard() {
-//    let searchInput = document.getElementById("searchTask").value.trim().toLowerCase();
-//    matchedTasks = [];
-//    for (let i = 0; i < tasks.length; i++) {
-//       if (tasks[i].name.toLowerCase().includes(searchInput)) {
-//          matchedTasks.push(tasks[i]);
-//       }
-//    }
-//    console.table(matchedTasks);
-//    renderTasksIntoColumnsSearching(matchedTasks);
-// }
+function findTaskInBoard() {
+   matchedTasks = [];
+   matchedTasksIndex = [];
+   let searchInput = document.getElementById("searchTask").value.trim().toLowerCase();
+   for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].name.toLowerCase().includes(searchInput)) {
+         matchedTasks.push(tasks[i]);
+      }
+   }
+   for (let j = 0; j < matchedTasks.length; j++) {
+      matchedTasksIndex.push(findTaskIndexById(matchedTasks[j].id));
+   }
+   renderTasksIntoColumnsSearching();
+}
 
-// function renderTasksIntoColumnsSearching(matchedTasks) {
-//    clearAllColums();
-//    matchedTasks.forEach((task, index) => {
-//       switch (task.state) {
-//          case "todo":
-//             todoCounter++;
-//             todoColumn.innerHTML += renderTasksIntoColumnsHTML(index);
-//             break;
-//          case "inprogress":
-//             inProgressCounter++;
-//             inProgressColumn.innerHTML += renderTasksIntoColumnsHTML(index);
-//             break;
-//          case "awaitfeedback":
-//             awaitFeedbackCounter++;
-//             awaitFeedbackColumn.innerHTML += renderTasksIntoColumnsHTML(index);
-//             break;
-//          case "done":
-//             doneCounter++;
-//             doneColumn.innerHTML += renderTasksIntoColumnsHTML(index);
-//             break;
-//          default:
-//             console.error(`Unknown state: ${task.state}`);
-//       }
-//    });
-//    checkIfColumnIsEmpty();
-// }
+function findTaskIndexById(id) {
+   let basicIndex = tasks.findIndex((task) => task.id === id);
+   return basicIndex;
+}
+
+function renderTasksIntoColumnsSearching() {
+   clearAllColums();
+   for (let i = 0; i < matchedTasks.length; i++) {
+      switch (matchedTasks[i].state) {
+         case "todo":
+            todoCounter++;
+            todoColumn.innerHTML += renderTasksIntoColumnsHTML(matchedTasksIndex[i]);
+            break;
+         case "inprogress":
+            inProgressCounter++;
+            inProgressColumn.innerHTML += renderTasksIntoColumnsHTML(matchedTasksIndex[i]);
+            break;
+         case "awaitfeedback":
+            awaitFeedbackCounter++;
+            awaitFeedbackColumn.innerHTML += renderTasksIntoColumnsHTML(matchedTasksIndex[i]);
+            break;
+         case "done":
+            doneCounter++;
+            doneColumn.innerHTML += renderTasksIntoColumnsHTML(matchedTasksIndex[i]);
+            break;
+         default:
+            console.error(`Unknown state: ${task.state}`);
+      }
+   }
+   checkIfColumnIsEmpty();
+}

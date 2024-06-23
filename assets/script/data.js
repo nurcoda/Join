@@ -1,30 +1,23 @@
 let user = [];
 let contacts = [];
 let tasks = [];
-
 const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
 
 loadData();
+
 async function loadData() {
    let response = await fetch(BASE_URL + ".json");
    let responseAsJson = await response.json();
-   console.log(responseAsJson);
-   user = [];
-   contacts = [];
-   tasks = [];
-   user = Object.values(responseAsJson.users);
-   contacts = Object.values(responseAsJson.contacts);
-   tasks = Object.values(responseAsJson.tasks);
+   // console.log(responseAsJson);
+   // user = [];
+   // contacts = [];
+   // tasks = [];
+   try {
+      user = Object.values(responseAsJson.users);
+      contacts = Object.values(responseAsJson.contacts);
+      tasks = Object.values(responseAsJson.tasks);
+   } catch (error) {}
 }
-
-// pushUsersToContacts(user, contacts);
-
-// function pushUsersToContacts(user, contacts) {
-//    user.forEach((singleUser) => {
-//       let { password, ...userWithoutPassword } = singleUser;
-//       contacts.push(userWithoutPassword);
-//    });
-// }
 
 async function PostData(path = "", data = {}) {
    let response = await fetch(BASE_URL + path + ".json", {
@@ -51,6 +44,12 @@ async function postSignUpData(path = "", data = {}) {
 // This function is to sort the data in database in right way, to work with it correctly.
 // ONLY NECESSARY WITH TESTDATA JSON, ONE TIME
 // USE ONE TIME IF DATA COMES FROM TESTDATA.JSON
+
+async function uploadTestData() {
+   await loadData();
+   pushUsersToContacts(user, contacts);
+   await uploadDataToHaveCorrectKeyInDB();
+}
 
 async function uploadDataToHaveCorrectKeyInDB() {
    const dataToUpload = {
@@ -79,8 +78,10 @@ async function uploadDataToHaveCorrectKeyInDB() {
    }
 }
 
-async function uploadTestData() {
-   await loadData();
-   await uploadDataToHaveCorrectKeyInDB();
+function pushUsersToContacts(user, contacts) {
+   user.forEach((singleUser) => {
+      let { password, ...userWithoutPassword } = singleUser;
+      contacts.push(userWithoutPassword);
+   });
 }
 // ____________________________________________________________________________

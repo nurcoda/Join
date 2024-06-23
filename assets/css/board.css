@@ -121,7 +121,7 @@
    align-items: center;
    margin-top: 24px;
    gap: 16px;
-   min-height: 100%;
+   min-height: 75vh;
 }
 
 .task-card {

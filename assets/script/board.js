@@ -13,23 +13,7 @@ let inProgressCounter = 0;
 let awaitFeedbackCounter = 0;
 let doneCounter = 0;
 let assignedContacts = [];
-
-setTimeout(() => {
-   renderTasksIntoColumns();
-}, 1000);
-
-// renderTasksIntoColumns();
-
-function clearAllColums() {
-   todoColumn.innerHTML = "";
-   inProgressColumn.innerHTML = "";
-   awaitFeedbackColumn.innerHTML = "";
-   doneColumn.innerHTML = "";
-   todoCounter = 0;
-   inProgressCounter = 0;
-   awaitFeedbackCounter = 0;
-   doneCounter = 0;
-}
+renderTasksIntoColumns();
 
 /**
  * checks the state of task
@@ -37,7 +21,8 @@ function clearAllColums() {
  * calls a function, to check if there is no task in a specific column
  */
 
-function renderTasksIntoColumns() {
+async function renderTasksIntoColumns() {
+   await loadData();
    clearAllColums();
    tasks.forEach((task, index) => {
       switch (task.state) {
@@ -64,20 +49,16 @@ function renderTasksIntoColumns() {
    checkIfColumnIsEmpty();
 }
 
-// render subtasks bar
-
-// function renderSubTasksToHTML(i) {
-//    let subTasksTemplate = "";
-//    let calculatedWidth = calcWidthOfProgressBar(i);
-//    let subTasksDone = countSubTask(i);
-//    subTasksTemplate += `
-//                   <span class="subtask-bar-half" style="width: ${calculatedWidth}%"></span>
-//                      </div>
-//                   <div class="subtask-counter">${subTasksDone}/${tasks[i].subtasks.length} Subtasks</div>
-//                   `;
-
-//    return subTasksTemplate;
-// }
+function clearAllColums() {
+   todoColumn.innerHTML = "";
+   inProgressColumn.innerHTML = "";
+   awaitFeedbackColumn.innerHTML = "";
+   doneColumn.innerHTML = "";
+   todoCounter = 0;
+   inProgressCounter = 0;
+   awaitFeedbackCounter = 0;
+   doneCounter = 0;
+}
 
 function renderSubTasksToHTML(i) {
    let subTasksTemplate = "";
@@ -183,15 +164,6 @@ function checkIfColumnIsEmptyHTML() {
  * render the right task in the pop up
  */
 
-function renderTaskPopUp(id) {
-   editTaskPopUpBackground.innerHTML = "";
-   tasks.forEach((task, index) => {
-      if (task.id == id) {
-         editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(index);
-      }
-   });
-}
-
 function formateDueDateEditPopUp(i) {
    if (!tasks[i].due_date) {
       return "No due_date";
@@ -263,7 +235,7 @@ function renderEditTask(i) {
    `;
 }
 
-function getEditedTask(i) {
+async function getEditedTask(i) {
    event.preventDefault();
    editedName = document.getElementById("taskName").value;
    editedDescription = document.getElementById("taskDescription").value;
@@ -273,24 +245,12 @@ function getEditedTask(i) {
    tasks[i].due_date = editedDueDate;
    tasks[i].assigned_user = assignedContacts;
    editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(i);
-   renderTasksIntoColumns();
-   updateTaskData(i);
+   await updateTaskData(i);
+   await loadData();
+   await renderTasksIntoColumns();
 }
 
-async function updateData(path, data) {
-   let response = await fetch(BASE_URL + path + ".json", {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: {
-         "Content-Type": "application/json",
-      },
-   });
-
-   let responseAsJson = await response.json();
-   // console.log(responseAsJson);
-}
-
-function updateTaskData(i) {
+async function updateTaskData(i) {
    let updatedTaskData = {
       "assigned_user": updateTaskDataAssignedUser(i),
       "subtasks": updateTaskDataSubtasks(i),
@@ -302,7 +262,17 @@ function updateTaskData(i) {
       "description": tasks[i].description,
       "due_date": tasks[i].due_date,
    };
-   updateData("tasks/" + tasks[i].id, updatedTaskData);
+   updateDataDB("tasks/" + tasks[i].id, updatedTaskData);
+}
+
+async function updateDataDB(path, data) {
+   await fetch(BASE_URL + path + ".json", {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+         "Content-Type": "application/json",
+      },
+   });
 }
 
 function updateTaskDataAssignedUser(i) {
@@ -375,22 +345,10 @@ function getPrioButton(i) {
 
 async function deleteTask(id) {
    let taskToDeleteIndex = tasks.findIndex((task) => task.id === id);
-
-   if (tasks.length === 1) {
-      // Wenn es die letzte Task ist, füge einen Placeholder ein
-      tasks[0] = {
-         name: "Placeholder",
-         id: "Placeholder",
-         description: "Placeholder",
-      };
-   } else {
-      // Sonst lösche die Task aus der Liste
-      tasks.splice(taskToDeleteIndex, 1);
-   }
-
-   editTaskPopUpBackground.classList.add("d-none");
+   tasks.splice(taskToDeleteIndex, 1);
+   await deleteTaskData(id);
    renderTasksIntoColumns();
-   deleteTaskData(id); // Aufruf der Funktion zur Löschung aus der Datenbank
+   editTaskPopUpBackground.classList.add("d-none");
 }
 
 async function deleteTaskData(id) {
@@ -401,24 +359,6 @@ async function deleteTaskData(id) {
       },
    });
 }
-
-// function updateTaskDataAssignedUser(i) {
-//    if (!tasks[i].assigned_user) {
-//       return [{}];
-//    }
-//    return tasks[i].assigned_user.map((user) => {
-//       return { "name": user.name, "first_two_letters": user.first_two_letters };
-//    });
-// }
-
-// function updateTaskDataSubtasks(i) {
-//    if (!tasks[i].subtasks) {
-//       return [{}];
-//    }
-//    return tasks[i].subtasks.map((subtask) => {
-//       return { "subtask_name": subtask.subtask_name, "subtask_isdone": subtask.subtask_isdone };
-//    });
-// }
 
 /**
  * checks how many assigned user in this task
@@ -457,12 +397,23 @@ function popUpRenderAssignedUser(i) {
  * @returns subtasktemplate
  */
 
-function popUpCheckmarkIsDone(taskIndex, subtaskIndex) {
+async function popUpCheckmarkIsDone(taskIndex, subtaskIndex) {
    tasks[taskIndex].subtasks[subtaskIndex].subtask_isdone
       ? (tasks[taskIndex].subtasks[subtaskIndex].subtask_isdone = false)
       : (tasks[taskIndex].subtasks[subtaskIndex].subtask_isdone = true);
+   await updateTaskData(taskIndex);
    renderTaskPopUp(tasks[taskIndex].id);
-   renderTasksIntoColumns();
+   await loadData();
+   await renderTasksIntoColumns();
+}
+
+function renderTaskPopUp(id) {
+   editTaskPopUpBackground.innerHTML = "";
+   tasks.forEach((task, index) => {
+      if (task.id == id) {
+         editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(index);
+      }
+   });
 }
 
 function popUpRenderSubTasks(i) {
@@ -506,11 +457,13 @@ function openEditTaskPopUp(id) {
 
 function closeEditTaskPopUp() {
    if (event.target === editTaskPopUpBackground || event.target === closePopUpBtn) {
+      renderTasksIntoColumns();
       editTaskPopUpBackground.classList.add("d-none");
    }
 }
 
 function closePopUpOnClick() {
+   renderTasksIntoColumns();
    editTaskPopUpBackground.classList.add("d-none");
 }
 
@@ -554,12 +507,39 @@ function startDragging(id) {
    currentDraggedElement = id;
 }
 
-function moveTo(state) {
+async function moveTo(state) {
    let foundItem = tasks.find((item) => item.id === currentDraggedElement);
    let taskPosition = tasks.findIndex((item) => item.id === currentDraggedElement);
    foundItem.state = state;
-   updateTaskData(taskPosition);
-   renderTasksIntoColumns();
+   await updateTaskData(taskPosition);
+   renderTasksIntoColumnsDragNDrop();
+}
+
+function renderTasksIntoColumnsDragNDrop() {
+   clearAllColums();
+   tasks.forEach((task, index) => {
+      switch (task.state) {
+         case "todo":
+            todoCounter++;
+            todoColumn.innerHTML += renderTasksIntoColumnsHTML(index);
+            break;
+         case "inprogress":
+            inProgressCounter++;
+            inProgressColumn.innerHTML += renderTasksIntoColumnsHTML(index);
+            break;
+         case "awaitfeedback":
+            awaitFeedbackCounter++;
+            awaitFeedbackColumn.innerHTML += renderTasksIntoColumnsHTML(index);
+            break;
+         case "done":
+            doneCounter++;
+            doneColumn.innerHTML += renderTasksIntoColumnsHTML(index);
+            break;
+         default:
+            console.error(`Unknown state: ${task.state}`);
+      }
+   });
+   checkIfColumnIsEmpty();
 }
 
 function allowDrop(ev) {
