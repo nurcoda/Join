@@ -339,6 +339,10 @@ function hideOpenedCategoryIcon() {
 
 // Verhindert die Standard-Formularübermittlung und ruft addTask() auf
 
+function resetForm() {
+  location.reload();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   // Funktion zur Validierung der Kategorie und gegebenenfalls Verhindern des Submit
   function validateCategory(event) {
