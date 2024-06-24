@@ -1,11 +1,11 @@
 // let Test = "./assets/script/data.js";
 let selectedContactIndex = null;
 
-function init() {
-   setTimeout(() => {
-      renderContact();
-   }, 1000);
-}
+// function init() {
+//    setTimeout(() => {
+//       renderContact();
+//    }, 1000);
+// }
 
 function groupAndDisplayContacts() {
    const sortedContacts = contacts.sort((a, b) => {
@@ -15,6 +15,7 @@ function groupAndDisplayContacts() {
    });
    groupContacts(sortedContacts);
 }
+
 function groupContacts(sortedContacts) {
    const groupedContacts = {};
    sortedContacts.forEach((contact) => {
@@ -71,7 +72,8 @@ function highlightContact(index) {
    }
 }
 
-function renderContact() {
+async function renderContact() {
+   await loadData();
    document.getElementById("contactList").innerHTML = `
        <div class="buttonWrapper">
            <button class="addContactBtn" onclick="renderAddContactCardInfo(); openPopUP()">
