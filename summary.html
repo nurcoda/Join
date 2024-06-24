@@ -12,7 +12,7 @@
    <script src="assets/script/data.js" defer></script>
 </head>
 
-<body onload="includeHTML();tasksInBoardCounter()">
+<body onload="includeHTML();tasksInBoardCounter();getTimeOfDay()">
    <div w3-include-html="./assets/templates/header.html"></div>
    <div w3-include-html="./assets/templates/sitebar.html"></div>
    <div class="headline">
@@ -75,7 +75,7 @@
          </div>
       </div>
       <div class="greeting">
-         <h2 class="greetingH2">Good morning,</h2>
+         <h2 class="greetingH2" id="greetingText"></h2>
          <br />
          <h2 class="greetingH2 user">guest</h2>
       </div>
