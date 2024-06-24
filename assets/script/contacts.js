@@ -169,7 +169,7 @@ function closePopUp() {
    }
 }
 
-function deleteContact(index) {
+async function deleteContact(index) {
    const elementToDelete = document.getElementById(`contact-${index}`);
    if (elementToDelete) {
       if (index === selectedContactIndex) {
@@ -179,9 +179,19 @@ function deleteContact(index) {
       elementToDelete.remove();
    }
    contacts.splice(index, 1);
+   // await deleteContactData(contacts[index].id);
    renderContacts();
    document.getElementById("contactCardBigContainer").innerHTML = "";
 }
+
+// async function deleteContactData(id) {
+//    await fetch(`${BASE_URL}/contacts/${id}.json`, {
+//       method: "DELETE",
+//       headers: {
+//          "Content-Type": "application/json",
+//       },
+//    });
+// }
 //**Add to Contacts */
 
 function addPersonToContact() {
@@ -272,14 +282,36 @@ function editSave(i) {
    if (phone.startsWith("+")) {
       phone = phone.substring(1); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
    }
-   contacts[i].name = name; // Aktualisiert die Daten im contacts Array
+   contacts[i].name = name;
    contacts[i].email = email;
    contacts[i].phone = phone;
-   closePopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
-   console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
+   closePopUpByBtn();
    renderContactCardInfo(i);
+   updateContactData(i);
+}
+
+async function updateContactData(i) {
+   let updatedContactData = {
+      "color": contacts[i].color,
+      "email": contacts[i].email,
+      "first_two_letters": contacts[i].first_two_letters,
+      "id": contacts[i].id,
+      "name": contacts[i].name,
+      "phone": contacts[i].phone,
+   };
+   await updateDataContactsDB("contacts/" + contacts[i].id, updatedContactData);
    renderContacts();
-   groupAndDisplayContacts(); // zum speichern wir diese funktion erneut aufgerufen
+}
+
+async function updateDataContactsDB(path, data) {
+   console.log(data);
+   await fetch(BASE_URL + path + ".json", {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+         "Content-Type": "application/json",
+      },
+   });
 }
 
 // function renderContactCardInfoMobile() {

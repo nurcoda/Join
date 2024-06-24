@@ -12,7 +12,7 @@
    <script src="assets/script/data.js" defer></script>
 </head>
 
-<body onload="includeHTML();tasksInBoardCounter();getTimeOfDay()">
+<body onload="initPage()">
    <div w3-include-html="./assets/templates/header.html"></div>
    <div w3-include-html="./assets/templates/sitebar.html"></div>
    <div class="headline">
@@ -51,7 +51,7 @@
                   </div>
                   <div class="seperationLineLong"></div>
                   <div class="date">
-                     <p><b>June 27th 2024</b></p>
+                     <p><b id="deadlineDate"></b></p>
                      <br />
                      <p>upcomming Deadline</p>
                   </div>
