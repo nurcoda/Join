@@ -644,3 +644,14 @@ button {
 .task-close:hover {
   background-color: #ebebeb;
 }
+
+.red-required-text {
+  color: #FF8190;
+  font-size: 10px;
+  /* position: absolute;
+  top: 540px;
+  left: 862px; */
+  height: 12px;
+  width: 440px;
+  margin-top: -4px;
+}

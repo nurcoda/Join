@@ -21,6 +21,8 @@
             <div class="add-task-left">
                 <label>Title<span class="asterisk">*</span></label>
                 <input id="titleInput" class="title-input" type="text" placeholder="Enter a title" required />
+                <!-- <span class="red-required-text">This field is required</span> -->
+
                 <label class="margin-top-16px">Description</label>
                 <textarea id="descriptionText" class="description-text" placeholder="Enter a Description"></textarea>
                 <label class="margin-top-16px">Assigned to</label>
@@ -49,7 +51,8 @@
                         Low <img id="lowButtonImg" src="./assets/img/prio_low_svg.svg" alt="" />
                     </button>
                 </div>
-                <label class="margin-top-16px">Category<span class="asterisk">*</span></label>
+
+                  <label class="margin-top-16px">Category<span class="asterisk">*</span></label>
                 <div id="categoryDiv" class="category-div">
                     <span id="categorySelection">Select task category</span>
                     <img id="categoryIcon1" class="dropdown-icon" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
@@ -60,7 +63,9 @@
                     <span class="category-option" onclick="selectOption(2)">User story</span>
                 </div>
                 <input type="hidden" id="selectedCategory" name="category" required />
-                <label class="margin-top-16px">Subtasks</label>
+                <span id="requiredText3" class="red-required-text"></span>
+                  
+                <label >Subtasks</label>
                 <div id="subtasksDiv" class="subtasks-div" onclick="showSubtasksIcons()">
                     <input id="subtasksInput" min="1" type="text" placeholder="Add new subtask" />
                     <img id="subtasksPlusIcon" class="subtasks-icon" src="./assets/img/add_svg.svg" alt="" />

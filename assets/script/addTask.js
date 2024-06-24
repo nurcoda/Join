@@ -293,6 +293,7 @@ document.getElementById("categoryDiv").addEventListener("click", function (event
   event.stopPropagation(); // Stop propagation to prevent immediate re-closing
   let dropdown = document.getElementById("categoryDropdown");
   let categoryDiv = document.getElementById("categoryDiv");
+  let requiredText = document.getElementById('requiredText3');
 
   if (dropdown.classList.contains("d-none")) {
     dropdown.classList.remove("d-none"); // Show dropdown
@@ -302,11 +303,10 @@ document.getElementById("categoryDiv").addEventListener("click", function (event
     hideOpenedCategoryIcon();
   }
 
-  if (categoryDiv.style.border !== "1px solid red") {
+  if (categoryDiv.style.border !== "1px solid #FF8190") {
     categoryDiv.style.border = "1px solid #d1d1d1"; // Set default border
-  } else {
-    categoryDiv.style.border = ""; // Remove the red border
-  }
+    requiredText.innerHTML = "";
+  } 
 });
 
 function selectOption(option) {
@@ -347,10 +347,12 @@ function resetForm() {
 document.addEventListener("DOMContentLoaded", function () {
   // Funktion zur Validierung der Kategorie und gegebenenfalls Verhindern des Submit
   function validateCategory(event) {
+    let requiredText = document.getElementById('requiredText3');
     let hiddenInput = document.getElementById("selectedCategory");
     let categoryDiv = document.getElementById("categoryDiv");
     if (hiddenInput.value === "") {
-      categoryDiv.style.border = "1px solid red";
+      categoryDiv.style.border = "1px solid #FF8190";
+      requiredText.innerHTML = "This field is required"; // required Text wird hier eingefügt und angezeigt, bei category wird es dann entfernt
       event.preventDefault(); // Verhindert das Abschicken des Formulars
     } else {
       categoryDiv.style.border = "1px solid #d1d1d1";
