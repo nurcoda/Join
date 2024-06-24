@@ -1,10 +1,11 @@
-function initPage() {
+function initPageSummary() {
     includeHTML();
     tasksInBoardCounter();
     getTimeOfDay();
     getNextDueDate()
     countHighPriorityTasks()
 }
+
 
 // Zähler initialisieren
 let toDoCounter = 0;
