@@ -105,9 +105,13 @@ function renderContactCardInfo(i) {
    avatar = renderAvatar(i, avatar); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
    let phone = contacts[i].phone;
    let x = document.getElementById("headAndContact");
+   if (!phone) {
+      phone = "";
+   }
    if (!phone.startsWith("+")) {
       phone = "+" + phone;
    }
+
    contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
       <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
       <div>
@@ -129,7 +133,7 @@ function renderContactCardInfo(i) {
          <div class="contact-info-email-headline">Email</div>
          <div class="contact-info-email">${contacts[i].email}</div>
          <div class="contact-info-phone-headline">Phone</div>
-         <div class="contact-info-phone">${`+` + contacts[i].phone}</div>
+         <div class="contact-info-phone">${phone}</div>
       </div>
    </div>`;
    document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
