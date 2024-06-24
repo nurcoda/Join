@@ -145,7 +145,7 @@ function openLoginHTML() {
 
                <div class="login-guestlogin-btn-wrapper">
                   <div class="login-btn btns-login">Log in</div>
-                  <div id="guest-link" class="guest-login-btn btns-login" ahref="./board.html">Guest Log in</div>
+                  <div id="guest-link" class="guest-login-btn btns-login">Guest Log in</div>
                </div>
             </form>
     `;
@@ -153,5 +153,5 @@ function openLoginHTML() {
 
 document.getElementById('guest-link')
               .addEventListener('click', function () {
-                window.location.href = './board.html';
+                window.location.href = './summary.html';
         });
