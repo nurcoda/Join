@@ -179,7 +179,7 @@ function deleteContact(index) {
       elementToDelete.remove();
    }
    contacts.splice(index, 1);
-   renderContact();
+   renderContacts();
    document.getElementById("contactCardBigContainer").innerHTML = "";
 }
 //**Add to Contacts */
@@ -187,12 +187,10 @@ function deleteContact(index) {
 function addPersonToContact() {
    let name = document.getElementById("input-field-name").value;
    let mail = document.getElementById("input-field-mail").value;
-   let phone = document.getElementById("input-field-phone").value; //** Inhalt der Inputfelder */
-
-   let contact = { "name": name, "email": mail, "phone": phone }; //**Inhalt in Objekt zusammenfügen */
-
+   let phone = document.getElementById("input-field-phone").value;
+   let contact = { "name": name, "email": mail, "phone": phone };
    contacts.push(contact);
-   renderContact(); //*Kontaktliste neu laden
+   renderContacts();
    closePopUpByBtn();
 }
 
@@ -279,7 +277,8 @@ function editSave(i) {
    contacts[i].phone = phone;
    closePopUpByBtn(); //Schließe das Pop-Up oder aktualisiere die Anzeige
    console.log("Kontakt erfolgreich aktualisiert:", contacts[i]); // Optional: Zeige eine Erfolgsmeldung oder aktualisiere die Anzeige
-   renderContactCardInfo(i); // ruft nochmal die Funktion aus
+   renderContactCardInfo(i);
+   renderContacts();
    groupAndDisplayContacts(); // zum speichern wir diese funktion erneut aufgerufen
 }
 
