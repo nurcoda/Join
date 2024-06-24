@@ -75,9 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
     greetingText.textContent = getTimeOfDay();
 });
 
-const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
 
 async function fetchDeadline() {
+    const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
     try {
         let response = await fetch(BASE_URL + ".json");
         let responseAsJson = await response.json();
@@ -113,6 +113,31 @@ function findNextDueDate(tasks) {
     return validTasks.length > 0 ? validTasks[0].due_date : null;
 }
 
+// async function fetchDeadline() {
+//     const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
+//     try {
+//         let response = await fetch(BASE_URL + ".json");
+//         let responseAsJson = await response.json();
+
+//         // Angenommen, "tasks" ist ein Array von Objekten
+//         let tasks = responseAsJson.tasks;
+//         if (tasks && tasks.length > 0) {
+//             // Wir nehmen an, dass wir das erste Element im Array verwenden
+//             let dueDate = tasks[0].due_date;
+
+//             // Überprüfen, ob "due_date" vorhanden ist
+//             if (dueDate) {
+//                 document.getElementById("deadlineDate").innerText = dueDate;
+//             } else {
+//                 console.error("due_date nicht gefunden.");
+//             }
+//         } else {
+//             console.error("Keine Aufgaben gefunden.");
+//         }
+//     } catch (error) {
+//         console.error("Fehler beim Abrufen der Daten:", error);
+//     }
+// }
 
 // document.getElementById('guest-link')
 //     .addEventListener('click', function () {
