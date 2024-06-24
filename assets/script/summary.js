@@ -107,7 +107,6 @@ function countHighPriorityTasks() {
     document.getElementById("priorityHighTasks").innerHTML = highPriorityCount;
 }
 
-// document.getElementById('guest-link')
-//     .addEventListener('click', function () {
-//         window.location.href = './board.html';
-//     });
+function toBoard() {
+    window.location.href = './board.html';
+}
