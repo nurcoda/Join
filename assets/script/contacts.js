@@ -1,8 +1,8 @@
 let selectedContactIndex = null;
 
 async function renderContacts() {
-   await loadData();
-   document.getElementById("contactList").innerHTML = `
+  await loadData();
+  document.getElementById('contactList').innerHTML = `
        <div class="buttonWrapper">
            <button class="addContactBtn" onclick="renderAddContactCardInfo(); openPopUP()">
                Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
@@ -12,31 +12,31 @@ async function renderContacts() {
            </button>
        </div>
    `;
-   groupAndDisplayContacts();
+  groupAndDisplayContacts();
 }
 
 function groupAndDisplayContacts() {
-   let sortedContacts = contacts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
-   groupContacts(sortedContacts);
+  let sortedContacts = contacts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+  groupContacts(sortedContacts);
 }
 
 function groupContacts(sortedContacts) {
-   const groupedContacts = {};
-   sortedContacts.forEach((contact) => {
-      const firstLetter = contact.name[0].toUpperCase();
-      if (!groupedContacts[firstLetter]) {
-         groupedContacts[firstLetter] = [];
-      }
-      groupedContacts[firstLetter].push(contact);
-   });
-   let containerContent = "";
-   for (const letter in groupedContacts) {
-      containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
-      groupedContacts[letter].forEach((contact) => {
-         let i = contacts.findIndex((c) => c.id === contact.id);
-         let avatar = renderAvatar(i, contact.color);
-         const highlightClass = i === selectedContactIndex ? "highlight" : "";
-         containerContent += `
+  const groupedContacts = {};
+  sortedContacts.forEach((contact) => {
+    const firstLetter = contact.name[0].toUpperCase();
+    if (!groupedContacts[firstLetter]) {
+      groupedContacts[firstLetter] = [];
+    }
+    groupedContacts[firstLetter].push(contact);
+  });
+  let containerContent = '';
+  for (const letter in groupedContacts) {
+    containerContent += `<div class="contact-letter"><h2 class="letter">${letter}</h2></div>`;
+    groupedContacts[letter].forEach((contact) => {
+      let i = contacts.findIndex((c) => c.id === contact.id);
+      let avatar = renderAvatar(i, contact.color);
+      const highlightClass = i === selectedContactIndex ? 'highlight' : '';
+      containerContent += `
                <div class="contact" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
                    <div id="contact-${i}" class="contactDetails">
                        <div class="img-contacts">
@@ -49,50 +49,50 @@ function groupContacts(sortedContacts) {
                    </div>
                </div>
            `;
-      });
-   }
-   document.getElementById("contactList").innerHTML += containerContent;
+    });
+  }
+  document.getElementById('contactList').innerHTML += containerContent;
 }
 
 function highlightContact(index) {
-   if (selectedContactIndex !== null) {
-      const previousElement = document.getElementById(`contact-${selectedContactIndex}`);
-      if (previousElement) {
-         previousElement.classList.remove("highlight");
-      }
-   }
-   selectedContactIndex = index;
-   const newElement = document.getElementById(`contact-${selectedContactIndex}`);
-   if (newElement) {
-      newElement.classList.add("highlight");
-   }
+  if (selectedContactIndex !== null) {
+    const previousElement = document.getElementById(`contact-${selectedContactIndex}`);
+    if (previousElement) {
+      previousElement.classList.remove('highlight');
+    }
+  }
+  selectedContactIndex = index;
+  const newElement = document.getElementById(`contact-${selectedContactIndex}`);
+  if (newElement) {
+    newElement.classList.add('highlight');
+  }
 }
 
 function colorAvatar(i, color) {
-   return `<div style="background-color: ${color}; width: 40px; height: 40px; border-radius: 50%;"></div>`;
+  return `<div style="background-color: ${color}; width: 40px; height: 40px; border-radius: 50%;"></div>`;
 }
 
 function renderAvatar(i, avatar) {
-   const username = contacts[i]["name"];
-   const firstNameInitial = username[0];
-   const secondNameInitial = username.split(" ")[1].split("")[0];
-   avatar = firstNameInitial + secondNameInitial;
-   return avatar;
+  const username = contacts[i]['name'];
+  const firstNameInitial = username[0];
+  const secondNameInitial = username.split(' ')[1].split('')[0];
+  avatar = firstNameInitial + secondNameInitial;
+  return avatar;
 }
 
 function renderContactCardInfo(i) {
-   let avatar;
-   avatar = renderAvatar(i, avatar); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
-   let phone = contacts[i].phone;
-   let x = document.getElementById("headAndContact");
-   if (!phone) {
-      phone = "";
-   }
-   if (!phone.startsWith("+")) {
-      phone = "+" + phone;
-   }
+  let avatar;
+  avatar = renderAvatar(i, avatar); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
+  let phone = contacts[i].phone;
+  let x = document.getElementById('headAndContact');
+  if (!phone) {
+    phone = '';
+  }
+  if (!phone.startsWith('+')) {
+    phone = '+' + phone;
+  }
 
-   contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
+  contactCardBigContainer.innerHTML = `<div class="contact-card-name-container">
       <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
       <div>
          <div class="contact-card-name">${contacts[i].name}</div>
@@ -117,14 +117,14 @@ function renderContactCardInfo(i) {
       </div>
    </div>`;
 
-   document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp);
-   document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
-      deleteContact(i);
-   });
+  document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp);
+  document.querySelector('.delete-icon-wrapper').addEventListener('click', function () {
+    deleteContact(i);
+  });
 
-   if (window.getComputedStyle(x).display === "none") {
-      openPopUp();
-      popUpBackground.innerHTML = `<div class="contact-card-name-container-mobile">
+  if (window.getComputedStyle(x).display === 'none') {
+    openPopUp();
+    popUpBackground.innerHTML = `<div class="contact-card-name-container-mobile">
     <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
    <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
    <div>
@@ -149,24 +149,24 @@ function renderContactCardInfo(i) {
 </div>
 </div>`;
 
-      document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
-      document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
-         deleteContact(i);
-      }); //löscht die Contact seite
-   } //löscht die Contact seite
+    document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp); //* öffnet die Edit Funktion
+    document.querySelector('.delete-icon-wrapper').addEventListener('click', function () {
+      deleteContact(i);
+    }); //löscht die Contact seite
+  } //löscht die Contact seite
 }
 
 //** Helper Functions */
-popUpBackground.addEventListener("click", closePopUp);
+popUpBackground.addEventListener('click', closePopUp);
 
 function openPopUp() {
-   popUpBackground.classList.remove("d-none");
+  popUpBackground.classList.remove('d-none');
 }
 
 function closePopUp() {
-   if (event.target === closePopUpBtn) {
-      popUpBackground.classList.add("d-none");
-   }
+  if (event.target === closePopUpBtn) {
+    popUpBackground.classList.add('d-none');
+  }
 }
 
 // ##################
@@ -174,67 +174,67 @@ function closePopUp() {
 // ##################
 
 async function deleteContact(index) {
-   // const elementToDelete = document.getElementById(`contact-${index}`);
-   // if (elementToDelete) {
-   //    // if (index === selectedContactIndex) {
-   //    //    elementToDelete.classList.remove("highlight");
-   //    // }
-   //    elementToDelete.remove();
-   // }
+  // const elementToDelete = document.getElementById(`contact-${index}`);
+  // if (elementToDelete) {
+  //    // if (index === selectedContactIndex) {
+  //    //    elementToDelete.classList.remove("highlight");
+  //    // }
+  //    elementToDelete.remove();
+  // }
 
-   isContactAlsoUser(index);
-   await deleteContactDataDB(contacts[index].id);
-   renderContacts();
-   document.getElementById("contactCardBigContainer").innerHTML = "";
+  isContactAlsoUser(index);
+  await deleteContactDataDB(contacts[index].id);
+  renderContacts();
+  document.getElementById('contactCardBigContainer').innerHTML = '';
 }
 
 async function deleteContactDataDB(id) {
-   await fetch(`${BASE_URL}/contacts/${id}.json`, {
-      method: "DELETE",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   });
+  await fetch(`${BASE_URL}/contacts/${id}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
 }
 
 // Delete Helper Functions
 
 function isContactAlsoUser(index) {
-   let isContactAlsoUser = checkIfContactisUser(contacts[index].id);
-   if (isContactAlsoUser) {
-      let userIndex = findContactIndexById(contacts[index].id);
-      deleteUserData(userIndex);
-      user.splice(userIndex, 1);
-   }
+  let isContactAlsoUser = checkIfContactisUser(contacts[index].id);
+  if (isContactAlsoUser) {
+    let userIndex = findContactIndexById(contacts[index].id);
+    deleteUserData(userIndex);
+    user.splice(userIndex, 1);
+  }
 }
 
 function findContactIndexById(contactsId) {
-   let userIndex;
-   for (let i = 0; i < user.length; i++) {
-      if (user[i].id === contactsId) {
-         userIndex = i;
-      }
-   }
-   return userIndex;
+  let userIndex;
+  for (let i = 0; i < user.length; i++) {
+    if (user[i].id === contactsId) {
+      userIndex = i;
+    }
+  }
+  return userIndex;
 }
 
 function checkIfContactisUser(contactID) {
-   const isUser = user.some((singleUser) => singleUser.id === contactID);
-   return isUser ? true : false;
+  const isUser = user.some((singleUser) => singleUser.id === contactID);
+  return isUser ? true : false;
 }
 
 function deleteUserData(userIndex) {
-   let userId = user[userIndex].id;
-   deleteUserDataDB(userId);
+  let userId = user[userIndex].id;
+  deleteUserDataDB(userId);
 }
 
 async function deleteUserDataDB(id) {
-   await fetch(`${BASE_URL}/users/${id}.json`, {
-      method: "DELETE",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   });
+  await fetch(`${BASE_URL}/users/${id}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
 }
 
 // ##################
@@ -242,83 +242,83 @@ async function deleteUserDataDB(id) {
 // ##################
 
 function addPersonToContact() {
-   event.preventDefault();
+  event.preventDefault();
 
-   let name = document.getElementById("input-field-name").value;
-   let mail = document.getElementById("input-field-mail").value;
-   let phone = document.getElementById("input-field-phone").value;
+  let name = document.getElementById('input-field-name').value;
+  let mail = document.getElementById('input-field-mail').value;
+  let phone = document.getElementById('input-field-phone').value;
 
-   let nameExists = contacts.some((contact) => contact.name === name);
+  let nameExists = contacts.some((contact) => contact.name === name);
 
-   if (!nameExists) {
-      let contact = { "name": name, "email": mail, "phone": phone, "id": generateId() };
-      contacts.push(contact);
-      updateNewContactData(contact.id);
-   } else {
-      let nameAffix = getNameAffixAtDoubleUse();
-      let contact = { "name": name + `(${nameAffix})`, "email": mail, "phone": phone, "id": generateId() };
-      contacts.push(contact);
-      updateNewContactData(contact.id);
-   }
+  if (!nameExists) {
+    let contact = { 'name': name, 'email': mail, 'phone': phone, 'id': generateId() };
+    contacts.push(contact);
+    updateNewContactData(contact.id);
+  } else {
+    let nameAffix = getNameAffixAtDoubleUse();
+    let contact = { 'name': name + `(${nameAffix})`, 'email': mail, 'phone': phone, 'id': generateId() };
+    contacts.push(contact);
+    updateNewContactData(contact.id);
+  }
 
-   renderContacts();
-   closePopUpByBtn();
+  renderContacts();
+  closePopUpByBtn();
 }
 
 async function updateNewContactData(id) {
-   let contactIndex = findUserIndexById(id);
-   let updatedContactData = {
-      "color": newContactColor(),
-      "email": contacts[contactIndex].email,
-      "first_two_letters": "Test",
-      "id": contacts[contactIndex].id,
-      "name": contacts[contactIndex].name,
-      "phone": contacts[contactIndex].phone,
-   };
-   await updateDataContactsDB("contacts/" + contacts[contactIndex].id, updatedContactData);
-   renderContacts();
+  let contactIndex = findUserIndexById(id);
+  let updatedContactData = {
+    'color': newContactColor(),
+    'email': contacts[contactIndex].email,
+    'first_two_letters': 'Test',
+    'id': contacts[contactIndex].id,
+    'name': contacts[contactIndex].name,
+    'phone': contacts[contactIndex].phone
+  };
+  await updateDataContactsDB('contacts/' + contacts[contactIndex].id, updatedContactData);
+  renderContacts();
 }
 
 // Helper Add Contact
 
 function findUserIndexById(id) {
-   return contacts.findIndex((contact) => contact.id === id);
+  return contacts.findIndex((contact) => contact.id === id);
 }
 
 function newContactColor() {
-   const usedColors = new Set(contacts.map((contact) => contact.color));
-   for (const color of colorCodes) {
-      if (!usedColors.has(color)) {
-         return color;
-      }
-   }
+  const usedColors = new Set(contacts.map((contact) => contact.color));
+  for (const color of colorCodes) {
+    if (!usedColors.has(color)) {
+      return color;
+    }
+  }
 }
 
 function generateId() {
-   const generatedId = Math.floor(100000 + Math.random() * 900000);
-   if (user.some((user) => user.id === generatedId)) {
-      return generateId(user);
-   }
-   return generatedId;
+  const generatedId = Math.floor(100000 + Math.random() * 900000);
+  if (user.some((user) => user.id === generatedId)) {
+    return generateId(user);
+  }
+  return generatedId;
 }
 
 function getNameAffixAtDoubleUse() {
-   let nameAffixString = generateId().toString().substring(0, 3);
-   nameAffix = parseInt(nameAffixString, 10);
-   return nameAffix;
+  let nameAffixString = generateId().toString().substring(0, 3);
+  nameAffix = parseInt(nameAffixString, 10);
+  return nameAffix;
 }
 
 // ________________________________________________
 
 function closePopUpByBtn() {
-   document.getElementById("popUpBackground").classList.add("d-none");
+  document.getElementById('popUpBackground').classList.add('d-none');
 }
 
 function renderEditContactCardInfo(i) {
-   openPopUp();
-   let avatar;
-   avatar = renderAvatar(i, avatar);
-   popUpBackground.innerHTML = `<div class="edit-contact-pop-up" id="editContentPopUp">
+  openPopUp();
+  let avatar;
+  avatar = renderAvatar(i, avatar);
+  popUpBackground.innerHTML = `<div class="edit-contact-pop-up" id="editContentPopUp">
          <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
          <div class="popup-logo-headline-wrapper">
             <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
@@ -348,8 +348,8 @@ function renderEditContactCardInfo(i) {
 }
 
 function renderAddContactCardInfo() {
-   openPopUp();
-   popUpBackground.innerHTML = `
+  openPopUp();
+  popUpBackground.innerHTML = `
    <div class="add-contact-pop-up" id="contentPopUp">
          <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
          <div class="popup-logo-headline-wrapper">
@@ -382,42 +382,42 @@ function renderAddContactCardInfo() {
 }
 
 function editSave(i) {
-   let name = document.getElementById("edit-input-field-name").value; // Liest die geänderten Werte aus den Eingabefeldern
-   let email = document.getElementById("edit-input-field-mail").value;
-   let phone = document.getElementById("edit-input-field-phone").value;
-   if (phone.startsWith("+")) {
-      phone = phone.substring(1); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
-   }
-   contacts[i].name = name;
-   contacts[i].email = email;
-   contacts[i].phone = phone;
-   closePopUpByBtn();
-   renderContactCardInfo(i);
-   updateContactData(i);
+  let name = document.getElementById('edit-input-field-name').value; // Liest die geänderten Werte aus den Eingabefeldern
+  let email = document.getElementById('edit-input-field-mail').value;
+  let phone = document.getElementById('edit-input-field-phone').value;
+  if (phone.startsWith('+')) {
+    phone = phone.substring(1); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
+  }
+  contacts[i].name = name;
+  contacts[i].email = email;
+  contacts[i].phone = phone;
+  closePopUpByBtn();
+  renderContactCardInfo(i);
+  updateContactData(i);
 }
 
 async function updateContactData(i) {
-   let updatedContactData = {
-      "color": contacts[i].color,
-      "email": contacts[i].email,
-      "first_two_letters": contacts[i].first_two_letters,
-      "id": contacts[i].id,
-      "name": contacts[i].name,
-      "phone": contacts[i].phone,
-   };
-   await updateDataContactsDB("contacts/" + contacts[i].id, updatedContactData);
-   renderContacts();
+  let updatedContactData = {
+    'color': contacts[i].color,
+    'email': contacts[i].email,
+    'first_two_letters': contacts[i].first_two_letters,
+    'id': contacts[i].id,
+    'name': contacts[i].name,
+    'phone': contacts[i].phone
+  };
+  await updateDataContactsDB('contacts/' + contacts[i].id, updatedContactData);
+  renderContacts();
 }
 
 async function updateDataContactsDB(path, data) {
-   console.log(data);
-   await fetch(BASE_URL + path + ".json", {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: {
-         "Content-Type": "application/json",
-      },
-   });
+  console.log(data);
+  await fetch(BASE_URL + path + '.json', {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
 }
 
 // function renderContactCardInfoMobile() {
