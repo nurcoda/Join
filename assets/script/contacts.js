@@ -37,7 +37,7 @@ function groupContacts(sortedContacts) {
          let avatar = renderAvatar(i, contact.color);
          const highlightClass = i === selectedContactIndex ? "highlight" : "";
          containerContent += `
-               <div class="contact ${highlightClass}" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
+               <div class="contact" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
                    <div id="contact-${i}" class="contactDetails">
                        <div class="img-contacts">
                            <div id="avatar${i}" class="avatar" style="background-color: ${contact.color}">${avatar}</div>
@@ -174,24 +174,38 @@ function closePopUp() {
 // ##################
 
 async function deleteContact(index) {
-   const elementToDelete = document.getElementById(`contact-${index}`);
-   if (elementToDelete) {
-      if (index === selectedContactIndex) {
-         elementToDelete.classList.remove("highlight");
-      }
-      elementToDelete.remove();
-   }
+   // const elementToDelete = document.getElementById(`contact-${index}`);
+   // if (elementToDelete) {
+   //    // if (index === selectedContactIndex) {
+   //    //    elementToDelete.classList.remove("highlight");
+   //    // }
+   //    elementToDelete.remove();
+   // }
 
+   isContactAlsoUser(index);
+   await deleteContactDataDB(contacts[index].id);
+   renderContacts();
+   document.getElementById("contactCardBigContainer").innerHTML = "";
+}
+
+async function deleteContactDataDB(id) {
+   await fetch(`${BASE_URL}/contacts/${id}.json`, {
+      method: "DELETE",
+      headers: {
+         "Content-Type": "application/json",
+      },
+   });
+}
+
+// Delete Helper Functions
+
+function isContactAlsoUser(index) {
    let isContactAlsoUser = checkIfContactisUser(contacts[index].id);
    if (isContactAlsoUser) {
       let userIndex = findContactIndexById(contacts[index].id);
       deleteUserData(userIndex);
       user.splice(userIndex, 1);
    }
-
-   await deleteContactDataDB(contacts[index].id);
-   renderContacts();
-   document.getElementById("contactCardBigContainer").innerHTML = "";
 }
 
 function findContactIndexById(contactsId) {
@@ -202,15 +216,6 @@ function findContactIndexById(contactsId) {
       }
    }
    return userIndex;
-}
-
-async function deleteContactDataDB(id) {
-   await fetch(`${BASE_URL}/contacts/${id}.json`, {
-      method: "DELETE",
-      headers: {
-         "Content-Type": "application/json",
-      },
-   });
 }
 
 function checkIfContactisUser(contactID) {
@@ -242,6 +247,7 @@ function addPersonToContact() {
    let name = document.getElementById("input-field-name").value;
    let mail = document.getElementById("input-field-mail").value;
    let phone = document.getElementById("input-field-phone").value;
+
    let nameExists = contacts.some((contact) => contact.name === name);
 
    if (!nameExists) {
