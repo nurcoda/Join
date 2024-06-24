@@ -195,13 +195,44 @@ async function deleteContact(index) {
 //**Add to Contacts */
 
 function addPersonToContact() {
+   event.preventDefault();
    let name = document.getElementById("input-field-name").value;
    let mail = document.getElementById("input-field-mail").value;
    let phone = document.getElementById("input-field-phone").value;
-   let contact = { "name": name, "email": mail, "phone": phone };
+   let contact = { "name": name, "email": mail, "phone": phone, "id": generateId() };
    contacts.push(contact);
+   updateNewContactData(contact.id);
    renderContacts();
    closePopUpByBtn();
+}
+
+async function updateNewContactData(id) {
+   let contactIndex = findUserIndexById(id);
+
+   let updatedContactData = {
+      "color": "test",
+      "email": contacts[contactIndex].email,
+      "first_two_letters": "Test",
+      "id": contacts[contactIndex].id,
+      "name": contacts[contactIndex].name,
+      "phone": contacts[contactIndex].phone,
+   };
+   await updateDataContactsDB("contacts/" + contacts[contactIndex].id, updatedContactData);
+   renderContacts();
+}
+
+function findUserIndexById(id) {
+   return contacts.findIndex((contact) => contact.id === id);
+}
+
+function generateId() {
+   let generatedId;
+   let isUnique = false;
+   while (!isUnique) {
+      generatedId = Math.floor(100000 + Math.random() * 900000);
+      isUnique = !user.some((user) => user.id === generatedId);
+   }
+   return generatedId;
 }
 
 function closePopUpByBtn() {

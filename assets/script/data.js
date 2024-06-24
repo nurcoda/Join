@@ -2,21 +2,6 @@ let user = [];
 let contacts = [];
 let tasks = [];
 const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
-
-// Your web app's Firebase configuration DAS IST DAS DING MIT DEM ANMELDEN
-// const firebaseConfig = {
-//    apiKey: "YOUR_API_KEY",
-//    authDomain: "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/",
-//    projectId: "YOUR_PROJECT_ID",
-//    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-//    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-//    appId: "YOUR_APP_ID"
-//  };
-
- // Initialize Firebase
-//  firebase.initializeApp(firebaseConfig);
-//  const auth = firebase.auth();
-
 loadData();
 
 async function loadData() {
@@ -42,18 +27,60 @@ async function postSignUpData(path, data) {
    return (responseToJSON = await response.json());
 }
 
-//Maybe used later?
+// COLOR-COLLECTION
 
-// async function PostData(path = "", data = {}) {
-//    let response = await fetch(BASE_URL + path + ".json", {
-//       method: "POST",
-//       header: {
-//          "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(data),
-//    });
-//    return (responseToJSON = await response.json());
-// }
+const colorCodes = [
+   "#FF6347", // Tomato
+   "#40E0D0", // Turquoise
+   "#7B68EE", // Medium Slate Blue
+   "#3CB371", // Medium Sea Green
+   "#FF1493", // Deep Pink
+   "#00FA9A", // Medium Spring Green
+   "#4169E1", // Royal Blue
+   "#DB7093", // Pale Violet Red
+   "#228B22", // Forest Green
+   "#4682B4", // Steel Blue
+   "#8A2BE2", // Blue Violet
+   "#2E8B57", // Sea Green
+   "#FF4500", // Orange Red
+   "#20B2AA", // Light Sea Green
+   "#9932CC", // Dark Orchid
+   "#32CD32", // Lime Green
+   "#FFD700", // Gold
+   "#00BFFF", // Deep Sky Blue
+   "#A0522D", // Sienna
+   "#00CED1", // Dark Turquoise
+   "#9932CC", // Dark Orchid
+   "#8B4513", // Saddle Brown
+   "#FFA07A", // Light Salmon
+   "#2F4F4F", // Dark Slate Gray
+   "#BA55D3", // Medium Orchid
+   "#7FFF00", // Chartreuse
+   "#00FFFF", // Cyan
+   "#FF69B4", // Hot Pink
+   "#ADFF2F", // Green Yellow
+   "#FF8C00", // Dark Orange
+   "#7CFC00", // Lawn Green
+   "#00FF7F", // Spring Green
+   "#FFDAB9", // Peach Puff
+   "#FF6347", // Tomato
+   "#6A5ACD", // Slate Blue
+   "#FA8072", // Salmon
+   "#FFC0CB", // Pink
+   "#DDA0DD", // Plum
+   "#4682B4", // Steel Blue
+   "#FF4500", // Orange Red
+   "#E9967A", // Dark Salmon
+   "#8B008B", // Dark Magenta
+   "#98FB98", // Pale Green
+   "#BDB76B", // Dark Khaki
+   "#FFB6C1", // Light Pink
+   "#FFA500", // Orange
+   "#FF00FF", // Magenta
+   "#B0C4DE", // Light Steel Blue
+   "#BA55D3", // Medium Orchid
+   "#C71585", // Medium Violet Red
+];
 
 // This function is to sort the data in database in right way, to work with it correctly.
 // ONLY NECESSARY WITH TESTDATA JSON, ONE TIME
