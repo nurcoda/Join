@@ -122,17 +122,6 @@ function returnPostedData() {
    return data;
 }
 
-// async function postSignUpData(path="", data={}){
-//    let response = await fetch(BASE_URL + ".json",{
-//      method: "POST",
-//      header: {
-//       "Content-Type": "application/json"
-//      },
-//      body: JSON.stringify(data)
-//    });
-//    return responseToJSON = await response.json();
-// }
-
 function openLoginHTML() {
    loginContainer.innerHTML = `
     <div class="headline-login-wrapper">
@@ -156,8 +145,13 @@ function openLoginHTML() {
 
                <div class="login-guestlogin-btn-wrapper">
                   <div class="login-btn btns-login">Log in</div>
-                  <div class="guest-login-btn btns-login">Guest Log in</div>
+                  <div id="guest-link" class="guest-login-btn btns-login" ahref="./board.html">Guest Log in</div>
                </div>
             </form>
     `;
 }
+
+document.getElementById('guest-link')
+              .addEventListener('click', function () {
+                window.location.href = './board.html';
+        });
