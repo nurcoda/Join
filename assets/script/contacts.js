@@ -210,7 +210,7 @@ async function updateNewContactData(id) {
    let contactIndex = findUserIndexById(id);
 
    let updatedContactData = {
-      "color": "test",
+      "color": newContactColor(),
       "email": contacts[contactIndex].email,
       "first_two_letters": "Test",
       "id": contacts[contactIndex].id,
@@ -225,12 +225,19 @@ function findUserIndexById(id) {
    return contacts.findIndex((contact) => contact.id === id);
 }
 
+function newContactColor() {
+   const usedColors = new Set(contacts.map((contact) => contact.color));
+   for (const color of colorCodes) {
+      if (!usedColors.has(color)) {
+         return color;
+      }
+   }
+}
+
 function generateId() {
-   let generatedId;
-   let isUnique = false;
-   while (!isUnique) {
-      generatedId = Math.floor(100000 + Math.random() * 900000);
-      isUnique = !user.some((user) => user.id === generatedId);
+   const generatedId = Math.floor(100000 + Math.random() * 900000);
+   if (user.some((user) => user.id === generatedId)) {
+      return generateId(user);
    }
    return generatedId;
 }
