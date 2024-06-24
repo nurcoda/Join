@@ -190,7 +190,6 @@ async function deleteContact(index) {
    }
 
    await deleteContactDataDB(contacts[index].id);
-   contacts.splice(index, 1);
    renderContacts();
    document.getElementById("contactCardBigContainer").innerHTML = "";
 }
