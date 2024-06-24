@@ -2,21 +2,6 @@ let user = [];
 let contacts = [];
 let tasks = [];
 const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
-
-// Your web app's Firebase configuration DAS IST DAS DING MIT DEM ANMELDEN
-// const firebaseConfig = {
-//    apiKey: "YOUR_API_KEY",
-//    authDomain: "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/",
-//    projectId: "YOUR_PROJECT_ID",
-//    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-//    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-//    appId: "YOUR_APP_ID"
-//  };
-
- // Initialize Firebase
-//  firebase.initializeApp(firebaseConfig);
-//  const auth = firebase.auth();
-
 loadData();
 
 async function loadData() {
