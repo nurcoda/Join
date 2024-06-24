@@ -102,12 +102,13 @@ function openSignUpHTML() {
                <label for="acceptPrivacyPolicy">I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label>
            </div>
            <div class="login-guestlogin-btn-wrapper">
-               <div class="signup-btn-in-form btns-login" onclick="signUpSucces(); postSignUpData('/users', returnPostedData());">Sign up</div>
+               <div class="signup-btn-in-form btns-login" onclick="signUpSucces(); postSignUpData('/users/${newId}', returnPostedData());">Sign up</div>
            </div>
        </form>
    `;
 }
 
+let newId = generateId();
 
 function returnPostedData() {
    const form = document.getElementById('SignUpData');
@@ -116,7 +117,8 @@ function returnPostedData() {
    const data = {
        name: formData.get('name'),
        email: formData.get('email'),
-       password: formData.get('password')
+       password: formData.get('password'),
+       id: newId
    };
 
    return data;
@@ -155,3 +157,19 @@ document.getElementById('guest-link')
               .addEventListener('click', function () {
                 window.location.href = './summary.html';
         });
+
+
+        function generateId() {
+         let generatedId;
+         let isUnique = false;
+       
+         while (!isUnique) {
+           // Generiere eine zufällige 6-stellige Zahl
+           generatedId = Math.floor(100000 + Math.random() * 900000);
+       
+           // Überprüfen, ob die ID bereits existiert
+           isUnique = !users.some((user) => user.id === generatedId);
+         }
+       
+         return generatedId;
+       }
