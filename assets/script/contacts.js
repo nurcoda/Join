@@ -169,29 +169,69 @@ function closePopUp() {
    }
 }
 
+// ##################
+//   DELETE CONTACT
+// ##################
+
 async function deleteContact(index) {
    const elementToDelete = document.getElementById(`contact-${index}`);
    if (elementToDelete) {
       if (index === selectedContactIndex) {
          elementToDelete.classList.remove("highlight");
-         selectedContactIndex = null; // oder setze auf einen anderen gültigen Index
       }
       elementToDelete.remove();
    }
+
+   let isContactAlsoUser = checkIfContactisUser(contacts[index].id);
+   if (isContactAlsoUser) {
+      let userIndex = findContactIndexById(contacts[index].id);
+      deleteUserData(userIndex);
+      user.splice(userIndex, 1);
+   }
+
+   await deleteContactDataDB(contacts[index].id);
    contacts.splice(index, 1);
-   // await deleteContactData(contacts[index].id);
    renderContacts();
    document.getElementById("contactCardBigContainer").innerHTML = "";
 }
 
-// async function deleteContactData(id) {
-//    await fetch(`${BASE_URL}/contacts/${id}.json`, {
-//       method: "DELETE",
-//       headers: {
-//          "Content-Type": "application/json",
-//       },
-//    });
-// }
+function findContactIndexById(contactsId) {
+   let userIndex;
+   for (let i = 0; i < user.length; i++) {
+      if (user[i].id === contactsId) {
+         userIndex = i;
+      }
+   }
+   return userIndex;
+}
+
+async function deleteContactDataDB(id) {
+   await fetch(`${BASE_URL}/contacts/${id}.json`, {
+      method: "DELETE",
+      headers: {
+         "Content-Type": "application/json",
+      },
+   });
+}
+
+function checkIfContactisUser(contactID) {
+   const isUser = user.some((singleUser) => singleUser.id === contactID);
+   return isUser ? true : false;
+}
+
+function deleteUserData(userIndex) {
+   let userId = user[userIndex].id;
+   deleteUserDataDB(userId);
+}
+
+async function deleteUserDataDB(id) {
+   await fetch(`${BASE_URL}/users/${id}.json`, {
+      method: "DELETE",
+      headers: {
+         "Content-Type": "application/json",
+      },
+   });
+}
 
 // ##################
 //    ADD CONTACT
@@ -199,10 +239,12 @@ async function deleteContact(index) {
 
 function addPersonToContact() {
    event.preventDefault();
+
    let name = document.getElementById("input-field-name").value;
    let mail = document.getElementById("input-field-mail").value;
    let phone = document.getElementById("input-field-phone").value;
    let nameExists = contacts.some((contact) => contact.name === name);
+
    if (!nameExists) {
       let contact = { "name": name, "email": mail, "phone": phone, "id": generateId() };
       contacts.push(contact);
@@ -213,6 +255,7 @@ function addPersonToContact() {
       contacts.push(contact);
       updateNewContactData(contact.id);
    }
+
    renderContacts();
    closePopUpByBtn();
 }
