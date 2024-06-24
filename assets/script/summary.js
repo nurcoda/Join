@@ -75,24 +75,24 @@ document.addEventListener("DOMContentLoaded", function () {
     greetingText.textContent = getTimeOfDay();
 });
 
-async function fetchDeadline() {
-    const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
 
+async function fetchDeadline() {
     try {
         let response = await fetch(BASE_URL + ".json");
         let responseAsJson = await response.json();
 
         // Angenommen, "tasks" ist ein Array von Objekten
         let tasks = responseAsJson.tasks;
-        if (tasks && tasks.length > 0) {
-            // Wir nehmen an, dass wir das erste Element im Array verwenden
-            let dueDate = tasks[0].due_date;
 
-            // Überprüfen, ob "due_date" vorhanden ist
-            if (dueDate) {
-                document.getElementById("deadlineDate").innerText = dueDate;
+        if (tasks && tasks.length > 0) {
+            let nextDueDate = findNextDueDate(tasks);
+
+            // Überprüfen, ob ein nächstes Fälligkeitsdatum gefunden wurde
+            if (nextDueDate) {
+                document.getElementById("deadlineDate").innerText = nextDueDate;
             } else {
-                console.error("due_date nicht gefunden.");
+                console.error("Kein gültiges Fälligkeitsdatum gefunden.");
             }
         } else {
             console.error("Keine Aufgaben gefunden.");
@@ -100,6 +100,17 @@ async function fetchDeadline() {
     } catch (error) {
         console.error("Fehler beim Abrufen der Daten:", error);
     }
+}
+
+function findNextDueDate(tasks) {
+    // Filtere nur Aufgaben mit einem gültigen due_date
+    let validTasks = tasks.filter(task => task.due_date);
+
+    // Sortiere die Aufgaben nach dem due_date aufsteigend
+    validTasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
+
+    // Gib das due_date der ersten Aufgabe zurück (das früheste)
+    return validTasks.length > 0 ? validTasks[0].due_date : null;
 }
 
 
