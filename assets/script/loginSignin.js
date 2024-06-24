@@ -4,7 +4,6 @@ const signUpContainer = document.getElementById("signUpContainer");
 const signUpSuccesContainer = document.getElementById("signUpSuccesContainer");
 let newId = generateId();
 
-
 openLogin();
 
 function openLogin() {
@@ -111,17 +110,15 @@ function openSignUpHTML() {
    `;
 }
 
-
-
 function returnPostedData() {
-   const form = document.getElementById('SignUpData');
+   const form = document.getElementById("SignUpData");
    const formData = new FormData(form);
 
    const data = {
-       name: formData.get('name'),
-       email: formData.get('email'),
-       password: formData.get('password'),
-       id: newId
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+      id: newId,
    };
 
    return data;
@@ -156,51 +153,42 @@ function openLoginHTML() {
     `;
 }
 
-document.getElementById('guest-link')
-              .addEventListener('click', function () {
-                window.location.href = './summary.html';
-        });
+document.getElementById("guest-link").addEventListener("click", function () {
+   window.location.href = "./summary.html";
+});
 
+function generateId() {
+   let generatedId;
+   let isUnique = false;
 
-        function generateId() {
-         let generatedId;
-         let isUnique = false;
-       
-         while (!isUnique) {
-           // Generiere eine zufällige 6-stellige Zahl
-           generatedId = Math.floor(100000 + Math.random() * 900000);
-       
-           // Überprüfen, ob die ID bereits existiert
-           isUnique = !user.some((user) => user.id === generatedId);
-         }
-       
-         return generatedId;
-       }
+   while (!isUnique) {
+      // Generiere eine zufällige 6-stellige Zahl
+      generatedId = Math.floor(100000 + Math.random() * 900000);
 
-       function loginUser() {
-         let email = document.getElementById('email').value;
-         let password = document.getElementById('password').value;
-   for (let i=0;i<user.length;i++){
+      // Überprüfen, ob die ID bereits existiert
+      isUnique = !user.some((user) => user.id === generatedId);
+   }
+
+   return generatedId;
+}
+
+function loginUser() {
+   let email = document.getElementById("email").value;
+   let password = document.getElementById("password").value;
+   for (let i = 0; i < user.length; i++) {
       if (user[i]["email"].includes(email)) {
-         console.log( 'Email ist da');
+         console.log("Email ist da");
 
-         if (user[i]["password"].includes(password)){
-            console.log('Passwort ist auch da');
+         if (user[i]["password"].includes(password)) {
+            console.log("Passwort ist auch da");
 
-            window.location.href = './summary.html';
+            window.location.href = "./summary.html";
          }
-
-         
-
       } else {
-          console.log('passt nicht');
-        
+         console.log("passt nicht");
       }
    }
-                 
-              }
+}
 
-
-            
-         //   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
-           // Anmeldedaten stimmen übere
+//   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
+// Anmeldedaten stimmen übere
