@@ -1,18 +1,22 @@
-// let Test = "./assets/script/data.js";
 let selectedContactIndex = null;
 
-// function init() {
-//    setTimeout(() => {
-//       renderContact();
-//    }, 1000);
-// }
+async function renderContacts() {
+   await loadData();
+   document.getElementById("contactList").innerHTML = `
+       <div class="buttonWrapper">
+           <button class="addContactBtn" onclick="renderAddContactCardInfo(); openPopUP()">
+               Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
+           </button>
+           <button class="addContactBtnMobile" onclick="renderAddContactCardInfo()"
+                 <img src="./assets/img/person_add_icon.png" alt="" />
+           </button>
+       </div>
+   `;
+   groupAndDisplayContacts();
+}
 
 function groupAndDisplayContacts() {
-   const sortedContacts = contacts.sort((a, b) => {
-      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-      return 0;
-   });
+   let sortedContacts = contacts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
    groupContacts(sortedContacts);
 }
 
@@ -50,14 +54,6 @@ function groupContacts(sortedContacts) {
    document.getElementById("contactList").innerHTML += containerContent;
 }
 
-// function highlightContact(index) {
-//    if (selectedContactIndex !== null) {
-//       document.getElementById(`contact-${selectedContactIndex}`).classList.remove('highlight');
-//    }
-//    selectedContactIndex = index;
-//    document.getElementById(`contact-${selectedContactIndex}`).classList.add('highlight');
-// }
-
 function highlightContact(index) {
    if (selectedContactIndex !== null) {
       const previousElement = document.getElementById(`contact-${selectedContactIndex}`);
@@ -72,23 +68,7 @@ function highlightContact(index) {
    }
 }
 
-async function renderContact() {
-   await loadData();
-   document.getElementById("contactList").innerHTML = `
-       <div class="buttonWrapper">
-           <button class="addContactBtn" onclick="renderAddContactCardInfo(); openPopUP()">
-               Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
-           </button>
-           <button class="addContactBtnMobile" onclick="renderAddContactCardInfo()"
-                 <img src="./assets/img/person_add_icon.png" alt="" />
-           </button>
-       </div>
-   `;
-   groupAndDisplayContacts();
-}
-
 function colorAvatar(i, color) {
-   // Diese Funktion sollte das Avatar-Rendering übernehmen
    return `<div style="background-color: ${color}; width: 40px; height: 40px; border-radius: 50%;"></div>`;
 }
 
@@ -136,10 +116,12 @@ function renderContactCardInfo(i) {
          <div class="contact-info-phone">${phone}</div>
       </div>
    </div>`;
-   document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp); //* öffnet die Edit Funktion
+
+   document.querySelector(".edit-icon-wrapper").addEventListener("click", openPopUp);
    document.querySelector(".delete-icon-wrapper").addEventListener("click", function () {
       deleteContact(i);
    });
+
    if (window.getComputedStyle(x).display === "none") {
       openPopUp();
       popUpBackground.innerHTML = `<div class="contact-card-name-container-mobile">
