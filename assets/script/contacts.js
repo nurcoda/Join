@@ -192,23 +192,33 @@ async function deleteContact(index) {
 //       },
 //    });
 // }
-//**Add to Contacts */
+
+// ##################
+//    ADD CONTACT
+// ##################
 
 function addPersonToContact() {
    event.preventDefault();
    let name = document.getElementById("input-field-name").value;
    let mail = document.getElementById("input-field-mail").value;
    let phone = document.getElementById("input-field-phone").value;
-   let contact = { "name": name, "email": mail, "phone": phone, "id": generateId() };
-   contacts.push(contact);
-   updateNewContactData(contact.id);
+   let nameExists = contacts.some((contact) => contact.name === name);
+   if (!nameExists) {
+      let contact = { "name": name, "email": mail, "phone": phone, "id": generateId() };
+      contacts.push(contact);
+      updateNewContactData(contact.id);
+   } else {
+      let nameAffix = getNameAffixAtDoubleUse();
+      let contact = { "name": name + `(${nameAffix})`, "email": mail, "phone": phone, "id": generateId() };
+      contacts.push(contact);
+      updateNewContactData(contact.id);
+   }
    renderContacts();
    closePopUpByBtn();
 }
 
 async function updateNewContactData(id) {
    let contactIndex = findUserIndexById(id);
-
    let updatedContactData = {
       "color": newContactColor(),
       "email": contacts[contactIndex].email,
@@ -220,6 +230,8 @@ async function updateNewContactData(id) {
    await updateDataContactsDB("contacts/" + contacts[contactIndex].id, updatedContactData);
    renderContacts();
 }
+
+// Helper Add Contact
 
 function findUserIndexById(id) {
    return contacts.findIndex((contact) => contact.id === id);
@@ -241,6 +253,14 @@ function generateId() {
    }
    return generatedId;
 }
+
+function getNameAffixAtDoubleUse() {
+   let nameAffixString = generateId().toString().substring(0, 3);
+   nameAffix = parseInt(nameAffixString, 10);
+   return nameAffix;
+}
+
+// ________________________________________________
 
 function closePopUpByBtn() {
    document.getElementById("popUpBackground").classList.add("d-none");
