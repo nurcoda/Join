@@ -8,15 +8,12 @@ loadData();
 async function loadData() {
    let response = await fetch(BASE_URL + ".json");
    let responseAsJson = await response.json();
-   // console.log(responseAsJson);
-   // user = [];
-   // contacts = [];
-   // tasks = [];
    try {
       user = Object.values(responseAsJson.users);
       contacts = Object.values(responseAsJson.contacts);
       tasks = Object.values(responseAsJson.tasks);
    } catch (error) {}
+   pushUsersToContacts(user, contacts);
 }
 
 async function postSignUpData(path = "", data = {}) {
@@ -29,6 +26,7 @@ async function postSignUpData(path = "", data = {}) {
    });
    return (responseToJSON = await response.json());
 }
+
 //Maybe used later?
 
 // async function PostData(path = "", data = {}) {
@@ -82,7 +80,11 @@ async function uploadDataToHaveCorrectKeyInDB() {
 function pushUsersToContacts(user, contacts) {
    user.forEach((singleUser) => {
       let { password, ...userWithoutPassword } = singleUser;
-      contacts.push(userWithoutPassword);
+      const usernameExists = contacts.find((contact) => contact.name === userWithoutPassword.username);
+      const idExists = contacts.find((contact) => contact.id === userWithoutPassword.id);
+      if (!usernameExists && !idExists) {
+         contacts.push(singleUser);
+      }
    });
 }
 // ____________________________________________________________________________
