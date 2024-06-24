@@ -58,9 +58,6 @@ function getUserObjectById(user_id) {
 function renderContactsDropdownPopUpEdit(i) {
    let dropdown = document.getElementById("assignedDropdown");
    dropdown.innerHTML = "";
-
-   // Überprüfen, ob tasks[i] definiert ist und ob es assigned_user gibt
-
    for (let j = 0; j < contacts.length; j++) {
       let isAssigned = false;
       let imgSrc = "./assets/img/check_btn.png";
@@ -80,7 +77,6 @@ function renderContactsDropdownPopUpEdit(i) {
             }
          }
       }
-
       dropdown.innerHTML += `
                <div id="contact${contacts[j].id}" class="assigned-to-contact ${
          isAssigned ? "marked" : ""
