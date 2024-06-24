@@ -122,16 +122,16 @@ function returnPostedData() {
    return data;
 }
 
-async function postSignUpData(path="", data={}){
-   let response = await fetch(BASE_URL + ".json",{
-     method: "POST",
-     header: {
-      "Content-Type": "application/json"
-     },
-     body: JSON.stringify(data)
-   });
-   return responseToJSON = await response.json();
-}
+// async function postSignUpData(path="", data={}){
+//    let response = await fetch(BASE_URL + ".json",{
+//      method: "POST",
+//      header: {
+//       "Content-Type": "application/json"
+//      },
+//      body: JSON.stringify(data)
+//    });
+//    return responseToJSON = await response.json();
+// }
 
 function openLoginHTML() {
    loginContainer.innerHTML = `
