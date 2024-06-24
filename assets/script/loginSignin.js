@@ -3,6 +3,8 @@ const loginContainer = document.getElementById("loginContainer");
 const signUpContainer = document.getElementById("signUpContainer");
 const signUpSuccesContainer = document.getElementById("signUpSuccesContainer");
 let newId = generateId();
+
+
 openLogin();
 
 function openLogin() {
@@ -133,11 +135,11 @@ function openLoginHTML() {
             </div>
             <form class="input-login">
                <div class="input-login-field">
-                  <input type="email" placeholder="Email" />
+                  <input id="email" type="email" placeholder="Email" />
                   <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
                </div>
                <div class="input-login-field">
-                  <input type="password" placeholder="Password" />
+                  <input id="password" type="password" placeholder="Password" />
                   <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
                </div>
 
@@ -147,7 +149,7 @@ function openLoginHTML() {
                </div>
 
                <div class="login-guestlogin-btn-wrapper">
-                  <div class="login-btn btns-login">Log in</div>
+                  <div class="login-btn btns-login" onclick="loginUser()">Log in</div>
                   <div id="guest-link" class="guest-login-btn btns-login">Guest Log in</div>
                </div>
             </form>
@@ -174,3 +176,31 @@ document.getElementById('guest-link')
        
          return generatedId;
        }
+
+       function loginUser() {
+         let email = document.getElementById('email').value;
+         let password = document.getElementById('password').value;
+   for (let i=0;i<user.length;i++){
+      if (user[i]["email"].includes(email)) {
+         console.log( 'Email ist da');
+
+         if (user[i]["password"].includes(password)){
+            console.log('Passwort ist auch da');
+
+            window.location.href = './summary.html';
+         }
+
+         
+
+      } else {
+          console.log('passt nicht');
+        
+      }
+   }
+                 
+              }
+
+
+            
+         //   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
+           // Anmeldedaten stimmen übere
