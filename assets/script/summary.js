@@ -79,9 +79,14 @@ async function tasksInBoardCounter() {
     // Anzeige der Anzahl der Aufgaben je nach Zustand auf der Webseite
     let taskToDoElement = document.getElementById('toDoTasks');
     taskToDoElement.innerHTML = toDoCounter;
-    // Hier die anderen Counter auch entsprechend einfügen
 
-    // Beispiel:
-    // let inProgressElement = document.getElementById('inProgressTasks');
-    // inProgressElement.innerHTML = inProgressCounter;
+    let inProgressElement = document.getElementById('progressTasks');
+    inProgressElement.innerHTML = inProgressCounter;
+
+
+    let feedbackTasksElement = document.getElementById('feedbackTasks');
+    feedbackTasksElement.innerHTML = awaitFeedbackCounter;
+
+    let doneTasksElement = document.getElementById('doneTasks')
+    doneTasksElement.innerHTML = doneCounter;
 }
