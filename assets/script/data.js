@@ -29,7 +29,7 @@ async function postSignUpData(path, data) {
 
 // COLOR-COLLECTION
 
-const moreColorCodes = [
+const colorCodes = [
    "#FF6347", // Tomato
    "#40E0D0", // Turquoise
    "#7B68EE", // Medium Slate Blue
