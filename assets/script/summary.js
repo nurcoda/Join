@@ -3,6 +3,7 @@ function initPage() {
     tasksInBoardCounter();
     getTimeOfDay();
     getNextDueDate()
+    countHighPriorityTasks()
 }
 
 // Zähler initialisieren
@@ -92,6 +93,18 @@ function getNextDueDate() {
     const options = { year: "numeric", month: "long", day: "numeric" };
     const formattedDate = nextDueDate.toLocaleDateString("en-US", options);
     document.getElementById("deadlineDate").innerHTML = formattedDate;
+}
+
+function countHighPriorityTasks() {
+    let highPriorityCount = 0;
+
+    tasks.forEach((task) => {
+        if (task.priority === 'high') {
+            highPriorityCount++;
+        }
+    });
+
+    document.getElementById("priorityHighTasks").innerHTML = highPriorityCount;
 }
 
 // document.getElementById('guest-link')
