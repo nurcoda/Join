@@ -120,12 +120,18 @@ async function uploadDataToHaveCorrectKeyInDB() {
 }
 
 function pushUsersToContacts(user, contacts) {
+   for (let i = contacts.length - 1; i >= 0; i--) {
+      if (contacts[i] === null) {
+         contacts.splice(i, 1);
+      }
+   }
+
    user.forEach((singleUser) => {
       let { password, ...userWithoutPassword } = singleUser;
       const usernameExists = contacts.find((contact) => contact.name === userWithoutPassword.username);
       const idExists = contacts.find((contact) => contact.id === userWithoutPassword.id);
       if (!usernameExists && !idExists) {
-         contacts.push(singleUser);
+         contacts.push(userWithoutPassword);
       }
    });
 }
