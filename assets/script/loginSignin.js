@@ -2,6 +2,7 @@ const toSignUpContainer = document.getElementById("toSignUpContainer");
 const loginContainer = document.getElementById("loginContainer");
 const signUpContainer = document.getElementById("signUpContainer");
 const signUpSuccesContainer = document.getElementById("signUpSuccesContainer");
+let newId = generateId();
 openLogin();
 
 function openLogin() {
@@ -108,7 +109,7 @@ function openSignUpHTML() {
    `;
 }
 
-let newId = generateId();
+
 
 function returnPostedData() {
    const form = document.getElementById('SignUpData');
@@ -168,7 +169,7 @@ document.getElementById('guest-link')
            generatedId = Math.floor(100000 + Math.random() * 900000);
        
            // Überprüfen, ob die ID bereits existiert
-           isUnique = !users.some((user) => user.id === generatedId);
+           isUnique = !user.some((user) => user.id === generatedId);
          }
        
          return generatedId;

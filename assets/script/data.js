@@ -16,9 +16,10 @@ async function loadData() {
    pushUsersToContacts(user, contacts);
 }
 
-async function postSignUpData(path, data = {}) {
+async function postSignUpData(path, data) {
+   console.log(data);
    let response = await fetch(BASE_URL + path + ".json", {
-      method: "POST",
+      method: "PUT",
       header: {
          "Content-Type": "application/json",
       },
