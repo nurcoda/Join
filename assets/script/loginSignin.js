@@ -26,6 +26,7 @@ function signUpSucces() {
 
 function closeSignUpSucces() {
    signUpSuccesContainer.classList.add("d-none");
+   window.location.href = "./summary.html";
 }
 
 // function openSignUpHTML() {
