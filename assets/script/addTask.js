@@ -321,11 +321,11 @@ function selectOption(option) {
   let hiddenInput = document.getElementById("selectedCategory");
 
   if (option == 1) {
-    selection.innerHTML = "Technical task";
-    hiddenInput.value = "Technical task";
+    selection.innerHTML = "Technical Task";
+    hiddenInput.value = "Technical Task";
   } else if (option == 2) {
-    selection.innerHTML = "User story";
-    hiddenInput.value = "User story";
+    selection.innerHTML = "User Story";
+    hiddenInput.value = "User Story";
   }
 
   let dropdown = document.getElementById("categoryDropdown");

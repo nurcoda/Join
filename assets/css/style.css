@@ -43,6 +43,7 @@ header {
   position: fixed;
   background-color: white;
   top: 0;
+  z-index: 100;
 }
 
 header span {
@@ -130,6 +131,7 @@ header span {
   width: 232px;
   position: fixed;
   top: 0;
+  z-index: 100;
 }
 
 .join-logo-sitebar {
