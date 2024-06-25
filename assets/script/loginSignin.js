@@ -1,37 +1,34 @@
-const toSignUpContainer = document.getElementById("toSignUpContainer");
-const loginContainer = document.getElementById("loginContainer");
-const signUpContainer = document.getElementById("signUpContainer");
-const signUpSuccesContainer = document.getElementById("signUpSuccesContainer");
+const toSignUpContainer = document.getElementById('toSignUpContainer');
+const loginContainer = document.getElementById('loginContainer');
+const signUpContainer = document.getElementById('signUpContainer');
+const signUpSuccesContainer = document.getElementById('signUpSuccesContainer');
 let newId = generateId();
 
 openLogin();
 
 function openLogin() {
-   loginContainer.classList.remove("d-none");
-   toSignUpContainer.classList.remove("d-none");
-   signUpContainer.classList.add("d-none");
-   openLoginHTML();
+  loginContainer.classList.remove('d-none');
+  toSignUpContainer.classList.remove('d-none');
+  signUpContainer.classList.add('d-none');
+  openLoginHTML();
 }
 
 function openSignUp() {
-   loginContainer.classList.add("d-none");
-   toSignUpContainer.classList.add("d-none");
-   signUpContainer.classList.remove("d-none");
-   openSignUpHTML();
+  loginContainer.classList.add('d-none');
+  toSignUpContainer.classList.add('d-none');
+  signUpContainer.classList.remove('d-none');
+  openSignUpHTML();
 }
 
 function signUpSucces() {
-   signUpSuccesContainer.classList.remove("d-none");
-   setTimeout(function() {
-      signUpSuccesContainer.classList.add("d-none");
-      window.location.href = "./summary.html"; // Blende den Div-Container nach 2 Sekunden aus
+  signUpSuccesContainer.classList.remove('d-none');
+  setTimeout(function () {
+    signUpSuccesContainer.classList.add('d-none');
+    window.location.href = './summary.html'; // Blende den Div-Container nach 2 Sekunden aus
   }, 1500); // 2000 Millisekunden = 2 Sekunden
 }
 
-function closeSignUpSucces() {
-   
-   
-}
+function closeSignUpSucces() {}
 
 // function openSignUpHTML() {
 //    signUpContainer.innerHTML = `
@@ -81,7 +78,7 @@ function closeSignUpSucces() {
 // }
 
 function openSignUpHTML() {
-   signUpContainer.innerHTML = `
+  signUpContainer.innerHTML = `
        <div class="headline-login-wrapper">
            <img src="./assets/img/goback_arrow_icon.png" alt="" class="goback-arrow" onclick="openLogin()" />
            <h1>Sign-up</h1>
@@ -116,49 +113,64 @@ function openSignUpHTML() {
 }
 
 function returnPostedData() {
-   const form = document.getElementById("SignUpData");
-   const formData = new FormData(form);
-   let input = formData.get("name");
-   let words = input.split(' ');
-   let firstLetters = words.map(word => word.charAt(0)).join('');
-   const firstLetter = firstLetters.toUpperCase();
+  const form = document.getElementById('SignUpData');
+  const formData = new FormData(form);
+  let input = formData.get('name');
+  let words = input.split(' ');
+  let firstLetters = words.map((word) => word.charAt(0)).join('');
+  const firstLetter = firstLetters.toUpperCase();
 
-   const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      password: formData.get("password"),
-      first_two_letters: firstLetter,
-      id: newId,
-   };
-   for (let i = 0; i < user.length; i++) {
-      if (!user[i]["email"].includes(email)) {
-         console.log("neue Mail");
+  const data = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+    first_two_letters: firstLetter,
+    id: newId
+  };
+  for (let i = 0; i < user.length; i++) {
+    if (!user[i]['email'].includes(email)) {
+      console.log('neue Mail');
 
-         if (!user[i]["password"].includes(password)) {
-            console.log("neues Passwort");
+      if (!user[i]['password'].includes(password)) {
+        console.log('neues Passwort');
 
-            return data;
-         }
-      } else {
-         console.log("Dieser Account besteht bereits");
+        return data;
       }
-   }
-   
-}function checkNames() {
-   const form = document.getElementById("SignUpData");
-   const formData = new FormData(form);
-   var input = formData.get("name");
-   var words = input.split(/\s+/);
-   if (words.length === 2) {
-       signUpSucces();
-       postSignUpData('/users/${newId}', returnPostedData())
-   } else {
-       alert("Bitte geben Sie genau zwei Namen ein.");
-   }
+    } else {
+      console.log('Dieser Account besteht bereits');
+    }
+  }
+}
+
+async function postSignUpData(path, data) {
+  console.log(path);
+  console.log(data);
+  let response = await fetch(BASE_URL + path + '.json', {
+    method: 'PUT',
+    header: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  return (responseToJSON = await response.json());
+}
+
+function checkNames() {
+  const form = document.getElementById('SignUpData');
+  const formData = new FormData(form);
+  let input = formData.get('name');
+  let words = input.split(/\s+/);
+  if (words.length === 2) {
+    console.log(returnPostedData());
+    postSignUpData('/users/' + newId, returnPostedData());
+    signUpSucces();
+  } else {
+    alert('Bitte geben Sie genau zwei Namen ein.');
+  }
 }
 
 function openLoginHTML() {
-   loginContainer.innerHTML = `
+  loginContainer.innerHTML = `
     <div class="headline-login-wrapper">
                <h1>Log in</h1>
                <div class="underline-headline"></div>
@@ -186,43 +198,41 @@ function openLoginHTML() {
     `;
 }
 
-document.getElementById("guest-link").addEventListener("click", function () {
-   window.location.href = "./summary.html";
+document.getElementById('guest-link').addEventListener('click', function () {
+  window.location.href = './summary.html';
 });
 
-
-
 function generateId() {
-   let generatedId;
-   let isUnique = false;
+  let generatedId;
+  let isUnique = false;
 
-   while (!isUnique) {
-      // Generiere eine zufällige 6-stellige Zahl
-      generatedId = Math.floor(100000 + Math.random() * 900000);
+  while (!isUnique) {
+    // Generiere eine zufällige 6-stellige Zahl
+    generatedId = Math.floor(100000 + Math.random() * 900000);
 
-      // Überprüfen, ob die ID bereits existiert
-      isUnique = !user.some((user) => user.id === generatedId);
-   }
+    // Überprüfen, ob die ID bereits existiert
+    isUnique = !user.some((user) => user.id === generatedId);
+  }
 
-   return generatedId;
+  return generatedId;
 }
 
 function loginUser() {
-   let email = document.getElementById("email").value;
-   let password = document.getElementById("password").value;
-   for (let i = 0; i < user.length; i++) {
-      if (user[i]["email"].includes(email)) {
-         console.log("Email ist da");
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
+  for (let i = 0; i < user.length; i++) {
+    if (user[i]['email'].includes(email)) {
+      console.log('Email ist da');
 
-         if (user[i]["password"].includes(password)) {
-            console.log("Passwort ist auch da");
+      if (user[i]['password'].includes(password)) {
+        console.log('Passwort ist auch da');
 
-            window.location.href = "./summary.html";
-         }
-      } else {
-         console.log("passt nicht");
+        window.location.href = './summary.html';
       }
-   }
+    } else {
+      console.log('passt nicht');
+    }
+  }
 }
 
 //   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
