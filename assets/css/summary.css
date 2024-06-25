@@ -208,6 +208,10 @@ h1 {
     object-fit: contain;
 }
 
+.text-logo-join {
+    font-size: 16px;
+}
+
 /**************************/
 /* Media Querya 
  Summary                   */
@@ -439,7 +443,7 @@ h1 {
 
 @media only screen and (max-width: 400px) {
     .headline-summary {
-        margin-left: 18px;
+        margin-left: 12px;
     }
 
     h1 {
