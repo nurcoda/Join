@@ -111,16 +111,14 @@ function openSignUpHTML() {
        </form>
    `;
 }
-function showPassword(){
-
-   let password = document.getElementById('password').value;
-   if (!password === "") {
-      password.type = 'password'; // Passwort im Klartext anzeigen
-   } else {
-      password.type = 'text'; // Passwort wieder verbergen
-   }
+function showPassword() {
+  let password = document.getElementById('password').value;
+  if (!password === '') {
+    password.type = 'password'; // Passwort im Klartext anzeigen
+  } else {
+    password.type = 'text'; // Passwort wieder verbergen
+  }
 }
-
 
 function returnPostedData() {
   const form = document.getElementById('SignUpData');
@@ -135,29 +133,27 @@ function returnPostedData() {
     email: formData.get('email'),
     password: formData.get('password'),
     first_two_letters: firstLetter,
-    id: newId
+    id: newId,
+    'color': newContactColor()
   };
   // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
-  const emailExists = user.some(item => item.email === formData.get('email'));
-  
+  const emailExists = user.some((item) => item.email === formData.get('email'));
+
   if (emailExists) {
-    alert("Die E-Mail-Adresse ist bereits im Array vorhanden.");
+    alert('Die E-Mail-Adresse ist bereits im Array vorhanden.');
     document.getElementById('SignUpData').reset();
 
-   //  document.getElementById('SignUpData').reset();
-
-    
+    //  document.getElementById('SignUpData').reset();
   } else {
-    console.log("Die E-Mail-Adresse ist nicht im Array vorhanden.");
-   return data; 
-    }
-    
+    console.log('Die E-Mail-Adresse ist nicht im Array vorhanden.');
+    return data;
+  }
 }
 
 async function postSignUpData(path, data) {
-   if(returnPostedData ===""){
-      return;
-   }
+  if (returnPostedData === '') {
+    return;
+  }
   console.log(path);
   console.log(data);
   let response = await fetch(BASE_URL + path + '.json', {
@@ -178,14 +174,24 @@ function checkNames() {
   if (words.length === 2) {
     console.log(returnPostedData());
     postSignUpData('/users/' + newId, returnPostedData());
-    if(!returnPostedData===""){
+    if (!returnPostedData === '') {
       signUpSucces();
-    }else{
+    } else {
       return;
     }
-    
   } else {
     alert('Bitte geben Sie genau zwei Namen ein.');
+  }
+}
+
+// Von Alex, um den usern einen Farbcode zu geben
+
+function newContactColor() {
+  const usedColors = new Set(contacts.map((contact) => contact.color));
+  for (const color of colorCodes) {
+    if (!usedColors.has(color)) {
+      return color;
+    }
   }
 }
 
@@ -241,24 +247,23 @@ function loginUser() {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
 
-// Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
-const emailExists = user.some(item => item.email === document.getElementById('email').value);
+  // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
+  const emailExists = user.some((item) => item.email === document.getElementById('email').value);
 
-if (emailExists) {
-  console.log("Die E-Mail-Adresse ist korrekt.");
-  const passwordExists = user.some(item => item.password === document.getElementById('password').value);
-  if (passwordExists) {
-   console.log("Beides korrekt");
-   window.location.href = './summary.html';
- } else {
-   alert("Du bist ein HACKER.");
-document.getElementById('input-login').reset();
- }
-
-} else {
-  alert("Bitte Registriere dich unter SignUP.");
-  document.getElementById('input-login').reset();
-}
+  if (emailExists) {
+    console.log('Die E-Mail-Adresse ist korrekt.');
+    const passwordExists = user.some((item) => item.password === document.getElementById('password').value);
+    if (passwordExists) {
+      console.log('Beides korrekt');
+      window.location.href = './summary.html';
+    } else {
+      alert('Du bist ein HACKER.');
+      document.getElementById('input-login').reset();
+    }
+  } else {
+    alert('Bitte Registriere dich unter SignUP.');
+    document.getElementById('input-login').reset();
+  }
 }
 
 //   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
