@@ -84,7 +84,7 @@ function openSignUpHTML() {
            <h1>Sign-up</h1>
            <div class="underline-headline"></div>
        </div>
-       <form id="SignUpData" class="input-login" onsubmit="checkNames()">
+       <form id="SignUpData" class="input-login" onsubmit="checkNames(); return false;">
            <div class="input-login-field">
                <input required type="text" name="name" placeholder="Name" />
                <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
@@ -132,7 +132,8 @@ function returnPostedData() {
   
   if (emailExists) {
     alert("Die E-Mail-Adresse ist bereits im Array vorhanden.");
-    window.location.href = './index.html'
+    document.getElementById('SignUpData').reset();
+
    //  document.getElementById('SignUpData').reset();
 
     
@@ -144,6 +145,9 @@ function returnPostedData() {
 }
 
 async function postSignUpData(path, data) {
+   if(returnPostedData ===""){
+      return;
+   }
   console.log(path);
   console.log(data);
   let response = await fetch(BASE_URL + path + '.json', {
@@ -164,7 +168,12 @@ function checkNames() {
   if (words.length === 2) {
     console.log(returnPostedData());
     postSignUpData('/users/' + newId, returnPostedData());
-    signUpSucces();
+    if(!returnPostedData===""){
+      signUpSucces();
+    }else{
+      return;
+    }
+    
   } else {
     alert('Bitte geben Sie genau zwei Namen ein.');
   }
@@ -176,23 +185,23 @@ function openLoginHTML() {
                <h1>Log in</h1>
                <div class="underline-headline"></div>
             </div>
-            <form class="input-login">
+            <form id="input-login" class="input-login" onsubmit="loginUser(); return false";>
                <div class="input-login-field">
-                  <input id="email" type="email" placeholder="Email" />
+                  <input required id="email" type="email" placeholder="Email" />
                   <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
                </div>
                <div class="input-login-field">
-                  <input id="password" type="password" placeholder="Password" />
+                  <input required id="password" type="password" placeholder="Password" />
                   <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
                </div>
 
                <div class="remember-me-form">
-                  <input class="accept-icon" type="checkbox" name="remember-me" id="" />
+                  <input required class="accept-icon" type="checkbox" name="remember-me" id="" />
                   <label for="remember-me">Remember me</label>
                </div>
 
                <div class="login-guestlogin-btn-wrapper">
-                  <div class="login-btn btns-login" onclick="loginUser()">Log in</div>
+                  <button class="login-btn btns-login">Log in</button>
                   <div id="guest-link" class="guest-login-btn btns-login">Guest Log in</div>
                </div>
             </form>
@@ -221,19 +230,25 @@ function generateId() {
 function loginUser() {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
-  for (let i = 0; i < user.length; i++) {
-    if (user[i]['email'].includes(email)) {
-      console.log('Email ist da');
 
-      if (user[i]['password'].includes(password)) {
-        console.log('Passwort ist auch da');
+// Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
+const emailExists = user.some(item => item.email === document.getElementById('email').value);
 
-        window.location.href = './summary.html';
-      }
-    } else {
-      console.log('passt nicht');
-    }
-  }
+if (emailExists) {
+  console.log("Die E-Mail-Adresse ist korrekt.");
+  const passwordExists = user.some(item => item.password === document.getElementById('password').value);
+  if (passwordExists) {
+   console.log("Beides korrekt");
+   window.location.href = './summary.html';
+ } else {
+   alert("Du bist ein HACKER.");
+document.getElementById('input-login').reset();
+ }
+
+} else {
+  alert("Bitte Registriere dich unter SignUP.");
+  document.getElementById('input-login').reset();
+}
 }
 
 //   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
