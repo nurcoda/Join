@@ -3,7 +3,7 @@ p {
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 48px;
 }
 
 .content {
@@ -32,8 +32,8 @@ h1 {
 .seperationLine {
     height: 50px;
     width: 1px;
-    border: 1px solid #28ABE2;
-    background-color: #28ABE2;
+    border: 1px solid #28abe2;
+    background-color: #28abe2;
     border-radius: 25px;
     margin: 10px;
 }
@@ -62,7 +62,7 @@ h1 {
 }
 
 .container:hover {
-    background-color: #2A3647;
+    background-color: #2a3647;
     color: white;
     transform: scale(1.1);
 
@@ -108,7 +108,7 @@ h1 {
 }
 
 .containerLong:hover {
-    background-color: #2A3647;
+    background-color: #2a3647;
     color: white;
     transform: translateY(5%);
 
@@ -132,7 +132,7 @@ h1 {
 }
 
 .containerSmall:hover {
-    background-color: #2A3647;
+    background-color: #2a3647;
     color: white;
     transform: scale(1.1);
 
@@ -155,7 +155,7 @@ h1 {
 }
 
 .user {
-    color: #28ABE2;
+    color: #28abe2;
     font-size: 50px;
 }
 
@@ -218,7 +218,6 @@ h1 {
 /**************************/
 
 @media only screen and (max-width: 1110px) {
-
     .greetingH2 {
         font-size: 35px;
     }
@@ -229,7 +228,6 @@ h1 {
 }
 
 @media only screen and (max-width: 1050px) {
-
     .greetin {
         margin-left: 37px;
     }
@@ -241,11 +239,9 @@ h1 {
     .user {
         font-size: 35px;
     }
-
 }
 
 @media only screen and (max-width: 1015px) {
-
     .greeting {
         margin-left: 35px;
     }
@@ -257,7 +253,6 @@ h1 {
     .user {
         font-size: 35px;
     }
-
 }
 
 @media only screen and (max-width: 1015px) {
@@ -273,7 +268,6 @@ h1 {
 }
 
 @media only screen and (max-width: 840px) {
-
     .content {
         margin-left: 87px;
     }
@@ -281,12 +275,9 @@ h1 {
     .headline-summary {
         margin-left: 236px;
     }
-
-
 }
 
 @media only screen and (max-width: 730px) {
-
     .content {
         margin-left: 30px;
     }
@@ -297,7 +288,6 @@ h1 {
 }
 
 @media only screen and (max-width: 675px) {
-
     .content {
         margin-left: 0px;
     }
@@ -308,7 +298,6 @@ h1 {
 }
 
 @media only screen and (max-width: 645px) {
-
     .content {
         margin-left: 0px;
     }
@@ -324,7 +313,6 @@ h1 {
 }
 
 @media only screen and (max-width: 585px) {
-
     .content {
         margin-left: 0px;
     }
@@ -340,7 +328,6 @@ h1 {
 }
 
 @media only screen and (max-width: 575px) {
-
     .content {
         margin-left: 0px;
     }
@@ -393,9 +380,7 @@ h1 {
     }
 }
 
-
 @media only screen and (max-width: 440px) {
-
     .content {
         margin-left: 0px;
     }
@@ -443,7 +428,7 @@ h1 {
 
 @media only screen and (max-width: 400px) {
     .headline-summary {
-        margin-left: 12px;
+        margin-left: 18px;
     }
 
     h1 {
@@ -480,7 +465,6 @@ h1 {
 }
 
 @media only screen and (max-width: 365px) {
-
     .content {
         margin-left: 0px;
     }
