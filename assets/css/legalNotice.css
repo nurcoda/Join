@@ -46,10 +46,21 @@ h3 {
     padding-top: 6px;
 }
 
-.dev-text-names {}
-
 .target-link {
     text-decoration: none;
     color: #29ABE2;
     white-space: nowrap;
+}
+
+/**************************/
+/* Media Querya 
+ Legal Notice            */
+/**************************/
+
+@media only screen and (max-width: 840px) {
+    .content-Legal {
+        padding-left: 6px;
+        padding-right: 6px;
+
+    }
 }
