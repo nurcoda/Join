@@ -64,3 +64,15 @@ h3 {
 .head-line-description {
     /* display: flex; */
 }
+
+/**************************/
+/* Media Querya 
+ Help                     */
+/**************************/
+
+@media only screen and (max-width: 840px) {
+    .content-help {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+}
