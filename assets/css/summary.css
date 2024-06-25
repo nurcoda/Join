@@ -12,7 +12,6 @@ h1 {
 }
 
 .headline-summary {
-    margin-left: 232px;
     margin-top: 96px;
     display: flex;
     align-items: center;
@@ -274,6 +273,12 @@ h1 {
     .content {
         margin-left: 87px;
     }
+
+    .headline-summary {
+        margin-left: 236px;
+    }
+
+
 }
 
 @media only screen and (max-width: 730px) {
@@ -283,7 +288,7 @@ h1 {
     }
 
     .headline-summary {
-        margin-left: 175px;
+        margin-left: 166px;
     }
 }
 
@@ -305,7 +310,7 @@ h1 {
     }
 
     .headline-summary {
-        margin-left: 130px;
+        margin-left: 120px;
     }
 
     .interactionContainer {
@@ -321,7 +326,7 @@ h1 {
     }
 
     .headline-summary {
-        margin-left: 130px;
+        margin-left: 100px;
     }
 
     .interactionContainer {
@@ -337,7 +342,7 @@ h1 {
     }
 
     .headline-summary {
-        margin-left: 130px;
+        margin-left: 85px;
     }
 
     .interactionContainer {
@@ -358,6 +363,33 @@ h1 {
     }
 }
 
+@media only screen and (max-width: 560px) {
+    h1 {
+        font-size: 45px;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .headline-summary {
+        margin-left: 45px;
+    }
+
+    h1 {
+        font-size: 45px;
+    }
+}
+
+@media only screen and (max-width: 455px) {
+    .headline-summary {
+        margin-left: 30px;
+    }
+
+    h1 {
+        font-size: 45px;
+    }
+}
+
+
 @media only screen and (max-width: 440px) {
 
     .content {
@@ -365,7 +397,7 @@ h1 {
     }
 
     .headline-summary {
-        margin-left: 130px;
+        margin-left: 26px;
     }
 
     .interactionContainer {
@@ -385,6 +417,62 @@ h1 {
         font-size: 16px;
         padding-left: 19px;
     }
+
+    .seperationLineLong {
+        margin: 45px;
+    }
+}
+
+@media only screen and (max-width: 433px) {
+    .headline-summary {
+        margin-left: 12px;
+    }
+
+    h1 {
+        font-size: 43px;
+    }
+
+    .seperationLineLong {
+        margin: 35px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .headline-summary {
+        margin-left: 18px;
+    }
+
+    h1 {
+        font-size: 43px;
+    }
+
+    .procressImg {
+        width: 50px;
+        padding-left: 5px;
+    }
+
+    .seperationLineLong {
+        margin: 35px;
+    }
+}
+
+@media only screen and (max-width: 385px) {
+    .headline-summary {
+        margin-left: 18px;
+    }
+
+    h1 {
+        font-size: 43px;
+    }
+
+    .procressImg {
+        width: 50px;
+        padding-left: 5px;
+    }
+
+    .seperationLineLong {
+        margin: 30px;
+    }
 }
 
 @media only screen and (max-width: 365px) {
@@ -394,7 +482,7 @@ h1 {
     }
 
     .headline-summary {
-        margin-left: 130px;
+        margin-left: 0px;
     }
 
     .interactionContainer {
