@@ -443,6 +443,10 @@ h1 {
     .seperationLineLong {
         margin: 35px;
     }
+
+    .text-logo-join {
+        font-size: 12px;
+    }
 }
 
 @media only screen and (max-width: 385px) {
@@ -451,7 +455,26 @@ h1 {
     }
 
     h1 {
-        font-size: 43px;
+        font-size: 40px;
+    }
+
+    .procressImg {
+        width: 50px;
+        padding-left: 5px;
+    }
+
+    .seperationLineLong {
+        margin: 30px;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .headline-summary {
+        margin-left: 18px;
+    }
+
+    h1 {
+        font-size: 40px;
     }
 
     .procressImg {
@@ -500,11 +523,21 @@ h1 {
     }
 
     .seperationLineLong {
-        margin: 14px;
+        margin: 10px;
     }
 
     .taskStatus {
         font-size: 15px;
         padding-left: 15px;
     }
+
+    .text-logo-join {
+        font-size: 10px;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin-left: 4px;
+    }
+
 }
