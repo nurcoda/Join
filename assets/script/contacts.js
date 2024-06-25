@@ -234,6 +234,8 @@ function getUpdatedTask(task, updatedAssignedUsers) {
   };
 }
 
+// test
+
 async function deleteAssignedUserFromTaskDB(taskId, updatedTask) {
   await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
     method: 'PUT',
