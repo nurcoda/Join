@@ -34,7 +34,6 @@
 }
 
 .contactList {
-  width: 40%;
   height: 100vh;
   background-color: white;
   display: flex;
@@ -101,7 +100,6 @@
 .contactDetails {
   display: flex;
   border-radius: 8px;
-  width: 350px;
   padding: 12px;
   cursor: pointer;
 }
@@ -143,7 +141,7 @@
 
 .addContactBtn {
   height: 50px;
-  width: 352px;
+  width: 80%;
   border: none;
   cursor: pointer;
   display: flex;
