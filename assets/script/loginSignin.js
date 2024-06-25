@@ -22,11 +22,15 @@ function openSignUp() {
 
 function signUpSucces() {
    signUpSuccesContainer.classList.remove("d-none");
+   setTimeout(function() {
+      signUpSuccesContainer.classList.add("d-none");
+      window.location.href = "./summary.html"; // Blende den Div-Container nach 2 Sekunden aus
+  }, 1500); // 2000 Millisekunden = 2 Sekunden
 }
 
 function closeSignUpSucces() {
-   signUpSuccesContainer.classList.add("d-none");
-   window.location.href = "./summary.html";
+   
+   
 }
 
 // function openSignUpHTML() {
@@ -114,15 +118,32 @@ function openSignUpHTML() {
 function returnPostedData() {
    const form = document.getElementById("SignUpData");
    const formData = new FormData(form);
+   let input = formData.get("name");
+   let words = input.split(' ');
+   let firstLetters = words.map(word => word.charAt(0)).join('');
+   const firstLetter = firstLetters.toUpperCase();
 
    const data = {
       name: formData.get("name"),
       email: formData.get("email"),
       password: formData.get("password"),
+      first_two_letters: firstLetter,
       id: newId,
    };
+   for (let i = 0; i < user.length; i++) {
+      if (!user[i]["email"].includes(email)) {
+         console.log("neue Mail");
 
-   return data;
+         if (!user[i]["password"].includes(password)) {
+            console.log("neues Passwort");
+
+            return data;
+         }
+      } else {
+         console.log("Dieser Account besteht bereits");
+      }
+   }
+   
 }
 
 function openLoginHTML() {
@@ -157,6 +178,8 @@ function openLoginHTML() {
 document.getElementById("guest-link").addEventListener("click", function () {
    window.location.href = "./summary.html";
 });
+
+
 
 function generateId() {
    let generatedId;
