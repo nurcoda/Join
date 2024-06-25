@@ -52,6 +52,7 @@ function highlightContact(index) {
 function colorAvatar(i, color) {
   return `<div style="background-color: ${color}; width: 40px; height: 40px; border-radius: 50%;"></div>`;
 }
+
 function renderAvatar(i, avatar) {
   const username = contacts[i]['name'];
   const firstNameInitial = username[0];
@@ -233,7 +234,7 @@ async function updateNewContactData(id) {
   let updatedContactData = {
     'color': newContactColor(),
     'email': contacts[contactIndex].email,
-    'first_two_letters': 'Test',
+    'first_two_letters': getFirstTwoLetters(contactIndex),
     'id': contacts[contactIndex].id,
     'name': contacts[contactIndex].name,
     'phone': contacts[contactIndex].phone
@@ -243,6 +244,16 @@ async function updateNewContactData(id) {
 }
 
 // Helper Add Contact
+
+function getFirstTwoLetters(i) {
+  let username = contacts[i].name;
+  let firstNameInitial = username[0];
+  let secondNameInitial = '';
+  let nameParts = username.split(' ');
+  secondNameInitial = nameParts[nameParts.length - 1][0];
+  firstTwoLetters = firstNameInitial.toUpperCase() + secondNameInitial.toUpperCase();
+  return firstTwoLetters;
+}
 
 function findUserIndexById(id) {
   return contacts.findIndex((contact) => contact.id === id);
