@@ -11,7 +11,7 @@ h1 {
     display: flex;
 }
 
-.headline {
+.headline-summary {
     margin-left: 232px;
     margin-top: 96px;
     display: flex;
@@ -282,7 +282,7 @@ h1 {
         margin-left: 30px;
     }
 
-    .headline {
+    .headline-summary {
         margin-left: 175px;
     }
 }
@@ -293,7 +293,7 @@ h1 {
         margin-left: 0px;
     }
 
-    .headline {
+    .headline-summary {
         margin-left: 130px;
     }
 }
@@ -304,7 +304,7 @@ h1 {
         margin-left: 0px;
     }
 
-    .headline {
+    .headline-summary {
         margin-left: 130px;
     }
 
@@ -320,7 +320,7 @@ h1 {
         margin-left: 0px;
     }
 
-    .headline {
+    .headline-summary {
         margin-left: 130px;
     }
 
@@ -336,7 +336,7 @@ h1 {
         margin-left: 0px;
     }
 
-    .headline {
+    .headline-summary {
         margin-left: 130px;
     }
 
@@ -364,7 +364,7 @@ h1 {
         margin-left: 0px;
     }
 
-    .headline {
+    .headline-summary {
         margin-left: 130px;
     }
 
@@ -393,7 +393,7 @@ h1 {
         margin-left: 0px;
     }
 
-    .headline {
+    .headline-summary {
         margin-left: 130px;
     }
 
