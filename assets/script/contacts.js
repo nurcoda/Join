@@ -179,14 +179,6 @@ function closePopUp() {
 // ##################
 
 async function deleteContact(index) {
-  // const elementToDelete = document.getElementById(`contact-${index}`);
-  // if (elementToDelete) {
-  //    // if (index === selectedContactIndex) {
-  //    //    elementToDelete.classList.remove("highlight");
-  //    // }
-  //    elementToDelete.remove();
-  // }
-
   isContactAssignedToTask(index);
   isContactAlsoUser(index);
   await deleteContactDataDB(contacts[index].id);
@@ -202,6 +194,18 @@ async function deleteContactDataDB(id) {
     }
   });
 }
+
+async function deleteAssignedUserFromTaskDB(taskId, updatedTask) {
+  await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedTask)
+  });
+}
+
+// Delete ASSIGNED USER Helper Functions
 
 async function isContactAssignedToTask(index) {
   let username = contacts[index].name;
@@ -232,18 +236,6 @@ function getUpdatedTask(task, updatedAssignedUsers) {
     'state': task.state,
     'assigned_user': updatedAssignedUsers
   };
-}
-
-// test
-
-async function deleteAssignedUserFromTaskDB(taskId, updatedTask) {
-  await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updatedTask)
-  });
 }
 
 // Delete Helper Functions
@@ -292,12 +284,14 @@ async function deleteUserDataDB(id) {
 
 function addPersonToContact() {
   event.preventDefault();
-
   let name = document.getElementById('input-field-name').value;
   let mail = document.getElementById('input-field-mail').value;
   let phone = document.getElementById('input-field-phone').value;
-
   let nameExists = contacts.some((contact) => contact.name === name);
+
+  if (!isTwoWordName(name)) {
+    return;
+  }
 
   if (!nameExists) {
     let contact = { 'name': name, 'email': mail, 'phone': phone, 'id': generateId() };
@@ -312,6 +306,19 @@ function addPersonToContact() {
 
   renderContacts();
   closePopUpByBtn();
+}
+
+function isTwoWordName(name) {
+  let nameWords = name.trim().split(' ');
+  if (nameWords.length < 2) {
+    let errorMessage = document.getElementById('errorMessageAddContact');
+    errorMessage.classList.remove('d-none');
+    setTimeout(() => {
+      errorMessage.classList.add('d-none');
+    }, 1500);
+    return false;
+  }
+  return true;
 }
 
 async function updateNewContactData(id) {
@@ -399,7 +406,9 @@ function renderEditContactCardInfo(i) {
 function renderAddContactCardInfo() {
   openPopUp();
   popUpBackground.innerHTML = `
+
    <div class="add-contact-pop-up" id="contentPopUp">
+      <div class="error-message-add-contact d-none" id="errorMessageAddContact">Please enter surname and lastname</div>
          <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
          <div class="popup-logo-headline-wrapper">
             <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
