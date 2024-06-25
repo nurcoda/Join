@@ -213,22 +213,35 @@ async function isContactAssignedToTask(index) {
 }
 
 async function deleteAssignedUserFromTask(taskId, username) {
-  // Finde die Aufgabe in der lokalen tasks-Liste
   let task = tasks.find((task) => task.id === taskId);
-
   if (task) {
     let updatedAssignedUsers = task.assigned_user.filter((user) => user.name !== username);
-    await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ...task,
-        assigned_user: updatedAssignedUsers
-      })
-    });
+    let updatedTask = getUpdatedTask(task, updatedAssignedUsers);
+    deleteAssignedUserFromTaskDB(taskId, updatedTask);
   }
+}
+
+function getUpdatedTask(task, updatedAssignedUsers) {
+  return {
+    'id': task.id,
+    'name': task.name,
+    'description': task.description,
+    'category': task.category,
+    'priority': task.priority,
+    'due_date': task.due_date,
+    'state': task.state,
+    'assigned_user': updatedAssignedUsers
+  };
+}
+
+async function deleteAssignedUserFromTaskDB(taskId, updatedTask) {
+  await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedTask)
+  });
 }
 
 // Delete Helper Functions
