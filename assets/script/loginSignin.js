@@ -94,7 +94,7 @@ function openSignUpHTML() {
                <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
            </div>
            <div class="input-login-field">
-               <input required type="password" name="password" placeholder="Password" required />
+               <input id="password" onmouseover="showPassword()" type="password" name="password" placeholder="Password" required />
                <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
            </div>
            <div class="input-login-field">
@@ -102,7 +102,7 @@ function openSignUpHTML() {
                <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
            </div>
            <div class="accept-privacy-policy-form">
-               <input class="accept-icon" type="checkbox" name="acceptPrivacyPolicy" id="acceptPrivacyPolicy" />
+               <input required class="accept-icon" type="checkbox" name="acceptPrivacyPolicy" id="acceptPrivacyPolicy" />
                <label for="acceptPrivacyPolicy">I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label>
            </div>
            <div class="login-guestlogin-btn-wrapper">
@@ -111,6 +111,16 @@ function openSignUpHTML() {
        </form>
    `;
 }
+function showPassword(){
+
+   let password = document.getElementById('password').value;
+   if (!password === "") {
+      password.type = 'password'; // Passwort im Klartext anzeigen
+   } else {
+      password.type = 'text'; // Passwort wieder verbergen
+   }
+}
+
 
 function returnPostedData() {
   const form = document.getElementById('SignUpData');
