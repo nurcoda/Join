@@ -228,15 +228,6 @@ function mailExistsAlready() {
   }, 1800);
 }
 
-function nameIsToLong() {
-  let errorMessage = document.getElementById('errorMessageAddContact');
-  errorMessage.innerHTML = 'Please only use 3 names';
-  errorMessage.classList.remove('d-none');
-  setTimeout(() => {
-    errorMessage.classList.add('d-none');
-  }, 1800);
-}
-
 async function updateNewContactData(id) {
   let contactIndex = findUserIndexById(id);
   let updatedContactData = {
@@ -305,34 +296,36 @@ function nameIsToShort() {
   }, 1800);
 }
 
-// ________________________________________________
-
-function closePopUpByBtn() {
-  document.getElementById('popUpBackground').classList.add('d-none');
+function nameIsToLong() {
+  let errorMessage = document.getElementById('errorMessageAddContact');
+  errorMessage.innerHTML = 'Please only use 3 names';
+  errorMessage.classList.remove('d-none');
+  setTimeout(() => {
+    errorMessage.classList.add('d-none');
+  }, 1800);
 }
 
-function renderEditContactCardInfo(i) {
-  openPopUp();
-  let avatar;
-  avatar = renderAvatar(i, avatar);
-  popUpBackground.innerHTML = renderEditContactCardInfoHTML(i, avatar);
-}
-
-function renderAddContactCardInfo() {
-  openPopUp();
-  popUpBackground.innerHTML = renderAddContactCardInfoHTML();
-}
+// ##################
+//    EDIT CONTACT
+// ##################
 
 function editSave(i) {
-  let name = document.getElementById('edit-input-field-name').value; // Liest die geänderten Werte aus den Eingabefeldern
+  let name = document.getElementById('edit-input-field-name').value;
   let email = document.getElementById('edit-input-field-mail').value;
   let phone = document.getElementById('edit-input-field-phone').value;
+
   if (phone.startsWith('+')) {
-    phone = phone.substring(1); // kontrolliert ob ein plus vorhanden ist wenn ja wird es raus geschnitten
+    phone = phone.substring(1);
   }
+
   contacts[i].name = name;
   contacts[i].email = email;
   contacts[i].phone = phone;
+
+  if (!checkNamesLength(name)) {
+    return;
+  }
+
   closePopUpByBtn();
   renderContactCardInfo(i);
   updateContactData(i);
@@ -362,6 +355,26 @@ async function updateDataContactsDB(path, data) {
 }
 
 //** Helper Functions */
+// ________________________________________________
+
+function closePopUpByBtn() {
+  document.getElementById('popUpBackground').classList.add('d-none');
+}
+
+function renderEditContactCardInfo(i) {
+  openPopUp();
+  let avatar;
+  avatar = renderAvatar(i, avatar);
+  if (!contacts[i].phone) {
+    contacts[i].phone = '';
+  }
+  popUpBackground.innerHTML = renderEditContactCardInfoHTML(i, avatar);
+}
+
+function renderAddContactCardInfo() {
+  openPopUp();
+  popUpBackground.innerHTML = renderAddContactCardInfoHTML();
+}
 
 popUpBackground.addEventListener('click', closePopUp);
 

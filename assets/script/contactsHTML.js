@@ -1,5 +1,8 @@
 function renderEditContactCardInfoHTML(i, avatar) {
-  return `<div class="edit-contact-pop-up" id="editContentPopUp">
+  return `
+        
+        <div class="edit-contact-pop-up" id="editContentPopUp">
+        <div class="error-message-add-contact d-none" id="errorMessageAddContact">Please enter surname and lastname</div>
            <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
            <div class="popup-logo-headline-wrapper">
               <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
@@ -16,7 +19,7 @@ function renderEditContactCardInfoHTML(i, avatar) {
                  <input id="edit-input-field-mail" class="input-field-mail edit-contact-form-input" placeholder="Email"
                     type="e-mail" value="${contacts[i].email}"  /><br />
                  <input id="edit-input-field-phone" class="input-field-phone edit-contact-form-input" placeholder="Phone"
-                    type="tel" value="+${contacts[i].phone}"/>
+                    type="number" value="${contacts[i].phone}"/>
                  <div class="edit-contact-buttons-wrapper">
                     <div class="edit-delete-btn edit-contact-form-btn-delete" onclick="closePopUpByBtn() ; deleteContact(${i})">Delete</div>
                     <div class="edit-create-contact-btn edit-contact-form-btn"
@@ -30,8 +33,9 @@ function renderEditContactCardInfoHTML(i, avatar) {
 
 function renderAddContactCardInfoHTML() {
   return `
+ 
      <div class="add-contact-pop-up" id="contentPopUp">
-        <div class="error-message-add-contact d-none" id="errorMessageAddContact">Please enter surname and lastname</div>
+      <div class="error-message-add-contact d-none" id="errorMessageAddContact">Please enter surname and lastname</div>
            <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
            <div class="popup-logo-headline-wrapper">
               <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
@@ -46,9 +50,9 @@ function renderAddContactCardInfoHTML() {
                     type="text" />
                  <br />
                  <input id="input-field-mail" class="input-field-mail add-contact-form-input" placeholder="Email"
-                    type="text" /><br />
+                    type="email" /><br />
                  <input id="input-field-phone" class="input-field-phone add-contact-form-input" placeholder="Phone"
-                    type="text" />
+                    type="number" />
                  <div class="add-contact-buttons-wrapper">
                     <button class="cancel-btn add-contact-form-btn" onclick="closePopUpByBtn()">Cancel</button><button
                        class="create-contact-btn add-contact-form-btn" onclick="addPersonToContact()">
