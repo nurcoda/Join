@@ -109,7 +109,7 @@ function openSignUpHTML() {
                <label for="acceptPrivacyPolicy">I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label>
            </div>
            <div class="login-guestlogin-btn-wrapper">
-               <div class="signup-btn-in-form btns-login" onclick="signUpSucces(); postSignUpData('/users/${newId}', returnPostedData());">Sign up</div>
+               <div class="signup-btn-in-form btns-login" onclick="checkNames()">Sign up</div>
            </div>
        </form>
    `;
@@ -144,6 +144,17 @@ function returnPostedData() {
       }
    }
    
+}function checkNames() {
+   const form = document.getElementById("SignUpData");
+   const formData = new FormData(form);
+   var input = formData.get("name");
+   var words = input.split(/\s+/);
+   if (words.length === 2) {
+       signUpSucces();
+       postSignUpData('/users/${newId}', returnPostedData())
+   } else {
+       alert("Bitte geben Sie genau zwei Namen ein.");
+   }
 }
 
 function openLoginHTML() {
