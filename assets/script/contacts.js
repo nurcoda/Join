@@ -288,8 +288,14 @@ function addPersonToContact() {
   let mail = document.getElementById('input-field-mail').value;
   let phone = document.getElementById('input-field-phone').value;
   let nameExists = contacts.some((contact) => contact.name === name);
+  let mailExists = contacts.some((contact) => contact.email === mail);
 
-  if (!isTwoWordName(name)) {
+  if (!checkNamesLength(name)) {
+    return;
+  }
+
+  if (mailExists) {
+    mailExistsAlready();
     return;
   }
 
@@ -308,17 +314,22 @@ function addPersonToContact() {
   closePopUpByBtn();
 }
 
-function isTwoWordName(name) {
-  let nameWords = name.trim().split(' ');
-  if (nameWords.length < 2) {
-    let errorMessage = document.getElementById('errorMessageAddContact');
-    errorMessage.classList.remove('d-none');
-    setTimeout(() => {
-      errorMessage.classList.add('d-none');
-    }, 1500);
-    return false;
-  }
-  return true;
+function mailExistsAlready() {
+  let errorMessage = document.getElementById('errorMessageAddContact');
+  errorMessage.innerHTML = 'This mail exsists already.';
+  errorMessage.classList.remove('d-none');
+  setTimeout(() => {
+    errorMessage.classList.add('d-none');
+  }, 1800);
+}
+
+function nameIsToLong() {
+  let errorMessage = document.getElementById('errorMessageAddContact');
+  errorMessage.innerHTML = 'Please only use 3 names';
+  errorMessage.classList.remove('d-none');
+  setTimeout(() => {
+    errorMessage.classList.add('d-none');
+  }, 1800);
 }
 
 async function updateNewContactData(id) {
@@ -362,6 +373,31 @@ function getNameAffixAtDoubleUse() {
   let nameAffixString = generateId().toString().substring(0, 3);
   nameAffix = parseInt(nameAffixString, 10);
   return nameAffix;
+}
+
+function checkNamesLength(name) {
+  let nameWords = name.trim().split(' ');
+
+  if (nameWords.length < 2) {
+    nameIsToShort();
+    return false;
+  }
+
+  if (nameWords.length > 3) {
+    nameIsToLong();
+    return false;
+  }
+
+  return true;
+}
+
+function nameIsToShort() {
+  let errorMessage = document.getElementById('errorMessageAddContact');
+  errorMessage.innerHTML = 'Please use surname and lastname';
+  errorMessage.classList.remove('d-none');
+  setTimeout(() => {
+    errorMessage.classList.add('d-none');
+  }, 1800);
 }
 
 // ________________________________________________
