@@ -510,7 +510,7 @@ h1 {
     }
 
     .taskNumber {
-        font-size: 40px;
+        font-size: 36px;
     }
 
     .row2 {
@@ -538,6 +538,10 @@ h1 {
     h1 {
         font-size: 36px;
         margin-left: 4px;
+    }
+
+    .done-text {
+        padding-right: 4px;
     }
 
 }
