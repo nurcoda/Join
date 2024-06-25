@@ -84,17 +84,17 @@ function openSignUpHTML() {
            <h1>Sign-up</h1>
            <div class="underline-headline"></div>
        </div>
-       <form id="SignUpData" class="input-login">
+       <form id="SignUpData" class="input-login" onsubmit="checkNames()">
            <div class="input-login-field">
-               <input type="text" name="name" placeholder="Name" />
+               <input required type="text" name="name" placeholder="Name" />
                <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
            </div>
            <div class="input-login-field">
-               <input type="email" name="email" placeholder="Email" />
+               <input required type="email" name="email" placeholder="Email" />
                <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
            </div>
            <div class="input-login-field">
-               <input type="password" name="password" placeholder="Password" />
+               <input required type="password" name="password" placeholder="Password" required />
                <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
            </div>
            <div class="input-login-field">
@@ -106,7 +106,7 @@ function openSignUpHTML() {
                <label for="acceptPrivacyPolicy">I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label>
            </div>
            <div class="login-guestlogin-btn-wrapper">
-               <div class="signup-btn-in-form btns-login" onclick="checkNames()">Sign up</div>
+               <button class="signup-btn-in-form btns-login">Sign up</button>
            </div>
        </form>
    `;
@@ -127,19 +127,20 @@ function returnPostedData() {
     first_two_letters: firstLetter,
     id: newId
   };
-  for (let i = 0; i < user.length; i++) {
-    if (!user[i]['email'].includes(email)) {
-      console.log('neue Mail');
+  // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
+  const emailExists = user.some(item => item.email === formData.get('email'));
+  
+  if (emailExists) {
+    alert("Die E-Mail-Adresse ist bereits im Array vorhanden.");
+    window.location.href = './index.html'
+   //  document.getElementById('SignUpData').reset();
 
-      if (!user[i]['password'].includes(password)) {
-        console.log('neues Passwort');
-
-        return data;
-      }
-    } else {
-      console.log('Dieser Account besteht bereits');
+    
+  } else {
+    console.log("Die E-Mail-Adresse ist nicht im Array vorhanden.");
+   return data; 
     }
-  }
+    
 }
 
 async function postSignUpData(path, data) {
