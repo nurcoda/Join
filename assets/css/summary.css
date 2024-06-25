@@ -1,17 +1,17 @@
-p{
+p {
     margin: 0;
 }
 
-h1{
+h1 {
     font-size: 50px;
 }
 
-.content{
+.content {
     margin-left: 232px;
     display: flex;
 }
 
-.headline{
+.headline-summary {
     margin-left: 232px;
     margin-top: 96px;
     display: flex;
@@ -20,7 +20,7 @@ h1{
     margin-left: 300px;
 }
 
-.interactionContainer{
+.interactionContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +30,7 @@ h1{
     margin-left: 58px;
 }
 
-.seperationLine{
+.seperationLine {
     height: 50px;
     width: 1px;
     border: 1px solid #28ABE2;
@@ -39,7 +39,7 @@ h1{
     margin: 10px;
 }
 
-.seperationLineLong{
+.seperationLineLong {
     height: 100px;
     width: 1px;
     border: 1px solid #bdbdbd;
@@ -48,7 +48,7 @@ h1{
     margin: 50px;
 }
 
-.container{
+.container {
     background-color: white;
     border: 1px solid gray;
     border-radius: 25px;
@@ -62,28 +62,31 @@ h1{
     transition: all 100ms ease-in-out;
 }
 
-.container:hover{
+.container:hover {
     background-color: #2A3647;
     color: white;
     transform: scale(1.1);
-    .taskNumber{
-        color:white;
+
+    .taskNumber {
+        color: white;
     }
-    .procressImgDone{
+
+    .procressImgDone {
         background-image: url(../img/Frame\ 59-2.png);
     }
-    .procressImgToDo{
+
+    .procressImgToDo {
         background-image: url(../img/Frame\ 59\ Kopie.png);
     }
 }
 
-.Task{
+.Task {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
 }
 
-.taskStatus{
+.taskStatus {
     font-size: 25px;
     display: flex;
     justify-content: center;
@@ -91,7 +94,7 @@ h1{
     padding-left: 25px;
 }
 
-.containerLong{
+.containerLong {
     background-color: white;
     border: 1px solid gray;
     border-radius: 25px;
@@ -105,16 +108,17 @@ h1{
     transition: transform 0.3s ease-in-out;
 }
 
-.containerLong:hover{
+.containerLong:hover {
     background-color: #2A3647;
     color: white;
     transform: translateY(5%);
-    .taskNumber{
-        color:white;
+
+    .taskNumber {
+        color: white;
     }
 }
 
-.containerSmall{
+.containerSmall {
     background-color: white;
     border: 1px solid gray;
     border-radius: 25px;
@@ -128,16 +132,17 @@ h1{
     transition: all 100ms ease-in-out;
 }
 
-.containerSmall:hover{
+.containerSmall:hover {
     background-color: #2A3647;
-    color:white;
+    color: white;
     transform: scale(1.1);
-    .taskNumber{
-        color:white;
+
+    .taskNumber {
+        color: white;
     }
 }
 
-.greeting{
+.greeting {
     display: flex;
     justify-content: center;
     align-items: start;
@@ -145,33 +150,33 @@ h1{
     margin-left: 50px;
 }
 
-.greetingH2{
-    margin:0;
+.greetingH2 {
+    margin: 0;
     font-size: 45px;
 }
 
-.user{
+.user {
     color: #28ABE2;
     font-size: 50px;
 }
 
-.row1{
+.row1 {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.row2{
+.row2 {
     display: flex;
 }
 
-.row3{
+.row3 {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.taskNumber{
+.taskNumber {
     font-size: 45px;
     font-weight: bold;
     color: black;
@@ -179,27 +184,251 @@ h1{
     justify-content: center;
 }
 
-.date{
+.date {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.procressImgDone{
+.procressImgDone {
     background-image: url(../img/Group\ 7.png);
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     height: 89px;
     width: 89px;
     object-fit: contain;
 }
 
-.procressImgToDo{
+.procressImgToDo {
     background-image: url(../img/Frame\ 59.png);
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     height: 89px;
     width: 89px;
     object-fit: contain;
+}
+
+/**************************/
+/* Media Querya 
+ Summary                   */
+/**************************/
+
+@media only screen and (max-width: 1110px) {
+
+    .greetingH2 {
+        font-size: 35px;
+    }
+
+    .user {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+
+    .greetin {
+        margin-left: 37px;
+    }
+
+    .greetingH2 {
+        font-size: 25px;
+    }
+
+    .user {
+        font-size: 35px;
+    }
+
+}
+
+@media only screen and (max-width: 1015px) {
+
+    .greeting {
+        margin-left: 35px;
+    }
+
+    .greetingH2 {
+        font-size: 25px;
+    }
+
+    .user {
+        font-size: 35px;
+    }
+
+}
+
+@media only screen and (max-width: 1015px) {
+    .greeting {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 865px) {
+    .content {
+        margin-left: 207px;
+    }
+}
+
+@media only screen and (max-width: 840px) {
+
+    .content {
+        margin-left: 87px;
+    }
+}
+
+@media only screen and (max-width: 730px) {
+
+    .content {
+        margin-left: 30px;
+    }
+
+    .headline {
+        margin-left: 175px;
+    }
+}
+
+@media only screen and (max-width: 675px) {
+
+    .content {
+        margin-left: 0px;
+    }
+
+    .headline {
+        margin-left: 130px;
+    }
+}
+
+@media only screen and (max-width: 645px) {
+
+    .content {
+        margin-left: 0px;
+    }
+
+    .headline {
+        margin-left: 130px;
+    }
+
+    .interactionContainer {
+        margin-left: 0px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 585px) {
+
+    .content {
+        margin-left: 0px;
+    }
+
+    .headline {
+        margin-left: 130px;
+    }
+
+    .interactionContainer {
+        margin-left: 0px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+
+    .content {
+        margin-left: 0px;
+    }
+
+    .headline {
+        margin-left: 130px;
+    }
+
+    .interactionContainer {
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .tasks {
+        width: 100%;
+    }
+
+    .row2 {
+        width: 100%;
+    }
+
+    .taskStatus {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+
+    .content {
+        margin-left: 0px;
+    }
+
+    .headline {
+        margin-left: 130px;
+    }
+
+    .interactionContainer {
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .tasks {
+        width: 100%;
+    }
+
+    .row2 {
+        width: 100%;
+    }
+
+    .taskStatus {
+        font-size: 16px;
+        padding-left: 19px;
+    }
+}
+
+@media only screen and (max-width: 365px) {
+
+    .content {
+        margin-left: 0px;
+    }
+
+    .headline {
+        margin-left: 130px;
+    }
+
+    .interactionContainer {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .Task {
+        margin-left: 6px;
+    }
+
+    .tasks {
+        width: 100%;
+    }
+
+    .taskNumber {
+        font-size: 40px;
+    }
+
+    .row2 {
+        width: 100%;
+    }
+
+    .procressImg {
+        width: 50px;
+        padding-left: 5px;
+    }
+
+    .seperationLineLong {
+        margin: 14px;
+    }
+
+    .taskStatus {
+        font-size: 15px;
+        padding-left: 15px;
+    }
 }
