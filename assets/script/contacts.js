@@ -71,12 +71,17 @@ function highlightContact(index) {
 function colorAvatar(i, color) {
   return `<div style="background-color: ${color}; width: 40px; height: 40px; border-radius: 50%;"></div>`;
 }
-
 function renderAvatar(i, avatar) {
   const username = contacts[i]['name'];
   const firstNameInitial = username[0];
-  const secondNameInitial = username.split(' ')[1].split('')[0];
-  avatar = firstNameInitial + secondNameInitial;
+  let secondNameInitial = '';
+
+  const nameParts = username.split(' ');
+  if (nameParts.length > 1) {
+    secondNameInitial = nameParts[1][0];
+  }
+
+  avatar = firstNameInitial.toUpperCase() + secondNameInitial.toUpperCase();
   return avatar;
 }
 
@@ -182,6 +187,7 @@ async function deleteContact(index) {
   //    elementToDelete.remove();
   // }
 
+  isContactAssignedToTask(index);
   isContactAlsoUser(index);
   await deleteContactDataDB(contacts[index].id);
   renderContacts();
@@ -197,6 +203,34 @@ async function deleteContactDataDB(id) {
   });
 }
 
+async function isContactAssignedToTask(index) {
+  let username = contacts[index].name;
+  tasks.forEach(async (task) => {
+    if (task.assigned_user && task.assigned_user.some((user) => user.name === username)) {
+      await deleteAssignedUserFromTask(task.id, username);
+    }
+  });
+}
+
+async function deleteAssignedUserFromTask(taskId, username) {
+  // Finde die Aufgabe in der lokalen tasks-Liste
+  let task = tasks.find((task) => task.id === taskId);
+
+  if (task) {
+    let updatedAssignedUsers = task.assigned_user.filter((user) => user.name !== username);
+    await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...task,
+        assigned_user: updatedAssignedUsers
+      })
+    });
+  }
+}
+
 // Delete Helper Functions
 
 function isContactAlsoUser(index) {
@@ -208,10 +242,10 @@ function isContactAlsoUser(index) {
   }
 }
 
-function findContactIndexById(contactsId) {
+function findContactIndexById(contactId) {
   let userIndex;
   for (let i = 0; i < user.length; i++) {
-    if (user[i].id === contactsId) {
+    if (user[i].id === contactId) {
       userIndex = i;
     }
   }
