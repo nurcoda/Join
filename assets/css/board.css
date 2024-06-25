@@ -266,9 +266,11 @@
   color: rgba(168, 168, 168, 1);
   transition: all 100ms ease-in-out;
   padding: 12px 24px;
+  user-select: none;
   &:hover {
     background-color: rgba(231, 231, 231, 0.747);
     transform: unset;
+    cursor: unset;
   }
 }
 
@@ -283,19 +285,23 @@
   height: 100vh;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.404);
-  z-index: 1;
+  z-index: 101;
 }
 
 .add-task-popup-board {
   height: 80%;
-  width: 60%;
+  width: 75%;
   background-color: white;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  z-index: 2;
+  z-index: 102;
+  padding: 2%;
+  h2 {
+    width: 90%;
+  }
 }
 
 .close-popup-btn {

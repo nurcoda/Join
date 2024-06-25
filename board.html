@@ -41,7 +41,11 @@
       <!--  -->
 
       <!-- ADD TASK POP UP -->
-      <div class="add-task-popup-board-container d-none" id="addTaskPopUpBackground" onclick="closeAddTaskPopUp()">
+      <div
+        class="add-task-popup-board-container d-none"
+        id="addTaskPopUpBackground"
+        onclick="closeAddTaskPopUp()"
+      >
         <div class="add-task-popup-board" id="addTaskPopUp">
           <img
             src="./assets/img/close_big_icon.png"
@@ -50,7 +54,6 @@
             id="closePopUpBtn"
             onclick="closeAddTaskPopUp()"
           />
-          <h1>Add Task (in Board)</h1>
         </div>
       </div>
 
@@ -68,10 +71,15 @@
           <!-- pop up content -->
           <div class="category-user-story task-category">User Story</div>
           <div class="existing-task-popup-headline">Kochwelt Page & Recipe Recommender</div>
-          <div class="existing-task-popup-description">Build start page with recipe recommendation</div>
-          <div class="existing-task-popup-date">Due date: <span id="popUpDate">10/05/2024</span></div>
+          <div class="existing-task-popup-description">
+            Build start page with recipe recommendation
+          </div>
+          <div class="existing-task-popup-date">
+            Due date: <span id="popUpDate">10/05/2024</span>
+          </div>
           <div class="existing-task-popup-priority">
-            Priority: <span id="popUpDate">Medium <img src="./assets/img/prio_medium.png" alt="" /></span>
+            Priority:
+            <span id="popUpDate">Medium <img src="./assets/img/prio_medium.png" alt="" /></span>
           </div>
           <div class="existing-task-popup-user-wrapper">
             <div class="popup-user-headline">Assigned to:</div>
@@ -118,7 +126,12 @@
         <div class="board-column">
           <div class="board-column-headline">
             To do
-            <div src="./assets/img/add_btn_board.png" alt="" class="add-a-card-btn" onclick="openAddTaskPopUp()"></div>
+            <div
+              src="./assets/img/add_btn_board.png"
+              alt=""
+              class="add-a-card-btn"
+              onclick="openAddTaskPopUp()"
+            ></div>
           </div>
           <div
             class="task-card-container"
@@ -131,7 +144,12 @@
         <div class="board-column">
           <div class="board-column-headline">
             In progress
-            <div src="./assets/img/add_btn_board.png" alt="" class="add-a-card-btn" onclick="openAddTaskPopUp()"></div>
+            <div
+              src="./assets/img/add_btn_board.png"
+              alt=""
+              class="add-a-card-btn"
+              onclick="openAddTaskPopUp()"
+            ></div>
           </div>
           <div
             class="task-card-container"
@@ -144,7 +162,12 @@
         <div class="board-column">
           <div class="board-column-headline">
             Await feedback
-            <div src="./assets/img/add_btn_board.png" alt="" class="add-a-card-btn" onclick="openAddTaskPopUp()"></div>
+            <div
+              src="./assets/img/add_btn_board.png"
+              alt=""
+              class="add-a-card-btn"
+              onclick="openAddTaskPopUp()"
+            ></div>
           </div>
           <div
             class="task-card-container"
