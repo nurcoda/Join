@@ -218,9 +218,12 @@ function renderContacts() {
     }
   }
   if (dropdown.innerHTML == "") {
-    dropdown.innerHTML = "<span class='no-contacts-text'>No contacts found.</span>";
-    // <div class='add-contact-div'>Add new contact <img class='add-contact-img' src='./assets/img/person_add_icon.png'</div>
+    dropdown.innerHTML = "<span class='no-contacts-text'>No contacts found.</span><div class='add-contact-div' onclick='locateToContacts()'>Add new contact <img class='add-contact-img' src='./assets/img/person_add_icon.png'</div>";
   }
+}
+
+function locateToContacts() {
+  window.location.href = "contacts.html";
 }
 
 function addContactToAssigned(i) {

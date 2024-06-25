@@ -55,8 +55,7 @@ button {
 
 /* Behebt das Kalendersymbol, um sicherzustellen, dass es korrekt positioniert bleibt */
 input[type="date"]::-webkit-calendar-picker-indicator {
-  position: absolute;
-  right: 247px;
+  margin-left: 268px;
   cursor: pointer;
 }
 
@@ -136,7 +135,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-direction: column;
   gap: 2px;
   z-index: 6;
-  cursor: pointer;
   /* scrollbar-width: thin;
   scrollbar-color: #d6d6d6 #f4f4f4;  */
 }
@@ -175,11 +173,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 406px;
   padding: 2px 12px 2px 12px;
   border-radius: 10px;
+  cursor: pointer;
 }
-
-/* .assigned-to-contact:hover {
-  background-color: rgba(224, 224, 224, 0.658);
-} */
 
 .contact-img-name {
   display: flex;
