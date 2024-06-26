@@ -576,3 +576,22 @@ function setDefaultDate() {
 
   document.getElementById("dueDate").value = formattedDate;
 }
+
+const dueDateInput = document.getElementById('dueDate');
+
+// Heutiges Datum als String im Format JJJJ-MM-TT erhalten
+const today = new Date().toISOString().split('T')[0];
+
+// Minimales Datum auf heute setzen
+dueDateInput.setAttribute('min', today);
+
+// Event-Listener hinzufügen, um Änderungen im Datum zu überwachen
+dueDateInput.addEventListener('input', function() {
+  const selectedDate = new Date(this.value);
+  const currentDate = new Date();
+
+  // Wenn das ausgewählte Datum in der Vergangenheit liegt, wird es auf das heutige Datum zurückgesetzt
+  if (selectedDate < currentDate) {
+    this.value = today;
+  }
+});
