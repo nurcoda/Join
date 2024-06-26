@@ -248,30 +248,52 @@ function generateId() {
   return generatedId;
 }
 
+// function loginUser() {
+//   let email = document.getElementById('email').value;
+//   let password = document.getElementById('password').value;
+
+//   // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
+//   const emailExists = user.some((item) => item.email === document.getElementById('email').value);
+
+//   if (emailExists) {
+//     console.log('Die E-Mail-Adresse ist korrekt.');
+//     const passwordExists = user.some((item) => item.password === document.getElementById('password').value);
+//     if (passwordExists) {
+//       console.log('Beides korrekt');
+//         sessionStorage.setItem('status', 'loggedIn');
+//         checkUser(user);
+//     window.location.href = './summary.html';
+//     } else {
+//       alert('Passwort ist nicht korrekt.');
+//       document.getElementById('input-login').reset();
+//     }
+//   } else {
+//     alert('Bitte Registriere dich unter SignUP.');
+//     document.getElementById('input-login').reset();
+//   }
+// }
+
 function loginUser() {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
 
-  // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
-  const emailExists = user.some((item) => item.email === document.getElementById('email').value);
+  // Benutzer im Array finden
+  const Currentuser = user.find((item) => item.email === email);
 
-  if (emailExists) {
-    console.log('Die E-Mail-Adresse ist korrekt.');
-    const passwordExists = user.some((item) => item.password === document.getElementById('password').value);
-    if (passwordExists) {
-      console.log('Beides korrekt');
-      window.onload = function() {
-        sessionStorage.setItem('status', 'loggedIn');
-        checkUser();
-    };
-    window.location.href = './summary.html';
-    } else {
-      alert('Passwort ist nicht korrekt.');
-      document.getElementById('input-login').reset();
-    }
+  if (Currentuser) {
+      console.log('Die E-Mail-Adresse ist korrekt.');
+      if (Currentuser.password === password) {
+          console.log('Beides korrekt');
+          sessionStorage.setItem('status', 'loggedIn');
+          checkUser(Currentuser);  // Stellen Sie sicher, dass checkUser definiert ist
+          window.location.href = './summary.html';
+      } else {
+          alert('Passwort ist nicht korrekt.');
+          document.getElementById('input-login').reset();
+      }
   } else {
-    alert('Bitte Registriere dich unter SignUP.');
-    document.getElementById('input-login').reset();
+      alert('Bitte Registriere dich unter SignUP.');
+      document.getElementById('input-login').reset();
   }
 }
 
