@@ -74,7 +74,9 @@ function getTimeOfDay() {
 
 document.addEventListener("DOMContentLoaded", function () {
     const greetingText = document.getElementById("greetingText");
+    const logInWelcomeGreetingText = document.getElementById("logInWelcomeGreetingText");
     greetingText.textContent = getTimeOfDay();
+    logInWelcomeGreetingText.textContent = getTimeOfDay();
 });
 
 async function getNextDueDate() {
