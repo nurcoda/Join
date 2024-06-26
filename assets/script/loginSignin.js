@@ -178,6 +178,9 @@ function checkNames() {
     if (! user.some((item) => item.email === formData.get('email'))) {
       postSignUpData('/users/' + newId, returnPostedData());
       signUpSucces();
+      jQuery(window).load(function() {
+        sessionStorage.setItem('status','loggedIn') 
+      });
     } else {
       return;
     }
@@ -257,7 +260,11 @@ function loginUser() {
     const passwordExists = user.some((item) => item.password === document.getElementById('password').value);
     if (passwordExists) {
       console.log('Beides korrekt');
-      window.location.href = './summary.html';
+      window.onload = function() {
+        sessionStorage.setItem('status', 'loggedIn');
+        checkUser();
+    };
+    window.location.href = './summary.html';
     } else {
       alert('Passwort ist nicht korrekt.');
       document.getElementById('input-login').reset();
