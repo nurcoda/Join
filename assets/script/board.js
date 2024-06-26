@@ -178,13 +178,18 @@ async function getEditedTask(i) {
 
   tasks[i].name = editedName;
   tasks[i].description = editedDescription;
-  tasks[i].due_date = editedDueDate;
+  tasks[i].due_date = await formatDueDateAfterEdit(editedDueDate);
   tasks[i].assigned_user = assignedContacts;
 
   editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(i);
   await updateTaskData(i);
   await loadData();
   await renderTasksIntoColumns();
+}
+
+function formatDueDateAfterEdit(editedDueDate) {
+  editedDueDate = editedDueDate.split('-').reverse().join('/');
+  return editedDueDate;
 }
 
 async function updateTaskData(i) {
