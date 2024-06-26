@@ -280,3 +280,31 @@ function getPrioButtonLowAddTaskHTML(prio) {
               Low <img id="lowButtonImg" src="./assets/img/prio_low_white_svg.svg" alt="" />
             </button>`;
 }
+
+function renderSubtasksaddTaskPopUpHTML(i, subTaskTitle) {
+  return `
+                 <div class="edit-pop-up-subtask-wrapper" id="subtask${i}">
+                     &bull; ${subTaskTitle} 
+                     <span class="edit-pop-up-btn-wrapper">
+                         <span class="edit-subtask-edit-btn">
+                             <img class="subtask-edit-btn" onclick="editSubtask(${
+                               (i, subTaskTitle)
+                             }')" src="./assets/img/edit_pen_icon.png" alt="">
+                         </span>
+                         <span class="subtask-delete-btn edit-subtask-delete-btn">
+                             <img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt="">
+                         </span>
+                     </span>
+                 </div>`;
+}
+
+function editSubtaskAddTaskHTML(i, subTaskTitle) {
+  return `
+     <div class="edit-subtask-div">
+       <input id="onEditSubtaskInput${i}" class="edit-subtask-input" value="${subTaskTitle}">
+     <div class="on-edit-subtask-icons">
+       <img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt="">
+       <div class="subtasks-seperator"></div>
+       <img onclick="saveEditedSubtask(${i})" src="./assets/img/addtask_check.svg" alt="">
+     </div>`;
+}

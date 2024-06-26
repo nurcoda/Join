@@ -293,12 +293,10 @@ function loginUser() {
           checkUser(Currentuser);  // Stellen Sie sicher, dass checkUser definiert ist
           window.location.href = './summary.html';
       } else {
-          alert('Passwort ist nicht korrekt.');
-          document.getElementById('input-login').reset();
+        showInvalidCredentialsToast();
       }
   } else {
-      alert('Bitte Registriere dich unter SignUP.');
-      document.getElementById('input-login').reset();
+      showInvalidCredentialsToast();
   }
 }
 
@@ -306,4 +304,15 @@ function loginUser() {
 // Anmeldedaten stimmen übere
 function deleteSession(){
   sessionStorage.clear();
+}
+
+const toast = document.getElementById('toast');
+
+// Annahme: Zeige die Toast-Nachricht an, wenn die Anmeldeinformationen falsch sind
+// Beispiel-Logik:
+function showInvalidCredentialsToast() {
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2200); 
 }

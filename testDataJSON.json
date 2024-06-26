@@ -168,94 +168,94 @@
       "color": "#9400D3"
    }
 ],
-   "tasks": [
-      {
-         "name": "Destroy the One Ring",
-         "id": 31,
-         "description": "Take the One Ring to Mount Doom and destroy it.",
-         "category": "User Story",
-         "priority": "high",
-         "due_date": "19/12/2024",
-         "state": "todo",
-         "assigned_user": [
-            { "name": "Frodo Baggins", "first_two_letters": "FB" },
-            { "name": "Samwise Gamgee", "first_two_letters": "SG" }
-         ],
-         "subtasks": [
-            { "subtask_name": "Reach Rivendell", "subtask_isdone": true },
-            { "subtask_name": "Pass through Moria", "subtask_isdone": false }
-         ]
-      },
-      {
-         "name": "Defend Helm's Deep",
-         "id": 32,
-         "description": "Defend the fortress of Helm's Deep against Saruman's army.",
-         "category": "User Story",
-         "priority": "high",
-         "due_date": "15/06/2024",
-         "state": "inprogress",
-         "assigned_user": [
-            { "name": "Aragorn Elessar", "first_two_letters": "AE" },
-            { "name": "Legolas Thranduilion", "first_two_letters": "LT" },
-            { "name": "Gimli Glóin'son", "first_two_letters": "GG" }
-         ],
-         "subtasks": [
-            { "subtask_name": "Rally the troops", "subtask_isdone": true },
-            { "subtask_name": "Fortify the walls", "subtask_isdone": true }
-         ]
-      },
-      {
-         "name": "Rescue Merry and Pippin",
-         "id": 33,
-         "description": "Find and rescue Merry and Pippin from the Uruk-hai.",
-         "category": "User Story",
-         "priority": "medium",
-         "due_date": "05/05/2024",
-         "state": "done",
-         "assigned_user": [
-            { "name": "Aragorn Elessar", "first_two_letters": "AE" },
-            { "name": "Legolas Thranduilion", "first_two_letters": "LT" },
-            { "name": "Gimli Glóin'son", "first_two_letters": "GG" }
-         ],
-         "subtasks": [
-            { "subtask_name": "Track the Uruk-hai", "subtask_isdone": true },
-            { "subtask_name": "Engage in combat", "subtask_isdone": true }
-         ]
-      },
-      {
-         "name": "Convince the Ents",
-         "id": 34,
-         "description": "Convince Treebeard and the Ents to join the fight against Saruman.",
-         "category": "User Story",
-         "priority": "medium",
-         "due_date": "01/04/2024",
-         "state": "inprogress",
-         "assigned_user": [
-            { "name": "Meriadoc Brandybuck", "first_two_letters": "MB" },
-            { "name": "Peregrin Took", "first_two_letters": "PT" }
-         ],
-         "subtasks": [
-            { "subtask_name": "Find Treebeard", "subtask_isdone": true },
-            { "subtask_name": "Attend Entmoot", "subtask_isdone": false }
-         ]
-      },
-      {
-         "name": "Frodo's Journey",
-         "id": 35,
-         "description": "Ensure Frodo safely makes his journey to destroy the One Ring.",
-         "category": "Technical Task",
-         "priority": "high",
-         "due_date": "25/12/2024",
-         "state": "todo",
-         "assigned_user": [
-            { "name": "Samwise Gamgee", "first_two_letters": "SG" },
-            { "name": "Frodo Baggins", "first_two_letters": "FB" }
-         ],
-         "subtasks": [
-            { "subtask_name": "Escape the Shire", "subtask_isdone": true },
-            { "subtask_name": "Cross the Brandywine River", "subtask_isdone": true },
-            { "subtask_name": "Reach Bree", "subtask_isdone": false }
-         ]
-      }
-   ]
+"tasks": [
+   {
+      "name": "Destroy the One Ring",
+      "id": 31,
+      "description": "Take the One Ring to Mount Doom and destroy it.",
+      "category": "User Story",
+      "priority": "high",
+      "due_date": "26/08/2024",
+      "state": "todo",
+      "assigned_user": [
+         { "name": "Frodo Baggins", "first_two_letters": "FB" },
+         { "name": "Samwise Gamgee", "first_two_letters": "SG" }
+      ],
+      "subtasks": [
+         { "subtask_name": "Reach Rivendell", "subtask_isdone": true },
+         { "subtask_name": "Pass through Moria", "subtask_isdone": false }
+      ]
+   },
+   {
+      "name": "Defend Helm's Deep",
+      "id": 32,
+      "description": "Defend the fortress of Helm's Deep against Saruman's army.",
+      "category": "User Story",
+      "priority": "high",
+      "due_date": "26/07/2024",
+      "state": "inprogress",
+      "assigned_user": [
+         { "name": "Aragorn Elessar", "first_two_letters": "AE" },
+         { "name": "Legolas Thranduilion", "first_two_letters": "LT" },
+         { "name": "Gimli Glóin'son", "first_two_letters": "GG" }
+      ],
+      "subtasks": [
+         { "subtask_name": "Rally the troops", "subtask_isdone": true },
+         { "subtask_name": "Fortify the walls", "subtask_isdone": true }
+      ]
+   },
+   {
+      "name": "Rescue Merry and Pippin",
+      "id": 33,
+      "description": "Find and rescue Merry and Pippin from the Uruk-hai.",
+      "category": "User Story",
+      "priority": "medium",
+      "due_date": "26/07/2024",
+      "state": "done",
+      "assigned_user": [
+         { "name": "Aragorn Elessar", "first_two_letters": "AE" },
+         { "name": "Legolas Thranduilion", "first_two_letters": "LT" },
+         { "name": "Gimli Glóin'son", "first_two_letters": "GG" }
+      ],
+      "subtasks": [
+         { "subtask_name": "Track the Uruk-hai", "subtask_isdone": true },
+         { "subtask_name": "Engage in combat", "subtask_isdone": true }
+      ]
+   },
+   {
+      "name": "Convince the Ents",
+      "id": 34,
+      "description": "Convince Treebeard and the Ents to join the fight against Saruman.",
+      "category": "User Story",
+      "priority": "medium",
+      "due_date": "26/07/2024",
+      "state": "inprogress",
+      "assigned_user": [
+         { "name": "Meriadoc Brandybuck", "first_two_letters": "MB" },
+         { "name": "Peregrin Took", "first_two_letters": "PT" }
+      ],
+      "subtasks": [
+         { "subtask_name": "Find Treebeard", "subtask_isdone": true },
+         { "subtask_name": "Attend Entmoot", "subtask_isdone": false }
+      ]
+   },
+   {
+      "name": "Frodo's Journey",
+      "id": 35,
+      "description": "Ensure Frodo safely makes his journey to destroy the One Ring.",
+      "category": "Technical Task",
+      "priority": "high",
+      "due_date": "26/08/2024",
+      "state": "todo",
+      "assigned_user": [
+         { "name": "Samwise Gamgee", "first_two_letters": "SG" },
+         { "name": "Frodo Baggins", "first_two_letters": "FB" }
+      ],
+      "subtasks": [
+         { "subtask_name": "Escape the Shire", "subtask_isdone": true },
+         { "subtask_name": "Cross the Brandywine River", "subtask_isdone": true },
+         { "subtask_name": "Reach Bree", "subtask_isdone": false }
+      ]
+   }
+]
 }

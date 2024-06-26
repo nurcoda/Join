@@ -285,6 +285,38 @@
    font-size: 20px;
 }
 
+.toast {
+   display: none;
+   position: fixed;
+   top: 20px;
+   left: 50%;
+   transform: translateX(-50%);
+   background-color: #f44336;
+   color: white;
+   padding: 15px 20px;
+   border-radius: 5px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   z-index: 1;
+ }
+ 
+ .toast.show {
+   display: block;
+   animation: fadeOut 2.2s ease forwards;
+ }
+ 
+ @keyframes fadeOut {
+   0% {
+     opacity: 1;
+   }
+   70% {
+     opacity: 1;
+   }
+   100% {
+     opacity: 0;
+     display: none;
+   }
+ }
+
 @keyframes fadeInForm {
    0% {
       opacity: 0;
@@ -317,3 +349,4 @@
       height: 120px;
    }
 }
+
