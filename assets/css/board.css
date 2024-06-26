@@ -122,6 +122,7 @@
   margin-top: 24px;
   gap: 16px;
   min-height: 75vh;
+  padding-bottom: 3vh;
 }
 
 .task-card {
@@ -641,11 +642,29 @@
   .board-column {
     width: 250px;
   }
+  .board-column:nth-child(1),
+  .board-column:nth-child(2) {
+    border-bottom: 1px solid black;
+    padding-bottom: 5%;
+  }
   .board-wrapper {
     justify-content: space-around;
   }
   .board-column-headline {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .distances {
+    padding-right: 50px;
+  }
+  .search-add-wrapper {
+    gap: 16px;
+    justify-content: center;
+  }
+  .search-task {
+    width: 50%;
   }
 }
 
@@ -656,7 +675,53 @@
 }
 
 @media (max-width: 880px) {
-  .board-column {
+  .task-card {
     width: 100%;
   }
+}
+
+/* Real responsive design */
+
+@media (max-width: 840px) {
+  .board-wrapper {
+    flex-direction: column;
+    overflow: scroll;
+  }
+
+  .board-column {
+    width: 100vw;
+  }
+
+  .board-column:last-child {
+    margin-bottom: 15vh;
+  }
+
+  .board-column-headline {
+    padding-left: 16px;
+    font-size: 18px;
+    width: fit-content;
+    gap: 16px;
+  }
+
+  .task-card-container {
+    flex-direction: row;
+    min-height: unset;
+    align-items: start;
+  }
+
+  .task-card {
+    max-width: 30vw;
+  }
+
+  .board-column:nth-child(1),
+  .board-column:nth-child(2) {
+    border: none;
+  }
+
+  .distances {
+    margin-left: 2%;
+  }
+}
+
+@media (max-width: 600px) {
 }
