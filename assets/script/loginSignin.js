@@ -277,8 +277,8 @@ function generateId() {
 
 function loginUser() {
   event.preventDefault()
-  let email = document.getElementById('email').value;
-  let password = document.getElementById('password').value;
+  let email = document.getElementById('email');
+  let password = document.getElementById('password');
 
   // Benutzer im Array finden
   const Currentuser = user.find((item) => item.email === email);
@@ -296,10 +296,21 @@ function loginUser() {
           document.getElementById('input-login').reset();
       }
   } else {
-      alert('Bitte Registriere dich unter SignUP.');
-      document.getElementById('input-login').reset();
+      showInvalidCredentialsToast()
   }
 }
 
 //   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
 // Anmeldedaten stimmen übere
+
+
+const toast = document.getElementById('toast');
+
+// Annahme: Zeige die Toast-Nachricht an, wenn die Anmeldeinformationen falsch sind
+// Beispiel-Logik:
+function showInvalidCredentialsToast() {
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2200); 
+}

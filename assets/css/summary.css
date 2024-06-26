@@ -224,29 +224,32 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    animation: fadeOut 5s ease;
+    animation: fadeOut 3s ease;
 }
 
 .welcome-greeting-text {
     font-size: 24px;
     color: rgb(13, 13, 13);
     text-align: center;
-    animation: fadeOut 5s ease;
+    animation: fadeOut 3s ease;
 }
 
 .user-nick-login-greetings {
     font-size: 47px;
     color: #28abe2;
     margin: 0;
+    animation: fadeOut 3s ease;
 }
 
 @keyframes fadeOut {
     0% {
         background-color: rgba(254, 253, 253, 1);
+        opacity: 1;
     }
 
     100% {
         background-color: rgba(0, 0, 0, 0);
+        opacity: 0;
     }
 }
 
