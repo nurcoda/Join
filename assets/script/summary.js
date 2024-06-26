@@ -114,13 +114,10 @@ function toBoard() {
 }
 
 function userNameRenderingGreeting() {
-    // Überprüfe, ob der Benutzername im sessionStorage vorhanden ist
     if (sessionStorage.getItem('name')) {
-        // Hole den Benutzernamen aus dem sessionStorage
         var username = sessionStorage.getItem('name');
-        // Finde das HTML-Element mit der ID userGreetingsLogIn
         var greetingElement = document.getElementById('userGreetingsLogIn');
-        // Setze den innerText des Elements auf die Begrüßungsnachricht
-        greetingElement.innerText = + username;
+        greetingElement.innerText = username;
+        greetingElement.classList.add('hidden'); // Versteckte nach Animation
     }
 }

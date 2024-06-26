@@ -219,12 +219,11 @@ h1 {
     width: 100%;
     height: 100%;
     background-color: rgba(254, 253, 253, 1);
-    /* Startet mit 100% */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    animation: fadeOut 3s ease;
+    animation: fadeOut 3s ease forwards;
 }
 
 .welcome-greeting-text {
@@ -239,6 +238,10 @@ h1 {
     color: #28abe2;
     margin: 0;
     animation: fadeOut 3s ease;
+}
+
+.hidden {
+    display: none;
 }
 
 @keyframes fadeOut {
@@ -315,6 +318,10 @@ h1 {
 
     .headline-summary {
         margin-left: 236px;
+    }
+
+    .greeting-login-animation-container {
+        display: flex;
     }
 }
 
