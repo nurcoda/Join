@@ -304,17 +304,17 @@ function renderAddTaskPopUp() {
         <form id="addTaskForm" class="add-task-form">
             <div class="add-task-left">
                 <label>Title<span class="asterisk">*</span></label>
-                <input id="titleInput" class="title-input" type="text" placeholder="Enter a title" required />
+                <input id="titleInput" autocomplete="off"  class="title-input" type="text" placeholder="Enter a title" required />
                 <!-- <span class="red-required-text">This field is required</span> -->
 
                 <label class="margin-top-16px">Description</label>
                 <textarea id="descriptionText" class="description-text" placeholder="Enter a Description"></textarea>
                 <label class="margin-top-16px">Assigned to</label>
 
-                <div id="assignedDiv" class="assigned-to-div" onclick="renderContacts()">
-                    <input id="assignedInput" type="text" class="assigned-input" onkeyup="renderContacts()" placeholder="Select contacts to assign" />
+                <div id="assignedDiv" class="assigned-to-div" onclick="showAssignedDropdown(); renderContactsDropdownAddTask()">
+                    <input id="assignedInput" type="text" class="assigned-input" autocomplete="off" onkeyup="renderContactsDropdownAddTask()" placeholder="Select contacts to assign" />
                     <img id="dropdown1" src="./assets/img/arrow_drop_down_svg.svg" class="dropdown-icon" alt="" />
-                    <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" alt="" />
+                    <img id="dropdown2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" alt="" onclick="hideAssignedDropdown()"/>
                 </div>
                 <div id="assignedContacts"></div>
                 <div id="assignedDropdown" class="assigned-dropdown assigned-scrollbar d-none"></div>
@@ -329,20 +329,12 @@ function renderAddTaskPopUp() {
                 <input id="dueDate" class="date-input" type="date" required />
                 
                 <label class="margin-top-16px">Prio</label>
-                <div class="prio-buttons">
-                    <button type="button" id="urgentButton" onclick="setPrioButton('urgent')">
-                        Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent_svg.svg" alt="" />
-                    </button>
-                    <button type="button" id="mediumButton" onclick="setPrioButton('medium')">
-                        Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_svg.svg" alt="" />
-                    </button>
-                    <button type="button" id="lowButton" onclick="setPrioButton('low')">
-                        Low <img id="lowButtonImg" src="./assets/img/prio_low_svg.svg" alt="" />
-                    </button>
+                <div id="prioBtnContainer" class="prio-buttons">
+                ${getPrioButtonMediumAddTaskHTML('medium')}
                 </div>
 
                   <label class="margin-top-16px">Category<span class="asterisk">*</span></label>
-                <div id="categoryDiv" class="category-div">
+                <div id="categoryDiv" onclick="renderCategoryAddTask()" class="category-div">
                     <span id="categorySelection">Select task category</span>
                     <img id="categoryIcon1" class="dropdown-icon" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
                     <img id="categoryIcon2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" alt="" />
@@ -356,7 +348,7 @@ function renderAddTaskPopUp() {
                   
                 <label >Subtasks</label>
                 <div id="subtasksDiv" class="subtasks-div" onclick="showSubtasksIcons()">
-                    <input id="subtasksInput" min="1" type="text" placeholder="Add new subtask" />
+                    <input id="subtasksInput" autocomplete="off"  min="1" type="text" placeholder="Add new subtask" />
                     <img id="subtasksPlusIcon" class="subtasks-icon" src="./assets/img/add_svg.svg" alt="" />
                     <div id="subtasksInputIcons" class="d-none">
                         <img src="./assets/img/addtask_close.svg" class="subtasks-icon" onclick="clearSubtasksInput()" alt="" />
@@ -390,6 +382,110 @@ function renderAddTaskPopUp() {
             </div>
         </div>
    `;
+}
+
+// Helper Add Task
+
+function renderContactsDropdownAddTask() {
+  let dropdown = document.getElementById('assignedDropdown');
+  let searchInput = document.getElementById('assignedInput').value.toLowerCase(); // Wert des Suchfelds
+  dropdown.innerHTML = '';
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
+
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i];
+    const isAssigned = assignedContacts.includes(contact); // Prüfen, ob der Kontakt markiert ist
+    const contactClass = isAssigned ? 'assigned-to-contact marked' : 'assigned-to-contact'; // Klasse basierend auf Zuweisungsstatus
+    const imgSrc = isAssigned
+      ? './assets/img/checked_btn_white_svg.svg'
+      : './assets/img/check_btn.png';
+
+    // Überprüfen, ob der Kontaktname dem Suchkriterium entspricht
+    if (contact.name.toLowerCase().includes(searchInput)) {
+      // Erstellen des HTML-Strings für jeden Kontakt
+      dropdown.innerHTML += `
+        <div id="contact${contact.id}" class="${contactClass}" onclick="markContactEditPopUp(${contact.id}, ${i}); event.stopPropagation();">
+          <div class="contact-img-name">
+            <div class="two-letters-img" style="background-color: ${contact.color}; color: white;">
+              ${contact.first_two_letters}
+            </div>
+            <span>${contact.name}</span>
+          </div>
+          <img id="contactCheckBtn${contact.id}" class="check-btn-img" src="${imgSrc}" alt="" />
+        </div>`;
+    }
+  }
+  if (dropdown.innerHTML == '') {
+    dropdown.innerHTML = "<span class='no-contacts-text'>No contacts found.</span>";
+  }
+}
+
+function setPrioButtonAddTask(prio) {
+  changeButtonColorAndImgAddTask(prio);
+}
+
+function changeButtonColorAndImgAddTask(prio) {
+  let prioBtnContainer = document.getElementById('prioBtnContainer');
+  prioBtnContainer.innerHTML = `${getPrioButtonAddTask(prio)}`;
+}
+
+function getPrioButtonAddTask(prio) {
+  if (prio === 'high') {
+    return getPrioButtonHighAddTaskHTML(prio);
+  }
+  if (prio === 'medium') {
+    return getPrioButtonMediumAddTaskHTML(prio);
+  }
+  if (prio === 'low') {
+    return getPrioButtonLowAddTaskHTML(prio);
+  }
+}
+
+function renderCategoryAddTask() {
+  event.stopPropagation(); // Stop propagation to prevent immediate re-closing
+  let dropdown = document.getElementById('categoryDropdown');
+  let categoryDiv = document.getElementById('categoryDiv');
+  let requiredText = document.getElementById('requiredText3');
+
+  if (dropdown.classList.contains('d-none')) {
+    dropdown.classList.remove('d-none'); // Show dropdown
+    showOpenedCategoryIcon();
+  } else {
+    dropdown.classList.add('d-none'); // Hide dropdown
+    hideOpenedCategoryIcon();
+  }
+
+  if (categoryDiv.style.border !== '1px solid #FF8190') {
+    categoryDiv.style.border = '1px solid #d1d1d1'; // Set default border
+    requiredText.innerHTML = '';
+  }
+}
+
+function selectOption(option) {
+  let selection = document.getElementById('categorySelection');
+  let hiddenInput = document.getElementById('selectedCategory');
+
+  if (option == 1) {
+    selection.innerHTML = 'Technical Task';
+    hiddenInput.value = 'Technical Task';
+  } else if (option == 2) {
+    selection.innerHTML = 'User Story';
+    hiddenInput.value = 'User Story';
+  }
+
+  let dropdown = document.getElementById('categoryDropdown');
+  dropdown.classList.add('d-none');
+  hideOpenedCategoryIcon();
+}
+
+function showOpenedCategoryIcon() {
+  document.getElementById('categoryIcon1').classList.add('d-none');
+  document.getElementById('categoryIcon2').classList.remove('d-none');
+}
+
+function hideOpenedCategoryIcon() {
+  document.getElementById('categoryIcon2').classList.add('d-none');
+  document.getElementById('categoryIcon1').classList.remove('d-none');
 }
 
 // async function addTask(event) {

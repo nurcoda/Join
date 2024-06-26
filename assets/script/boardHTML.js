@@ -239,3 +239,44 @@ function editSubtaskHTML(i, j, subTaskTitle) {
        <img onclick="saveEditedSubtask(${i}, ${j})" src="./assets/img/addtask_check.svg" alt="">
      </div>`;
 }
+
+// ADD TASK
+
+function getPrioButtonHighAddTaskHTML(prio) {
+  return `            
+      <button type="button" id="urgentButton" onclick="setPrioButtonAddTask('high')" style="background-color: #FF3D00; color: white">
+              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent_white_svg.svg" alt="" />
+            </button>
+            <button type="button" id="mediumButton" onclick="setPrioButtonAddTask('medium')">
+              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_svg.svg" alt="" />
+            </button>
+            <button type="button" id="lowButton" onclick="setPrioButtonAddTask('low')">
+              Low <img id="lowButtonImg" src="./assets/img/prio_low_svg.svg" alt="" />
+            </button>`;
+}
+
+function getPrioButtonMediumAddTaskHTML(prio) {
+  return `            
+       <button type="button" id="urgentButton" onclick="setPrioButtonAddTask('high')" >
+              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent_svg.svg" alt="" />
+            </button>
+            <button type="button" id="mediumButton" onclick="setPrioButtonAddTask('medium')" style="background-color: #FFA800; color: white">
+              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_white_svg.svg" alt="" />
+            </button>
+            <button type="button" id="lowButton" onclick="setPrioButtonAddTask('low')">
+              Low <img id="lowButtonImg" src="./assets/img/prio_low_svg.svg" alt="" />
+            </button>`;
+}
+
+function getPrioButtonLowAddTaskHTML(prio) {
+  return `            
+      <button type="button" id="urgentButton" onclick="setPrioButtonAddTask('high')" >
+              Urgent <img id="urgentButtonImg" src="./assets/img/prio_urgent.png" alt="" />
+            </button>
+            <button type="button" id="mediumButton" onclick="setPrioButtonAddTask('medium')">
+              Medium <img id="mediumButtonImg" src="./assets/img/prio_medium_svg.svg" alt="" />
+            </button>
+            <button type="button" id="lowButton"  onclick="setPrioButtonAddTask('low')" style="background-color: #7AE229; color: white">
+              Low <img id="lowButtonImg" src="./assets/img/prio_low_white_svg.svg" alt="" />
+            </button>`;
+}
