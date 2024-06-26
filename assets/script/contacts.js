@@ -196,7 +196,7 @@ function addPersonToContact() {
   let nameExists = contacts.some((contact) => contact.name === name);
   let mailExists = contacts.some((contact) => contact.email === mail);
 
-  if (!checkNamesLength(name)) {
+  if (!validateSignUpFormLength(name)) {
     return;
   }
 
@@ -282,7 +282,7 @@ function getNameAffixAtDoubleUse() {
   return nameAffix;
 }
 
-function checkNamesLength(name) {
+function validateSignUpFormLength(name) {
   let nameWords = name.trim().split(' ');
 
   if (nameWords.length < 2) {
@@ -333,7 +333,7 @@ function editSave(i) {
   contacts[i].email = email;
   contacts[i].phone = phone;
 
-  if (!checkNamesLength(name)) {
+  if (!validateSignUpFormLength(name)) {
     return;
   }
 
