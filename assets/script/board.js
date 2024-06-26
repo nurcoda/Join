@@ -13,7 +13,13 @@ let inProgressCounter = 0;
 let awaitFeedbackCounter = 0;
 let doneCounter = 0;
 let assignedContacts = [];
-renderTasksIntoColumns();
+
+initBoard();
+
+async function initBoard() {
+  await loadData();
+  renderTasksIntoColumns();
+}
 
 /**
  * checks the state of task
@@ -22,7 +28,6 @@ renderTasksIntoColumns();
  */
 
 async function renderTasksIntoColumns() {
-  await loadData();
   clearAllColums();
   tasks.forEach((task, index) => {
     switch (task.state) {
@@ -81,7 +86,11 @@ function checkSubTasksTemplate(i, calculatedWidth, subTasksDone) {
   `;
 }
 
-// render assigned user
+/**
+ *
+ * @param {number} i index
+ * @returns HTML-Template for assigned user
+ */
 
 function renderAssignedUserToHTML(i) {
   let assignedUserTemplate = '';
@@ -234,7 +243,6 @@ function updateTaskDataSubtasks(i) {
     return { 'subtask_name': subtask.subtask_name, 'subtask_isdone': subtask.subtask_isdone };
   });
 }
-// _____________________________________________________________
 
 function setPrioButton(prio, i) {
   changeButtonColorAndImg(prio, i);
@@ -360,14 +368,18 @@ function popUpRenderSubTasks(i) {
   return subTasksTemplate;
 }
 
-/**
- * helper functions
- */
+// ############################
+//       HELPER FUNCTIONS
+// ############################
 
 function closeAddTaskPopUp() {
   if (event.target === addTaskPopUpBackground || event.target === closePopUpBtn) {
     addTaskPopUpBackground.classList.add('d-none');
   }
+}
+
+function closeAddTaskPopUpCross() {
+  addTaskPopUpBackground.classList.add('d-none');
 }
 
 function openEditTaskPopUp(id) {
@@ -391,8 +403,9 @@ addTaskPopUpBackground.addEventListener('click', closeAddTaskPopUp);
 editTaskPopUpBackground.addEventListener('click', closeEditTaskPopUp);
 closePopUpBtn_2.addEventListener('click', closeAddTaskPopUp);
 
-// _____________________________________
-//  DRAG & DROP
+// ############################
+//       DRAG & DROP
+// ############################
 
 let currentDraggedElement;
 
@@ -405,34 +418,7 @@ async function moveTo(state) {
   let taskPosition = tasks.findIndex((item) => item.id === currentDraggedElement);
   foundItem.state = state;
   await updateTaskData(taskPosition);
-  renderTasksIntoColumnsDragNDrop();
-}
-
-function renderTasksIntoColumnsDragNDrop() {
-  clearAllColums();
-  tasks.forEach((task, index) => {
-    switch (task.state) {
-      case 'todo':
-        todoCounter++;
-        todoColumn.innerHTML += renderTasksIntoColumnsHTML(index);
-        break;
-      case 'inprogress':
-        inProgressCounter++;
-        inProgressColumn.innerHTML += renderTasksIntoColumnsHTML(index);
-        break;
-      case 'awaitfeedback':
-        awaitFeedbackCounter++;
-        awaitFeedbackColumn.innerHTML += renderTasksIntoColumnsHTML(index);
-        break;
-      case 'done':
-        doneCounter++;
-        doneColumn.innerHTML += renderTasksIntoColumnsHTML(index);
-        break;
-      default:
-        console.error(`Unknown state: ${task.state}`);
-    }
-  });
-  checkIfColumnIsEmpty();
+  renderTasksIntoColumns();
 }
 
 function allowDrop(ev) {
