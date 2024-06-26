@@ -572,7 +572,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
   background-color: #2a3647;
   position: fixed;
   top: 50%;
-  left: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 10px;
   color: white;
   display: flex;
@@ -806,7 +807,9 @@ label {
     padding-bottom: 12px;
   }
 
-
+  #toastDiv {
+    left: 32%;
+  }
 }
 
 @media (max-width: 560px) {
@@ -818,6 +821,10 @@ label {
 }
 
 @media (max-width: 465px) {
+  #toastDiv {
+    left: 20%;
+  }
+
   .title-input,
   .date-input {
     width: 326px;
@@ -877,6 +884,10 @@ label {
 }
 
 @media (max-width: 380px) {
+  #toastDiv {
+    left: 10%;
+  }
+
   .title-input,
 .date-input {
   width: 266px;

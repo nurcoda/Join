@@ -2,7 +2,7 @@ async function initPageSummary() {
     includeHTML();
     tasksInBoardCounter();
     getTimeOfDay();
-    countHighPriorityTasks()
+    await countHighPriorityTasks()
     await getNextDueDate()
 }
 
