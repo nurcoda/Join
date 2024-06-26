@@ -140,7 +140,8 @@ function returnPostedData() {
   };
   // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
   const emailExists = user.some((item) => item.email === formData.get('email'));
-
+  let Newuser = first_two_letters;
+  sessionStorage.setItem('loggedIn', Newuser) 
   if (emailExists) {
     alert('Die E-Mail-Adresse ist bereits im Array vorhanden.');
     document.getElementById('SignUpData').reset();
@@ -181,7 +182,7 @@ function checkNames() {
     if (! user.some((item) => item.email === formData.get('email'))) {
       postSignUpData('/users/' + newId, returnPostedData());
       signUpSucces();
-        sessionStorage.setItem('status','loggedIn') 
+      
       
     } else {
       return;
@@ -300,6 +301,9 @@ function loginUser() {
       document.getElementById('input-login').reset();
   }
 }
-
+}
 //   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
 // Anmeldedaten stimmen übere
+function deleteSession(){
+  sessionStorage.clear();
+}
