@@ -98,28 +98,13 @@ async function getNextDueDate() {
 
 async function countHighPriorityTasks() {
     const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
-    let response = await fetch(BASE_URL + ".json");
-    let tasks = await response.json();
+    const response = await fetch(BASE_URL + ".json");
+    const responseAsJson = await response.json();
 
-    console.log(tasks);
+    const highPriorityTasks = Object.values(responseAsJson).filter(task => task.priority === "high");
 
-    let highPriorityCount = 0;
-
-    if (Array.isArray(tasks)) {
-        tasks.forEach((task) => {
-            if (task.priority === 'high') {
-                highPriorityCount++;
-            }
-        });
-    } else {
-        for (let key in tasks) {
-            if (tasks[key].priority === 'high') {
-                highPriorityCount++;
-            }
-        }
-    }
-
-    document.getElementById("priorityHighTasks").innerHTML = highPriorityCount;
+    const priorityHighTasksElement = document.getElementById("priorityHighTasks");
+    priorityHighTasksElement.innerHTML = `${highPriorityTasks.length}`;
 }
 
 
