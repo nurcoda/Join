@@ -259,7 +259,7 @@ function loginUser() {
       console.log('Beides korrekt');
       window.location.href = './summary.html';
     } else {
-      alert('Du bist ein HACKER.');
+      alert('Passwort ist nicht korrekt.');
       document.getElementById('input-login').reset();
     }
   } else {
