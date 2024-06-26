@@ -105,9 +105,7 @@ async function countHighPriorityTasks() {
 
     const priorityHighTasksElement = document.getElementById("priorityHighTasks");
     priorityHighTasksElement.innerHTML = `${highPriorityTasks.length}`;
-    console.log(highPriorityTasks);
 }
-
 
 function toBoard() {
     window.location.href = './board.html';
