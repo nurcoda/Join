@@ -303,6 +303,20 @@
    display: block;
    animation: fadeOut 2.2s ease forwards;
  }
+
+ #passwordsDontMatchText {
+   color: #FF8190;
+   font-size: 12px;
+   position: fixed;
+   margin-top: 4px;
+ }
+
+ #nameErrorMessage {
+   color: #FF8190;
+   font-size: 12px;
+   position: fixed;
+   margin-top: 4px;
+ }
  
  @keyframes fadeOut {
    0% {

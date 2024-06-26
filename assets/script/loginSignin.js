@@ -1,7 +1,7 @@
-const toSignUpContainer = document.getElementById('toSignUpContainer');
-const loginContainer = document.getElementById('loginContainer');
-const signUpContainer = document.getElementById('signUpContainer');
-const signUpSuccesContainer = document.getElementById('signUpSuccesContainer');
+const toSignUpContainer = document.getElementById("toSignUpContainer");
+const loginContainer = document.getElementById("loginContainer");
+const signUpContainer = document.getElementById("signUpContainer");
+const signUpSuccesContainer = document.getElementById("signUpSuccesContainer");
 let currentUser = sessionStorage.getItem("name");
 let currentUserAvatar = sessionStorage.getItem("loggedIn");
 let newId = generateId();
@@ -9,24 +9,24 @@ let newId = generateId();
 openLogin();
 
 function openLogin() {
-  loginContainer.classList.remove('d-none');
-  toSignUpContainer.classList.remove('d-none');
-  signUpContainer.classList.add('d-none');
+  loginContainer.classList.remove("d-none");
+  toSignUpContainer.classList.remove("d-none");
+  signUpContainer.classList.add("d-none");
   openLoginHTML();
 }
 
 function openSignUp() {
-  loginContainer.classList.add('d-none');
-  toSignUpContainer.classList.add('d-none');
-  signUpContainer.classList.remove('d-none');
+  loginContainer.classList.add("d-none");
+  toSignUpContainer.classList.add("d-none");
+  signUpContainer.classList.remove("d-none");
   openSignUpHTML();
 }
 
 function signUpSucces() {
-  signUpSuccesContainer.classList.remove('d-none');
+  signUpSuccesContainer.classList.remove("d-none");
   setTimeout(function () {
-    signUpSuccesContainer.classList.add('d-none');
-    window.location.href = './summary.html'; // Blende den Div-Container nach 2 Sekunden aus
+    signUpSuccesContainer.classList.add("d-none");
+    window.location.href = "./summary.html"; // Blende den Div-Container nach 2 Sekunden aus
   }, 1500); // 2000 Millisekunden = 2 Sekunden
 }
 
@@ -86,111 +86,168 @@ function openSignUpHTML() {
            <h1>Sign-up</h1>
            <div class="underline-headline"></div>
        </div>
-       <form id="SignUpData" class="input-login" onsubmit="checkNames(); return false;">
-           <div class="input-login-field">
-               <input required type="text" name="name" placeholder="Name" />
-               <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
-           </div>
-           <div class="input-login-field">
-               <input id="newMail" required type="email" name="email" placeholder="Email" />
-               <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
-           </div>
-           <div class="input-login-field">
-               <input id="password" onmouseover="showPassword()" type="password" name="password" placeholder="Password" required />
-               <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
-           </div>
-           <div class="input-login-field">
-               <input type="password" name="confirmPassword" placeholder="Confirm Password" />
-               <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
-           </div>
-           <div class="accept-privacy-policy-form">
-               <input required class="accept-icon" type="checkbox" name="acceptPrivacyPolicy" id="acceptPrivacyPolicy" />
-               <label for="acceptPrivacyPolicy">I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label>
-           </div>
-           <div class="login-guestlogin-btn-wrapper">
-               <button class="signup-btn-in-form btns-login">Sign up</button>
-           </div>
+       <form id="SignUpData" class="input-login" onsubmit="validateSignUpForm(); return false;">
+         <div class="input-login-field">
+           <input required type="text" name="name" placeholder="Name" onfocus="resetNameError()" />
+           <img src="./assets/img/person_icon.png" alt="Person Icon" class="login-input-icons" />
+           <span id="nameErrorMessage" class="error-message"></span>
+         </div>
+         <div class="input-login-field">
+           <input id="newMail" required type="email" name="email" placeholder="Email" />
+           <img src="./assets/img/mail_icon.png" alt="Mail Icon" class="login-input-icons" />
+         </div>
+         <div class="input-login-field">
+           <input id="password" onmouseover="showPassword()" type="password" name="password" placeholder="Password" required />
+           <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock Icon" />
+         </div>
+         <div class="input-login-field">
+           <input id="confirmPasswordInput" type="password" name="confirmPassword" placeholder="Confirm Password" onfocus="resetPasswordError()" />
+           <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock Icon" />
+           <span id="passwordsDontMatchText"></span>
+         </div>
+         <div class="accept-privacy-policy-form">
+           <input required class="accept-icon" type="checkbox" name="acceptPrivacyPolicy" id="acceptPrivacyPolicy" />
+           <label for="acceptPrivacyPolicy">I accept the <a href="#" class="privacy-policy-link">Privacy policy</a></label>
+         </div>
+         <div class="login-guestlogin-btn-wrapper">
+           <button class="signup-btn-in-form btns-login">Sign up</button>
+         </div>
        </form>
    `;
+
+  // Event-Listener zum Zurücksetzen der Fehlerzustände beim Klicken auf die Input-Felder
+  const nameInputField = document.getElementsByName('name')[0];
+  nameInputField.addEventListener('focus', resetNameError);
+
+  const confirmPasswordInput = document.getElementsByName('confirmPassword')[0];
+  confirmPasswordInput.addEventListener('focus', resetPasswordError);
 }
+
+// Funktionen zum Zurücksetzen der Fehlerzustände
+function resetNameError() {
+  const nameInputField = document.getElementsByName('name')[0];
+  const nameErrorMessage = document.getElementById('nameErrorMessage');
+  nameInputField.style.border = "1px solid #ccc";
+  nameErrorMessage.innerHTML = "";
+}
+
+function resetPasswordError() {
+  const confirmPasswordId = document.getElementById('confirmPasswordInput');
+  const dontMatchText = document.getElementById('passwordsDontMatchText');
+  confirmPasswordId.style.border = "1px solid #ccc";
+  dontMatchText.innerHTML = "";
+}
+
 function showPassword() {
-  let password = document.getElementById('password').value;
-  if (!password === '') {
-    password.type = 'password'; // Passwort im Klartext anzeigen
+  let password = document.getElementById("password").value;
+  if (!password === "") {
+    password.type = "password"; // Passwort im Klartext anzeigen
   } else {
-    password.type = 'text'; // Passwort wieder verbergen
+    password.type = "text"; // Passwort wieder verbergen
   }
 }
 
 function returnPostedData() {
-  const form = document.getElementById('SignUpData');
+  const form = document.getElementById("SignUpData");
   const formData = new FormData(form);
-  let input = formData.get('name');
-  let words = input.split(' ');
-  let firstLetters = words.map((word) => word.charAt(0)).join('');
+  let input = formData.get("name");
+  let words = input.split(" ");
+  let firstLetters = words.map((word) => word.charAt(0)).join("");
   const firstLetter = firstLetters.toUpperCase();
 
   const data = {
-    name: formData.get('name'),
-    email: formData.get('email'),
-    password: formData.get('password'),
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
     first_two_letters: firstLetter,
     id: newId,
-    'color': newContactColor()
+    color: newContactColor(),
   };
   // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
-  const emailExists = user.some((item) => item.email === formData.get('email'));
+  const emailExists = user.some((item) => item.email === formData.get("email"));
   let Newuser = firstLetters.toUpperCase();
-  sessionStorage.setItem('loggedIn', Newuser) 
+  sessionStorage.setItem("loggedIn", Newuser);
   if (emailExists) {
-    alert('Die E-Mail-Adresse ist bereits im Array vorhanden.');
-    document.getElementById('SignUpData').reset();
+    alert("Die E-Mail-Adresse ist bereits im Array vorhanden.");
+    document.getElementById("SignUpData").reset();
 
     //  document.getElementById('SignUpData').reset();
   } else {
-    console.log('Die E-Mail-Adresse ist nicht im Array vorhanden.');
+    console.log("Die E-Mail-Adresse ist nicht im Array vorhanden.");
     return data;
   }
 }
 
 async function postSignUpData(path, data) {
-  if (returnPostedData === '') {
+  if (returnPostedData === "") {
     return;
   }
   console.log(path);
   console.log(data);
-  let response = await fetch(BASE_URL + path + '.json', {
-    method: 'PUT',
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "PUT",
     header: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
   return (responseToJSON = await response.json());
 }
 
-function checkNames() {
-  event.preventDefault()
+function validateSignUpForm() {
+  event.preventDefault();
+
   const form = document.getElementById('SignUpData');
-  let newMail = document.getElementById('newMail').value;
   const formData = new FormData(form);
-  let input = formData.get('name');
-  let words = input.split(/\s+/);
-  if (words.length >= 2 && words.length <= 3) {
-    console.log(returnPostedData());
-    
-    if (! user.some((item) => item.email === formData.get('email'))) {
-      postSignUpData('/users/' + newId, returnPostedData());
-      signUpSucces();
-      
-      
-    } else {
-      return;
-    }
+  const password = formData.get('password');
+  const confirmPassword = formData.get('confirmPassword');
+  const confirmPasswordId = document.getElementById('confirmPasswordInput');
+  const dontMatchText = document.getElementById('passwordsDontMatchText');
+  const nameInput = formData.get('name');
+  const nameInputField = document.getElementsByName('name')[0];
+  const nameErrorMessage = document.getElementById('nameErrorMessage');
+  let hasError = false;
+
+  // Zurücksetzen der vorherigen Fehlerzustände
+  nameInputField.style.border = "1px solid #ccc";
+  nameErrorMessage.innerHTML = "";
+
+  confirmPasswordId.style.border = "1px solid #ccc";
+  dontMatchText.innerHTML = "";
+
+  // Überprüfen, ob die Passwörter übereinstimmen
+  if (password !== confirmPassword) {
+    confirmPasswordId.style.border = "1px solid #FF001F";
+    dontMatchText.innerHTML = "Your Passwords don't match. Try again.";
+    hasError = true;
+  }
+
+  // Split name into words
+  let words = nameInput.trim().split(/\s+/);
+
+  // Check number of names entered
+  if (words.length !== 2 && words.length !== 3) {
+    nameInputField.style.border = "1px solid #FF001F";
+    nameErrorMessage.innerHTML = "Please enter first and last name.";
+    hasError = true;
+  }
+
+  // Check if there are errors, if so, stop further processing
+  if (hasError) {
+    return;
+  }
+
+  // Check if email is already registered
+  if (!user.some((item) => item.email === formData.get('email'))) {
+    // Assuming 'newId' is defined or provided
+    postSignUpData('/users/' + newId, returnPostedData());
+    signUpSucces();
   } else {
-    alert('Bitte geben Sie maximal 3 Namen ein.');
+    alert('Email address is already registered.');
+    return;
   }
 }
+
 
 // Von Alex, um den usern einen Farbcode zu geben
 
@@ -232,8 +289,8 @@ function openLoginHTML() {
     `;
 }
 
-document.getElementById('guest-link').addEventListener('click', function () {
-  window.location.href = './summary.html';
+document.getElementById("guest-link").addEventListener("click", function () {
+  window.location.href = "./summary.html";
 });
 
 function generateId() {
@@ -277,42 +334,42 @@ function generateId() {
 // }
 
 function loginUser() {
-  event.preventDefault()
-  let email = document.getElementById('email').value;
-  let password = document.getElementById('password').value;
+  event.preventDefault();
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
 
   // Benutzer im Array finden
   const Currentuser = user.find((item) => item.email === email);
 
   if (Currentuser) {
-      console.log('Die E-Mail-Adresse ist korrekt.');
-      if (Currentuser.password === password) {
-          console.log('Beides korrekt');
-          sessionStorage.setItem('loggedIn', Currentuser.first_two_letters);
-          sessionStorage.setItem('name', Currentuser.name);
-          checkUser(Currentuser);  // Stellen Sie sicher, dass checkUser definiert ist
-          window.location.href = './summary.html';
-      } else {
-        showInvalidCredentialsToast();
-      }
-  } else {
+    console.log("Die E-Mail-Adresse ist korrekt.");
+    if (Currentuser.password === password) {
+      console.log("Beides korrekt");
+      sessionStorage.setItem("loggedIn", Currentuser.first_two_letters);
+      sessionStorage.setItem("name", Currentuser.name);
+      checkUser(Currentuser); // Stellen Sie sicher, dass checkUser definiert ist
+      window.location.href = "./summary.html";
+    } else {
       showInvalidCredentialsToast();
+    }
+  } else {
+    showInvalidCredentialsToast();
   }
 }
 
 //   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
 // Anmeldedaten stimmen übere
-function deleteSession(){
+function deleteSession() {
   sessionStorage.clear();
 }
 
-const toast = document.getElementById('toast');
+const toast = document.getElementById("toast");
 
 // Annahme: Zeige die Toast-Nachricht an, wenn die Anmeldeinformationen falsch sind
 // Beispiel-Logik:
 function showInvalidCredentialsToast() {
-  toast.classList.add('show');
+  toast.classList.add("show");
   setTimeout(() => {
-    toast.classList.remove('show');
-  }, 2200); 
+    toast.classList.remove("show");
+  }, 2200);
 }
