@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     greetingText.textContent = getTimeOfDay();
 });
 
-function getNextDueDate() {
+async function getNextDueDate() {
     let nextDueDate = null;
     let nextTask = null;
 
@@ -96,17 +96,32 @@ function getNextDueDate() {
     document.getElementById("deadlineDate").innerHTML = formattedDate;
 }
 
-function countHighPriorityTasks() {
+async function countHighPriorityTasks() {
+    const BASE_URL = "https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/";
+    let response = await fetch(BASE_URL + ".json");
+    let tasks = await response.json();
+
+    console.log(tasks);
+
     let highPriorityCount = 0;
 
-    tasks.forEach((task) => {
-        if (task.priority === 'high') {
-            highPriorityCount++;
+    if (Array.isArray(tasks)) {
+        tasks.forEach((task) => {
+            if (task.priority === 'high') {
+                highPriorityCount++;
+            }
+        });
+    } else {
+        for (let key in tasks) {
+            if (tasks[key].priority === 'high') {
+                highPriorityCount++;
+            }
         }
-    });
+    }
 
     document.getElementById("priorityHighTasks").innerHTML = highPriorityCount;
 }
+
 
 function toBoard() {
     window.location.href = './board.html';
