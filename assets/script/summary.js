@@ -114,14 +114,13 @@ function toBoard() {
 }
 
 function userNameRenderingGreeting() {
-    if (window.innerWidth >= 840) {  // Überprüfen der Fensterbreite
-        if (sessionStorage.getItem('name')) {
-            let username = sessionStorage.getItem('name');
-            let greetingElement = document.getElementById('userGreetingsLogIn');
-            greetingElement.innerText = username;
-        }
+    if (sessionStorage.getItem('name')) {
+        let username = sessionStorage.getItem('name');
+        let greetingElement = document.getElementById('userGreetingsLogIn');
+        greetingElement.innerText = username;
     }
 }
+
 
 document.addEventListener('DOMContentloaded', function () {
     if (sessionStorage.getItem('loggedIn') === 'true') {

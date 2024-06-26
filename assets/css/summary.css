@@ -321,7 +321,7 @@ h1 {
     }
 
     .greeting-login-animation-container {
-        animation: none;
+        animation: fadeOut
     }
 }
 
