@@ -283,19 +283,17 @@ function getPrioButtonLowAddTaskHTML(prio) {
 
 function renderSubtasksaddTaskPopUpHTML(i, subTaskTitle) {
   return `
-                 <div class="edit-pop-up-subtask-wrapper" id="subtask${i}">
-                     &bull; ${subTaskTitle} 
-                     <span class="edit-pop-up-btn-wrapper">
-                         <span class="edit-subtask-edit-btn">
-                             <img class="subtask-edit-btn" onclick="editSubtask(${
-                               (i, subTaskTitle)
-                             }')" src="./assets/img/edit_pen_icon.png" alt="">
-                         </span>
-                         <span class="subtask-delete-btn edit-subtask-delete-btn">
-                             <img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt="">
-                         </span>
-                     </span>
-                 </div>`;
+     <div class="edit-pop-up-subtask-wrapper" id="subtask${i}">
+         &bull; ${subTaskTitle} 
+         <span class="edit-pop-up-btn-wrapper">
+             <span class="edit-subtask-edit-btn">
+      <img class="subtask-edit-btn" onclick="editSubtask(${i}, ${subTaskTitle})" src="./assets/img/edit_pen_icon.png" alt="">
+             </span>
+             <span class="subtask-delete-btn edit-subtask-delete-btn">
+                 <img onclick="deleteSubtask(${i})" src="./assets/img/delete_trashcan_icon.png" alt="">
+             </span>
+         </span>
+     </div>`;
 }
 
 function editSubtaskAddTaskHTML(i, subTaskTitle) {
