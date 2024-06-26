@@ -113,18 +113,13 @@ function toBoard() {
     window.location.href = './board.html';
 }
 
-function userNameRenderingGreeting() {
-    if (sessionStorage.getItem('name')) {
-        let username = sessionStorage.getItem('name');
-        let greetingElement = document.getElementById('userGreetingsLogIn');
-        greetingElement.innerText = username;
-    }
-}
-
-
-document.addEventListener('DOMContentloaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     if (sessionStorage.getItem('loggedIn') === 'true') {
-        userNameRenderingGreeting();
+        if (sessionStorage.getItem('name')) {
+            let username = sessionStorage.getItem('name');
+            let greetingElement = document.getElementById('userGreetingsLogIn');
+            greetingElement.innerText = username;
+        }
         sessionStorage.removeItem('loggedIn');
     }
 });
