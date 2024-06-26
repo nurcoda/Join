@@ -28,7 +28,13 @@ function checkUser(user) {
 }
 
 
-function showUserLetter(){
-   currentUserAvatar = sessionStorage.getItem("loggedIn");
+// function showUserLetter(){
+//    currentUserAvatar = sessionStorage.getItem("loggedIn");
+//    document.getElementById('headerUserIcon').innerHTML = currentUserAvatar;
+//    }
+
+async function showUserLetter() {
+   await includeHTML();
+   currentUserAvatar = sessionStorage.getItem('loggedIn');
    document.getElementById('headerUserIcon').innerHTML = currentUserAvatar;
-   }
+ }
