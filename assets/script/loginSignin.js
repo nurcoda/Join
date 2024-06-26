@@ -172,7 +172,7 @@ function checkNames() {
   const formData = new FormData(form);
   let input = formData.get('name');
   let words = input.split(/\s+/);
-  if (words.length <= 3) {
+  if (words.length >= 2 && words.length <= 3) {
     console.log(returnPostedData());
     
     if (! user.some((item) => item.email === formData.get('email'))) {
