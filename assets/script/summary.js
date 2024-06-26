@@ -101,10 +101,11 @@ async function countHighPriorityTasks() {
     const response = await fetch(BASE_URL + ".json");
     const responseAsJson = await response.json();
 
-    const highPriorityTasks = Object.values(responseAsJson).filter(task => task.priority === "high");
+    const highPriorityTasks = Object.values(responseAsJson).filter(tasks => tasks.priority === "high");
 
     const priorityHighTasksElement = document.getElementById("priorityHighTasks");
     priorityHighTasksElement.innerHTML = `${highPriorityTasks.length}`;
+    console.log(highPriorityTasks);
 }
 
 
