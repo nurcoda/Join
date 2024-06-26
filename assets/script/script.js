@@ -22,9 +22,9 @@ document.addEventListener("click", (event) => {
    }
 });
 
-function showCurrentUser(){
+// function showCurrentUser(){
 
-}
+// }
 function getUserFromToken(token) {
    const payload = JSON.parse(atob(token.split('.')[1]));
    return payload;
@@ -39,29 +39,16 @@ function setProfileImage(user) {
 }
 
 // Überprüfung, ob der Benutzer angemeldet ist und Profilbild setzen
-function checkUser() {
-   const token = localStorage.getItem('token');
-   if (token) {
-       const user = getUserFromToken(token);
-       setProfileImage(user);
-   }
+// function checkUser(user) {
+//    const token = user.first_two_letters;
+//    if (token) {
+//        const user = getUserFromToken(token);
+//        setProfileImage(user);
+//    }
+// }
+
+function checkUser(user) {
+   console.log('Angemeldeter Benutzer:', user.name);
+   document.getElementById('headerUserIcon').innerHTML = user.first_two_letters;
 }
 
-// Beispiel für die Benutzeranmeldung und JWT-Speicherung
-async function login(username, password) {
-   const response = await fetch('/login', {
-       method: 'POST',
-       headers: {
-           'Content-Type': 'application/json'
-       },
-       body: JSON.stringify({ username, password })
-   });
-   
-   const data = await response.json();
-   if (response.ok) {
-       localStorage.setItem('token', data.token);
-       return data.token;
-   } else {
-       console.error(data.message);
-   }
-}
