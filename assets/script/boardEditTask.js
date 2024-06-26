@@ -284,9 +284,73 @@ function renderTasksIntoColumnsSearching() {
 //   ##### ADD TASK BOARD ###########
 // _________________________________
 
+let addTaskSubtasks = [];
+
 function openAddTaskPopUp() {
+  addTaskSubtasks = [];
   addTaskPopUpBackground.classList.remove('d-none');
   renderAddTaskPopUp();
+}
+
+function addNewSubtaskEditPopUp() {
+  let inputField = document.getElementById('subtasksInput');
+  let input = inputField.value;
+  let newSubTask = { 'subtask_name': input, 'subtask_isdone': false };
+  addTaskSubtasks.push(newSubTask);
+  inputField.value = '';
+  let subtasksListContainer = document.getElementById('subtasksList');
+  subtasksListContainer.innerHTML = `${renderSubtasksEditPopUp()}`;
+}
+
+function renderSubtasksEditPopUp(i) {
+  let subtaskList = '';
+  for (let i = 0; i < addTaskSubtasks.length; i++) {
+    if (addTaskSubtasks[i] && addTaskSubtasks.length > 0) {
+      let subTaskTitle = addTaskSubtasks[i].subtask_name;
+      subtaskList += renderSubtasksaddTaskPopUpHTML(i, subTaskTitle);
+    }
+  }
+  return subtaskList;
+}
+
+// SUBTASKS
+
+function editSubtask(i, subTaskTitle) {
+  let subtask = document.getElementById(`subtask${i}`);
+  subtask.innerHTML = editSubtaskAddTaskHTML(i, subTaskTitle);
+  subtask.style.padding = '2px 0px 2px 0px';
+}
+
+function saveEditedSubtask(i) {
+  input = document.getElementById(`onEditSubtaskInput${i}`);
+  addTaskSubtasks[i].subtask_name = input.value;
+  renderSubtasksAfterEdit(i);
+}
+
+function deleteSubtask(i) {
+  addTaskSubtasks.splice(i, 1);
+  renderSubtasksAfterEdit(i);
+}
+
+function renderSubtasksAfterEdit(i) {
+  let subtasksList = document.getElementById('subtasksList');
+  subtasksList.innerHTML = '';
+  if (addTaskSubtasks.length > 0) {
+    for (let j = 0; j < addTaskSubtasks.length; j++) {
+      let subTaskTitle = addTaskSubtasks[j].subtask_name;
+      subtasksList.innerHTML += renderSubtasksaddTaskPopUpHTML(j, subTaskTitle);
+    }
+  }
+}
+
+function showEditIcons(event, i) {
+  let icons = document.getElementById(`subtask${i}Icons`);
+  icons.classList.remove('d-none');
+}
+
+function hideEditIcons(i) {
+  let icons = document.getElementById(`subtask${i}Icons`);
+  icons.classList.add('d-none');
 }
 
 function renderAddTaskPopUp() {
@@ -353,7 +417,7 @@ function renderAddTaskPopUp() {
                     <div id="subtasksInputIcons" class="d-none">
                         <img src="./assets/img/addtask_close.svg" class="subtasks-icon" onclick="clearSubtasksInput()" alt="" />
                         <div class="subtasks-seperator"></div>
-                        <img src="./assets/img/addtask_check.svg" class="subtasks-icon" onclick="addNewSubtask()" alt="" />
+                        <img src="./assets/img/addtask_check.svg" class="subtasks-icon" onclick="addNewSubtaskEditPopUp()" alt="" />
                     </div>
                 </div>
                 <div id="subtasksList" class="subtasks-scrollbar"></div>
