@@ -371,7 +371,7 @@ function renderAddTaskPopUpHTML() {
                     <div id="subtasksInputIcons" class="d-none">
                         <img src="./assets/img/addtask_close.svg" class="subtasks-icon" onclick="clearSubtasksInput()" alt="" />
                         <div class="subtasks-seperator"></div>
-                        <img src="./assets/img/addtask_check.svg" class="subtasks-icon" onclick="addNewSubtaskEditPopUp()" alt="" />
+                        <img src="./assets/img/addtask_check.svg" class="subtasks-icon" onclick="addNewSubtaskAddTasPopUp()" alt="" />
                     </div>
                 </div>
                 <div id="subtasksList" class="subtasks-scrollbar"></div>

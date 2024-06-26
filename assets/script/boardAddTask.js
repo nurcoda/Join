@@ -13,7 +13,7 @@ function openAddTaskPopUp(state) {
 
 // SUBTASKS
 
-function addNewSubtaskEditPopUp() {
+function addNewSubtaskAddTasPopUp() {
   let inputField = document.getElementById('subtasksInput');
   let input = inputField.value;
   let newSubTask = { 'subtask_name': input, 'subtask_isdone': false };
