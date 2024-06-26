@@ -258,6 +258,10 @@ function getPrioButton(i) {
   }
 }
 
+// #######################
+//        DELETE TASK
+// #######################
+
 async function deleteTask(id) {
   let taskToDeleteIndex = tasks.findIndex((task) => task.id === id);
   tasks.splice(taskToDeleteIndex, 1);
