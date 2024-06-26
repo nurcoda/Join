@@ -277,8 +277,8 @@ function generateId() {
 
 function loginUser() {
   event.preventDefault()
-  let email = document.getElementById('email');
-  let password = document.getElementById('password');
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
 
   // Benutzer im Array finden
   const Currentuser = user.find((item) => item.email === email);
@@ -292,11 +292,10 @@ function loginUser() {
           checkUser(Currentuser);  // Stellen Sie sicher, dass checkUser definiert ist
           window.location.href = './summary.html';
       } else {
-          alert('Passwort ist nicht korrekt.');
-          document.getElementById('input-login').reset();
+        showInvalidCredentialsToast();
       }
   } else {
-      showInvalidCredentialsToast()
+      showInvalidCredentialsToast();
   }
 }
 
