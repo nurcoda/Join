@@ -90,7 +90,7 @@ function openSignUpHTML() {
                <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
            </div>
            <div class="input-login-field">
-               <input required type="email" name="email" placeholder="Email" />
+               <input id="newMail" required type="email" name="email" placeholder="Email" />
                <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
            </div>
            <div class="input-login-field">
@@ -168,19 +168,21 @@ async function postSignUpData(path, data) {
 
 function checkNames() {
   const form = document.getElementById('SignUpData');
+  let newMail = document.getElementById('newMail').value;
   const formData = new FormData(form);
   let input = formData.get('name');
   let words = input.split(/\s+/);
-  if (words.length === 2) {
+  if (words.length <= 3) {
     console.log(returnPostedData());
-    postSignUpData('/users/' + newId, returnPostedData());
-    if (!returnPostedData === '') {
+    
+    if (! user.some((item) => item.email === formData.get('email'))) {
+      postSignUpData('/users/' + newId, returnPostedData());
       signUpSucces();
     } else {
       return;
     }
   } else {
-    alert('Bitte geben Sie genau zwei Namen ein.');
+    alert('Bitte geben Sie maximal 3 Namen ein.');
   }
 }
 
@@ -212,7 +214,7 @@ function openLoginHTML() {
                </div>
 
                <div class="remember-me-form">
-                  <input required class="accept-icon" type="checkbox" name="remember-me" id="" />
+                  <input class="accept-icon" type="checkbox" name="remember-me" id="" />
                   <label for="remember-me">Remember me</label>
                </div>
 
