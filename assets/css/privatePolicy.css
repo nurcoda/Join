@@ -59,21 +59,24 @@ h2 {
 @media only screen and (max-width: 840px) {
 
     .contentPolicy {
-        padding-left: 160px;
+        padding-left: 6px;
+        padding-right: 6px;
     }
 }
 
 @media only screen and (max-width: 730px) {
 
     .contentPolicy {
-        padding-left: 100px;
+        padding-left: 6px;
+        padding-right: 6px;
     }
 }
 
 @media only screen and (max-width: 660px) {
 
     .contentPolicy {
-        padding-left: 100px;
+        padding-left: 6px;
+        padding-right: 6px;
     }
 
     h1 {
@@ -88,7 +91,8 @@ h2 {
 @media only screen and (max-width: 595px) {
 
     .contentPolicy {
-        padding-left: 80px;
+        padding-left: 6px;
+        padding-right: 6px;
     }
 
     h1 {
@@ -103,7 +107,8 @@ h2 {
 @media only screen and (max-width: 595px) {
 
     .contentPolicy {
-        padding-left: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
     }
 
     h1 {
@@ -118,7 +123,8 @@ h2 {
 @media only screen and (max-width: 420px) {
 
     .contentPolicy {
-        padding-left: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
     }
 
     h1 {
