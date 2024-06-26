@@ -2,6 +2,8 @@ const toSignUpContainer = document.getElementById('toSignUpContainer');
 const loginContainer = document.getElementById('loginContainer');
 const signUpContainer = document.getElementById('signUpContainer');
 const signUpSuccesContainer = document.getElementById('signUpSuccesContainer');
+let currentUser = sessionStorage.getItem("name");
+let currentUserAvatar = sessionStorage.getItem("loggedIn");
 let newId = generateId();
 
 openLogin();
@@ -167,6 +169,7 @@ async function postSignUpData(path, data) {
 }
 
 function checkNames() {
+  event.preventDefault()
   const form = document.getElementById('SignUpData');
   let newMail = document.getElementById('newMail').value;
   const formData = new FormData(form);
@@ -274,6 +277,7 @@ function generateId() {
 // }
 
 function loginUser() {
+  event.preventDefault()
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
 
@@ -284,7 +288,8 @@ function loginUser() {
       console.log('Die E-Mail-Adresse ist korrekt.');
       if (Currentuser.password === password) {
           console.log('Beides korrekt');
-          sessionStorage.setItem('status', 'loggedIn');
+          sessionStorage.setItem('loggedIn', Currentuser.first_two_letters);
+          sessionStorage.setItem('name', Currentuser.name);
           checkUser(Currentuser);  // Stellen Sie sicher, dass checkUser definiert ist
           window.location.href = './summary.html';
       } else {
