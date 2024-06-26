@@ -110,3 +110,4 @@ async function countHighPriorityTasks() {
 function toBoard() {
     window.location.href = './board.html';
 }
+

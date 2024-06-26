@@ -22,33 +22,13 @@ document.addEventListener("click", (event) => {
    }
 });
 
-// function showCurrentUser(){
-
-// }
-function getUserFromToken(token) {
-   const payload = JSON.parse(atob(token.split('.')[1]));
-   return payload;
-}
-
-// Funktion, um das Profilbild zu setzen
-function setProfileImage(user) {
-   const userIcon = document.getElementById('headerUserIcon');
-   if (user.profileImageUrl) {
-       userIcon.src = user.profileImageUrl;
-   }
-}
-
-// Überprüfung, ob der Benutzer angemeldet ist und Profilbild setzen
-// function checkUser(user) {
-//    const token = user.first_two_letters;
-//    if (token) {
-//        const user = getUserFromToken(token);
-//        setProfileImage(user);
-//    }
-// }
-
 function checkUser(user) {
    console.log('Angemeldeter Benutzer:', user.name);
-   document.getElementById('headerUserIcon').innerHTML = user.first_two_letters;
+   // document.getElementById('headerUserIcon').innerHTML = user.first_two_letters;
 }
 
+
+function showUserLetter(){
+   currentUserAvatar = sessionStorage.getItem("loggedIn");
+   document.getElementById('headerUserIcon').innerHTML = currentUserAvatar;
+   }
