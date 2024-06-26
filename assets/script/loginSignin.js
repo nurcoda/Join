@@ -181,9 +181,8 @@ function checkNames() {
     if (! user.some((item) => item.email === formData.get('email'))) {
       postSignUpData('/users/' + newId, returnPostedData());
       signUpSucces();
-      jQuery(window).load(function() {
         sessionStorage.setItem('status','loggedIn') 
-      });
+      
     } else {
       return;
     }
