@@ -223,6 +223,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     animation: fadeOut 5s ease;
 }
 
@@ -231,6 +232,12 @@ h1 {
     color: rgb(13, 13, 13);
     text-align: center;
     animation: fadeOut 5s ease;
+}
+
+.user-nick-login-greetings {
+    font-size: 47px;
+    color: #28abe2;
+    margin: 0;
 }
 
 @keyframes fadeOut {
