@@ -2,11 +2,13 @@ function renderTasksIntoColumnsHTML(i) {
   return `  <div class="task-card" draggable="true" ondragstart="startDragging(${
     tasks[i].id
   })" onclick="openEditTaskPopUp(${tasks[i].id})">
+                    
                        <div class="${
                          tasks[i].category === 'User Story' || tasks[i].category === 'User story'
                            ? 'category-user-story'
                            : 'category-technical-task'
-                       } task-category">${tasks[i].category}</div>
+                       } task-category">${tasks[i].category} </div>
+                    
                        <div class="task-headline">${tasks[i].name}</div>
                        <div class="task-comment">${tasks[i].description}</div>
                        <div class="subtask-counter-wrapper">
@@ -400,4 +402,19 @@ function renderAddTaskPopUpHTML() {
             </div>
         </div>
    `;
+}
+
+{
+  /* <div class="state-change-btn" onclick="openStatesList()" id="changeStateBtn">${
+  tasks[i].state
+}
+
+<img src="./assets/img/edit_pen_icon.png" alt="">
+         <div class="states-list d-none" id="statesList">
+         <div class="state-list-item">todo</div>
+          <div class="state-list-item">in progress</div>
+           <div class="state-list-item">await feedback</div>
+         <div class="state-list-item">done</div>
+       </div>
+</div> */
 }

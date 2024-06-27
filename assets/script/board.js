@@ -428,3 +428,7 @@ async function moveTo(state) {
 function allowDrop(ev) {
   ev.preventDefault();
 }
+
+// ############################
+//      CHANGE STATE
+// ############################
