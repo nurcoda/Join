@@ -1,6 +1,5 @@
 async function initPageSummary() {
     includeHTML();
-    playAnimationOnce();
     tasksInBoardCounter();
     getTimeOfDay();
     await countHighPriorityTasks()
@@ -136,10 +135,21 @@ document.addEventListener('DOMContentLoaded', function () {
 // });
 
 // Hier setzt Variable auf true, nachdem die Animation abgespielt wurde
-function playAnimationOnce() {
-    if (!animationPlayed) {
-        const loginAnimation = document.getElementById('loginAnimation');
-        loginAnimation.classList.add('fadeOutAnimation');
-        animationPlayed = true;
-    }
-}
+// function playAnimationOnce() {
+//     if (!animationPlayed) {
+//         const loginAnimation = document.getElementById('loginAnimation');
+//         loginAnimation.classList.add('fadeOutAnimation');
+//         animationPlayed = true;
+//     }
+// }
+document.addEventListener('DOMContentLoaded', function () {
+    const loginAnimation = document.getElementById('loginAnimation');
+
+    // Eventlistener für das Ende der Animation hinzufügen
+    loginAnimation.addEventListener('animationend', function () {
+        loginAnimation.classList.add('finished');
+    });
+
+    // Animation starten, indem die Klasse hinzugefügt wird
+    loginAnimation.classList.add('fadeOutAnimation');
+});

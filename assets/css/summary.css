@@ -258,6 +258,12 @@ h1 {
 
 .fadeOutAnimation {
     animation: fadeOut 1s ease-out forwards;
+    animation-play-state: paused;
+}
+
+.fadeOutAnimation.finished {
+    display: none;
+    /* Element nach Abschluss der Animation ausblenden */
 }
 
 /**************************/
