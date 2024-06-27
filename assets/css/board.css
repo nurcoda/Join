@@ -67,6 +67,10 @@
   border: 1px solid #29abe2;
 }
 
+.search-task-mobile {
+  display: none;
+}
+
 .add-task-btn {
   display: flex;
   align-items: center;
@@ -121,7 +125,7 @@
   align-items: center;
   margin-top: 24px;
   gap: 16px;
-  min-height: 75vh;
+  min-height: 100%;
   padding-bottom: 3vh;
 }
 
@@ -379,6 +383,18 @@
 
 .existing-task-popup-user-wrapper {
   margin-bottom: 8px;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 25%;
+}
+
+.existing-task-popup-user-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+.existing-task-popup-user-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(211, 211, 211, 0.505);
+  border-radius: 4px;
 }
 
 .popup-user {
@@ -391,6 +407,18 @@
 
 .existing-task-popup-subtasks {
   margin-top: 8px;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 15%;
+}
+
+.existing-task-popup-subtasks::-webkit-scrollbar {
+  width: 4px;
+}
+
+.existing-task-popup-subtasks::-webkit-scrollbar-thumb {
+  background-color: rgba(211, 211, 211, 0.505);
+  border-radius: 4px;
 }
 
 .popup-subtask-headline {
@@ -657,7 +685,7 @@
 
 @media (max-width: 1024px) {
   .distances {
-    padding-right: 50px;
+    padding-right: 0px;
   }
   .search-add-wrapper {
     gap: 16px;
@@ -686,10 +714,24 @@
   .board-wrapper {
     flex-direction: column;
     overflow: scroll;
+    overflow-y: hidden;
   }
 
   .board-column {
-    width: 100vw;
+    width: 100%;
+    overflow: scroll;
+  }
+
+  /* Für Webkit-basierte Browser (wie Chrome und Safari) */
+  .board-column::-webkit-scrollbar {
+    height: 4px;
+    border-radius: 50%;
+  }
+
+  /* Für die Scroll-Leiste */
+  .board-column::-webkit-scrollbar-thumb {
+    background: rgba(211, 211, 211, 0.715);
+    border-radius: 20px;
   }
 
   .board-column:last-child {
@@ -716,12 +758,63 @@
   .board-column:nth-child(1),
   .board-column:nth-child(2) {
     border: none;
+    padding-bottom: 0;
   }
 
   .distances {
-    margin-left: 2%;
+    padding-left: 2%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .distances {
+    padding-right: 0;
+  }
+  .board-wrapper {
+    gap: 0;
   }
 }
 
 @media (max-width: 600px) {
+  .distances {
+    margin-left: unset;
+    margin-right: unset;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .add-task-btn {
+  }
+  .add-task-btn span {
+    display: none;
+  }
+  .search-task-desktop {
+    display: none;
+  }
+
+  .search-task-mobile {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 2vh;
+  }
+
+  .search-task-mobile input {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+  }
+
+  .task-card {
+    min-width: 35vw;
+    max-width: 35vw;
+  }
+}
+
+@media (max-width: 470px) {
+  .task-card {
+    min-width: 50vw;
+    max-width: 50vw;
+  }
 }
