@@ -115,7 +115,7 @@ function renderContactsHTML() {
                Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
            </button>
            <button class="addContactBtnMobile" onclick="renderAddContactCardInfo()"
-                 <img src="./assets/img/person_add_icon.png" alt="" />
+                 
            </button>
        </div>
    `;
