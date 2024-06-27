@@ -159,12 +159,11 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .assigned-scrollbar::-webkit-scrollbar-track-piece:end {
   background: transparent;
-  margin-bottom: 48px;
 }
 
 .assigned-scrollbar::-webkit-scrollbar-track-piece:start {
   background: transparent;
-  margin-top: 32px;
+  margin-top: 16px;
 }
 
 .assigned-to-contact {
