@@ -97,14 +97,15 @@ function openSignUpHTML() {
            <img src="./assets/img/mail_icon.png" alt="Mail Icon" class="login-input-icons" />
          </div>
          <div class="input-login-field">
-           <input id="password" onmouseover="showPassword()" type="password" name="password" placeholder="Password" required />
-           <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock Icon" />
-         </div>
-         <div class="input-login-field">
-           <input id="confirmPasswordInput" type="password" name="confirmPassword" placeholder="Confirm Password" onfocus="resetPasswordError()" />
-           <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock Icon" />
-           <span id="passwordsDontMatchText"></span>
-         </div>
+  <input id="signupPassword" oninput="updatePasswordVisibilityIcon('signupPassword')" type="password" name="password" placeholder="Password" required />
+  <img id="signupPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('signupPassword')" class="login-input-icons" alt="Lock Icon" />
+</div>
+<div class="input-login-field">
+  <input id="signupConfirmPassword" oninput="updatePasswordVisibilityIcon('signupConfirmPassword')" type="password" name="confirmPassword" placeholder="Confirm Password" required />
+  <img id="signupConfirmPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('signupConfirmPassword')" class="login-input-icons" alt="Lock Icon" />
+  <span id="passwordsDontMatchText"></span>
+</div>
+
          <div class="accept-privacy-policy-form">
            <input required class="accept-icon" type="checkbox" name="acceptPrivacyPolicy" id="acceptPrivacyPolicy" />
            <label for="acceptPrivacyPolicy">I accept the <a href="#" class="privacy-policy-link">Privacy policy</a></label>
@@ -132,19 +133,10 @@ function resetNameError() {
 }
 
 function resetPasswordError() {
-  const confirmPasswordId = document.getElementById('confirmPasswordInput');
+  const confirmPasswordId = document.getElementById('signupConfirmPassword');
   const dontMatchText = document.getElementById('passwordsDontMatchText');
   confirmPasswordId.style.border = "1px solid #ccc";
   dontMatchText.innerHTML = "";
-}
-
-function showPassword() {
-  let password = document.getElementById("password").value;
-  if (!password === "") {
-    password.type = "password"; // Passwort im Klartext anzeigen
-  } else {
-    password.type = "text"; // Passwort wieder verbergen
-  }
 }
 
 function returnPostedData() {
@@ -194,6 +186,8 @@ async function postSignUpData(path, data) {
   return (responseToJSON = await response.json());
 }
 
+
+
 function validateSignUpForm() {
   event.preventDefault();
 
@@ -201,7 +195,7 @@ function validateSignUpForm() {
   const formData = new FormData(form);
   const password = formData.get('password');
   const confirmPassword = formData.get('confirmPassword');
-  const confirmPasswordId = document.getElementById('confirmPasswordInput');
+  const confirmPasswordId = document.getElementById('signupConfirmPassword');
   const dontMatchText = document.getElementById('passwordsDontMatchText');
   const nameInput = formData.get('name');
   const nameInputField = document.getElementsByName('name')[0];
@@ -272,9 +266,11 @@ function openLoginHTML() {
                   <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
                </div>
                <div class="input-login-field">
-                  <input required id="password" type="password" placeholder="Password" />
-                  <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
-               </div>
+  <input id="loginPassword" oninput="updatePasswordVisibilityIcon('loginPassword')" type="password" name="password" placeholder="Password" required />
+  <img id="loginPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('loginPassword')" class="login-input-icons" alt="Lock Icon" />
+</div>
+
+
 
                <div class="remember-me-form">
                   <input class="accept-icon" type="checkbox" name="remember-me" id="" />
@@ -292,6 +288,36 @@ function openLoginHTML() {
 function loginGuest() {
   window.location.href = "summary.html";
 }
+
+function togglePasswordVisibility(inputId) {
+  const passwordInput = document.getElementById(inputId);
+  const passwordToggle = document.getElementById(inputId + 'Toggle');
+
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    passwordToggle.src = './assets/img/visibility.svg'; // Passwort sichtbar machen
+  } else {
+    passwordInput.type = 'password';
+    if (passwordInput.value.length > 0) {
+      passwordToggle.src = './assets/img/visibility_off.svg'; // Passwort verstecken, wenn Text im Input
+    } else {
+      passwordToggle.src = './assets/img/lock_icon.png'; // Passwort verstecken, wenn kein Text im Input
+    }
+  }
+}
+
+
+function updatePasswordVisibilityIcon(inputId) {
+  const passwordInput = document.getElementById(inputId);
+  const passwordToggle = document.getElementById(inputId + 'Toggle');
+
+  if (passwordInput.value.length > 0) {
+    passwordToggle.src = './assets/img/visibility_off.svg'; // Passwort verstecken, wenn Text im Input
+  } else {
+    passwordToggle.src = './assets/img/lock_icon.png'; // Passwort verstecken, wenn kein Text im Input
+  }
+}
+
 
 function generateId() {
   let generatedId;
@@ -373,3 +399,4 @@ function showInvalidCredentialsToast() {
     toast.classList.remove("show");
   }, 2200);
 }
+
