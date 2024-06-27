@@ -116,10 +116,9 @@ function toBoard() {
 document.addEventListener('DOMContentLoaded', function () {
     let greetingElement = document.getElementById('userGreetingsLogIn');
     let greetingElementBigView = document.getElementById('userGreetingsLogInBigView');
-    let isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
     let username = sessionStorage.getItem('name');
 
-    if (isLoggedIn && username) {
+    if (username) {
         greetingElement.innerText = username;
         greetingElementBigView.innerText = username;
     } else {
