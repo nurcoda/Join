@@ -200,15 +200,16 @@ function saveEditedSubtask(i, j) {
 
 function deleteSubtask(i, j) {
   tasks[i].subtasks.splice(j, 1);
-  renderSubtasksAfterEdit(i, j);
+  console.table(tasks[i].subtasks);
+  renderSubtasksAfterEdit(i);
 }
 
-function renderSubtasksAfterEdit(i, j) {
+function renderSubtasksAfterEdit(i) {
   let subtasksList = document.getElementById('subtasksList');
   subtasksList.innerHTML = '';
   for (let j = 0; j < tasks[i].subtasks.length; j++) {
     let subTaskTitle = tasks[i].subtasks[j].subtask_name;
-    subtasksList.innerHTML += renderSubtasksAfterEditHTML(i, j, subTaskTitle);
+    subtasksList.innerHTML += renderSubtasksEditPopUpHTML(i, j, subTaskTitle);
   }
 }
 

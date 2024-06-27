@@ -13,63 +13,58 @@ function openAddTaskPopUp(state) {
 
 // SUBTASKS
 
-function addNewSubtaskAddTasPopUp() {
+function addNewSubtaskAddTaskPopUp() {
   let inputField = document.getElementById('subtasksInput');
   let input = inputField.value;
+  let subtasksListContainer = document.getElementById('subtasksList');
+
+  if (input === '') {
+    return;
+  }
+
   let newSubTask = { 'subtask_name': input, 'subtask_isdone': false };
   addTaskSubtasks.push(newSubTask);
   inputField.value = '';
-  let subtasksListContainer = document.getElementById('subtasksList');
-  subtasksListContainer.innerHTML = `${renderSubtasksEditPopUp()}`;
+  subtasksListContainer.innerHTML = `${renderSubtasksAddTaskPopUp()}`;
 }
 
-function renderSubtasksEditPopUp(i) {
+function renderSubtasksAddTaskPopUp(i) {
   let subtaskList = '';
   for (let i = 0; i < addTaskSubtasks.length; i++) {
     if (addTaskSubtasks[i] && addTaskSubtasks.length > 0) {
       let subTaskTitle = addTaskSubtasks[i].subtask_name;
-      subtaskList += renderSubtasksaddTaskPopUpHTML(i, subTaskTitle);
+      subtaskList += renderSubtasksAddTaskPopUpHTML(i, subTaskTitle);
     }
   }
   return subtaskList;
 }
 
-function editSubtask(i, subTaskTitle) {
+function editSubtaskAddTask(i, subTaskTitle) {
   let subtask = document.getElementById(`subtask${i}`);
   subtask.innerHTML = editSubtaskAddTaskHTML(i, subTaskTitle);
   subtask.style.padding = '2px 0px 2px 0px';
 }
 
-function saveEditedSubtask(i) {
+function saveEditedSubtaskAddTask(i) {
   input = document.getElementById(`onEditSubtaskInput${i}`);
   addTaskSubtasks[i].subtask_name = input.value;
-  renderSubtasksAfterEdit(i);
+  renderSubtasksAfterEditAddTask(i);
 }
 
-function deleteSubtask(i) {
+function deleteSubtaskAddTask(i) {
   addTaskSubtasks.splice(i, 1);
-  renderSubtasksAfterEdit(i);
+  renderSubtasksAfterEditAddTask(i);
 }
 
-function renderSubtasksAfterEdit(i) {
+function renderSubtasksAfterEditAddTask(i) {
   let subtasksList = document.getElementById('subtasksList');
   subtasksList.innerHTML = '';
   if (addTaskSubtasks.length > 0) {
     for (let j = 0; j < addTaskSubtasks.length; j++) {
       let subTaskTitle = addTaskSubtasks[j].subtask_name;
-      subtasksList.innerHTML += renderSubtasksaddTaskPopUpHTML(j, subTaskTitle);
+      subtasksList.innerHTML += renderSubtasksAddTaskPopUpHTML(j, subTaskTitle);
     }
   }
-}
-
-function showEditIcons(event, i) {
-  let icons = document.getElementById(`subtask${i}Icons`);
-  icons.classList.remove('d-none');
-}
-
-function hideEditIcons(i) {
-  let icons = document.getElementById(`subtask${i}Icons`);
-  icons.classList.add('d-none');
 }
 
 async function getInputAddTaskBoard() {
