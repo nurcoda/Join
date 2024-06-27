@@ -256,6 +256,10 @@ h1 {
     }
 }
 
+.fadeOutAnimation {
+    animation: fadeOut 1s ease-out forwards;
+}
+
 /**************************/
 /* Media Querya 
 / Summary                 */
@@ -308,6 +312,12 @@ h1 {
 @media only screen and (max-width: 865px) {
     .content {
         margin-left: 207px;
+    }
+}
+
+@media screen and (min-width: 841px) {
+    .greeting-login-animation-container {
+        display: none;
     }
 }
 

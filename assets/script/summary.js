@@ -1,11 +1,14 @@
 async function initPageSummary() {
     includeHTML();
+    playAnimationOnce();
     tasksInBoardCounter();
     getTimeOfDay();
     await countHighPriorityTasks()
     await getNextDueDate()
 }
 
+// Initial ist die Animation noch nicht abgespielt
+let animationPlayed = false;
 
 // Zähler initialisieren
 let toDoCounter = 0;
@@ -126,3 +129,17 @@ document.addEventListener('DOMContentLoaded', function () {
         greetingElementBigView.innerText = 'Guest';
     }
 });
+
+// const animationContainer = document.querySelector('.greeting-login-animation-container');
+// animationContainer.addEventListener('animationend', () => {
+//     animationContainer.style.display = 'none';
+// });
+
+// Hier setzt Variable auf true, nachdem die Animation abgespielt wurde
+function playAnimationOnce() {
+    if (!animationPlayed) {
+        const loginAnimation = document.getElementById('loginAnimation');
+        loginAnimation.classList.add('fadeOutAnimation');
+        animationPlayed = true;
+    }
+}
