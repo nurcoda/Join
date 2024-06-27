@@ -7,7 +7,9 @@ async function renderContacts() {
 }
 
 function groupAndDisplayContacts() {
-  let sortedContacts = contacts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+  let sortedContacts = contacts.sort((a, b) =>
+    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+  );
   groupContacts(sortedContacts);
 }
 
@@ -211,7 +213,12 @@ function addPersonToContact() {
     updateNewContactData(contact.id);
   } else {
     let nameAffix = getNameAffixAtDoubleUse();
-    let contact = { 'name': name + `(${nameAffix})`, 'email': mail, 'phone': phone, 'id': generateId() };
+    let contact = {
+      'name': name + `(${nameAffix})`,
+      'email': mail,
+      'phone': phone,
+      'id': generateId()
+    };
     contacts.push(contact);
     updateNewContactData(contact.id);
   }
