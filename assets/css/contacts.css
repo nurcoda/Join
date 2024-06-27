@@ -457,7 +457,7 @@
   height: 56px;
   width: 56px;
   position: relative;
-  top: 700px;
+  top: 77vh;
   left: 38%;
   justify-content: center;
   align-items: center;
@@ -467,6 +467,7 @@
   background-image: url(../img/person_add_icon.png);
   background-repeat: no-repeat;
   background-position: center;
+  z-index: 555;
 }
 
 /**************************/
