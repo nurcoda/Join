@@ -114,13 +114,13 @@ function toBoard() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    if (sessionStorage.getItem('loggedIn') === 'true') {
-        if (sessionStorage.getItem('name')) {
-            let username = sessionStorage.getItem('name');
-            let greetingElement = document.getElementById('userGreetingsLogIn');
-            greetingElement.innerText = username;
-        }
-        sessionStorage.removeItem('loggedIn');
+    let greetingElement = document.getElementById('userGreetingsLogIn');
+    let isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
+    let username = sessionStorage.getItem('name');
+
+    if (isLoggedIn && username) {
+        greetingElement.innerText = username;
+    } else {
+        greetingElement.innerText = 'Guest';
     }
 });
-
