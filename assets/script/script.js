@@ -37,5 +37,7 @@ async function showUserLetter() {
   if (sessionStorage.length != 0) {
     currentUserAvatar = sessionStorage.getItem('loggedIn');
     document.getElementById('headerUserIcon').innerHTML = currentUserAvatar;
+  } else {
+    document.getElementById('headerUserIcon').innerHTML = 'G';
   }
 }
