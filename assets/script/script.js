@@ -1,32 +1,32 @@
 async function includeHTML() {
-   let includeElements = document.querySelectorAll("[w3-include-html]");
-   for (let i = 0; i < includeElements.length; i++) {
-      const element = includeElements[i];
-      file = element.getAttribute("w3-include-html"); // "includes/header.html"
-      let resp = await fetch(file);
-      if (resp.ok) {
-         element.innerHTML = await resp.text();
-      } else {
-         element.innerHTML = "Page not found";
-      }
-   }
+  let includeElements = document.querySelectorAll('[w3-include-html]');
+  for (let i = 0; i < includeElements.length; i++) {
+    const element = includeElements[i];
+    file = element.getAttribute('w3-include-html'); // "includes/header.html"
+    let resp = await fetch(file);
+    if (resp.ok) {
+      element.innerHTML = await resp.text();
+    } else {
+      element.innerHTML = 'Page not found';
+    }
+  }
+  showUserLetter();
 }
 
-document.addEventListener("click", (event) => {
-   let headerNav = document.getElementById("headerNav");
-   let headerUserIcon = document.getElementById("headerUserIcon");
-   if (event.target == headerUserIcon) {
-      headerNav.classList.toggle("d-none");
-   } else if (event.target != headerNav) {
-      headerNav.classList.add("d-none");
-   }
+document.addEventListener('click', (event) => {
+  let headerNav = document.getElementById('headerNav');
+  let headerUserIcon = document.getElementById('headerUserIcon');
+  if (event.target == headerUserIcon) {
+    headerNav.classList.toggle('d-none');
+  } else if (event.target != headerNav) {
+    headerNav.classList.add('d-none');
+  }
 });
 
 function checkUser(user) {
-   console.log('Angemeldeter Benutzer:', user.name);
-   // document.getElementById('headerUserIcon').innerHTML = user.first_two_letters;
+  console.log('Angemeldeter Benutzer:', user.name);
+  // document.getElementById('headerUserIcon').innerHTML = user.first_two_letters;
 }
-
 
 // function showUserLetter(){
 //    currentUserAvatar = sessionStorage.getItem("loggedIn");
@@ -34,7 +34,6 @@ function checkUser(user) {
 //    }
 
 async function showUserLetter() {
-   await includeHTML();
-   currentUserAvatar = sessionStorage.getItem('loggedIn');
-   document.getElementById('headerUserIcon').innerHTML = currentUserAvatar;
- }
+  currentUserAvatar = sessionStorage.getItem('loggedIn');
+  document.getElementById('headerUserIcon').innerHTML = currentUserAvatar;
+}
