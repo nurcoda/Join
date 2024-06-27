@@ -283,15 +283,15 @@ function openLoginHTML() {
 
                <div class="login-guestlogin-btn-wrapper">
                   <button class="login-btn btns-login">Log in</button>
-                  <div id="guest-link" class="guest-login-btn btns-login">Guest Log in</div>
+                  <div id="guest-link" onclick="loginGuest()" class="guest-login-btn btns-login">Guest Log in</div>
                </div>
             </form>
     `;
 }
 
-document.getElementById("guest-link").addEventListener("click", function () {
-  window.location.href = "./summary.html";
-});
+function loginGuest() {
+  window.location.href = "summary.html";
+}
 
 function generateId() {
   let generatedId;
