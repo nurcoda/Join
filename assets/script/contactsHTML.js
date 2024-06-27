@@ -111,7 +111,7 @@ function groupContactsHTML(i, avatar, contact) {
 function renderContactsHTML() {
   return `
        <div class="buttonWrapper">
-           <button class="addContactBtn" onclick="renderAddContactCardInfo(); openPopUP()">
+           <button class="addContactBtn" onclick="renderAddContactCardInfo();">
                Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
            </button>
            <button class="addContactBtnMobile" onclick="renderAddContactCardInfo()"
