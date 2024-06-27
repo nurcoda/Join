@@ -52,6 +52,7 @@
   gap: 35px;
   position: relative;
   padding: 15px 24px 15px 24px;
+  word-break: break-all;
 }
 
 .contact-letter {
@@ -457,12 +458,13 @@
   width: 56px;
   position: relative;
   top: 700px;
-  left: 200px;
+  left: 38%;
   justify-content: center;
   align-items: center;
   background-color: rgba(42, 54, 71, 1);
   display: none;
   cursor: pointer;
+  background-image: url(./assets/img/person_add_icon.png);
 }
 
 /**************************/
@@ -821,7 +823,8 @@
 
   .contact {
     padding-left: 0;
-  }
+    padding-bottom: 20px;
+}
 }
 
 @media only screen and (max-width: 1020px) {
@@ -870,7 +873,13 @@
   }
 
   .headAndContact {
+    width: 60%;
+    height: 82vh;
+  }
+
+  .contactList{
     width: 40%;
+    height: 82vh;
   }
 
   .headline {
@@ -881,6 +890,8 @@
     height: 90px;
     width: 90px;
     font-size: 52px;
+    top: 60px;
+    position: relative;
   }
 
   .contact-card-name-container {
@@ -888,7 +899,7 @@
   }
 
   .content {
-    margin: 0;
+    margin-left: 0;
   }
 
   .addContactBtn {
