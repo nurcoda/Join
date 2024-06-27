@@ -34,6 +34,8 @@ function checkUser(user) {
 //    }
 
 async function showUserLetter() {
-  currentUserAvatar = sessionStorage.getItem('loggedIn');
-  document.getElementById('headerUserIcon').innerHTML = currentUserAvatar;
+  if (sessionStorage.length != 0) {
+    currentUserAvatar = sessionStorage.getItem('loggedIn');
+    document.getElementById('headerUserIcon').innerHTML = currentUserAvatar;
+  }
 }
