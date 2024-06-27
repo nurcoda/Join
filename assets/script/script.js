@@ -18,7 +18,7 @@ document.addEventListener('click', (event) => {
   let headerUserIcon = document.getElementById('headerUserIcon');
   if (event.target == headerUserIcon) {
     headerNav.classList.toggle('d-none');
-  } else if (event.target != headerNav) {
+  } else if (event.target != headerNav && headerNav) {
     headerNav.classList.add('d-none');
   }
 });

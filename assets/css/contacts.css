@@ -898,6 +898,35 @@
 }
 
 @media only screen and (max-width: 840px) {
+  .add-contact-pop-up {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.popup-logo-headline-wrapper {
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 0;
+    padding: 20px;
+}
+
+.contact-formular {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.add-contact-buttons-wrapper {
+    flex-direction: column;
+}
+
+.add-contact-form-btn {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
   header {
     z-index: 10;
   }
@@ -948,10 +977,6 @@
   .contactCard {
     width: unset;
   }
-
-  .popup-logo-headline-wrapper {
-    border-top-right-radius: 0px;
-  }
 }
 
 @media only screen and (max-width: 770px) {
@@ -995,6 +1020,67 @@
   .addContactBtnMobile{
     left: 35%;
   }
+
+  #cancelBtn {
+    display: none;
+  }
+
+  .add-contact-pop-up {
+    height: 85vh;
+  }
+
+  .profile-img-add-contact {
+    height: 108px;
+    margin-top: -80px;
+    margin-bottom: 12px;
+  }
+
+  .contact-formular {
+    flex-direction: column;
+    margin-top: 8px;
+  }
+
+  .add-contact-form-input {
+    height: 12px;
+  }
+
+  .add-contact-pop-up {
+    flex-direction: column;
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
+}
+
+.popup-logo-headline-wrapper {
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 0;
+    padding: 20px;
+}
+
+.contact-formular {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.add-contact-buttons-wrapper {
+    flex-direction: column;
+}
+
+.add-contact-form-btn {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.cancel-btn {
+  display: none;
+}
+
+.add-contact-form-input {
+  height: 12px;
+}
+
 }
 
 @media only screen and (max-width: 550px) {
