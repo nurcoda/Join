@@ -41,6 +41,11 @@ function renderEditTaskHTML(i) {
            />
            <!-- pop up content -->
            <form action="" onsubmit="getEditedTask(${i});" class="add-task-form edit-task-form">
+           
+           <label>State</label>
+         <div class="states-list" id="statesList">
+        ${renderStateListEditTask(i)}
+       </div>
                <div class="add-task-left">
                    <label>Title</label>
                    <input id="taskName" class="title-input" type="text" value="${
@@ -88,7 +93,7 @@ function renderEditTaskHTML(i) {
                        <ul id="subtasksList">
                            ${renderSubtasksEditPopUp(i)}
                        </ul>
-                  
+                 
                </div>
                <button class="ok-btn-edit-task" type="submit">Ok<img src="./assets/img/checkmark_white.png" alt=""></button>
            </form>
@@ -134,6 +139,7 @@ function renderTaskPopUpHTML(i) {
                     <div class="popup-subtask-headline">Subtasks</div>
                   ${popUpRenderSubTasks(i)}
                  </div>
+                  
                  <div class="popup-delete-edit-btn-wrapper">
                     <div class="popup-delete-btn popup-btn" onclick="deleteTask(${tasks[i].id})">
                        <div class="popup-delete-icon"></div>
@@ -402,19 +408,4 @@ function renderAddTaskPopUpHTML() {
             </div>
         </div>
    `;
-}
-
-{
-  /* <div class="state-change-btn" onclick="openStatesList()" id="changeStateBtn">${
-  tasks[i].state
-}
-
-<img src="./assets/img/edit_pen_icon.png" alt="">
-         <div class="states-list d-none" id="statesList">
-         <div class="state-list-item">todo</div>
-          <div class="state-list-item">in progress</div>
-           <div class="state-list-item">await feedback</div>
-         <div class="state-list-item">done</div>
-       </div>
-</div> */
 }
