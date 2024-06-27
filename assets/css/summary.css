@@ -65,6 +65,7 @@ h1 {
     background-color: #2a3647;
     color: white;
     transform: scale(1.1);
+    cursor: pointer;
 
     .taskNumber {
         color: white;
@@ -111,6 +112,7 @@ h1 {
     background-color: #2a3647;
     color: white;
     transform: translateY(5%);
+    cursor: pointer;
 
     .taskNumber {
         color: white;
@@ -135,6 +137,7 @@ h1 {
     background-color: #2a3647;
     color: white;
     transform: scale(1.1);
+    cursor: pointer;
 
     .taskNumber {
         color: white;
@@ -212,7 +215,7 @@ h1 {
     font-size: 16px;
 }
 
-.greeting-login-animation-container {
+#loginAnimation {
     position: fixed;
     top: 0;
     left: 0;

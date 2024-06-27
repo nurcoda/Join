@@ -129,27 +129,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// const animationContainer = document.querySelector('.greeting-login-animation-container');
-// animationContainer.addEventListener('animationend', () => {
-//     animationContainer.style.display = 'none';
-// });
-
-// Hier setzt Variable auf true, nachdem die Animation abgespielt wurde
-// function playAnimationOnce() {
-//     if (!animationPlayed) {
-//         const loginAnimation = document.getElementById('loginAnimation');
-//         loginAnimation.classList.add('fadeOutAnimation');
-//         animationPlayed = true;
-//     }
-// }
 document.addEventListener('DOMContentLoaded', function () {
     const loginAnimation = document.getElementById('loginAnimation');
 
+    // Animation starten
+    loginAnimation.classList.add('fadeOutAnimation');
+
     // Eventlistener für das Ende der Animation hinzufügen
     loginAnimation.addEventListener('animationend', function () {
-        loginAnimation.classList.add('finished');
-    });
-
-    // Animation starten, indem die Klasse hinzugefügt wird
-    loginAnimation.classList.add('fadeOutAnimation');
+        // Element ausblenden, nachdem die Animation beendet ist
+        loginAnimation.style.display = 'none';
+    }, { once: true }); // Eventlistener nur einmal ausführen
 });
