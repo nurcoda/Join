@@ -266,7 +266,6 @@ h1 {
 
 .fadeOutAnimation.finished {
     display: none;
-    /* Element nach Abschluss der Animation ausblenden */
 }
 
 /**************************/

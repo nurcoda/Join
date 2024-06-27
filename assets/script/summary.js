@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Animation starten
     loginAnimation.classList.add('fadeOutAnimation');
+    loginAnimation.classList.add('fadeOutAnimation.finished');
 
     // Eventlistener für das Ende der Animation hinzufügen
     loginAnimation.addEventListener('animationend', function () {
