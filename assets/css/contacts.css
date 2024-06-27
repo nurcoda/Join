@@ -1029,9 +1029,9 @@
     height: 85vh;
   }
 
-  #profileImgAddContact {
-    margin-top: -88px;
-    height: 120px;
+  .profile-img-add-contact {
+    height: 108px;
+    margin-top: -80px;
     margin-bottom: 12px;
   }
 
@@ -1044,9 +1044,43 @@
     height: 12px;
   }
 
-  .popup-logo-headline-wrapper {
-    height: 48%;
-  }
+  .add-contact-pop-up {
+    flex-direction: column;
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
+}
+
+.popup-logo-headline-wrapper {
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 0;
+    padding: 20px;
+}
+
+.contact-formular {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.add-contact-buttons-wrapper {
+    flex-direction: column;
+}
+
+.add-contact-form-btn {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.cancel-btn {
+  display: none;
+}
+
+.add-contact-form-input {
+  height: 12px;
+}
+
 }
 
 @media only screen and (max-width: 550px) {
