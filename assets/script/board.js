@@ -14,9 +14,9 @@ let awaitFeedbackCounter = 0;
 let doneCounter = 0;
 let assignedContacts = [];
 
-initBoard();
+loadBoard();
 
-async function initBoard() {
+async function loadBoard() {
   await loadData();
   renderTasksIntoColumns();
 }
@@ -94,9 +94,9 @@ function checkSubTasksTemplate(i, calculatedWidth, subTasksDone) {
 
 function renderAssignedUserToHTML(i) {
   let assignedUserTemplate = '';
-  let assignedUsers = tasks[i]?.assigned_user;
-
-  if (Array.isArray(assignedUsers) && assignedUsers.length > 0) {
+  let assignedUsers = [];
+  assignedUsers = tasks[i].assigned_user;
+  if (tasks[i].assigned_user && assignedUsers.length > 0) {
     assignedUsers.forEach((user) => {
       let assignedUserBackgroundColor = getColorAssignedUser(user.name);
       assignedUserTemplate += `<div class="task-member-icon" style="background-color: ${assignedUserBackgroundColor}">${user.first_two_letters}</div>`;
@@ -110,8 +110,9 @@ function getColorAssignedUser(name) {
   let assignedUser = contacts.find((contact) =>
     contact.name.toLowerCase().includes(name.toLowerCase())
   );
-
-  return assignedUser.color;
+  if (assignedUser) {
+    return assignedUser.color;
+  }
 }
 
 function countSubTask(i) {
@@ -189,7 +190,7 @@ async function getEditedTask(i) {
   tasks[i].description = editedDescription;
   tasks[i].due_date = await formatDueDateAfterEdit(editedDueDate);
   tasks[i].assigned_user = assignedContacts;
-
+  console.table(tasks[i]);
   editTaskPopUpBackground.innerHTML = renderTaskPopUpHTML(i);
   await updateTaskData(i);
   await loadData();
@@ -274,7 +275,7 @@ async function deleteTask(id) {
   let taskToDeleteIndex = tasks.findIndex((task) => task.id === id);
   tasks.splice(taskToDeleteIndex, 1);
   await deleteTaskData(id);
-  renderTasksIntoColumns();
+  loadData();
   editTaskPopUpBackground.classList.add('d-none');
 }
 
@@ -331,7 +332,7 @@ async function popUpCheckmarkIsDone(taskIndex, subtaskIndex) {
   await updateTaskData(taskIndex);
   renderTaskPopUp(tasks[taskIndex].id);
   await loadData();
-  await renderTasksIntoColumns();
+  await loadBoard();
 }
 
 function renderTaskPopUp(id) {
@@ -376,27 +377,30 @@ function closeAddTaskPopUp() {
   if (event.target === addTaskPopUpBackground || event.target === closePopUpBtn) {
     addTaskPopUpBackground.classList.add('d-none');
   }
+  loadBoard();
 }
 
 function closeAddTaskPopUpCross() {
   addTaskPopUpBackground.classList.add('d-none');
+  loadBoard();
 }
 
 function openEditTaskPopUp(id) {
   editTaskPopUpBackground.classList.remove('d-none');
   renderTaskPopUp(id);
+  loadBoard();
 }
 
 function closeEditTaskPopUp() {
   if (event.target === editTaskPopUpBackground || event.target === closePopUpBtn) {
-    renderTasksIntoColumns();
     editTaskPopUpBackground.classList.add('d-none');
+    loadBoard();
   }
 }
 
 function closePopUpOnClick() {
-  renderTasksIntoColumns();
   editTaskPopUpBackground.classList.add('d-none');
+  loadBoard();
 }
 
 addTaskPopUpBackground.addEventListener('click', closeAddTaskPopUp);
