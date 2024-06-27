@@ -817,6 +817,13 @@
 /* Media Querya 
    ContactList       */
 /**************************/
+@media only screen and (max-width: 1180px){
+.avatar-big{
+  height: 100px;
+  width: 100px;
+}
+}
+
 
 @media only screen and (max-width: 1060px) {
   .headline {
@@ -832,6 +839,11 @@
 @media only screen and (max-width: 1020px) {
   .headAndContact {
     width: 400px;
+  }
+
+  .contact-card-name-container{
+    gap: 0;
+    flex-direction: column;
   }
 
   .headline {
@@ -904,12 +916,17 @@
     margin-left: 0;
   }
 
+  .buttonWrapper{
+    position:absolute;
+  }
+
   .addContactBtn {
     display: none;
   }
 
   .addContactBtnMobile {
     display: flex;
+    left: 14%;
   }
 
   .contactCard {
@@ -952,6 +969,10 @@
 
   .contactList {
     width: 100%;
+  }
+
+  .addContactBtnMobile{
+    left: 35%;
   }
 }
 
