@@ -464,7 +464,7 @@
   background-color: rgba(42, 54, 71, 1);
   display: none;
   cursor: pointer;
-  background-image: url(../img/person_add_icon.png);
+  background-image: url(../img/person_add.svg);
   background-repeat: no-repeat;
   background-position: center;
   z-index: 555;
