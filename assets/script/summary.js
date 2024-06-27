@@ -1,5 +1,5 @@
 async function initPageSummary() {
-  includeHTML();
+  await includeHTML();
   tasksInBoardCounter();
   getTimeOfDay();
   await countHighPriorityTasks();
