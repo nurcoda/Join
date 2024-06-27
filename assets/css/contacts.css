@@ -764,9 +764,6 @@
 }
 
 @media only screen and (max-width: 690px) {
-  .avatar-big {
-  }
-
   .avatar {
     color: #fff;
     display: flex;
@@ -817,10 +814,38 @@
 /* Media Querya 
    ContactList       */
 /**************************/
+@media only screen and (max-width: 1180px){
+.avatar-big{
+  height: 100px;
+  width: 100px;
+  font-size: 40px;
+}
+}
+@media only screen and (max-width: 1180px){
+.avatar-big {
+  height: 90px;
+  width: 90px;
+  font-size: 40px;
+};
+
+.contact-card-name{
+  font-size: 40px;
+}
+}
+
+@media only screen and (max-width: 1100px){
+  .contact-card-name {
+  font-size: 44px;}
+}
+
 
 @media only screen and (max-width: 1060px) {
   .headline {
     padding-left: 20px;
+  }
+
+  .contact-card-name{
+    font-size: 35px;
   }
 
   .contact {
@@ -832,6 +857,11 @@
 @media only screen and (max-width: 1020px) {
   .headAndContact {
     width: 400px;
+  }
+
+  .contact-card-name-container{
+    gap: 0;
+    flex-direction: column;
   }
 
   .headline {
@@ -847,9 +877,6 @@
 }
 
 @media only screen and (max-width: 980px) {
-  .contact-letter {
-  }
-
   .contact-card-big-container {
     padding-left: 24px;
   }
@@ -904,12 +931,17 @@
     margin-left: 0;
   }
 
+  .buttonWrapper{
+    position:absolute;
+  }
+
   .addContactBtn {
     display: none;
   }
 
   .addContactBtnMobile {
     display: flex;
+    left: 14%;
   }
 
   .contactCard {
@@ -952,6 +984,10 @@
 
   .contactList {
     width: 100%;
+  }
+
+  .addContactBtnMobile{
+    left: 35%;
   }
 }
 

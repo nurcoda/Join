@@ -266,12 +266,10 @@ function openLoginHTML() {
                   <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
                </div>
                <div class="input-login-field">
-  <input id="loginPassword" oninput="updatePasswordVisibilityIcon('loginPassword')" type="password" name="password" placeholder="Password" required />
-  <img id="loginPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('loginPassword')" class="login-input-icons" alt="Lock Icon" />
-</div>
-
-
-
+                <input id="loginPassword" oninput="updatePasswordVisibilityIcon('loginPassword')" type="password" name="password" placeholder="Password" required />
+                <img id="loginPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('loginPassword')" class="login-input-icons" alt="Lock Icon" />
+                <span id="loginPasswordWrongText" class="login-error-message">Wrong password! Try again.</span>
+               </div>
                <div class="remember-me-form">
                   <input class="accept-icon" type="checkbox" name="remember-me" id="" />
                   <label for="remember-me">Remember me</label>
@@ -362,26 +360,49 @@ function generateId() {
 function loginUser() {
   event.preventDefault();
   let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
+  let password = document.getElementById("loginPassword").value;
+  const passwordInput = document.getElementById("loginPassword");
+  const passwordWrongText = document.getElementById("loginPasswordWrongText");
 
   // Benutzer im Array finden
   const Currentuser = user.find((item) => item.email === email);
 
   if (Currentuser) {
-    console.log("Die E-Mail-Adresse ist korrekt.");
     if (Currentuser.password === password) {
-      console.log("Beides korrekt");
       sessionStorage.setItem("loggedIn", Currentuser.first_two_letters);
       sessionStorage.setItem("name", Currentuser.name);
       checkUser(Currentuser); // Stellen Sie sicher, dass checkUser definiert ist
       window.location.href = "./summary.html";
     } else {
       showInvalidCredentialsToast();
+      passwordWrongText.classList.add("show");
+      passwordInput.style.border = "1px solid #FF001F"; // Setzt den roten Rand bei falschem Passwort
     }
   } else {
     showInvalidCredentialsToast();
+    passwordWrongText.classList.add("show");
+    passwordInput.style.border = "1px solid #FF001F"; // Setzt den roten Rand bei falscher E-Mail
   }
+
+  // Setzt die Fehleranzeige zurück, wenn auf das Passwortfeld geklickt wird
+  passwordInput.addEventListener("focus", resetLoginPasswordError);
 }
+
+function showInvalidCredentialsToast() {
+  toast.classList.add("show");
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
+}
+
+function resetLoginPasswordError() {
+  const passwordInput = document.getElementById("loginPassword");
+  const passwordWrongText = document.getElementById("loginPasswordWrongText");
+
+  passwordInput.style.border = "1px solid #ccc"; // Setzt den Rand zurück
+  passwordWrongText.classList.remove("show"); // Versteckt den Fehlermeldungstext
+}
+
 
 //   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
 // Anmeldedaten stimmen übere
@@ -393,10 +414,4 @@ const toast = document.getElementById("toast");
 
 // Annahme: Zeige die Toast-Nachricht an, wenn die Anmeldeinformationen falsch sind
 // Beispiel-Logik:
-function showInvalidCredentialsToast() {
-  toast.classList.add("show");
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2200);
-}
 
