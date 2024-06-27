@@ -100,6 +100,7 @@
 .input-login-field {
    width: 401px;
    position: relative;
+}
 
    input {
       padding: 12px;
@@ -114,7 +115,7 @@
       color: #d1d1d1;
       font-size: 20px;
    }
-}
+
 
 .login-input-icons {
    position: absolute;
@@ -229,6 +230,9 @@
    h1 {
       margin: 0;
    }
+   margin-top: 42px;
+   margin-left: 24px;
+   margin-right: 24px;
 }
 
 .goback-arrow {
@@ -455,5 +459,17 @@
 
    .remember-me-form {
       width: 220px;
+   }
+}
+
+@media (max-width: 550px) {
+   .headline-login-wrapper h1 {
+      font-size: 48px;
+   }
+}
+
+@media (max-width: 500px) {
+   .goback-arrow {
+      left: 24px;
    }
 }
