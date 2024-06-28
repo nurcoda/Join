@@ -1,0 +1,232 @@
+/* responsive */
+
+
+@media (max-width: 1330px) {
+    .add-task-form {
+      width: 942px;
+    }
+  }
+  
+  @media (max-width: 1270px) {
+    .add-task-form {
+      width: 918px;
+    }
+  }
+  
+  @media (max-width: 1240px) {
+    .add-task-form {
+     flex-direction: column;
+     width: 100%;
+     align-items: center;
+    }
+  
+    .main-container {
+      margin-left: 232px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .add-task-left {
+      width: 442px;
+    }
+  
+  
+    #categoryDropdown {
+      top: 893px;
+    }
+  
+  
+    .clear-button {
+      display: none;
+    }
+  
+    #isRequiredTextMobile {
+      display: flex!important;
+      align-items: center;
+      height: 56px;
+    }
+  
+    .clear-and-task-button {
+      justify-content: space-between;
+    }
+  
+    h2 {
+      width: 442px;
+    }
+  
+    
+  
+    #isRequiredText {
+      display: none;
+    }
+  
+    #assignedContacts {
+      height: fit-content;
+      min-height: 16px;
+      max-height: 120px;
+      padding-top: 4px;
+      padding-bottom: 16px;
+    }
+  
+    .seperator {
+      display: none;
+    }
+  }
+  
+  
+  @media (max-width: 840px) {
+    .main-container {
+      margin-bottom: 180px;
+      margin-left: 0;
+    }
+  
+    .clear-and-task-button {
+      position: fixed;
+      display: flex;
+      justify-content: space-between;
+      bottom: 78px;
+      z-index: 25;
+      padding-bottom: 24px;
+      padding-top: 24px;
+      margin-bottom: 0px;
+      width: 442px;
+      background-color: #f6f7f9;
+    }
+  
+    #subtaskList {
+      padding-bottom: 12px;
+    }
+  
+    #toastDiv {
+      left: 32%;
+    }
+  }
+  
+  @media (max-width: 560px) {
+    .task-modal-content {
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+  
+  }
+  
+  @media (max-width: 465px) {
+    #toastDiv {
+      left: 20%;
+    }
+  
+    .title-input,
+    .date-input {
+      width: 326px;
+    }
+  
+    .add-task-left,
+    .add-task-right,
+    .clear-and-task-button,
+    h2 {
+      width: 352px;
+    }
+  
+    #assignedContacts,
+    .red-required-text {
+      width: 350px;
+    }
+  
+    .description-text {
+      width: 326px;
+    }
+  
+    .assigned-to-div {
+      width: 338px;
+    }
+  
+    .category-div {
+      width: 326px;
+    }
+    
+    #categoryDropdown,
+    .assigned-dropdown {
+      width: 350px;
+    }
+  
+    #categoryDropdown {
+      padding-top: 9px;
+    }
+  
+    .subtasks-div {
+      width: 340px;
+    }
+  
+    .assigned-to-contact {
+      width: 306px;
+    }
+  
+    .prio-buttons button {
+      width: 108px;
+      height: 41px;
+      font-size: 16px;
+    }
+  
+    .category-option {
+      width: 326px;
+    }
+  
+  }
+  
+  @media (max-width: 380px) {
+    #toastDiv {
+      left: 10%;
+    }
+  
+    .title-input,
+  .date-input {
+    width: 266px;
+  }
+  
+  .add-task-left,
+  .add-task-right,
+  .clear-and-task-button,
+  h2 {
+    width: 292px;
+  }
+  
+  #assignedContacts,
+  .red-required-text {
+    width: 290px;
+  }
+  
+  .description-text {
+    width: 266px;
+  }
+  
+  .assigned-to-div {
+    width: 278px;
+  }
+  
+  .category-div {
+    width: 266px;
+  }
+  
+  #categoryDropdown,
+  .assigned-dropdown {
+    width: 290px;
+  }
+  
+  .subtasks-div {
+    width: 280px;
+  }
+  
+  .assigned-to-contact {
+    width: 246px;
+  }
+  
+  .prio-buttons button {
+    width: 90px;
+    font-size: 14px;
+  }
+  
+  .category-option {
+    width: 266px;
+  }
+  
+  }
