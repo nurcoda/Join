@@ -76,11 +76,19 @@ function renderContactCardInfo(i) {
   if (!phone.startsWith('+')) {
     phone = '+' + phone;
   }
-
+if(window.innerWidth>590){
   contactCardBigContainer.innerHTML = renderContactCardInfoHTML(i, avatar, phone);
   document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp);
   document.querySelector('.delete-icon-wrapper').addEventListener('click', () => deleteContact(i));
+}else{
+  renderMobileContact(i, avatar, phone);
+  document.getElementById('contactCardBigContainerMobil').classList.remove('d-none');
+  // contactCardBigContainerMobil.innerHTML = renderContactBigCardMobil(i, avatar, phone);
+  document.querySelector('.edit-icon-wrapper').addEventListener('click', openPopUp);
+  document.querySelector('.delete-icon-wrapper').addEventListener('click', () => deleteContact(i));
+};
 }
+  
 
 // ##################
 //   DELETE CONTACT
@@ -404,4 +412,9 @@ function closePopUp() {
   if (event.target === closePopUpBtn) {
     popUpBackground.classList.add('d-none');
   }
+}
+
+function renderMobileContact(i, avatar, phone){
+  openPopUp();
+  popUpBackground.innerHTML = renderContactBigCardMobil(i, avatar, phone);
 }

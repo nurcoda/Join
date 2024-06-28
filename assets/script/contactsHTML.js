@@ -120,3 +120,37 @@ function renderContactsHTML() {
        </div>
    `;
 }
+
+//---------------------------------New Stuff-------------------------------
+
+function renderContactBigCardMobil(i, avatar, phone){
+   return `<div class="contact-card-name-container-mobile">
+    <div class="contact-pop-up" id="contactPopUp">
+           <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
+   <div class="contactContent">
+   <div class="contactHead">
+      <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
+      <div class="nameAndFunctions">
+      <div class="contact-card-name">${contacts[i].name}</div>
+       <div class="edit-delete-container">
+         <span class="edit-icon-wrapper" onclick="renderEditContactCardInfo(${i})" >
+            <div class="edit-icon"></div><span class="edit-name">Edit</span>
+         </span>
+         <span class="delete-icon-wrapper">
+            <div class="trash-icon"></div><span class="delete-name">Delete</span>
+         </span>
+       </div>
+      </div>
+   </div>
+   <div id="contact-card-info-container" class="contact-card-info-container">
+   <div class="headline-contact-information">Contact Information</div>
+   <div class="contact-card-info-wrapper">
+      <div class="contact-info-email-headline">Email</div>
+      <div class="contact-info-email">${contacts[i].email}</div>
+      <div class="contact-info-phone-headline">Phone</div>
+      <div class="contact-info-phone">${phone}</div>
+   </div>
+</div>
+</div>
+</div>`;
+}

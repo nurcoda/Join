@@ -65,6 +65,24 @@
   font-weight: 100;
 }
 
+.contactHead{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 66px;
+}
+
+.contactContent{
+  display:flex;
+  flex-direction: column;
+  height: 40vh;
+}
+
+.nameAndFunctions{
+  display: flex;
+  flex-direction: column;
+}
+
 .letter {
   font-weight: 400;
   font-size: 20px;
@@ -215,6 +233,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
+
 }
 
 .contact-card-info-container-mobile {
@@ -951,6 +971,7 @@
     font-size: 52px;
     top: 60px;
     position: relative;
+    margin-right: 20px;
   }
 
   .contact-card-name-container {
