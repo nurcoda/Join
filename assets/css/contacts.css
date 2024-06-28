@@ -1019,6 +1019,13 @@
   }
 }
 
+@media only screen and (min-width: 590px){
+  .contact-card-name-container-mobile{
+    display: none;
+  }
+}
+
+
 @media only screen and (max-width: 590px) {
   .contact-letter {
     justify-content: flex-start;
@@ -1101,7 +1108,6 @@
 .add-contact-form-input {
   height: 12px;
 }
-
 }
 
 @media only screen and (max-width: 550px) {
