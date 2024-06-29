@@ -1,9 +1,9 @@
 async function initPageSummary() {
-  await includeHTML();
   tasksInBoardCounter();
   getTimeOfDay();
   await countHighPriorityTasks();
   await getNextDueDate();
+  await includeHTML();
 }
 
 // Initial ist die Animation noch nicht abgespielt
