@@ -226,21 +226,21 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    animation: fadeOut 5s ease forwards;
+    animation: fadeOut 2s ease forwards;
 }
 
 .welcome-greeting-text {
     font-size: 24px;
     color: rgb(13, 13, 13);
     text-align: center;
-    animation: fadeOut 5s ease;
+    animation: fadeOut 2s ease;
 }
 
 .user-nick-login-greetings {
     font-size: 47px;
     color: #28abe2;
     margin: 0;
-    animation: fadeOut 5s ease;
+    animation: fadeOut 2s ease;
 }
 
 .hidden {
@@ -253,15 +253,20 @@ h1 {
         opacity: 1;
     }
 
+    80% {
+        background-color: rgba(254, 253, 253, 1);
+        opacity: 1;
+    }
+
+    95% {
+        background-color: rgba(254, 253, 253, 0.2);
+        opacity: 0.2;
+    }
+
     100% {
         background-color: rgba(0, 0, 0, 0);
         opacity: 0;
     }
-}
-
-.fadeOutAnimation {
-    animation: fadeOut 1s ease-out forwards;
-    animation-play-state: paused;
 }
 
 .fadeOutAnimation.finished {
