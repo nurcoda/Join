@@ -336,6 +336,10 @@
    position: fixed;
    margin-top: 4px;
  }
+
+ .accept-icon {
+   border: 0!important;
+ }
  
  @keyframes fadeOut {
    0% {
@@ -394,6 +398,26 @@
    .to-sign-up-container {
       right: 42px;
    }
+
+   .signup-content-wrapper {
+      height: 480px!important;
+   }
+
+   .input-login {
+      gap: 16px!important;
+   }
+
+   .login-content-wrapper {
+      height: 450px;
+   }
+
+   .headline-login-wrapper h1 {
+      font-size: 48px;
+   }
+   
+   .goback-arrow {
+      left: 24px;
+   }
 }
 
 @media (max-width: 700px) {
@@ -413,7 +437,6 @@
 @media (max-width: 580px) {
    .login-content-wrapper {
       width: 450px;
-      height: 580px;
    }
 
    .login-guestlogin-btn-wrapper {
@@ -427,9 +450,15 @@
 
    .btns-login {
       width: 180px;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding-left: 0;
       padding-right: 0;
+      padding: 0;
+      width: 160px;
+      height: 32px;
+      font-size: 20px;
    }
 
    .input-login-field {
@@ -438,6 +467,45 @@
 
    .remember-me-form {
       width: 260px;
+   }
+
+   @keyframes logoAnimation {
+      0% {
+         top: 30%;
+         left: 25%;
+         width: 274px;
+         height: 334px;
+      }
+      50% {
+         top: 30%;
+         left: 25%;
+         width: 274px;
+         height: 334px;
+      }
+      100% {
+         top: 24px;
+         left: 24px;
+         width: 60x;
+         height: 74px;
+      }
+   }
+
+   .login-join-logo {
+      top: 24px;
+      left: 24px;
+      width: 60px;
+   }
+}
+
+@media (max-width: 550px) {
+   .headline-login-wrapper h1 {
+      font-size: 48px;
+   }
+}
+
+@media (max-width: 500px) {
+   .goback-arrow {
+      left: 24px;
    }
 }
 
@@ -460,16 +528,89 @@
    .remember-me-form {
       width: 220px;
    }
-}
 
-@media (max-width: 550px) {
-   .headline-login-wrapper h1 {
-      font-size: 48px;
+   
+   @keyframes logoAnimation {
+      0% {
+         top: 30%;
+         left: 20%;
+         width: 219px;
+         height: 267px;
+      }
+      50% {
+         top: 30%;
+         left: 20%;
+         width: 219px;
+         height: 267px;
+      }
+      100% {
+         top: 24px;
+         left: 24px;
+         width: 60x;
+         height: 74px;
+      }
    }
 }
 
-@media (max-width: 500px) {
-   .goback-arrow {
-      left: 24px;
+@media (max-width: 360px) {
+   
+   @keyframes logoAnimation {
+      0% {
+         top: 30%;
+         left: 16%;
+         width: 219px;
+         height: 267px;
+      }
+      50% {
+         top: 30%;
+         left: 16%;
+         width: 219px;
+         height: 267px;
+      }
+      100% {
+         top: 24px;
+         left: 24px;
+         width: 60x;
+         height: 74px;
+      }
+   }
+}
+
+
+@media (max-height: 820px) {
+   /* .login-content-wrapper {
+      height: 500px;
+   } */
+
+   .login-guestlogin-btn-wrapper {
+      gap: 12px;
+   }
+
+   .signup-content-wrapper {
+      height: 520px;
+   }
+
+   h1 {
+      font-size: 52px;
+      margin-top: 24px;
+   }
+
+   .input-login {
+      gap: 18px;
+   }
+}
+
+@media (max-height: 715px) {
+   .login-content-wrapper {
+      height: 400px;
+      gap: 20px;
+   }
+   h1 {
+      font-size: 48px;
+      margin-top: 12px;
+   }
+   
+   .input-login {
+      gap: 16px;
    }
 }
