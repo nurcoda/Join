@@ -30,16 +30,26 @@ function signUpSucces() {
   }, 1500); // 2000 Millisekunden = 2 Sekunden
 }
 
-function closeSignUpSucces() {}
-
 function openSignUpHTML() {
-  signUpContainer.innerHTML = `
-       <div class="headline-login-wrapper">
-           <img src="./assets/img/goback_arrow_icon.png" alt="" class="goback-arrow" onclick="openLogin()" />
-           <h1>Sign-up</h1>
-           <div class="underline-headline"></div>
-       </div>
-       <form id="SignUpData" class="input-login" onsubmit="validateSignUpForm(); return false;" novalidate>
+  signUpContainer.innerHTML = openSignUpHTMLHead() + 
+  openSignUpHTMLForm();
+  // Event listeners for resetting error states
+  document.getElementsByName('name')[0].addEventListener('focus', resetNameError);
+  document.getElementsByName('email')[0].addEventListener('focus', resetEmailError);
+  document.getElementsByName('confirmPassword')[0].addEventListener('focus', resetPasswordError);
+  document.getElementById('acceptPrivacyPolicy').addEventListener('change', resetPrivacyPolicyError);
+}
+
+function openSignUpHTMLHead(){
+  return `<div class="headline-login-wrapper">
+  <img src="./assets/img/goback_arrow_icon.png" alt="" class="goback-arrow" onclick="openLogin()" />
+  <h1>Sign-up</h1>
+  <div class="underline-headline"></div>
+</div>`;
+}
+
+function openSignUpHTMLForm(){
+  return ` <form id="SignUpData" class="input-login" onsubmit="validateSignUpForm(); return false;" novalidate>
          <div class="input-login-field">
            <input required type="text" name="name" placeholder="Name" onfocus="resetNameError()" />
            <img src="./assets/img/person_icon.png" alt="Person Icon" class="login-input-icons" />
@@ -66,16 +76,8 @@ function openSignUpHTML() {
          <div class="login-guestlogin-btn-wrapper">
            <button class="signup-btn-in-form btns-login">Sign up</button>
          </div>
-       </form>
-   `;
-
-  // Event listeners for resetting error states
-  document.getElementsByName('name')[0].addEventListener('focus', resetNameError);
-  document.getElementsByName('email')[0].addEventListener('focus', resetEmailError);
-  document.getElementsByName('confirmPassword')[0].addEventListener('focus', resetPasswordError);
-  document.getElementById('acceptPrivacyPolicy').addEventListener('change', resetPrivacyPolicyError);
+       </form>`
 }
-
 // Funktionen zum Zurücksetzen der Fehlerzustände
 function resetNameError() {
   const nameInputField = document.getElementsByName('name')[0];
@@ -138,8 +140,6 @@ async function postSignUpData(path, data) {
   if (returnPostedData === "") {
     return;
   }
-  console.log(path);
-  console.log(data);
   let response = await fetch(BASE_URL + path + ".json", {
     method: "PUT",
     header: {
@@ -234,33 +234,39 @@ function newContactColor() {
 }
 
 function openLoginHTML() {
-  loginContainer.innerHTML = `
-    <div class="headline-login-wrapper">
+  loginContainer.innerHTML = openLoginHTMLWrapper() + openLoginHTMLForm();
+  }
+
+function openLoginHTMLWrapper(){
+  return ` <div class="headline-login-wrapper">
        <h1>Log in</h1>
        <div class="underline-headline"></div>
-    </div>
-    <form id="input-login" class="input-login" onsubmit="loginUser(); return false;" novalidate>
-       <div class="input-login-field">
-          <input required id="email" type="email" placeholder="Email" onfocus="resetLoginEmailError()" />
-          <img src="./assets/img/mail_icon.png" alt="Mail Icon" class="login-input-icons" />
-          <span id="loginEmailErrorMessage" class="error-message"></span>
-       </div>
-       <div class="input-login-field">
-        <input id="loginPassword" oninput="updatePasswordVisibilityIcon('loginPassword')" type="password" name="password" placeholder="Password" required />
-        <img id="loginPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('loginPassword')" class="login-input-icons" alt="Lock Icon" />
-        <span id="loginPasswordWrongText" class="login-error-message">Wrong password! Try again.</span>
-       </div>
-       <div class="remember-me-form">
-          <input class="accept-icon" type="checkbox" name="remember-me" id="" />
-          <label for="remember-me">Remember me</label>
-       </div>
-       <div class="login-guestlogin-btn-wrapper">
-          <button class="login-btn btns-login">Log in</button>
-          <div id="guest-link" onclick="loginGuest()" class="guest-login-btn btns-login">Guest Log in</div>
-       </div>
-    </form>
-  `;
+    </div>`;
 }
+
+function openLoginHTMLForm(){
+return ` <form id="input-login" class="input-login" onsubmit="loginUser(); return false;" novalidate>
+<div class="input-login-field">
+   <input required id="email" type="email" placeholder="Email" onfocus="resetLoginEmailError()" />
+   <img src="./assets/img/mail_icon.png" alt="Mail Icon" class="login-input-icons" />
+   <span id="loginEmailErrorMessage" class="error-message"></span>
+</div>
+<div class="input-login-field">
+ <input id="loginPassword" oninput="updatePasswordVisibilityIcon('loginPassword')" type="password" name="password" placeholder="Password" required />
+ <img id="loginPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('loginPassword')" class="login-input-icons" alt="Lock Icon" />
+ <span id="loginPasswordWrongText" class="login-error-message">Wrong password! Try again.</span>
+</div>
+<div class="remember-me-form">
+   <input class="accept-icon" type="checkbox" name="remember-me" id="" />
+   <label for="remember-me">Remember me</label>
+</div>
+<div class="login-guestlogin-btn-wrapper">
+   <button class="login-btn btns-login">Log in</button>
+   <div id="guest-link" onclick="loginGuest()" class="guest-login-btn btns-login">Guest Log in</div>
+</div>
+</form>`;
+}
+
 
 function loginGuest() {
   window.location.href = "summary.html";
@@ -361,31 +367,6 @@ function resetLoginEmailError() {
   emailInputField.style.border = "1px solid #ccc";
   emailErrorMessage.innerHTML = "";
 }
-
-// function loginUser() {
-//   let email = document.getElementById('email').value;
-//   let password = document.getElementById('password').value;
-
-//   // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
-//   const emailExists = user.some((item) => item.email === document.getElementById('email').value);
-
-//   if (emailExists) {
-//     console.log('Die E-Mail-Adresse ist korrekt.');
-//     const passwordExists = user.some((item) => item.password === document.getElementById('password').value);
-//     if (passwordExists) {
-//       console.log('Beides korrekt');
-//         sessionStorage.setItem('status', 'loggedIn');
-//         checkUser(user);
-//     window.location.href = './summary.html';
-//     } else {
-//       alert('Passwort ist nicht korrekt.');
-//       document.getElementById('input-login').reset();
-//     }
-//   } else {
-//     alert('Bitte Registriere dich unter SignUP.');
-//     document.getElementById('input-login').reset();
-//   }
-// }
 
 function deleteSession() {
   sessionStorage.clear();
