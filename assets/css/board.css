@@ -353,6 +353,22 @@
   .assigned-to-div {
     width: 100%;
   }
+
+  .red-required-text {
+    width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+  .title-input,
+  .date-input {
+    display: flex !important;
+  }
+
+  .add-task-popup-board {
+    width: 90%;
+    padding: 4%;
+  }
 }
 
 /* Existing Task Pop Up */
@@ -986,7 +1002,7 @@
 
 .title-input,
 .date-input {
-  display: unset !important;
+  display: unset;
 }
 
 @media (max-width: 1024px) {
