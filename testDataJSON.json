@@ -44,6 +44,33 @@
          "phone": "1234567894",
          "first_two_letters": "GM",
          "color": "#2F4F4F"
+      },
+      {
+         "name": "Mailo Mittelstädt",
+         "id": 739670,
+         "email": "mailo.mittelaedt@googlemail.com",
+         "password": "1122",
+         "phone": "",
+         "first_two_letters": "MM",
+         "color": "#BA55D3"
+      },
+      {
+         "name": "Alexander Hähnlein",
+         "id": 401465,
+         "email": "cueslsic.alex@gmx.de",
+         "password": "123",
+         "phone": "",
+         "first_two_letters": "AH",
+         "color": "#40E0D0"
+      },
+      {
+         "name": "Alexander Hähnlein",
+         "id": 401465,
+         "email": "cueslsic.alex@gmx.de",
+         "password": "123",
+         "phone": "",
+         "first_two_letters": "AH",
+         "color": "#40E0D0"
       }
    ],
    "contacts": [
