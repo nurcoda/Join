@@ -23,7 +23,7 @@ function renderEditContactCardInfoHTML(i, avatar) {
                  <div class="edit-contact-buttons-wrapper">
                     <div class="edit-delete-btn edit-contact-form-btn-delete" onclick="closePopUpByBtn() ; deleteContact(${i})">Delete</div>
                     <div class="edit-create-contact-btn edit-contact-form-btn"
-                       onclick="editSave(${i})">Save</div>
+                       onclick="validateForm(${i})">Save</div>  
                  </div>
               </form>
            </div>

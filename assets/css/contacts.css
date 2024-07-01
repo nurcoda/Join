@@ -70,6 +70,7 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 66px;
+  flex-wrap: wrap;
 }
 
 .contactContent{
@@ -224,7 +225,7 @@
 }
 
 .contact-card-name-container-mobile {
-  height: 60vh;
+  height: 75%;
   width: 75%;
   background-color: white;
   border-radius: 20px;
@@ -234,7 +235,9 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
-
+  padding-left: 6px;
+  padding-right: 6px;
+  flex-wrap: wrap;
 }
 
 .contact-card-info-container-mobile {

@@ -418,3 +418,13 @@ function renderMobileContact(i, avatar, phone){
   openPopUp();
   popUpBackground.innerHTML = renderContactBigCardMobil(i, avatar, phone);
 }
+
+function validateForm(i) {
+  let x = document.getElementById('edit-input-field-mail').value;
+  if (x == "") {
+    alert("Email must be filled out");
+    return false;
+  }else{
+    editSave(i)
+  }
+}
