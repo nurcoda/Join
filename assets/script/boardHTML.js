@@ -1,32 +1,41 @@
 function renderTasksIntoColumnsHTML(i) {
-  return `  <div class="task-card" draggable="true" ondragstart="startDragging(${
-    tasks[i].id
-  })" onclick="openEditTaskPopUp(${tasks[i].id})">
-                    
-                       <div class="${
-                         tasks[i].category === 'User Story' || tasks[i].category === 'User story'
-                           ? 'category-user-story'
-                           : 'category-technical-task'
-                       } task-category">${tasks[i].category} </div>
-                    
-                       <div class="task-headline">${tasks[i].name}</div>
-                       <div class="task-comment">${tasks[i].description}</div>
-                       <div class="subtask-counter-wrapper">
-                          <div class="subtask-progressbar">
-                             <!-- needs to switch with subtasks -->
-                            ${renderSubTasksToHTML(i)}
-                       </div>
-                       <div class="member-priority-wrapper">
-                          <div class="task-member">
-                             ${renderAssignedUserToHTML(i)}
-                          </div>
-                          <div class="priority-icon">
-                             <img src="./assets/img/prio_${
-                               tasks[i].priority === 'high' ? 'urgent' : tasks[i].priority
-                             }.png" alt="" />
-                          </div>
-                       </div>
-                    </div>`;
+  return `
+    <div class="task-card" draggable="true" ondragstart="startDragging(${
+      tasks[i].id
+    })" onclick="openEditTaskPopUp(event, ${tasks[i].id})" id="taskCard${tasks[i].id}">
+      <div class="${
+        tasks[i].category === 'User Story' || tasks[i].category === 'User story'
+          ? 'category-user-story'
+          : 'category-technical-task'
+      } task-category">
+        ${tasks[i].category}
+      </div>
+      <img src="./assets/img/three_dots_icon.png" alt="three dots" class="change-state-icon" onclick="toggleChangeStateDropdown(${
+        tasks[i].id
+      })" id="stateDropdownIcon${tasks[i].id}">
+      <div class="state-dropdown d-none" id="stateDropdown${tasks[i].id}">
+        <div class="state-dropdown-element" onclick="setNewState(${i}, 'todo')">To do</div>
+        <div class="state-dropdown-element"  onclick="setNewState(${i}, 'inprogress')">In progress</div>
+        <div class="state-dropdown-element"  onclick="setNewState(${i}, 'awaitfeedback')">Await feedback</div>
+        <div class="state-dropdown-element"  onclick="setNewState(${i}, 'done')">Done</div>
+      </div>
+      <div class="task-headline">${tasks[i].name}</div>
+      <div class="task-comment">${tasks[i].description}</div>
+      <div class="subtask-counter-wrapper">
+        <div class="subtask-progressbar">
+          <!-- needs to switch with subtasks -->
+          ${renderSubTasksToHTML(i)}
+        </div>
+        <div class="member-priority-wrapper">
+          <div class="task-member">
+            ${renderAssignedUserToHTML(i)}
+          </div>
+          <div class="priority-icon">
+            <img src="./assets/img/prio_${tasks[i].priority === 'high' ? 'urgent' : tasks[i].priority}.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>`;
 }
 
 function renderEditTaskHTML(i) {
@@ -41,26 +50,15 @@ function renderEditTaskHTML(i) {
            />
            <!-- pop up content -->
            <form action="" onsubmit="getEditedTask(${i});" class="add-task-form edit-task-form">
-           
-           <label>State</label>
-         <div class="states-list" id="statesList">
-        ${renderStateListEditTask(i)}
-       </div>
                <div class="add-task-left">
                    <label>Title</label>
-                   <input id="taskName" class="title-input" type="text" value="${
-                     tasks[i].name
-                   }" required />
+                   <input id="taskName" class="title-input" type="text" value="${tasks[i].name}" required />
                    
                    <label class="margin-top-16px">Description</label>
-                   <textarea id="taskDescription" class="description-text">${
-                     tasks[i].description
-                   }</textarea>
+                   <textarea id="taskDescription" class="description-text">${tasks[i].description}</textarea>
                    
                    <label for="dueDate">Due date</label>
-                   <input id="dueDate" class="date-input" type="date" value="${formateDueDateEditPopUp(
-                     i
-                   )}" required />
+                   <input id="dueDate" class="date-input" type="date" value="${formateDueDateEditPopUp(i)}" required />
                </div>
                
                <div class="add-task-right">
@@ -120,13 +118,9 @@ function renderTaskPopUpHTML(i) {
                  } task-category">${tasks[i].category}</div>
                  <div class="existing-task-popup-headline">${tasks[i].name}</div>
                  <div class="existing-task-popup-description">${tasks[i].description}</div>
-                 <div class="existing-task-popup-date">Due date: <span id="popUpDate">${
-                   tasks[i].due_date
-                 }</span></div>
+                 <div class="existing-task-popup-date">Due date: <span id="popUpDate">${tasks[i].due_date}</span></div>
                  <div class="existing-task-popup-priority">
-                    Priority: <span id="popUpDate">${
-                      tasks[i].priority
-                    } <img src="./assets/img/prio_${
+                    Priority: <span id="popUpDate">${tasks[i].priority} <img src="./assets/img/prio_${
     tasks[i].priority === 'high' ? 'urgent' : tasks[i].priority
   }.png" alt="" />
                  </span>
@@ -209,16 +203,12 @@ function renderContactsDropdownPopUpEditHTML(j, imgSrc, isAssigned) {
     isAssigned ? 'marked' : ''
   }" onclick="markContactEditPopUp(${contacts[j].id}, ${j})">
                      <div class="contact-img-name">
-                         <div class="two-letters-img" style="background-color: ${
-                           contacts[j].color
-                         }; color: white;">
+                         <div class="two-letters-img" style="background-color: ${contacts[j].color}; color: white;">
                              ${contacts[j].first_two_letters}
                          </div>
                          <span>${contacts[j].name}</span>
                      </div>
-                     <img id="contactCheckBtn${
-                       contacts[j].id
-                     }" class="check-btn-img" src="${imgSrc}" alt="" />
+                     <img id="contactCheckBtn${contacts[j].id}" class="check-btn-img" src="${imgSrc}" alt="" />
                  </div>`;
 }
 

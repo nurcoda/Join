@@ -379,10 +379,24 @@ function closeAddTaskPopUpCross() {
   loadBoard();
 }
 
-function openEditTaskPopUp(id) {
+function openEditTaskPopUp(event, id) {
+  let stateDropdownIcon = document.getElementById('stateDropdownIcon' + id);
+  let stateDropdown = document.getElementById('stateDropdown' + id);
+  let stateDropdownChild = stateDropdown.children;
+  let isChild = false;
+
+  for (let i = 0; i < stateDropdownChild.length; i++) {
+    if (event.target === stateDropdownChild[i]) {
+      isChild = true;
+      break;
+    }
+  }
+  if (event.target === stateDropdownIcon || event.target === stateDropdown || isChild) {
+    return;
+  }
   editTaskPopUpBackground.classList.remove('d-none');
   renderTaskPopUp(id);
-  loadBoard();
+  // loadBoard();
 }
 
 function closeEditTaskPopUp() {
@@ -427,32 +441,38 @@ function allowDrop(ev) {
 //      CHANGE STATE
 // ############################
 
+function toggleChangeStateDropdown(id) {
+  let changeStateDropdown = document.getElementById('stateDropdown' + id);
+  changeStateDropdown.classList.toggle('d-none');
+}
+
 async function setNewState(i, newState) {
   tasks[i].state = newState;
   await updateTaskData(i);
-  renderTasksIntoColumns();
-  renderStateListAfterEdit(i);
+  setTimeout(() => {
+    renderTasksIntoColumns();
+  }, 1);
 }
 
-function renderStateListEditTask(i) {
-  let actualState = tasks[i].state;
-  return `
-    <div class="state-list-item ${
-      actualState === 'todo' ? 'state-list-item-active' : ''
-    }" onclick="setNewState(${i}, 'todo')">todo</div>
-    <div class="state-list-item ${
-      actualState === 'inprogress' ? 'state-list-item-active' : ''
-    }" onclick="setNewState(${i}, 'inprogress')">in progress</div>
-    <div class="state-list-item ${
-      actualState === 'awaitfeedback' ? 'state-list-item-active' : ''
-    }" onclick="setNewState(${i}, 'awaitfeedback')">await feedback</div>
-    <div class="state-list-item ${
-      actualState === 'done' ? 'state-list-item-active' : ''
-    }" onclick="setNewState(${i}, 'done')">done</div>
-  `;
-}
+// function renderStateListEditTask(i) {
+//   let actualState = tasks[i].state;
+//   return `
+//     <div class="state-list-item ${
+//       actualState === 'todo' ? 'state-list-item-active' : ''
+//     }" onclick="setNewState(${i}, 'todo')">todo</div>
+//     <div class="state-list-item ${
+//       actualState === 'inprogress' ? 'state-list-item-active' : ''
+//     }" onclick="setNewState(${i}, 'inprogress')">in progress</div>
+//     <div class="state-list-item ${
+//       actualState === 'awaitfeedback' ? 'state-list-item-active' : ''
+//     }" onclick="setNewState(${i}, 'awaitfeedback')">await feedback</div>
+//     <div class="state-list-item ${
+//       actualState === 'done' ? 'state-list-item-active' : ''
+//     }" onclick="setNewState(${i}, 'done')">done</div>
+//   `;
+// }
 
-function renderStateListAfterEdit(i) {
-  let statesList = document.getElementById('statesList');
-  statesList.innerHTML = renderStateListEditTask(i);
-}
+// function renderStateListAfterEdit(i) {
+//   let statesList = document.getElementById('statesList');
+//   statesList.innerHTML = renderStateListEditTask(i);
+// }
