@@ -1,9 +1,9 @@
 async function initPageSummary() {
-  tasksInBoardCounter();
-  getTimeOfDay();
-  await countHighPriorityTasks();
-  await getNextDueDate();
-  await includeHTML();
+    tasksInBoardCounter();
+    getTimeOfDay();
+    await countHighPriorityTasks();
+    await getNextDueDate();
+    await includeHTML();
 }
 
 // Initial ist die Animation noch nicht abgespielt
@@ -16,135 +16,158 @@ let awaitFeedbackCounter = 0;
 let doneCounter = 0;
 
 async function tasksInBoardCounter() {
-  const BASE_URL = 'https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/';
-  let response = await fetch(BASE_URL + '.json');
-  let responseAsJson = await response.json();
+    const BASE_URL = 'https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/';
+    let response = await fetch(BASE_URL + '.json');
+    let responseAsJson = await response.json();
 
-  // Laden der Daten
-  let tasks = Object.values(responseAsJson.tasks);
+    // Laden der Daten
+    let tasks = Object.values(responseAsJson.tasks);
 
-  // Zählen der Aufgaben und Klassifizieren nach Zustand
-  tasks.forEach((task) => {
-    switch (task.state) {
-      case 'todo':
-        toDoCounter++;
-        break;
-      case 'inprogress':
-        inProgressCounter++;
-        break;
-      case 'awaitfeedback':
-        awaitFeedbackCounter++;
-        break;
-      case 'done':
-        doneCounter++;
-        break;
-      default:
-        console.error(`Unknown state: ${task.state}`);
-    }
-  });
+    // Zählen der Aufgaben und Klassifizieren nach Zustand
+    tasks.forEach((task) => {
+        switch (task.state) {
+            case 'todo':
+                toDoCounter++;
+                break;
+            case 'inprogress':
+                inProgressCounter++;
+                break;
+            case 'awaitfeedback':
+                awaitFeedbackCounter++;
+                break;
+            case 'done':
+                doneCounter++;
+                break;
+            default:
+                console.error(`Unknown state: ${task.state}`);
+        }
+    });
 
-  // Anzeige der Anzahl der Aufgaben auf der Webseite
-  let totalTasks = tasks.length;
-  let totalTasksElement = document.getElementById('totalTasks');
-  totalTasksElement.innerHTML = totalTasks;
+    // Anzeige der Anzahl der Aufgaben auf der Webseite
+    let totalTasks = tasks.length;
+    let totalTasksElement = document.getElementById('totalTasks');
+    totalTasksElement.innerHTML = totalTasks;
 
-  let taskToDoElement = document.getElementById('toDoTasks');
-  taskToDoElement.innerHTML = toDoCounter;
+    let taskToDoElement = document.getElementById('toDoTasks');
+    taskToDoElement.innerHTML = toDoCounter;
 
-  let inProgressElement = document.getElementById('progressTasks');
-  inProgressElement.innerHTML = inProgressCounter;
+    let inProgressElement = document.getElementById('progressTasks');
+    inProgressElement.innerHTML = inProgressCounter;
 
-  let feedbackTasksElement = document.getElementById('feedbackTasks');
-  feedbackTasksElement.innerHTML = awaitFeedbackCounter;
+    let feedbackTasksElement = document.getElementById('feedbackTasks');
+    feedbackTasksElement.innerHTML = awaitFeedbackCounter;
 
-  let doneTasksElement = document.getElementById('doneTasks');
-  doneTasksElement.innerHTML = doneCounter;
+    let doneTasksElement = document.getElementById('doneTasks');
+    doneTasksElement.innerHTML = doneCounter;
 }
 
 function getTimeOfDay() {
-  const now = new Date();
-  const hour = now.getHours();
+    const now = new Date();
+    const hour = now.getHours();
 
-  if (hour >= 5 && hour < 12) {
-    return 'Good morning,';
-  } else if (hour >= 12 && hour < 17) {
-    return 'Good afternoon,';
-  } else {
-    return 'Good evening,';
-  }
+    if (hour >= 5 && hour < 12) {
+        return 'Good morning,';
+    } else if (hour >= 12 && hour < 17) {
+        return 'Good afternoon,';
+    } else {
+        return 'Good evening,';
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const greetingText = document.getElementById('greetingText');
-  const logInWelcomeGreetingText = document.getElementById('logInWelcomeGreetingText');
-  greetingText.textContent = getTimeOfDay();
-  logInWelcomeGreetingText.textContent = getTimeOfDay();
+    const greetingText = document.getElementById('greetingText');
+    const logInWelcomeGreetingText = document.getElementById('logInWelcomeGreetingText');
+    greetingText.textContent = getTimeOfDay();
+    logInWelcomeGreetingText.textContent = getTimeOfDay();
 });
 
 async function getNextDueDate() {
-  let nextDueDate = null;
-  let nextTask = null;
+    let nextDueDate = null;
+    let nextTask = null;
 
-  tasks.forEach((task) => {
-    const [day, month, year] = task.due_date.split('/').map(Number);
-    const dueDate = new Date(year, month - 1, day);
+    tasks.forEach((task) => {
+        const [day, month, year] = task.due_date.split('/').map(Number);
+        const dueDate = new Date(year, month - 1, day);
 
-    if (!nextDueDate || dueDate < nextDueDate) {
-      nextDueDate = dueDate;
-      nextTask = task;
-    }
-  });
+        if (!nextDueDate || dueDate < nextDueDate) {
+            nextDueDate = dueDate;
+            nextTask = task;
+        }
+    });
 
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  const formattedDate = nextDueDate.toLocaleDateString('en-US', options);
-  document.getElementById('deadlineDate').innerHTML = formattedDate;
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = nextDueDate.toLocaleDateString('en-US', options);
+    document.getElementById('deadlineDate').innerHTML = formattedDate;
 }
 
 async function countHighPriorityTasks() {
-  const BASE_URL = 'https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/';
-  const response = await fetch(BASE_URL + '.json');
-  const responseAsJson = await response.json();
+    const BASE_URL = 'https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/';
+    const response = await fetch(BASE_URL + '.json');
+    const responseAsJson = await response.json();
 
-  const highPriorityTasks = Object.values(responseAsJson.tasks).filter(
-    (task) => task.priority === 'high' || task.priority === 'urgent'
-  );
+    const highPriorityTasks = Object.values(responseAsJson.tasks).filter(
+        (task) => task.priority === 'high' || task.priority === 'urgent'
+    );
 
-  const priorityHighTasksElement = document.getElementById('priorityHighTasks');
-  priorityHighTasksElement.innerHTML = `${highPriorityTasks.length}`;
+    const priorityHighTasksElement = document.getElementById('priorityHighTasks');
+    priorityHighTasksElement.innerHTML = `${highPriorityTasks.length}`;
 }
 
 function toBoard() {
-  window.location.href = './board.html';
+    window.location.href = './board.html';
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  let greetingElement = document.getElementById('userGreetingsLogIn');
-  let greetingElementBigView = document.getElementById('userGreetingsLogInBigView');
-  let username = sessionStorage.getItem('name');
+    let greetingElement = document.getElementById('userGreetingsLogIn');
+    let greetingElementBigView = document.getElementById('userGreetingsLogInBigView');
+    let username = sessionStorage.getItem('name');
 
-  if (username) {
-    greetingElement.innerText = username;
-    greetingElementBigView.innerText = username;
-  } else {
-    greetingElement.innerText = 'Guest';
-    greetingElementBigView.innerText = 'Guest';
-  }
+    if (username) {
+        greetingElement.innerText = username;
+        greetingElementBigView.innerText = username;
+    } else {
+        greetingElement.innerText = 'Guest';
+        greetingElementBigView.innerText = 'Guest';
+    }
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  const loginAnimation = document.getElementById('loginAnimation');
+    const loginAnimation = document.getElementById('loginAnimation');
 
-  // Animation starten
-  loginAnimation.classList.add('fadeOutAnimation');
-  loginAnimation.classList.add('fadeOutAnimation.finished');
+    // Animation starten
+    loginAnimation.classList.add('fadeOutAnimation');
+    loginAnimation.classList.add('fadeOutAnimation.finished');
 
-  // Eventlistener für das Ende der Animation hinzufügen
-  loginAnimation.addEventListener(
-    'animationend',
-    function () {
-      // Element ausblenden, nachdem die Animation beendet ist
-      loginAnimation.style.display = 'none';
-    },
-    { once: true }
-  ); // Eventlistener nur einmal ausführen
+    // Eventlistener für das Ende der Animation hinzufügen
+    loginAnimation.addEventListener(
+        'animationend',
+        function () {
+            // Element ausblenden, nachdem die Animation beendet ist
+            loginAnimation.style.display = 'none';
+        },
+        { once: true }
+    ); // Eventlistener nur einmal ausführen
 });
+
+function welcomeTextMobile() {
+    let mainContent = document.getElementById('loginAnimation');
+    const name = sessionStorage.getItem('name') ?? 'Guest';
+
+    if (window.matchMedia('(max-width: 840px)').matches) {
+        mainContent.innerHTML = `
+       <div class="greeting-login-animation-container fadeOutAnimation" id="loginAnimation">
+      <h2 class="welcome-greeting-text" id="logInWelcomeGreetingText">
+         </p>
+         <h2 class="user-nick-login-greetings" id="userGreetingsLogIn">
+            </p>
+   </div>`;
+
+        setTimeout(() => {
+            initPageSummary(true);
+        }, 1500);
+    } else {
+        setTimeout(() => {
+            initPageSummary(false);
+        }, 200);
+    }
+};
