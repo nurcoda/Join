@@ -107,9 +107,7 @@ function renderAssignedUserToHTML(i) {
 }
 
 function getColorAssignedUser(name) {
-  let assignedUser = contacts.find((contact) =>
-    contact.name.toLowerCase().includes(name.toLowerCase())
-  );
+  let assignedUser = contacts.find((contact) => contact.name.toLowerCase().includes(name.toLowerCase()));
   if (assignedUser) {
     return assignedUser.color;
   }
@@ -277,6 +275,7 @@ async function deleteTask(id) {
   await deleteTaskData(id);
   loadData();
   editTaskPopUpBackground.classList.add('d-none');
+  renderTasksIntoColumns();
 }
 
 async function deleteTaskData(id) {
@@ -346,12 +345,7 @@ function renderTaskPopUp(id) {
 
 function popUpRenderSubTasks(i) {
   let subTasksTemplate = '';
-  if (
-    tasks[i] &&
-    tasks[i].subtasks &&
-    Array.isArray(tasks[i].subtasks) &&
-    tasks[i].subtasks.length > 0
-  ) {
+  if (tasks[i] && tasks[i].subtasks && Array.isArray(tasks[i].subtasks) && tasks[i].subtasks.length > 0) {
     let subTaskDone;
     tasks[i].subtasks.forEach((subtask, index) => {
       subtask.subtask_isdone ? (subTaskDone = 'task-done-state-checked') : (subTaskDone = '');
