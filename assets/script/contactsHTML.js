@@ -156,5 +156,5 @@ return `<div class="contact-card-name-container-mobile">
            </span>
          </div>
         </div>
-     </div>`
+     </div>`;
 }
