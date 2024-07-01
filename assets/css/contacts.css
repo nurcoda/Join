@@ -1131,10 +1131,6 @@
   header {
     justify-content: flex-end;
   }
-
-  .contactList {
-    padding-left: 15px;
-  }
 }
 
 @media only screen and (max-width: 380px) {
