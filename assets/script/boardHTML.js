@@ -58,9 +58,7 @@ function renderEditTaskHTML(i) {
                    <textarea id="taskDescription" class="description-text">${tasks[i].description}</textarea>
                    
                    <label for="dueDate">Due date</label>
-                   <input id="dueDate" class="date-input-edit-popup" type="date" value="${formateDueDateEditPopUp(
-                     i
-                   )}" required />
+                   <input id="dueDate" class="date-input" type="date" value="${formateDueDateEditPopUp(i)}" required />
                </div>
                
                <div class="add-task-right">
