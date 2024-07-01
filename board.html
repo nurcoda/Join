@@ -27,7 +27,7 @@
         <div class="search-add-wrapper">
           <input
             type="search"
-            oninput="findTaskInBoard()"
+            oninput="handleKeyup(event)"
             name="search-task"
             class="search-task search-task-desktop"
             id="searchTask"
@@ -42,8 +42,8 @@
       <div class="search-task-mobile">
         <input
           type="search"
-          oninput="findTaskInBoard()"
           name="search-task"
+          onkeyup="handleKeyup(event)"
           class="search-task search-task-mobile"
           id="searchTask"
           placeholder="find Task"
@@ -53,11 +53,7 @@
       <!--  -->
 
       <!-- ADD TASK POP UP -->
-      <div
-        class="add-task-popup-board-container d-none"
-        id="addTaskPopUpBackground"
-        onclick="closeAddTaskPopUp()"
-      >
+      <div class="add-task-popup-board-container d-none" id="addTaskPopUpBackground" onclick="closeAddTaskPopUp()">
         <div class="add-task-popup-board" id="addTaskPopUp">
           <img
             src="./assets/img/close_big_icon.png"
@@ -83,12 +79,8 @@
           <!-- pop up content -->
           <div class="category-user-story task-category">User Story</div>
           <div class="existing-task-popup-headline">Kochwelt Page & Recipe Recommender</div>
-          <div class="existing-task-popup-description">
-            Build start page with recipe recommendation
-          </div>
-          <div class="existing-task-popup-date">
-            Due date: <span id="popUpDate">10/05/2024</span>
-          </div>
+          <div class="existing-task-popup-description">Build start page with recipe recommendation</div>
+          <div class="existing-task-popup-date">Due date: <span id="popUpDate">10/05/2024</span></div>
           <div class="existing-task-popup-priority">
             Priority:
             <span id="popUpDate">Medium <img src="./assets/img/prio_medium.png" alt="" /></span>

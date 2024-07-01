@@ -102,9 +102,7 @@ function removeContactFromAssignedEditPopUp(contactId) {
   let index = assignedContacts.findIndex((c) => c.id === contactId);
   if (index !== -1) {
     assignedContacts.splice(index, 1);
-    document
-      .querySelector(`#assignedContacts .assigned-contacts-img[data-id="${contactId}"]`)
-      .remove();
+    document.querySelector(`#assignedContacts .assigned-contacts-img[data-id="${contactId}"]`).remove();
   }
 }
 
@@ -226,14 +224,18 @@ function hideEditIcons(i) {
 // __________________________________________________________________;
 // Find Task
 
+function handleKeyup(event) {
+  let searchInput = ('onkeyup:', event.target.value);
+  findTaskInBoard(searchInput);
+}
+
 let matchedTasks = [];
 let matchedTasksIndex = [];
 
-function findTaskInBoard() {
+function findTaskInBoard(searchInput) {
   matchedTasks = [];
   matchedTasksIndex = [];
-  let searchInput = document.getElementById('searchTask').value.trim().toLowerCase();
-
+  searchInput = searchInput.trim().toLowerCase();
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].name.toLowerCase().includes(searchInput)) {
       matchedTasks.push(tasks[i]);
