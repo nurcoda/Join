@@ -32,53 +32,6 @@ function signUpSucces() {
 
 function closeSignUpSucces() {}
 
-// function openSignUpHTML() {
-//    signUpContainer.innerHTML = `
-//      <div class="headline-login-wrapper">
-//                <img src="./assets/img/goback_arrow_icon.png" alt="" class="goback-arrow" onclick="openLogin()" />
-//                <h1>Sign-up</h1>
-//                <div class="underline-headline"></div>
-//             </div>
-//             <form id="SignUpData" class="input-login">
-//                <div class="input-login-field">
-//                   <input type="text" placeholder="Name" />
-//                   <img src="./assets/img/person_icon.png" alt="Mail-Icon" class="login-input-icons" />
-//                </div>
-//                <div class="input-login-field">
-//                   <input type="email" placeholder="Email" />
-//                   <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
-//                </div>
-//                <div class="input-login-field">
-//                   <input type="password" placeholder="Password" />
-//                   <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
-//                </div>
-//                <div class="input-login-field">
-//                   <input type="password" placeholder="Confirm Password" />
-//                   <img src="./assets/img/lock_icon.png" class="login-input-icons" alt="Lock-Icon" />
-//                </div>
-
-//                <div class="accept-privacy-policy-form">
-//                   <input class="accept-icon" type="checkbox" name="accept-privacy-policy" id="" />
-//                   <label for="accept-privacy-policy"
-//                      >I accept the <a href="" class="privacy-policy-link">Privacy policy</a></label
-//                   >
-//                </div>
-
-//                <div class="login-guestlogin-btn-wrapper">
-//                   <div class="signup-btn-in-form btns-login" onclick="signUpSucces() postSignUpData("users",returnPostedData())">Sign up</div>
-//                </div>
-//             </form>
-//     `;
-// }
-
-// function returnPostedData(email, name, password){
-//    let email = document.getElementById('SignUpData').elements[0];
-//    let name = document.getElementById('SignUpData').elements[1];
-//    let password = document.getElementById('SignUpData').elements[2];
-
-//    // return {"email": email, "name": name, "password": password};
-// }
-
 function openSignUpHTML() {
   signUpContainer.innerHTML = `
        <div class="headline-login-wrapper">
@@ -86,26 +39,26 @@ function openSignUpHTML() {
            <h1>Sign-up</h1>
            <div class="underline-headline"></div>
        </div>
-       <form id="SignUpData" class="input-login" onsubmit="validateSignUpForm(); return false;">
+       <form id="SignUpData" class="input-login" onsubmit="validateSignUpForm(); return false;" novalidate>
          <div class="input-login-field">
            <input required type="text" name="name" placeholder="Name" onfocus="resetNameError()" />
            <img src="./assets/img/person_icon.png" alt="Person Icon" class="login-input-icons" />
            <span id="nameErrorMessage" class="error-message"></span>
          </div>
          <div class="input-login-field">
-           <input id="newMail" required type="email" name="email" placeholder="Email" />
+           <input id="newMail" required type="email" name="email" placeholder="Email" onfocus="resetEmailError()" />
            <img src="./assets/img/mail_icon.png" alt="Mail Icon" class="login-input-icons" />
+           <span id="emailErrorMessage" class="error-message"></span>
          </div>
          <div class="input-login-field">
-  <input id="signupPassword" oninput="updatePasswordVisibilityIcon('signupPassword')" type="password" name="password" placeholder="Password" required />
-  <img id="signupPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('signupPassword')" class="login-input-icons" alt="Lock Icon" />
-</div>
-<div class="input-login-field">
-  <input id="signupConfirmPassword" oninput="updatePasswordVisibilityIcon('signupConfirmPassword')" type="password" name="confirmPassword" placeholder="Confirm Password" required />
-  <img id="signupConfirmPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('signupConfirmPassword')" class="login-input-icons" alt="Lock Icon" />
-  <span id="passwordsDontMatchText"></span>
-</div>
-
+           <input id="signupPassword" oninput="updatePasswordVisibilityIcon('signupPassword')" type="password" name="password" placeholder="Password" required />
+           <img id="signupPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('signupPassword')" class="login-input-icons" alt="Lock Icon" />
+         </div>
+         <div class="input-login-field">
+           <input id="signupConfirmPassword" oninput="updatePasswordVisibilityIcon('signupConfirmPassword')" type="password" name="confirmPassword" placeholder="Confirm Password" required />
+           <img id="signupConfirmPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('signupConfirmPassword')" class="login-input-icons" alt="Lock Icon" />
+           <span id="passwordsDontMatchText"></span>
+         </div>
          <div class="accept-privacy-policy-form">
            <input required class="accept-icon" type="checkbox" name="acceptPrivacyPolicy" id="acceptPrivacyPolicy" />
            <label for="acceptPrivacyPolicy">I accept the <a href="#" class="privacy-policy-link">Privacy policy</a></label>
@@ -116,12 +69,11 @@ function openSignUpHTML() {
        </form>
    `;
 
-  // Event-Listener zum Zurücksetzen der Fehlerzustände beim Klicken auf die Input-Felder
-  const nameInputField = document.getElementsByName('name')[0];
-  nameInputField.addEventListener('focus', resetNameError);
-
-  const confirmPasswordInput = document.getElementsByName('confirmPassword')[0];
-  confirmPasswordInput.addEventListener('focus', resetPasswordError);
+  // Event listeners for resetting error states
+  document.getElementsByName('name')[0].addEventListener('focus', resetNameError);
+  document.getElementsByName('email')[0].addEventListener('focus', resetEmailError);
+  document.getElementsByName('confirmPassword')[0].addEventListener('focus', resetPasswordError);
+  document.getElementById('acceptPrivacyPolicy').addEventListener('change', resetPrivacyPolicyError);
 }
 
 // Funktionen zum Zurücksetzen der Fehlerzustände
@@ -132,11 +84,23 @@ function resetNameError() {
   nameErrorMessage.innerHTML = "";
 }
 
+function resetEmailError() {
+  const emailInputField = document.getElementsByName('email')[0];
+  const emailErrorMessage = document.getElementById('emailErrorMessage');
+  emailInputField.style.border = "1px solid #ccc";
+  emailErrorMessage.innerHTML = "";
+}
+
 function resetPasswordError() {
   const confirmPasswordId = document.getElementById('signupConfirmPassword');
   const dontMatchText = document.getElementById('passwordsDontMatchText');
   confirmPasswordId.style.border = "1px solid #ccc";
   dontMatchText.innerHTML = "";
+}
+
+function resetPrivacyPolicyError() {
+  const privacyPolicyCheckbox = document.getElementById('acceptPrivacyPolicy');
+  privacyPolicyCheckbox.style.border = "none";
 }
 
 function returnPostedData() {
@@ -186,13 +150,14 @@ async function postSignUpData(path, data) {
   return (responseToJSON = await response.json());
 }
 
-
-
 function validateSignUpForm() {
   event.preventDefault();
 
   const form = document.getElementById('SignUpData');
   const formData = new FormData(form);
+  const email = formData.get('email');
+  const emailInputField = document.getElementsByName('email')[0];
+  const emailErrorMessage = document.getElementById('emailErrorMessage');
   const password = formData.get('password');
   const confirmPassword = formData.get('confirmPassword');
   const confirmPasswordId = document.getElementById('signupConfirmPassword');
@@ -200,16 +165,19 @@ function validateSignUpForm() {
   const nameInput = formData.get('name');
   const nameInputField = document.getElementsByName('name')[0];
   const nameErrorMessage = document.getElementById('nameErrorMessage');
+  const privacyPolicyCheckbox = document.getElementById('acceptPrivacyPolicy');
   let hasError = false;
 
-  // Zurücksetzen der vorherigen Fehlerzustände
+  // Reset previous error states
   nameInputField.style.border = "1px solid #ccc";
   nameErrorMessage.innerHTML = "";
-
+  emailInputField.style.border = "1px solid #ccc";
+  emailErrorMessage.innerHTML = "";
   confirmPasswordId.style.border = "1px solid #ccc";
   dontMatchText.innerHTML = "";
+  privacyPolicyCheckbox.style.border = "none";
 
-  // Überprüfen, ob die Passwörter übereinstimmen
+  // Check if passwords match
   if (password !== confirmPassword) {
     confirmPasswordId.style.border = "1px solid #FF001F";
     dontMatchText.innerHTML = "Your Passwords don't match. Try again.";
@@ -226,14 +194,27 @@ function validateSignUpForm() {
     hasError = true;
   }
 
+  // Validate email format
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    emailInputField.style.border = "1px solid #FF001F";
+    emailErrorMessage.innerHTML = "Invalid email address.";
+    hasError = true;
+  }
+
+  // Check if privacy policy is accepted
+  if (!privacyPolicyCheckbox.checked) {
+    privacyPolicyCheckbox.style.border = "1px solid #FF001F";
+    hasError = true;
+  }
+
   // Check if there are errors, if so, stop further processing
   if (hasError) {
     return;
   }
 
   // Check if email is already registered
-  if (!user.some((item) => item.email === formData.get('email'))) {
-    // Assuming 'newId' is defined or provided
+  if (!user.some((item) => item.email === email)) {
     postSignUpData('/users/' + newId, returnPostedData());
     signUpSucces();
   } else {
@@ -242,9 +223,7 @@ function validateSignUpForm() {
   }
 }
 
-
 // Von Alex, um den usern einen Farbcode zu geben
-
 function newContactColor() {
   const usedColors = new Set(contacts.map((contact) => contact.color));
   for (const color of colorCodes) {
@@ -257,30 +236,30 @@ function newContactColor() {
 function openLoginHTML() {
   loginContainer.innerHTML = `
     <div class="headline-login-wrapper">
-               <h1>Log in</h1>
-               <div class="underline-headline"></div>
-            </div>
-            <form id="input-login" class="input-login" onsubmit="loginUser(); return false";>
-               <div class="input-login-field">
-                  <input required id="email" type="email" placeholder="Email" />
-                  <img src="./assets/img/mail_icon.png" alt="Mail-Icon" class="login-input-icons" />
-               </div>
-               <div class="input-login-field">
-                <input id="loginPassword" oninput="updatePasswordVisibilityIcon('loginPassword')" type="password" name="password" placeholder="Password" required />
-                <img id="loginPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('loginPassword')" class="login-input-icons" alt="Lock Icon" />
-                <span id="loginPasswordWrongText" class="login-error-message">Wrong password! Try again.</span>
-               </div>
-               <div class="remember-me-form">
-                  <input class="accept-icon" type="checkbox" name="remember-me" id="" />
-                  <label for="remember-me">Remember me</label>
-               </div>
-
-               <div class="login-guestlogin-btn-wrapper">
-                  <button class="login-btn btns-login">Log in</button>
-                  <div id="guest-link" onclick="loginGuest()" class="guest-login-btn btns-login">Guest Log in</div>
-               </div>
-            </form>
-    `;
+       <h1>Log in</h1>
+       <div class="underline-headline"></div>
+    </div>
+    <form id="input-login" class="input-login" onsubmit="loginUser(); return false;" novalidate>
+       <div class="input-login-field">
+          <input required id="email" type="email" placeholder="Email" onfocus="resetLoginEmailError()" />
+          <img src="./assets/img/mail_icon.png" alt="Mail Icon" class="login-input-icons" />
+          <span id="loginEmailErrorMessage" class="error-message"></span>
+       </div>
+       <div class="input-login-field">
+        <input id="loginPassword" oninput="updatePasswordVisibilityIcon('loginPassword')" type="password" name="password" placeholder="Password" required />
+        <img id="loginPasswordToggle" src="./assets/img/lock_icon.png" onclick="togglePasswordVisibility('loginPassword')" class="login-input-icons" alt="Lock Icon" />
+        <span id="loginPasswordWrongText" class="login-error-message">Wrong password! Try again.</span>
+       </div>
+       <div class="remember-me-form">
+          <input class="accept-icon" type="checkbox" name="remember-me" id="" />
+          <label for="remember-me">Remember me</label>
+       </div>
+       <div class="login-guestlogin-btn-wrapper">
+          <button class="login-btn btns-login">Log in</button>
+          <div id="guest-link" onclick="loginGuest()" class="guest-login-btn btns-login">Guest Log in</div>
+       </div>
+    </form>
+  `;
 }
 
 function loginGuest() {
@@ -304,7 +283,6 @@ function togglePasswordVisibility(inputId) {
   }
 }
 
-
 function updatePasswordVisibilityIcon(inputId) {
   const passwordInput = document.getElementById(inputId);
   const passwordToggle = document.getElementById(inputId + 'Toggle');
@@ -315,7 +293,6 @@ function updatePasswordVisibilityIcon(inputId) {
     passwordToggle.src = './assets/img/lock_icon.png'; // Passwort verstecken, wenn kein Text im Input
   }
 }
-
 
 function generateId() {
   let generatedId;
@@ -331,31 +308,6 @@ function generateId() {
 
   return generatedId;
 }
-
-// function loginUser() {
-//   let email = document.getElementById('email').value;
-//   let password = document.getElementById('password').value;
-
-//   // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
-//   const emailExists = user.some((item) => item.email === document.getElementById('email').value);
-
-//   if (emailExists) {
-//     console.log('Die E-Mail-Adresse ist korrekt.');
-//     const passwordExists = user.some((item) => item.password === document.getElementById('password').value);
-//     if (passwordExists) {
-//       console.log('Beides korrekt');
-//         sessionStorage.setItem('status', 'loggedIn');
-//         checkUser(user);
-//     window.location.href = './summary.html';
-//     } else {
-//       alert('Passwort ist nicht korrekt.');
-//       document.getElementById('input-login').reset();
-//     }
-//   } else {
-//     alert('Bitte Registriere dich unter SignUP.');
-//     document.getElementById('input-login').reset();
-//   }
-// }
 
 function loginUser() {
   event.preventDefault();
@@ -403,9 +355,38 @@ function resetLoginPasswordError() {
   passwordWrongText.classList.remove("show"); // Versteckt den Fehlermeldungstext
 }
 
+function resetLoginEmailError() {
+  const emailInputField = document.getElementById('email');
+  const emailErrorMessage = document.getElementById('loginEmailErrorMessage');
+  emailInputField.style.border = "1px solid #ccc";
+  emailErrorMessage.innerHTML = "";
+}
 
-//   const userCredential = await auth.signInWithEmailAndPassword(email, password);  //Abfrage von Firebase
-// Anmeldedaten stimmen übere
+// function loginUser() {
+//   let email = document.getElementById('email').value;
+//   let password = document.getElementById('password').value;
+
+//   // Überprüfung, ob die E-Mail-Adresse im Array vorhanden ist
+//   const emailExists = user.some((item) => item.email === document.getElementById('email').value);
+
+//   if (emailExists) {
+//     console.log('Die E-Mail-Adresse ist korrekt.');
+//     const passwordExists = user.some((item) => item.password === document.getElementById('password').value);
+//     if (passwordExists) {
+//       console.log('Beides korrekt');
+//         sessionStorage.setItem('status', 'loggedIn');
+//         checkUser(user);
+//     window.location.href = './summary.html';
+//     } else {
+//       alert('Passwort ist nicht korrekt.');
+//       document.getElementById('input-login').reset();
+//     }
+//   } else {
+//     alert('Bitte Registriere dich unter SignUP.');
+//     document.getElementById('input-login').reset();
+//   }
+// }
+
 function deleteSession() {
   sessionStorage.clear();
 }
@@ -413,5 +394,4 @@ function deleteSession() {
 const toast = document.getElementById("toast");
 
 // Annahme: Zeige die Toast-Nachricht an, wenn die Anmeldeinformationen falsch sind
-// Beispiel-Logik:
-
+// Beispiel-Logik: 
