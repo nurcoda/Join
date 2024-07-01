@@ -130,3 +130,22 @@ document.addEventListener('DOMContentLoaded', function () {
         greetingElementBigView.innerText = 'Guest';
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const loginAnimation = document.getElementById('loginAnimation');
+
+    // Animation starten
+    loginAnimation.classList.add('fadeOutAnimation');
+    loginAnimation.classList.add('fadeOutAnimation.finished');
+
+    // Eventlistener für das Ende der Animation hinzufügen
+    loginAnimation.addEventListener(
+        'animationend',
+        function () {
+            // Element ausblenden, nachdem die Animation beendet ist
+            loginAnimation.style.display = 'none';
+        },
+        { once: true }
+    ); // Eventlistener nur einmal ausführen
+});
+

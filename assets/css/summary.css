@@ -226,21 +226,21 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    animation: fadeOut 2s ease forwards;
+    animation: fadeOut 1s ease forwards;
 }
 
 .welcome-greeting-text {
     font-size: 24px;
     color: rgb(13, 13, 13);
     text-align: center;
-    animation: fadeOut 2s ease;
+    animation: fadeOut 1s ease;
 }
 
 .user-nick-login-greetings {
     font-size: 47px;
     color: #28abe2;
     margin: 0;
-    animation: fadeOut 2s ease;
+    animation: fadeOut 1s ease;
 }
 
 .hidden {
@@ -329,7 +329,7 @@ h1 {
 }
 
 @media screen and (min-width: 841px) {
-    .greeting-login-animation-container {
+    #loginAnimation {
         display: none;
     }
 }
