@@ -1,16 +1,6 @@
 function renderEditContactCardInfoHTML(i, avatar) {
-  return `
-        
-        <div class="edit-contact-pop-up" id="editContentPopUp">
-        <div class="error-message-add-contact d-none" id="errorMessageAddContact">Please enter surname and lastname</div>
-           <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
-           <div class="popup-logo-headline-wrapper">
-              <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
-              <div class="edit-popup-headline">Edit contact</div>
-              <div class="edit-underline-from-subline"></div>
-           </div>
-  
-           <div class="edit-contact-formular">
+  return renderEditContactCardInfoHTMLHead() + 
+       `<div class="edit-contact-formular">
                <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
               <form class="input-fields-edit-contact">
                  <input id="edit-input-field-name" class="input-field-name edit-contact-form-input" placeholder="Name"
@@ -29,21 +19,22 @@ function renderEditContactCardInfoHTML(i, avatar) {
            </div>
         </div>
      </div>`;
-}
+  }
 
-function renderAddContactCardInfoHTML() {
-  return `
- 
-     <div class="add-contact-pop-up" id="contentPopUp">
-      <div class="error-message-add-contact d-none" id="errorMessageAddContact">Please enter surname and lastname</div>
-           <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
+   function renderEditContactCardInfoHTMLHead(){
+      return `<div class="edit-contact-pop-up" id="editContentPopUp">
+        <div class="error-message-add-contact d-none" id="errorMessageAddContact">Please enter surname and lastname</div>
+           <img class="edit-close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
            <div class="popup-logo-headline-wrapper">
               <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
-              <div class="popup-headline">Add contact</div>
-              <div class="popup-subline">Tasks are better with a team!</div>
-              <div class="underline-from-subline"></div>
-           </div>
-           <div class="contact-formular">
+              <div class="edit-popup-headline">Edit contact</div>
+              <div class="edit-underline-from-subline"></div>
+           </div>`
+   }
+
+function renderAddContactCardInfoHTML() {
+   return  renderAddContactCardInfoHTMLHead() +
+       `<div class="contact-formular">
               <img src="./assets/img/profile_img.svg" class="profile-img-add-contact" />
               <form class="input-fields-add-contact">
                  <input id="input-field-name" class="input-field-name add-contact-form-input" placeholder="Name"
@@ -65,8 +56,33 @@ function renderAddContactCardInfoHTML() {
      </div>`;
 }
 
+function renderAddContactCardInfoHTMLHead(){
+return `    <div class="add-contact-pop-up" id="contentPopUp">
+      <div class="error-message-add-contact d-none" id="errorMessageAddContact">Please enter surname and lastname</div>
+           <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
+           <div class="popup-logo-headline-wrapper">
+              <div><img class="pop-up-join-logo-small" src="./assets/img/join_logo_small_popup.svg" alt="" /></div>
+              <div class="popup-headline">Add contact</div>
+              <div class="popup-subline">Tasks are better with a team!</div>
+              <div class="underline-from-subline"></div>
+           </div>`
+}
+
 function renderContactCardInfoHTML(i, avatar, phone) {
-  return `<div class="contact-card-name-container">
+  return renderContactCardInfoHTMLHead(i, avatar) +
+  `<div id="contact-card-info-container" class="contact-card-info-container">
+      <div class="headline-contact-information">Contact Information</div>
+      <div class="contact-card-info-wrapper">
+         <div class="contact-info-email-headline">Email</div>
+         <div class="contact-info-email">${contacts[i].email}</div>
+         <div class="contact-info-phone-headline">Phone</div>
+         <div class="contact-info-phone">${phone}</div>
+      </div>
+   </div>`;
+}
+
+function renderContactCardInfoHTMLHead(i, avatar){
+   return `<div class="contact-card-name-container">
       <div class="avatar avatar-big" style="background-color: ${contacts[i].color}">${avatar}</div>
       <div>
          <div class="contact-card-name">${contacts[i].name}</div>
@@ -79,22 +95,11 @@ function renderContactCardInfoHTML(i, avatar, phone) {
             </span>
          </div>
       </div>
-   </div>
-
-   <div id="contact-card-info-container" class="contact-card-info-container">
-      <div class="headline-contact-information">Contact Information</div>
-      <div class="contact-card-info-wrapper">
-         <div class="contact-info-email-headline">Email</div>
-         <div class="contact-info-email">${contacts[i].email}</div>
-         <div class="contact-info-phone-headline">Phone</div>
-         <div class="contact-info-phone">${phone}</div>
-      </div>
    </div>`;
 }
 
 function groupContactsHTML(i, avatar, contact) {
-  return `
-               <div class="contact" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
+  return ` <div class="contact" onclick="renderContactCardInfo(${i}), highlightContact(${i})")">
                    <div id="contact-${i}" class="contactDetails">
                        <div class="img-contacts">
                            <div id="avatar${i}" class="avatar" style="background-color: ${contact.color}">${avatar}</div>
@@ -104,28 +109,37 @@ function groupContactsHTML(i, avatar, contact) {
                            <div class="mailLink">${contact.email}</div>
                        </div>
                    </div>
-               </div>
-           `;
+               </div>`;
 }
 
 function renderContactsHTML() {
-  return `
-       <div class="buttonWrapper">
+  return `<div class="buttonWrapper">
            <button class="addContactBtn" onclick="renderAddContactCardInfo();">
                Add new Contact <img src="./assets/img/person_add_icon.png" alt="" />
            </button>
            <button class="addContactBtnMobile" onclick="renderAddContactCardInfo()"
                  
            </button>
-       </div>
-   `;
+       </div>`;
 }
 
-//---------------------------------New Stuff-------------------------------
-
 function renderContactBigCardMobil(i, avatar, phone){
-   
-      return `<div class="contact-card-name-container-mobile">
+   return  renderContactBigCardMobilHead(i, avatar) +
+   `<div id="contact-card-info-container" class="contact-card-info-container">
+     <div class="headline-contact-information">Contact Information</div>
+     <div class="contact-card-info-wrapper">
+        <div class="contact-info-email-headline">Email</div>
+        <div class="contact-info-email">${contacts[i].email}</div>
+        <div class="contact-info-phone-headline">Phone</div>
+        <div class="contact-info-phone">${phone}</div>
+     </div>
+  </div>
+  </div>
+  </div>`;
+}
+
+function renderContactBigCardMobilHead(i, avatar){
+return `<div class="contact-card-name-container-mobile">
       <div class="contact-pop-up" id="contactPopUp">
              <img class="close-pop-up-btn" src="./assets/img/close_big_icon.png" alt="" id="closePopUpBtn" />
      <div class="contactContent">
@@ -142,16 +156,5 @@ function renderContactBigCardMobil(i, avatar, phone){
            </span>
          </div>
         </div>
-     </div>
-     <div id="contact-card-info-container" class="contact-card-info-container">
-     <div class="headline-contact-information">Contact Information</div>
-     <div class="contact-card-info-wrapper">
-        <div class="contact-info-email-headline">Email</div>
-        <div class="contact-info-email">${contacts[i].email}</div>
-        <div class="contact-info-phone-headline">Phone</div>
-        <div class="contact-info-phone">${phone}</div>
-     </div>
-  </div>
-  </div>
-  </div>`;
+     </div>`
 }
