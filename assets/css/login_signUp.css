@@ -310,13 +310,13 @@
    animation: fadeOut 2.2s ease forwards;
  }
 
- #passwordsDontMatchText {
+ #error-message {
    color: #FF8190;
    font-size: 12px;
    position: fixed;
    margin-top: 4px;
  }
-
+ 
  .login-error-message {
    display: none;
    color: #FF8190;
@@ -329,16 +329,29 @@
    display: block;
  }
  
- 
  #nameErrorMessage {
    color: #FF8190;
    font-size: 12px;
    position: fixed;
    margin-top: 4px;
  }
-
+ 
+ #emailErrorMessage {
+   color: #FF8190;
+   font-size: 12px;
+   position: fixed;
+   margin-top: 4px;
+ }
+ 
+ #passwordsDontMatchText {
+   color: #FF8190;
+   font-size: 12px;
+   position: fixed;
+   margin-top: 4px;
+ }
+ 
  .accept-icon {
-   border: 0!important;
+   border: 0 !important;
  }
  
  @keyframes fadeOut {
