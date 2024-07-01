@@ -312,8 +312,17 @@
   }
 }
 
+.add-task-popup-board::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* .add-task-popup-board::-webkit-scrollbar-thumb {
+  background-color: rgba(211, 211, 211, 0.505);
+  border-radius: 4px;
+} */
+
 .add-task-form {
-  width: unset;
+  width: 100%;
   margin-top: 52px;
   display: flex;
   justify-content: space-between;
@@ -338,37 +347,9 @@
   }
 }
 
-@media (max-width: 1240px) {
-  .add-task-form {
-    width: 100%;
-    flex-direction: column;
-    overflow: scroll;
-  }
-
-  .title-input,
-  .date-input {
-    width: 90%;
-  }
-
-  .assigned-to-div {
-    width: 100%;
-  }
-
-  .red-required-text {
-    width: 100%;
-  }
-}
-
-@media (max-width: 620px) {
-  .title-input,
-  .date-input {
-    display: flex !important;
-  }
-
-  .add-task-popup-board {
-    width: 90%;
-    padding: 4%;
-  }
+.add-task-left,
+.add-task-right {
+  width: 100%;
 }
 
 /* Existing Task Pop Up */
@@ -631,6 +612,7 @@
 
 .category-div {
   width: 90%;
+  position: relative;
 }
 
 .subtasks-div {
@@ -700,6 +682,58 @@
 /* .date-input {
   display: inline !important;
 } */
+
+.change-state-icon {
+  display: none;
+  height: 2rem;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+/* Edit Popup */
+
+.states-list {
+  display: none;
+}
+
+#subtasksList::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 50%;
+}
+
+.assigned-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 50%;
+}
+
+/* Für die Scroll-Leiste */
+#subtasksList::-webkit-scrollbar-thumb {
+  background: rgba(211, 211, 211, 0.715);
+  border-radius: 20px;
+}
+
+.assigned-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a8a8a8;
+  border-radius: 20px;
+}
+
+.title-input,
+.date-input {
+  display: unset;
+  width: 90%;
+}
+
+#categoryDropdown {
+  width: 100%;
+  top: 90%;
+  left: 0;
+  padding-top: 0;
+  border-radius: 20px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
 /* RESPONSIVE */
 /* RESPONSIVE */
 /* RESPONSIVE */
@@ -887,14 +921,6 @@
   }
 }
 
-.change-state-icon {
-  display: none;
-  height: 2rem;
-  position: absolute;
-  top: 5%;
-  right: 5%;
-}
-
 @media (max-width: 1024px) {
   .change-state-icon {
     display: flex;
@@ -973,38 +999,6 @@
 
 /* Quick&Dirty change state */
 
-/* Edit Popup */
-
-.states-list {
-  display: none;
-}
-
-#subtasksList::-webkit-scrollbar {
-  width: 4px;
-  border-radius: 50%;
-}
-
-.assigned-scrollbar::-webkit-scrollbar {
-  width: 4px;
-  border-radius: 50%;
-}
-
-/* Für die Scroll-Leiste */
-#subtasksList::-webkit-scrollbar-thumb {
-  background: rgba(211, 211, 211, 0.715);
-  border-radius: 20px;
-}
-
-.assigned-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #a8a8a8;
-  border-radius: 20px;
-}
-
-.title-input,
-.date-input {
-  display: unset;
-}
-
 @media (max-width: 1024px) {
   .edit-task-form {
     margin: 0;
@@ -1072,5 +1066,71 @@
 @media (max-width: 670px) {
   .existing-task-popup-board {
     width: 80%;
+  }
+}
+
+@media (max-width: 1240px) {
+  .add-task-form {
+    width: 100%;
+    flex-direction: column;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+
+  #categoryDropdown {
+    width: 100%;
+    top: 90%;
+    left: 0;
+    padding-top: 0;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .category-option {
+    height: 24px;
+    width: 90%;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+  }
+
+  #subtaskList {
+    padding-left: 1%;
+  }
+
+  .add-task-form::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .add-task-form::-webkit-scrollbar-thumb {
+    background-color: rgba(211, 211, 211, 0.505);
+    border-radius: 4px;
+  }
+
+  .title-input,
+  .date-input {
+    width: 90%;
+  }
+
+  .assigned-to-div {
+    width: 93%;
+  }
+
+  .red-required-text {
+    width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+  .title-input,
+  .date-input {
+    display: flex !important;
+  }
+
+  .add-task-popup-board {
+    width: 90%;
+    padding: 4%;
   }
 }

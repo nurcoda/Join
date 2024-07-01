@@ -356,11 +356,12 @@ function renderAddTaskPopUpHTML() {
                     <span id="categorySelection">Select task category</span>
                     <img id="categoryIcon1" class="dropdown-icon" src="./assets/img/arrow_drop_down_svg.svg" alt="" />
                     <img id="categoryIcon2" src="./assets/img/arrow_dropdown2_svg.svg" class="d-none dropdown-icon" alt="" />
-                </div>
-                <div id="categoryDropdown" class="d-none">
+                     <div id="categoryDropdown" class="d-none">
                     <span class="category-option" onclick="selectOption(1)">Technical task</span>
                     <span class="category-option" onclick="selectOption(2)">User story</span>
                 </div>
+                </div>
+               
                 <input type="hidden" id="selectedCategory" name="category" required />
                 <span id="requiredText3" class="red-required-text"></span>
                   

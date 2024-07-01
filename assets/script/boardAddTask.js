@@ -69,12 +69,17 @@ function renderSubtasksAfterEditAddTask(i) {
 
 async function getInputAddTaskBoard() {
   event.preventDefault();
+  let categorySelection = document.getElementById('categorySelection').innerHTML;
+  if (categorySelection === 'Select task category') {
+    categorySelection = 'Technical Task';
+  }
+
   let newTask = {
     'name': document.getElementById('titleInput').value,
     'description': document.getElementById('descriptionText').value,
     'id': generateId(),
     'due_date': formatDueDate(document.getElementById('dueDate').value),
-    'category': document.getElementById('categorySelection').innerHTML,
+    'category': categorySelection,
     'priority': currentPriority,
     'state': addTaskState,
     'assigned_user': assignedContacts.map((contact) => ({
@@ -91,6 +96,13 @@ async function getInputAddTaskBoard() {
   closePopUpAndReloadBoard();
 }
 
+function checkSelection(categorySelection) {
+  if (categorySelection === 'Select task category') {
+    categorySelection = 'Technical Task';
+    return categorySelection;
+  }
+}
+
 async function addTaskBoardToDB(path, data) {
   let response = await fetch(BASE_URL + path + '.json', {
     method: 'PUT',
@@ -102,7 +114,7 @@ async function addTaskBoardToDB(path, data) {
 }
 
 function closePopUpAndReloadBoard() {
-  renderTasksIntoColumns();
+  loadBoard();
   addTaskPopUpBackground.classList.add('d-none');
 }
 
@@ -130,9 +142,7 @@ function renderContactsDropdownAddTask() {
     const contact = contacts[i];
     const isAssigned = assignedContacts.includes(contact); // Prüfen, ob der Kontakt markiert ist
     const contactClass = isAssigned ? 'assigned-to-contact marked' : 'assigned-to-contact'; // Klasse basierend auf Zuweisungsstatus
-    const imgSrc = isAssigned
-      ? './assets/img/checked_btn_white_svg.svg'
-      : './assets/img/check_btn.png';
+    const imgSrc = isAssigned ? './assets/img/checked_btn_white_svg.svg' : './assets/img/check_btn.png';
 
     // Überprüfen, ob der Kontaktname dem Suchkriterium entspricht
     if (contact.name.toLowerCase().includes(searchInput)) {
