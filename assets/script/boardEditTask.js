@@ -280,3 +280,18 @@ function renderTasksIntoColumnsSearching() {
   }
   checkIfColumnIsEmpty();
 }
+
+document.getElementById('searchTask').addEventListener('input', function (event) {
+  let searchInput = event.target.value;
+  console.log('Search Input:', searchInput);
+  if (searchInput === '') {
+    renderTasksIntoColumnsSearching();
+  }
+});
+
+function handleClear() {
+  console.log('Das Eingabefeld wurde geleert');
+  // Führen Sie hier Ihre benutzerdefinierte Funktion aus
+  // Zum Beispiel:
+  // findTaskInBoard('');
+}
