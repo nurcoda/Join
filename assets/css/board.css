@@ -653,6 +653,10 @@
 .state-change-btn {
   display: none;
 }
+
+/* .date-input {
+  display: inline !important;
+} */
 /* RESPONSIVE */
 /* RESPONSIVE */
 /* RESPONSIVE */
@@ -819,6 +823,18 @@
     min-width: 35vw;
     max-width: 35vw;
   }
+
+  .prio-buttons {
+    flex-direction: column;
+    justify-content: unset;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .prio-buttons button {
+    font-size: 18px;
+    width: 80%;
+  }
 }
 
 @media (max-width: 470px) {
@@ -886,7 +902,6 @@
 
   .edit-task-form input {
     font-size: 18px;
-    width: auto;
   }
 }
 
@@ -894,7 +909,6 @@
   .existing-task-popup-board {
     height: 80%;
     width: 80%;
-    align-items: center;
   }
 
   .edit-task-form input {
@@ -903,9 +917,9 @@
     text-align: start;
   }
 
-  .date-input {
+  /* .date-input {
     width: fit-content !important;
-  }
+  } */
 
   .edit-task-form {
     font-size: 18px;
