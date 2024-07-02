@@ -8,7 +8,7 @@ function openAddTaskPopUp(state) {
   addTaskState = state;
   addTaskSubtasks = [];
   addTaskPopUpBackground.classList.remove('d-none');
-  addTaskPopUp.innerHTML = renderAddTaskPopUpHTML();
+  addTaskPopUp.innerHTML = renderAddTaskPopUpHTML(state);
 }
 
 // SUBTASKS
@@ -231,4 +231,8 @@ function showOpenedCategoryIcon() {
 function hideOpenedCategoryIcon() {
   document.getElementById('categoryIcon2').classList.add('d-none');
   document.getElementById('categoryIcon1').classList.remove('d-none');
+}
+
+function resetForm(state) {
+  openAddTaskPopUp(state);
 }
