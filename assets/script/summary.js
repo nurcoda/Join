@@ -16,7 +16,7 @@ let awaitFeedbackCounter = 0;
 let doneCounter = 0;
 
 async function tasksInBoardCounter() {
-    const BASE_URL = 'https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/';
+    const BASE_URL = 'https://joinmailo-default-rtdb.europe-west1.firebasedatabase.app/';
     let response = await fetch(BASE_URL + '.json');
     let responseAsJson = await response.json();
 
@@ -101,7 +101,7 @@ async function getNextDueDate() {
 }
 
 async function countHighPriorityTasks() {
-    const BASE_URL = 'https://join-61eb9-default-rtdb.europe-west1.firebasedatabase.app/';
+    const BASE_URL = 'https://joinmailo-default-rtdb.europe-west1.firebasedatabase.app/';
     const response = await fetch(BASE_URL + '.json');
     const responseAsJson = await response.json();
 
